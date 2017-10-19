@@ -14,6 +14,8 @@ Article about where to collect mushrooms around Saxony-Anhalt [here](http://www.
 
 Mian mushroom website of Germany [here](https://www.dgfm-ev.de/)
 
+**German forum with mushrooms in Saxony-Anhalt** [here](http://www.passion-pilze-sammeln.com/pilz-ticker-st.html)
+
 Is it allowed or not to collect mushrooms? [artilce here](http://www.t-online.de/leben/essen-und-trinken/id_48747376/pilzkalender-pilze-sammeln-nach-saison.html) and something alike in [article](http://www.torgauerzeitung.com/default.aspx?t=newsdetailmodus(76939)). The answer is YES up to reasonable volume 2 kg max.
 
 Some information about mushroom picking in Germany in [here](http://www.rg-rb.de/index.php?option=com_rgchik&task=item&id=4590&Itemid=4)
