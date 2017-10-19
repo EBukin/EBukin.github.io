@@ -31,14 +31,14 @@ Some good information about norms [here](http://www.mknews.de/articles/2014/09/2
 
 # The list of forest extracted from the article:
 
-- [ ] die Dölauer Heide - Near Halle [map](https://www.google.de/maps/place/D%C3%B6lauer+Heide/@51.498851,11.8991903,15z) 
-- [ ] Colbitz-Letzlinger Heide und Theessen / Magdeburgerforth [wiki](https://de.wikipedia.org/wiki/Colbitz-Letzlinger_Heide)
-- [ ] Huy, Hohes Holz (bei Oschersleben), [map](https://www.google.de/maps/place/Hohes+Holz,+Saures+Holz+mit+östlichem+Vorland/@52.0834667,11.2274634,11.75z); [wiki](https://en.wikipedia.org/wiki/Hohes_Holz);
-- [ ] der Fläming Heide: [wiki](https://de.wikipedia.org/wiki/Naturpark_Fl%C3%A4ming); [official website](http://www.naturpark-flaeming.de/), 
-- [ ] der Harz Forst: [map](https://www.google.de/maps/place/Harz+National+Park/@51.7932934,10.4816419,12.18z); [Official website](http://www.v-beyme.de/index.php/forst)
-- [ ] die Dübener Heide: [Official website](http://naturpark-duebener-heide.de/?selected_day=20171019); [map](https://www.google.de/maps/place/Dübener+Heide+Nature+Park/@51.6883482,12.5587356,13z); [wiki](https://de.wikipedia.org/wiki/D%C3%BCbener_Heide)
-- [ ] die Dölauer Heide: [map](https://www.google.de/maps/place/D%C3%B6lauer+Heide/@51.498851,11.8991903,15z/data=!4m5!3m4!1s0x0:0x301c2c76baae9e26!8m2!3d51.498851!4d11.8991903); [wiki](https://de.wikipedia.org/wiki/D%C3%B6lauer_Heide)
-- [ ] Ziegelrodaer Forst
+- [ ] die Dölauer Heide - Near Halle: [map](https://www.google.de/maps/place/D%C3%B6lauer+Heide/@51.498851,11.8991903,15z).
+- [ ] Colbitz-Letzlinger Heide und Theessen / Magdeburgerforth: [wiki](https://de.wikipedia.org/wiki/Colbitz-Letzlinger_Heide).
+- [ ] Huy, Hohes Holz (bei Oschersleben): [map](https://www.google.de/maps/place/Hohes+Holz,+Saures+Holz+mit+östlichem+Vorland/@52.0834667,11.2274634,11.75z); [wiki](https://en.wikipedia.org/wiki/Hohes_Holz).
+- [ ] der Fläming Heide: [map](https://www.google.de/maps/place/Fläming+Nature+Park/@51.9501912,12.3552179,10.83z); [wiki](https://de.wikipedia.org/wiki/Naturpark_Fl%C3%A4ming); [official website](http://www.naturpark-flaeming.de/).
+- [ ] der Harz Forst: [map](https://www.google.de/maps/place/Harz+National+Park/@51.7932934,10.4816419,12.18z); [Official website](http://www.v-beyme.de/index.php/forst).
+- [ ] die Dübener Heide: [Official website](http://naturpark-duebener-heide.de/?selected_day=20171019); [map](https://www.google.de/maps/place/Dübener+Heide+Nature+Park/@51.6883482,12.5587356,13z); [wiki](https://de.wikipedia.org/wiki/D%C3%BCbener_Heide).
+- [ ] die Dölauer Heide: [map](https://www.google.de/maps/place/D%C3%B6lauer+Heide/@51.498851,11.8991903,15z/data=!4m5!3m4!1s0x0:0x301c2c76baae9e26!8m2!3d51.498851!4d11.8991903); [wiki](https://de.wikipedia.org/wiki/D%C3%B6lauer_Heide).
+- [ ] Ziegelrodaer Forst:
 
 
 # Edible mushrooms that you can collect and eat anywhere
