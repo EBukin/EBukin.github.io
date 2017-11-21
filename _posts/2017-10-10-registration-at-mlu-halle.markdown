@@ -1,7 +1,7 @@
 ---
 title:  "Registration as a PhD at the MLU Halle"
 layout: post
-tags: [MLU]
+tags: [PhD]
 categories:
 - blog
 ---
