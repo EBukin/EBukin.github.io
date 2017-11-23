@@ -1,9 +1,10 @@
 ---
 title:  "Mushroom places near Halle"
 layout: post
-tags: [Germany]
+tags: 
+  - Germany
 categories:
-- blog
+  - blog
 ---
 
 When you are facing an empty apartment, which has to be furnished and filled with all important things, you need to search for everything!

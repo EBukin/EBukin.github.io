@@ -1,9 +1,10 @@
 ---
 title:  "Registration as a PhD at the MLU Halle"
 layout: post
-tags: [PhD]
+tags: 
+  - PhD
 categories:
-- blog
+  - blog
 ---
 
 As a PhD student, you need to register at the Martin-Luter-University of Halle (Saale) as a doctorate candidate. This is important because you can get a student card and some associated benefits. In the end MLU Halle will grant you your PhD diploma. 

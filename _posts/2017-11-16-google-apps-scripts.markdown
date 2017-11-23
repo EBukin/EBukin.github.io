@@ -2,9 +2,9 @@
 title: Developing a Scripts in Google Apps
 layout: post
 tags:
-  - Google Apps
-  - Programming
-  - phd
+  - googleApps
+  - programming
+  - PhD
 categories:
   - blog
 ---
