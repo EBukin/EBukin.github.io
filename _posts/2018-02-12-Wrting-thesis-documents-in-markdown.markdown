@@ -29,16 +29,13 @@ Then, I slowly realized that using R Studio for writing and documenting work all
 1. Prepare bibliography file in one folder - exporting relevant data to one .bibtex file.
 
 1. Download the templates and explore all possible and nicely prepared templates on the pandoc github [pandoc Wiki](https://github.com/jgm/pandoc/wiki).
-
-  - [Various pandoc examples and templates](https://github.com/Wandmalfarbe/pandoc-latex-template/tree/master/examples)
-  - [thesis in markdown](https://github.com/chiakaivalya/thesis-markdown-pandoc) - and a corresponding [blog post](https://chiakaivalya.wordpress.com/2014/04/23/using-markdown-pandoc-to-write-my-biology-phd-thesis/)
-  - [another thesis in markdown](https://github.com/tompollard/phd_thesis_markdown)
-  - Tufte styled handouts [tamplate](https://github.com/wcaleb/pandoc-templates/blob/master/handout.tex)
-
+   - [Various pandoc examples and templates](https://github.com/Wandmalfarbe/pandoc-latex-template/tree/master/examples)
+   - [thesis in markdown](https://github.com/chiakaivalya/thesis-markdown-pandoc) - and a corresponding [blog post](https://chiakaivalya.wordpress.com/2014/04/23/using-markdown-pandoc-to-write-my-biology-phd-thesis/)
+   - [another thesis in markdown](https://github.com/tompollard/phd_thesis_markdown)
+   - Tufte styled handouts [tamplate](https://github.com/wcaleb/pandoc-templates/blob/master/handout.tex)
   There were several problems with dependencies and additional packages. In particular, I had to install pandoc-citeproc with `sudo apt-get install pandoc-citeproc` and texlive-latex-extra with some important libraries `sudo apt-get -y install texlive-latex-extra`.
-
 1. To convert markdown document into a `pdf` I use [Tufte styled handouts template](https://github.com/wcaleb/pandoc-templates/blob/master/handout.tex). In the markdown document, in the YAML header I specify `links-as-notes: true` and `linenos: true`.
-
 1. to run the code, I use two commands:
-  - windows `pandoc 2018-proposal.md -s -o output/2018-proposal.pdf --template ~/.pandoc/templates/handout.tex --bibliography /c/Users/bukin/Documents/projects/PhD-library.bib`
-  - Ubuntu `pandoc 2017-proposal/2018-proposal.md -s -o 2017-proposal/output/2018-proposal.pdf --template ~/projects/phd-notebook/pandoc/templates/handout.tex --bibliography ~/projects/phd-notebook/library.bib`
+   - windows `pandoc 2018-proposal.md -s -o output/2018-proposal.pdf --template ~/.pandoc/templates/handout.tex --bibliography /c/Users/bukin/Documents/projects/PhD-library.bib`
+   - Ubuntu `pandoc 2017-proposal/2018-proposal.md -s -o 2017-proposal/output/2018-proposal.pdf --template ~/projects/phd-notebook/pandoc/templates/handout.tex --bibliography ~/projects/phd-notebook/library.bib`
+2. Sometimes, i have problems with the spell-check in Atom. To resolve this, I download dictionaries to the folder: `C:\Users\USERNAME\AppData\Local\atom\app-1.22.1\resources\app.asar.unpacked\node_modules\spellchecker\vendor\hunspell_dictionaries` and make sure that the parameter `Locales` in the spell-check package setting is specified to "en-US, uk_UA, ru_RU".
