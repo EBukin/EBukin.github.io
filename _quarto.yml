@@ -1,0 +1,55 @@
+﻿project:
+  type: website
+  output-dir: _site
+  pre-render: scripts/build-cv-data.R
+
+website:
+  title: "Eduard Bukin"
+  site-url: https://ebukin.github.io
+  description: "Personal website of Eduard Bukin"
+  
+  navbar:
+    pinned: true
+    left:
+      - text: About
+        href: about.qmd
+      - text: Publications
+        href: publications/index.qmd
+      - text: Projects
+        href: projects/index.qmd
+      - text: Software
+        href: software/index.qmd
+      - text: Engagements
+        href: engagements/index.qmd
+      - text: CV
+        href: cv/index.qmd
+    right:
+      - icon: github
+        href: https://github.com/EBukin
+      - icon: envelope
+        href: mailto:your.email@example.com
+
+  page-footer:
+    left: |
+      Copyright 2025 Eduard Bukin
+    right: |
+      Made with [Quarto](https://quarto.org/)
+
+format:
+  html:
+    theme:
+      light: [flatly, html/styles.scss]
+    toc: true
+    toc-location: right
+    code-link: true
+    anchor-sections: true
+    fig-cap-location: margin
+    reference-location: margin
+    footnotes-hover: true
+    highlight-style: github
+
+execute:
+  freeze: auto
+
+bibliography: files/bib/references.bib
+csl: files/bib/apa.csl

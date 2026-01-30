@@ -1,0 +1,31 @@
+﻿---
+title: "Eduard Bukin"
+pagetitle: "Eduard Bukin"
+description-meta: "Personal academic website of Eduard Bukin"
+toc: false
+---
+
+::: {.grid}
+
+::: {.g-col-12 .g-col-md-4}
+![](files/profile.svg){.img-fluid .rounded-circle style="max-width: 200px;"}
+:::
+
+::: {.g-col-12 .g-col-md-8}
+## Welcome
+
+I am an academic researcher. This is my personal website where I share my publications, projects, and other professional activities.
+
+[About me](about.qmd){.btn .btn-primary} [CV](cv/index.qmd){.btn .btn-outline-primary}
+:::
+
+:::
+
+## Featured Work
+
+::: {#featured-publications}
+:::
+
+::: {#featured-projects}
+:::
+

@@ -1,0 +1,26 @@
+﻿---
+title: "About"
+pagetitle: "About | Eduard Bukin"
+toc: false
+---
+
+## Biography
+
+Eduard Bukin is an academic researcher with expertise in [your field]. 
+
+## Education
+
+- **PhD** in [Field], [University], [Year]
+- **MSc** in [Field], [University], [Year]
+- **BSc** in [Field], [University], [Year]
+
+## Research Interests
+
+- Topic 1
+- Topic 2
+- Topic 3
+
+## Contact
+
+- Email: [your.email@example.com](mailto:your.email@example.com)
+- GitHub: [EBukin](https://github.com/EBukin)

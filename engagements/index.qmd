@@ -1,0 +1,26 @@
+﻿---
+title: "Engagements"
+pagetitle: "Engagements | Eduard Bukin"
+toc: true
+toc-depth: 2
+---
+
+## Talks and Presentations
+
+| Date | Title | Event | Location |
+|------|-------|-------|----------|
+| 2024-03 | Example Talk Title | Conference Name | City, Country |
+| 2023-11 | Another Presentation | Workshop Name | City, Country |
+
+## Teaching
+
+| Period | Course | Institution | Role |
+|--------|--------|-------------|------|
+| 2023-2024 | Course Name | University | Lecturer |
+| 2022-2023 | Another Course | University | Teaching Assistant |
+
+## Workshops
+
+| Date | Title | Audience |
+|------|-------|----------|
+| 2024-01 | Workshop Title | Description |

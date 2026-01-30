@@ -1,0 +1,18 @@
+﻿---
+title: "Projects"
+pagetitle: "Projects | Eduard Bukin"
+listing:
+  id: projects-listing
+  contents: "*/index.qmd"
+  type: default
+  sort: "date desc"
+  categories: true
+  fields: [date, title, description, categories]
+  date-format: "YYYY"
+toc: false
+---
+
+Research projects and collaborations.
+
+::: {#projects-listing}
+:::

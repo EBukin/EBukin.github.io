@@ -1,0 +1,20 @@
+/*-- scss:defaults --*/
+
+/*-- scss:rules --*/
+
+/* Custom styles for Eduard Bukin website */
+
+/* Profile image styling */
+.rounded-circle {
+  border-radius: 50% !important;
+}
+
+/* Navbar tweaks */
+.navbar {
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+/* Card hover effects for listings */
+.quarto-listing-default .listing-item:hover {
+  background-color: rgba(0,0,0,0.02);
+}

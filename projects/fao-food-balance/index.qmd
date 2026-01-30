@@ -1,0 +1,33 @@
+﻿---
+title: "FAO Food Balance Analysis Project"
+date: "2023-01-01"
+description: "A comprehensive analysis of global food balance sheets using FAO data to understand food security trends."
+categories:
+  - Food Security
+  - FAO
+  - Data Analysis
+featured: true
+status: "ongoing"
+---
+
+## Overview
+
+This project analyzes FAO Food Balance Sheet data to understand long-term trends in food availability, consumption, and trade patterns across countries.
+
+## Objectives
+
+- Track changes in dietary patterns over time
+- Identify countries at risk of food insecurity
+- Analyze the impact of trade on food availability
+
+## Methods
+
+- Data collection from FAOSTAT
+- Panel data analysis
+- Visualization dashboards
+
+## Outputs
+
+- Annual reports on food security trends
+- Interactive dashboards
+- Policy briefs
