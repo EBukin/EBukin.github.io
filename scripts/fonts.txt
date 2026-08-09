@@ -1,0 +1,21 @@
+# Fonts required by the Typst CV builds (cv/cv-*.qmd).
+# One download URL per line; blank lines and # comments are ignored.
+# The HTML site loads the same families from Google Fonts over the CDN, so
+# these files matter only for the PDF output.
+#
+# Spectral and IBM Plex Sans are both SIL Open Font License 1.1.
+
+# Spectral — headings (weights 300/400/500 plus italics)
+https://github.com/google/fonts/raw/main/ofl/spectral/Spectral-Light.ttf
+https://github.com/google/fonts/raw/main/ofl/spectral/Spectral-LightItalic.ttf
+https://github.com/google/fonts/raw/main/ofl/spectral/Spectral-Regular.ttf
+https://github.com/google/fonts/raw/main/ofl/spectral/Spectral-Italic.ttf
+https://github.com/google/fonts/raw/main/ofl/spectral/Spectral-Medium.ttf
+
+# IBM Plex Sans — body text (weights 400/500/600)
+# Pinned to v6.4.0: google/fonts only ships a variable build, which Typst
+# renders at its default instance and so loses the weight distinctions.
+https://github.com/IBM/plex/raw/v6.4.0/IBM-Plex-Sans/fonts/complete/ttf/IBMPlexSans-Regular.ttf
+https://github.com/IBM/plex/raw/v6.4.0/IBM-Plex-Sans/fonts/complete/ttf/IBMPlexSans-Italic.ttf
+https://github.com/IBM/plex/raw/v6.4.0/IBM-Plex-Sans/fonts/complete/ttf/IBMPlexSans-Medium.ttf
+https://github.com/IBM/plex/raw/v6.4.0/IBM-Plex-Sans/fonts/complete/ttf/IBMPlexSans-SemiBold.ttf

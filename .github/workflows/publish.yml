@@ -1,0 +1,55 @@
+# Renders the Quarto site and publishes it to GitHub Pages.
+#
+# DELIBERATELY MANUAL. There is no push trigger, so nothing runs by itself —
+# the workflow only fires from the Actions tab ("Run workflow"). To go live
+# automatically, uncomment the `push:` block below and see README.md for the
+# two repo settings that also have to change.
+name: Publish site
+
+on:
+  workflow_dispatch:
+  # push:
+  #   branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never let two deploys race; queue instead of cancelling a live publish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: "1.9.37"
+
+      # The CV PDFs are typeset with Typst (bundled with Quarto) and need
+      # Spectral and IBM Plex Sans on disk. No R or Python: the site has no
+      # executable code chunks.
+      - name: Fetch fonts
+        run: bash scripts/fetch-fonts.sh
+
+      - name: Render
+        run: quarto render
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

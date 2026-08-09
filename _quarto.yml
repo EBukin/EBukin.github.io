@@ -1,6 +1,10 @@
 project:
   type: website
   output-dir: _site
+  resources:
+    # Stops GitHub Pages putting the output through Jekyll if the site is ever
+    # served from a branch rather than the Actions artifact.
+    - .nojekyll
 
 website:
   title: "Eddie Bukin"

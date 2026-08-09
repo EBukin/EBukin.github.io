@@ -1,0 +1,7 @@
+# Applies to every CV variant in this directory.
+# fonts/ is populated by scripts/fetch-fonts.{sh,ps1}; without it Typst falls
+# back to its defaults and the PDFs stop matching the web design.
+format:
+  typst:
+    font-paths:
+      - ../fonts

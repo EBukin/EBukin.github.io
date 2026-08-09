@@ -1,4 +1,5 @@
 /.quarto/
 /_site/
+/fonts/
 **/*.quarto_ipynb
 .Rproj.user

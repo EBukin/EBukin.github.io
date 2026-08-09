@@ -3,6 +3,8 @@ title: "Curriculum vitae"
 pagetitle: "CV — Eddie Bukin"
 page-layout: full
 toc: false
+# Shown next to the PDF links; bump when the CV sources change.
+cv-updated: "August 2026"
 ---
 
 ::: {.hero style="grid-template-columns:1fr auto; align-items:end; border-bottom:1px solid #E4E4E4; padding-bottom:2.6rem"}
