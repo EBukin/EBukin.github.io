@@ -1,31 +1,82 @@
-﻿---
-title: "Eduard Bukin"
-pagetitle: "Eduard Bukin"
-description-meta: "Personal academic website of Eduard Bukin"
+---
+title: "Eddie Bukin"
+pagetitle: "Eddie Bukin — land and poverty economist"
+page-layout: full
 toc: false
 ---
 
-::: {.grid}
+::: {.hero}
+::: {}
+[Land and Poverty Economist @ the World Bank &nbsp;/&nbsp; PhD Candidate · JLU Giessen]{.eyebrow}
 
-::: {.g-col-12 .g-col-md-4}
-![](files/profile.svg){.img-fluid .rounded-circle style="max-width: 200px;"}
+# Eddie Bukin {.display-name}
+
+::: {.rule-short}
 :::
 
-::: {.g-col-12 .g-col-md-8}
-## Welcome
-
-I am an academic researcher. This is my personal website where I share my publications, projects, and other professional activities.
-
-[About me](about.qmd){.btn .btn-primary} [CV](cv/index.qmd){.btn .btn-outline-primary}
+::: {.lede}
+Land and poverty economist with a decade of research and operational experience in
+Ukrainian land markets, institutions, and valuation. I combine rigorous impact evaluation
+with the practical business of making land data usable — from peer-reviewed work on
+farmland pricing and rental-market efficiency to analysis code adopted by the Ukrainian
+State Cadaster as the basis for regression-based agricultural land valuation.
 :::
 
+::: {.btn-row style="padding-top:0.6rem"}
+[CV — short [PDF · 2p]{.qty}](cv/cv-short.pdf){.btn-flat}
+[CV — full [PDF]{.qty}](cv/cv-full.pdf){.btn-outline-flat}
+[Publications only](cv/cv-academic.pdf){.btn-quiet}
+:::
 :::
 
-## Featured Work
-
-::: {#featured-publications}
+::: {.portrait}
+![](images/portrait.jpg){fig-alt="Eddie Bukin"}
+:::
 :::
 
-::: {#featured-projects}
+::: {.section-split}
+::: {.label}
+[Current focus]{.eyebrow}
+
+***
+:::
+::: {}
+Three things occupy me at the moment. I am completing a PhD thesis on the natural
+experiment of land privatization in southern Kazakhstan and its effects on pasture
+quality, extending it into a district-level evaluation of thirty years of land reform.
+In parallel, I am developing urban mass-valuation methods for Ukraine, combining real
+estate listing data with Cadaster and Registry of Rights records in a deliberately
+data-scarce environment.
+
+At the World Bank's Global Poverty Department I co-initiated GeoPov, which joins
+geospatial and micro data to read spatial welfare disparities, and I lead the Bank-wide
+effort on responsible AI-assisted coding in R and Stata — a course taken by more than
+six hundred staff.
+
+::: {.chips style="padding-top:0.4rem"}
+[Impact evaluation]{.chip-out}
+[Land markets]{.chip-out}
+[Geospatial · GEE, PostGIS]{.chip-out}
+[R · Shiny · Stata]{.chip-out}
+:::
+:::
 :::
 
+::: {.section-split}
+::: {.label}
+[Selected work]{.eyebrow}
+
+***
+
+[All publications →](publications.qmd){.meta}
+:::
+::: {}
+[[2026]{.yr}[[Reforming land valuation and taxation in Ukraine: a path towards greater sustainability, fairness, and transparency]{.ttl}[Deininger, K., Ali, D. A., [Bukin, E.]{.me}, Martyn, A. · *Land Use Policy* 165, 107976]{.aut}]{}](https://doi.org/10.1016/j.landusepol.2026.107976){.pub}
+
+[[2025]{.yr}[[The effects of land privatization on pasture productivity in south-eastern Kazakhstan]{.ttl}[[Bukin, E.]{.me}, Robinson, S., Petrick, M. · *Land Use Policy* 158, 107741]{.aut}]{}](https://doi.org/10.1016/j.landusepol.2025.107741){.pub}
+
+[[2024]{.yr}[["For whoever has will be given more"? Land rental decisions and technical efficiency in Ukraine]{.ttl}[Kvartiuk, V., [Bukin, E.]{.me}, Herzfeld, T. · *Land Use Policy* 146, 107336]{.aut}]{}](https://doi.org/10.1016/j.landusepol.2024.107336){.pub}
+
+[[2022]{.yr}[[The effects of international trade on structural convergence and CO~2~ emissions]{.ttl}[Hübler, M., [Bukin, E.]{.me}, Xi, Y. · *Environmental and Resource Economics* 83(3), 579–604]{.aut}]{}](https://doi.org/10.1007/s10640-022-00698-7){.pub}
+:::
+:::

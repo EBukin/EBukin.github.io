@@ -1,0 +1,108 @@
+---
+title: "Projects"
+pagetitle: "Projects — Eddie Bukin"
+page-layout: full
+toc: false
+---
+
+::: {style="padding:3rem 0 1rem; max-width:60ch"}
+[Projects]{.eyebrow}
+
+# Research streams and software {.display-name style="font-size:clamp(2.2rem,5vw,3.2rem)"}
+
+::: {.lede style="font-size:1.05rem; margin-top:1.2rem"}
+Two kinds of work, kept side by side on purpose: long-running research programmes, and the
+tools built so that other people can do the analysis themselves.
+:::
+:::
+
+::: {.section-split}
+::: {.label}
+[Research streams]{.eyebrow}
+
+***
+:::
+::: {.card-grid}
+
+::: {.flat-card}
+### Land reform in Kazakhstan
+
+Thirty years of land-allocation reform evaluated across 200 rayon-level units, combining
+administrative and geospatial data with the natural experiment of pasture privatization.
+
+::: {.chips}
+[Impact evaluation]{.chip} [Google Earth Engine]{.chip}
+:::
+:::
+
+::: {.flat-card}
+### Land valuation in Ukraine
+
+Mass valuation of agricultural and urban land — regression-based methods adopted by the
+State Cadaster, and listing-data approaches for urban property where records are thin.
+
+::: {.chips}
+[Cadaster]{.chip} [Machine learning]{.chip} [PostGIS]{.chip}
+:::
+:::
+
+::: {.flat-card}
+### GeoPov
+
+A World Bank working programme joining microdata with geospatial data to read spatial
+income and welfare disparities.
+
+::: {.chips}
+[Poverty mapping]{.chip} [Microdata]{.chip}
+:::
+:::
+
+:::
+:::
+
+::: {.section-split}
+::: {.label}
+[Software]{.eyebrow}
+
+***
+:::
+::: {.card-grid}
+
+::: {.flat-card}
+### peaApp
+
+R Shiny application for poverty and equity analysis — packaging country workflows into
+something a counterpart can run without an analyst in the room.
+
+[R · Shiny]{.chip}
+:::
+
+::: {.flat-card}
+### devCEQ
+
+R package for scaling up fiscal microsimulation Shiny apps — deployed for Senegal, Côte
+d'Ivoire, Benin, Indonesia, Romania, Türkiye, El Salvador, and Armenia.
+
+[worldbank.github.io/devCEQ →](https://worldbank.github.io/devCEQ/){.card-link}
+:::
+
+::: {.flat-card}
+### devPTIpack
+
+Project Targeting Index tooling: spatial and micro data combined to improve how development
+projects choose where to work.
+
+[worldbank.github.io/devPTIpack →](https://worldbank.github.io/devPTIpack){.card-link}
+:::
+
+::: {.flat-card}
+### lassopmm
+
+Lassoing welfare dynamics — synthetic panel construction with machine learning, packaged
+for reuse.
+
+[R]{.chip}
+:::
+
+:::
+:::

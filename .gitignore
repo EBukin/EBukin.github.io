@@ -1,18 +1,4 @@
-﻿# Quarto output
-/_site/
-/_freeze/
 /.quarto/
-
-# R
+/_site/
+**/*.quarto_ipynb
 .Rproj.user
-.Rhistory
-.RData
-.Ruserdata
-
-# OS
-.DS_Store
-Thumbs.db
-
-# IDE
-.vscode/
-*.Rproj

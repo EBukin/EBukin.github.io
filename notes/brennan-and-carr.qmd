@@ -1,0 +1,16 @@
+---
+title: "Brennan & Carr"
+subtitle: "Brooklyn · Sheepshead Bay"
+date: 2026-05-04
+image: ../images/notes/brennan-carr.jpg
+description: "A roast beef sandwich dipped in its own broth, in a dark wood room that has not changed its mind since 1938."
+categories: [Brooklyn, roast beef]
+---
+
+A roast beef sandwich dipped in its own broth, served in a dark wood room that has not
+changed its mind since 1938. Order it double-dipped, get the gravy on the side anyway, and
+do not plan anything ambitious afterwards.
+
+::: {.chips}
+[Double-dipped roast beef]{.chip-out} [Since 1938]{.chip-out}
+:::

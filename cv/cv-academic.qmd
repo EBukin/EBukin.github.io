@@ -1,0 +1,55 @@
+---
+title: "Eddie Bukin"
+subtitle: "Publications and academic record"
+format:
+  typst:
+    include-in-header: _typst-style.typ
+---
+
+Economist, The World Bank · PhD candidate, Justus Liebig University Giessen
+
+## Journal articles
+
+- Deininger, K., Ali, D. A., *Bukin, E.*, Martyn, A. (2026). Reforming land valuation and taxation in Ukraine: a path towards greater sustainability, fairness, and transparency. _Land Use Policy_ 165, 107976.
+- *Bukin, E.*, Robinson, S., Petrick, M. (2025). The effects of land privatization on pasture productivity in south-eastern Kazakhstan. _Land Use Policy_ 158, 107741.
+- Kvartiuk, V., *Bukin, E.*, Herzfeld, T. (2024). "For whoever has will be given more"? Land rental decisions and technical efficiency in Ukraine. _Land Use Policy_ 146, 107336.
+- Leimbach, M., Hübler, M., Mahlkow, H., Montrone, L., *Bukin, E.*, Felbermayr, G., et al. (2024). Macroeconomic structural change likely increases inequality in India more than climate policy. _Environmental Research Letters_ 19(4), 044070.
+- Hübler, M., *Bukin, E.*, Xi, Y. (2022). The effects of international trade on structural convergence and CO#sub[2] emissions. _Environmental and Resource Economics_ 83(3), 579–604.
+- Kvartiuk, V., Herzfeld, T., *Bukin, E.* (2022). Decentralized public farmland conveyance: rental rights auctioning in Ukraine. _Land Use Policy_ 114, 105983.
+- Hajdu, A., Gagalyuk, T., *Bukin, E.*, Petrick, M. (2021). Determinants of corporate social responsibility among farms in Russia and Kazakhstan. _IFAMAR_ 24(4), 697–716.
+
+## Work in progress
+
+- *Bukin, E.* (2026). Three decades of land reforms in Kazakhstan: economic impact evaluation.
+- *Bukin, E.*, Deininger, K. (2026). Urban land and property valuation in Ukraine: overcoming data constraints with real estate listing data.
+
+## Working papers
+
+- Deininger, K. W., Ali, D. A., *Bukin, E.*, Martyn, A. (2024). Reforming land valuation and taxation in Ukraine. Policy Research Working Paper Series.
+- Deininger, K., Ali, D. A., *Bukin, E.*, Martyn, A. (2024). Reproducibility package. World Bank.
+- Leimbach, M., Hübler, M., Mahlkow, H., Montrone, L., *Bukin, E.*, et al. (2022). Structural change likely increases inequality in India more than climate policy.
+- Hübler, M., *Bukin, E.*, Xi, Y. (2020). The effects of international trade on structural change and CO#sub[2] emissions. Kiel Working Paper 2174.
+
+## Reports
+
+- Kvartiuk, V., Herzfeld, T., Martyn, A., *Bukin, E.* (2020). Rental price dynamics of state-owned agricultural land in Ukraine. APD Report.
+- FAO (2017). OECD-FAO Agricultural Outlook 2017–2026 — meat chapter.
+
+## Conference presentations
+
+- *Bukin, E.* (2024). Quantifying effects of ownership fragmentation and use concentration on farmland sales and rental prices in Ukraine. 32nd ICAE.
+- *Bukin, E.*, Robinson, S., Petrick, M. (2024). The effects of privatization on pasture productivity in southern Kazakhstan. 32nd ICAE; World Bank Land Conference, Washington DC.
+- *Bukin, E.*, Petrick, M. (2023). Poverty-reduction effects of in-kind exchange and subsistence farming in Ukraine. XVII EAAE Congress, Rennes.
+- *Bukin, E.* (2021). Determinants of farmland rental prices under imperfect competition and transaction costs. 16th EAAE Congress.
+- Kvartiuk, V., *Bukin, E.*, Herzfeld, T. (2019). Do land rental markets contribute to efficient land allocations? Land and Poverty Conference.
+
+## Theses
+
+- *Bukin, E.* (2026). Land privatization and pasture quality in southern Kazakhstan. PhD thesis, JLU Giessen.
+- *Bukin, E.* (2015). Improving competitiveness of the Ukrainian sugar industry. MSc thesis, Ghent University.
+
+## Teaching
+
+- Introduction to Statistics and Econometrics — MSc, English, JLU Giessen, 2020–2024.
+- Advanced Econometrics in the Social Sciences — MSc, English, JLU Giessen, 2020–2024.
+- AI-assisted coding for economists — World Bank Open Learning Campus, 2025–.

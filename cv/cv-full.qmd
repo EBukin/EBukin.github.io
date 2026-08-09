@@ -1,0 +1,138 @@
+---
+title: "Eddie Bukin"
+subtitle: "Land and poverty economist — full curriculum vitae"
+format:
+  typst:
+    include-in-header: _typst-style.typ
+---
+
+<!--
+  The full CV. Keep this file as the single source of record; the short and academic
+  versions are edited-down selections of the same material.
+-->
+
+Mühlweg 48, 35418 Buseck, Germany · [github.com/EBukin](https://github.com/EBukin)
+German and Ukrainian national · born 26 January 1992
+
+## About
+
+Land and poverty economist with a decade of research and hands-on operational experience in
+Ukrainian land markets, institutions, and valuation. My work combines rigorous impact evaluation
+with the practical business of making land data usable: published peer-reviewed research on
+farmland pricing, rental-market efficiency, and land valuation and taxation in Ukraine, and direct
+technical assistance to the State Cadaster — including analysis code adopted as the basis for
+regression-based agricultural land valuation. My current pipeline extends this into urban mass
+valuation (real estate listing data combined with Cadaster and Registry of Rights records) and a
+large-scale impact evaluation of land reform in Kazakhstan. I work fluently across survey,
+administrative, and geospatial data (R, Python, Google Earth Engine, PostGIS), and have consulted
+on the Land Parcel Identification System and mass valuation of agricultural land. Alongside my
+research I have several years' experience teaching applied econometrics and impact-evaluation
+methods and building analytical capacity with clients and national statistical offices.
+
+## Work experience
+
+### The World Bank — Washington DC. Economist (ETC2) · Feb 2025 – present
+
+Global Poverty Department (WKPEP). Work programme:
+
+- *Land economics and Ukraine.* Co-authored research on the Ukrainian land market; technical
+  assistance to the State Cadaster; consulting on the Land Parcel Identification System (LPIS) and
+  mass valuation of agricultural land; piloted mass appraisal of urban land. Implemented
+  agricultural land valuation with the Ukrainian State Cadastre.
+- *AI-assisted coding.* Led the Bank-wide initiative on AI-assisted coding in R and Stata. Launched
+  a seminar series and internal training; delivered the ai4coding course through the Open Learning
+  Campus to 600+ staff; introduced Positron and Quarto as Bank-standard tools.
+- *GeoPov.* Co-initiated the Poverty Department programme leveraging microdata augmented with
+  geospatial data to understand spatial income and welfare disparities.
+- *Micro Modelling Lab.* Engineered data pipelines for macro-micro fiscal microsimulations as part
+  of the MML standardization initiative.
+- *EU poverty mapping.* Contributed to EU-wide poverty mapping; trained the Polish NSO.
+
+References: Klaus W. Deininger; Carolina Diaz-Bonilla; Nobuo Yoshida.
+
+### Justus Liebig University Giessen — Germany. Lecturer · Jan 2020 – Dec 2024
+
+Institute for Agricultural Policy and Market Research. Research on land markets and institutions,
+agricultural economics, rural development, and poverty in Ukraine and Central Asia — farm
+restructuring and returns to scale, land market efficiency, land policy evaluation in Kazakhstan,
+and resource market failures in transition agriculture. Introduced the *Applied Econometrics*
+course. Researcher on the BMBF-funded ROCHADE project (CGE modelling, global trade data).
+
+Contact: Prof. Dr. Martin Petrick.
+
+### The World Bank. Economist (short-term consultant) · Mar 2018 – Jan 2025
+
+Poverty and Equity Global Practice. Microeconomic analysis of fiscal incidence, geospatial analysis,
+and country-level capacity building.
+
+- *Land economics at DEC* — transparent land governance in Ukraine; papers on agricultural land mass
+  valuation and LPIS.
+- *devCEQ* — R package for scaling fiscal-microsimulation Shiny apps: Senegal, Côte d'Ivoire, Benin,
+  Indonesia, Romania, Türkiye, El Salvador, Armenia. Capacity building in Indonesia and Georgia.
+- *devPTIpack* — Project Targeting Index tools across Africa and Asia.
+- *EU Poverty Mapping* — founded the wbEUPM GitHub organisation and the initial guidelines mock-up.
+- *Miscellaneous* — Shiny tools for fragility and conflict risk monitoring (Iraq), spatial poverty
+  explorers (Latin America, Indonesia), rural diagnostics, and the lassopmm package.
+
+### IAMO — Halle (Saale), Germany. Researcher · Oct 2017 – Dec 2019
+
+Land and labour relationships in agriculture, principal–agent problems and contractual relations in
+Ukrainian agriculture. Led the second wave of the IAMO Farm Survey in Kazakhstan and Central Asia:
+questionnaire design, pre-testing, interviewer training, QA/QC — 600 responses.
+
+### FAO of the United Nations — Rome. Trade Economist, Statistician, Intern · Sep 2014 – Jan 2018
+
+Trade and Markets Division: policy briefs for the WTO 11th Ministerial, bilateral trade analysis,
+the Import Surges and Price Depressions review, and an R Shiny app for trade data exploration.
+OECD-FAO Agricultural Outlook 2017–2026: AGLINK-COSIMO country modules, meat market projections and
+chapter. Earlier, as statistician: IPCC-compliant GHG estimation methodology, QA/QC protocols, and
+the first emissions-intensities database in FAOSTAT.
+
+### Earlier positions
+
+PGSARD, Pretoria — intern, inclusive business models impact assessment (2014–2015). National
+University of State Tax Service of Ukraine — junior researcher, transfer pricing in agricultural
+exports (2012–2013). NULES of Ukraine — junior researcher, information systems (2010–2011).
+Kapfgut, Twann, Switzerland — agricultural intern (2011).
+
+## Education
+
+### PhD, Agricultural Economics — JLU Giessen · 2024 – Dec 2026
+"Land privatization and pasture quality in southern Kazakhstan: evaluating the impact of a natural
+experiment." Supervisor: Prof. Dr. Martin Petrick.
+
+### MSc, Rural Development — Erasmus Mundus · 2013 – 2015
+Ghent, Humboldt Berlin, Pisa, Pretoria. Magna cum laude, 130 ECTS. Thesis: "Improving
+Competitiveness of the Ukrainian Sugar Industry." Supervisor: Prof. Dr. Jeroen Buysse.
+
+### MSc & BSc, Economic Cybernetics — NULES of Ukraine · 2008 – 2013
+Summa cum laude. MSc 70 ECTS, BSc 240 ECTS. Supervisor: Prof. Dr. Andrii Skrypnyk.
+
+## Teaching
+
+- *Introduction to Statistics and Econometrics* — MSc, English, JLU Giessen, 2020–2024.
+- *Advanced Econometrics in the Social Sciences* — MSc, English, JLU Giessen, 2020–2024.
+- *AI-assisted coding for economists* — World Bank Open Learning Campus, 2025–, 600+ participants.
+
+## Publications
+
+See the academic CV for the complete list, or
+[the publications page](https://ebukin.github.io/ebukin/publications.html).
+
+## Skills
+
+Micro-econometrics, causal inference, impact evaluation (10+ yrs) · microdata and survey analysis
+(8+ yrs) · agricultural economics (10+ yrs), policy and trade analysis (8+ yrs) · statistics, data
+pipelines and QA/QC (8+ yrs) · R and R Shiny, package development (12+ yrs) · geospatial analysis in
+R and Python, Google Earth Engine (6+ yrs) · Stata (10+ yrs) · GAMS (6+ yrs) · Git (10+ yrs) ·
+PostgreSQL and PostGIS · Docker · Google Cloud Storage.
+
+## Languages
+
+Ukrainian (mother tongue) · Russian C2 · English C2 · German B2 · Italian A2 · French A2
+
+## Scholarships
+
+IAMO Leibniz-Association PhD Scholarship (2017–2020) · Erasmus+ post-graduation internship grant
+(2015–2016) · Erasmus Mundus Scholarship, IMRD (2013–2015) · Zavtra.UA Scholarship, Victor Pinchuk
+Foundation (2011–2013).

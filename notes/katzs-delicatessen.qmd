@@ -1,0 +1,16 @@
+---
+title: "Katz's Delicatessen"
+subtitle: "New York · Lower East Side"
+date: 2026-07-12
+image: ../images/notes/katzs.jpg
+description: "Take the ticket, walk to the carver, tip him, and watch the pastrami come off the board still steaming."
+categories: [New York, deli]
+---
+
+Take the ticket, walk to the carver, tip him, and watch the pastrami come off the board
+still steaming. Hand-carved, on rye, with mustard and nothing else. The queue is part of
+the price and worth paying once a year.
+
+::: {.chips}
+[Pastrami on rye]{.chip-out} [Cash-adjacent chaos]{.chip-out}
+:::
