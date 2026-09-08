@@ -91,7 +91,7 @@
 # `in: [full]` — and why the Short view of cv.qmd hides that row too.
 
 cv-me:
-  name: "Eddie Bukin"
+  name: "Eduard Bukin"
   headline: "Land and poverty economist"
   positions:
     - "Economist, Global Poverty Department, The World Bank"
@@ -156,7 +156,7 @@ cv:
       Innovation and systems engineering for global poverty analysis, as well as
       land-economics research and operational support to the Ukrainian State Cadastre.
     description: |
-      Innovation and systems engineering for global poverty analysis, with continuing
+      Innovation and systems engineering for global poverty analysis, as well as
       land-economics research and operational support to the Ukrainian State Cadastre.
       The work programme in the Global Poverty Department (WKPEP):
 

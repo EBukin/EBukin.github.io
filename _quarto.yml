@@ -18,7 +18,7 @@ shortcodes:
   - _templates/cv.lua
 
 website:
-  title: "Eddie Bukin"
+  title: "Eduard Bukin"
   description: "Land and poverty economist — World Bank, JLU Giessen."
   site-url: https://ebukin.github.io
   repo-url: https://github.com/EBukin/EBukin.github.io
@@ -27,7 +27,7 @@ website:
     logo: assets/logo.svg
     title: false
     left:
-      - text: "[Eddie Bukin]{.brand-name}"
+      - text: "[Eduard Bukin]{.brand-name}"
         href: index.qmd
     right:
       - text: Home
