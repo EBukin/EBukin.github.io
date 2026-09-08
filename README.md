@@ -147,18 +147,18 @@ the header comment of `_cv.yml`.
 
 ## Publishing
 
-`.github/workflows/publish.yml` renders the site and deploys it to GitHub Pages. It is
-**manual only** — the workflow has no push trigger, so merging to `main` publishes nothing
-until the steps below are taken deliberately.
+The site is live at **<https://ebukin.github.io/>**.
 
-To go live:
+`.github/workflows/publish.yml` renders it and deploys to GitHub Pages on **every push to
+`main`**. Pages is set to source "GitHub Actions" — there is no `gh-pages` branch and no
+committed build output; `_site/` stays gitignored and is only ever an Actions artifact.
 
-1. **Settings → Pages → Build and deployment → Source: GitHub Actions.** Pages is currently
-   disabled on this repo; nothing is served until this is set.
-2. Run the workflow once by hand: **Actions → Publish site → Run workflow**. Confirm the
-   deployed site looks right.
-3. Only then, uncomment the `push:` block in `.github/workflows/publish.yml` to publish on
-   every push to `main`.
+The workflow also keeps `workflow_dispatch`, so **Actions → Publish site → Run workflow**
+forces a republish without a commit — the way to pick up a change that is not in the repo
+(a repo setting, a font URL, an external asset).
+
+Merging into `main` is therefore publishing. Work on a branch, render locally first
+(`quarto render` must finish without a `(W) cv:` warning), then merge.
 
 A custom domain would need a `CNAME` file at the repo root plus the DNS records; the old
 Jekyll site's `CNAME` was empty, so there is nothing to carry over.

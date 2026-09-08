@@ -1,15 +1,15 @@
 # Renders the Quarto site and publishes it to GitHub Pages.
 #
-# DELIBERATELY MANUAL. There is no push trigger, so nothing runs by itself —
-# the workflow only fires from the Actions tab ("Run workflow"). To go live
-# automatically, uncomment the `push:` block below and see README.md for the
-# two repo settings that also have to change.
+# Live since 2026-09-08: Pages is set to source "GitHub Actions", and every push
+# to `main` republishes. `workflow_dispatch` is kept alongside so a publish can
+# still be forced from the Actions tab without a commit — useful when only a
+# repo setting or an external asset has changed.
 name: Publish site
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches: [main]
+  push:
+    branches: [main]
 
 permissions:
   contents: read

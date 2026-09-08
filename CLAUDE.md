@@ -37,6 +37,14 @@ Local Quarto is 1.10.x; CI pins 1.9.37 (`.github/workflows/publish.yml`).
 `projects`, `teaching`, `notes`), wired up in `_quarto.yml`. `notes.qmd` is a Quarto listing
 over `notes/`, with RSS (`feed: true`) emitted as `_site/notes.xml`.
 
+All six are the same page: a `.page-head` (or the CV's `.cv-head`, which is that plus a
+column of controls), then a run of two-column sections with the section's name in a narrow
+left column and a list on a hairline `.rail` to its right. Four of them state no fact of
+their own — `publications.qmd` is five `{{< pubs >}}` calls, `projects.qmd` two `{{< cv >}}`
+calls, `teaching.qmd` one, and `notes.qmd` a listing — so a page is a choice of what to show
+and nothing else. `projects.qmd` and `teaching.qmd` used to draw their content as a grid of
+cards, written out by hand and, in teaching's case, duplicating `_cv.yml` word for word.
+
 **CV PDFs.** `cv/` holds two Typst-only documents that render to `_site/cv/cv-*.pdf`.
 Neither has any YAML frontmatter: `cv/_metadata.yml` carries the whole format block for
 the directory — `format: typst:` (which is also what overrides the project's
@@ -158,13 +166,19 @@ the file into all page metadata and registers `_templates/cv.lua`, which impleme
 
 Three shapes of entry, told apart by `type:`:
 
-- **dated** — `experience`, `education`, `teaching`. `period:` / `title:` / `place:` (each
-  of the latter two with an optional `-short` twin, used only at `titles=short` so the
-  two-page CV keeps its headings to one line), a
+- **dated** — `experience`, `education`, `teaching`, `project`, `software`. `period:` /
+  `title:` / `place:` (each of the latter two with an optional `-short` twin, used only at
+  `titles=short` so the two-page CV keeps its headings to one line), a
   one-sentence `summary:`, a Markdown `description:` that may carry paragraphs and bullet
   lists, and an optional `references:` line printed only in the PDFs and only at `show=full`.
   HTML gets a `<details class="cv-entry">` timeline row; Typst gets a `#cv-entry()` call with
   the three fields passed separately, followed by the prose.
+  `project` and `software` are the two `projects.qmd` is built from. They are the same shape
+  and go through the same code, but no `{{< cv >}}` call in `cv/` asks for them, so neither
+  reaches a PDF; and neither carries a `period:`, because nothing in the record dates a
+  research stream or a package and an invented range would be worse than no line at all. A
+  row without one simply opens on its title, and the section label above it carries the
+  accent instead.
 - **flat** — `skills`, `languages`, `scholarships`. Only `items:`, a list of strings. Rendered
   as `.chip-out` chips on the web and as one ` · `-joined paragraph in the PDFs; `show=` does
   not apply to them.
@@ -226,21 +240,82 @@ interleaved with raw Typst fragments (`typst_call`), precisely so that Pandoc's 
 gets to write them and a `CO~2~` in the record comes out as Typst markup rather than as
 literal text inside the call.
 
+**The page frame.** Every page's `<main>` is the same width, in the same place, whatever
+Quarto would have done with it. Quarto lays a page out on a named CSS grid and places
+`<main>` with a class it picks from that page's own front matter — `column-page` normally,
+`column-page-right` as soon as the page asks for a table of contents, `column-page-left` for
+a listing with categories — which is why `publications.qmd` used to start visibly further
+right than `index.qmd`. `styles.scss` takes the whole grid row (`grid-column: 1 / -1`) and
+then sets its own measure: `$frame` wide, centred, `$frame-pad` inside. The navbar and the
+footer are given the same two lines, so the site is one column from the brand to the
+copyright. Change `$frame` and everything moves together.
+
+The footer is framed one level up, on `<footer>`, because `.nav-footer` carries the hairline
+that closes the page off and padding it would put that border 1.5rem wider each side than
+every other rule on the page.
+
+**Asides hang in the left margin.** A page that asks for something in a Quarto sidebar — the
+table of contents on `publications.qmd`, the category filter on `notes.qmd` — gets it as a
+fixed block to the *left* of the frame, never as a column taken out of it. Below `$aside-min`
+there is no margin to hang one in and it is dropped rather than allowed to push the reading
+column around; nothing is lost that the page does not already say, since every section names
+itself in its own label column and every note carries its own tags. The navbar's hamburger
+still opens the table of contents as a drawer at those widths, which is why the rule that
+hides it is written `:not(.show):not(.collapsing)` rather than a flat `display: none`.
+
+Two things about that block are not obvious. Its vertical position cannot be set by `top:`,
+because `quarto.js` measures the real navbar height and writes it as an *inline* `top` on the
+sidebar (and as an inline `padding-top` on `<body>`), and an inline style beats any rule — so
+the rules here keep Quarto's value and add `$aside-top` of padding, the distance from the top
+of `<main>` to the first line of a `.page-head`, which is what puts the aside's first line and
+the page's first line on the same line. And its heading is restyled to the same weight, size,
+tracking and colour as a section label, because it is one.
+
 **Design system.** `styles.scss` is the whole theme — Bootstrap 5 variable overrides in the
-`scss:defaults` block, then ~190 lines of rules. There are no per-page stylesheets. Pages are
-built by composing the semantic classes it defines, so a new section should reuse them rather
-than introduce CSS:
+`scss:defaults` block, then the rules. There are no per-page stylesheets. Pages are built by
+composing the semantic classes it defines, so a new section should reuse them rather than
+introduce CSS:
 
 - Rhythm: `$row-pad` is the padding above and below every list row — publications, CV
   entries, the notes listing. One variable, so the three cannot drift apart; change it there
   rather than per-list. Note that Quarto's own stylesheet sets `details { margin-bottom: 1em }`,
   which silently loosens anything built on `<details>`; `details.cv-entry, details.pub-entry`
   give it back so `$row-pad` is the only thing setting the gap.
-- Layout: `.hero`, `.section-split` (sticky label left / content right), `.card-grid`
+- Layout: `.hero`, `.page-head`, `.section-split` / `section.split` (label left, content
+  right), `.rail` (the hairline every list hangs off, and the indent with it)
 - Type: `.eyebrow`, `.display-name`, `.lede`, `.meta`, `.rule-short`
-- Components: `.flat-card` (+ `.featured`), `.chips` with `.chip` / `.chip-out`,
-  `.btn-flat` / `.btn-outline-flat` / `.btn-quiet` (+ `.qty` for the trailing count),
-  `.timeline` (CV entries are `<details>`/`<summary>`, emitted by `{{< cv >}}`), `.pub`
+- Components: `.chips` with `.chip-out`, `.btn-flat` / `.btn-outline-flat` / `.btn-quiet`
+  (+ `.qty` for the trailing count), `.timeline` (CV entries are `<details>`/`<summary>`,
+  emitted by `{{< cv >}}`), `.pub`
+
+There is no card. `.card-grid`, `.flat-card`, `.featured`, `.card-link` and the filled
+`.chip` are gone with the two pages that used them; a list of work on this site is a list.
+
+**Two spellings of a section, and the difference is not cosmetic.** `.section-split` is a div
+wrapping a `.label` and a content column, and is what a section named by an `.eyebrow` uses —
+`cv.qmd` and `index.qmd`. `section.split` is the same row built from `## Name {.split}`
+instead, and `publications.qmd` uses it because Quarto's table of contents walks only the top
+level of a document and does not look inside a div: put the `##` in a `.label` and the section
+still renders correctly and the table of contents silently empties. So a section that has to
+be linkable leaves its heading where Pandoc put it and lets the `<section>` Pandoc wrapped
+around it *be* the grid. `styles.scss` gives the heading the `.eyebrow`'s look, so which
+spelling a section used is invisible.
+
+**The `+` means one thing.** A CV entry and a publication row both open downward, into the
+row, with the same measure and the same type. The publication row used to open sideways into
+a ruled aside on the right, so the same control did two different things depending on which
+list the reader was in. One difference survives, and it is a difference in the data: a CV
+entry hides its collapsed `.sum` on open because `_cv.yml` requires `description:` to begin
+with `summary:`, while `_publications.yml` does not, so a publication row keeps both lines.
+
+**The notes listing is dressed, not generated.** Quarto emits its own markup for a listing, so
+those rows cannot come from a shortcode the way the CV's and the projects' do. `styles.scss`
+matches them to a CV entry element for element instead: the date takes `.timeline .when`'s
+small-caps accent, the title its serif `.role`, the subtitle its muted `.org`, the description
+the `.sum` underneath, and the categories the chips the CV's flat lists use. `notes.qmd` no
+longer asks for an `image` field — `images/notes/` does not exist and every row drew a grey
+placeholder box — and Quarto's `margin-right: 2em` inset on the listing is zeroed so the rows
+reach the same right edge as every other list.
 
 A publication row is a single Markdown link wrapping nested spans, ending in `{.pub}`:
 
@@ -260,10 +335,17 @@ Medium / SemiBold separately.
 
 ## Publishing
 
-`.github/workflows/publish.yml` is **manual only** — `workflow_dispatch`, with the `push:`
-trigger commented out. Merging to `main` publishes nothing. README.md documents the three
-steps to go live (enable Pages with source "GitHub Actions", run the workflow by hand, then
-uncomment `push:`).
+The site is live at <https://ebukin.github.io/>. `.github/workflows/publish.yml` renders it
+and deploys on **every push to `main`**, and also keeps `workflow_dispatch` for a republish
+without a commit. Pages is set to source "GitHub Actions": no `gh-pages` branch, no committed
+build output, `_site/` stays gitignored. **Merging into `main` publishes** — render locally
+first, and treat a `(W) cv:` line as a blocker rather than shipping it.
+
+The workflow pins Quarto 1.9.37 while local is 1.10.x, so CI is the second opinion, not a
+copy of the local render. Its one non-obvious step is `bash scripts/fetch-fonts.sh` before
+`quarto render`: `fonts/` is gitignored, and without that step the Typst builds fall back to
+Typst's defaults and the PDFs quietly stop matching the web design. There is no R or Python
+to set up — the site has no executable chunks.
 
 **Navbar and footer links.** Profile links live in two places in `_quarto.yml`, written two
 different ways, and the difference is not cosmetic:
@@ -302,5 +384,11 @@ logos work in both because the `mask-image` rules are keyed on `.bi-orcid` /
 No `href="#"` is left anywhere in the sources — every profile link now points somewhere real.
 What remains unfinished is content, not markup: eleven entries in `_publications.yml` carry no
 `doi:`, `url:` or `page:` and so render as deliberately inert rows; some `description:` text is
-still flagged `# EXAMPLE TEXT`; and the two food notes in `notes/` are template carry-overs
-whose `image:` paths resolve to nothing, `images/notes/` not existing yet.
+still flagged `# EXAMPLE TEXT`; the lede on `notes.qmd` is still marked DRAFT WORDING; and the
+two food notes in `notes/` are template carry-overs whose `image:` front matter points into an
+`images/notes/` that does not exist — harmless now that the listing no longer asks for an
+image, but the field is a lie until either the directory or the two notes go.
+
+`project` and `software` entries in `_cv.yml` carry no `period:`, because the record dates
+neither. If real date ranges are wanted, adding `period:` to each is all it takes — the
+shortcode already prints one when it is there.
