@@ -6,6 +6,14 @@ project:
     # served from a branch rather than the Actions artifact.
     - .nojekyll
 
+# The publication record, merged into every page's metadata so that the
+# {{< pubs >}} shortcode can assemble it for the web pages and the CV PDFs alike.
+metadata-files:
+  - _publications.yml
+
+shortcodes:
+  - _templates/pubs.lua
+
 website:
   title: "Eddie Bukin"
   description: "Land and poverty economist — World Bank, JLU Giessen."

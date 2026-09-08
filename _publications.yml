@@ -1,0 +1,247 @@
+# The publication record — written down once, typeset by the {{< pubs >}} shortcode
+# (_templates/pubs.lua) into web rows on publications.qmd / index.qmd and into
+# reference-list bullets in the Typst CVs. _quarto.yml merges this file into every
+# page's metadata via `metadata-files:`, so editing here updates site and PDFs together.
+#
+# Fields — only `type`, `year`, `title` and `authors` are required:
+#
+#   type          article | wip | working-paper | report | conference | thesis
+#                 Each page selects by type: {{< pubs type=article >}}
+#   year          used for sorting (newest first) and shown in the web row
+#   title         full title; Markdown works, so subscripts are written `CO~2~`
+#                 once and come out as <sub>2</sub> in HTML and CO#sub[2] in Typst
+#   title-short   optional trimmed title, used only by {{< pubs titles=short >}}
+#                 (cv-short.qmd); everywhere else the full title is used
+#   authors       in order, formatted as they should appear; the name matching
+#                 `author-me` below is highlighted automatically
+#   journal       italicised, followed by `detail` (volume, issue, pages)
+#   where         plain-text venue for anything without a journal — a working
+#                 paper series, a conference, a thesis institution
+#   summary       SHORT description — one line, sits on the citation line after the
+#                 venue. Printed wherever the shortcode runs with show=summary
+#                 (the default) or show=full
+#   description   LONG description — a paragraph. Printed only where the shortcode
+#                 runs with show=full: below the row on the web, as an indented
+#                 continuation of the bullet in the CVs
+#   doi / url     `doi` becomes https://doi.org/…; `url` is used verbatim. With
+#                 neither, the row links to `#` like the site's other placeholders
+#   selected      true puts the entry on the home page and in the short CV
+#
+# Which pages print how much:
+#
+#   publications.qmd    show=full     both descriptions
+#   index.qmd           (default)     summary only
+#   cv/cv-academic.qmd  (default)     summary only, except theses at show=full
+#   cv/cv-short.qmd     show=none     citations only, to hold it to two pages
+
+author-me: "Bukin, E."
+
+publications:
+
+  # ---- journal articles ------------------------------------------------------
+
+  - type: article
+    year: 2026
+    title: "Pastoral land tenure reform in post-independence Kazakhstan: issues and prospects"
+    authors: ["Robinson, S.", "Akhmadiyeva, Z.", "Bukin, E.", "Bútorová-McGurk, M.", "Oshakbayev, D.", "Petrick, M."]
+    journal: "Journal of Land Use Science"
+    detail: "21(1), 323–348"
+    doi: "10.1080/1747423X.2026.2711144"
+
+  - type: article
+    year: 2026
+    title: "Reforming land valuation and taxation in Ukraine: a path towards greater sustainability, fairness, and transparency"
+    title-short: "Reforming land valuation and taxation in Ukraine"
+    authors: ["Deininger, K.", "Ali, D. A.", "Bukin, E.", "Martyn, A."]
+    journal: "Land Use Policy"
+    detail: "165, 107976"
+    doi: "10.1016/j.landusepol.2026.107976"
+    selected: true
+
+  # EXAMPLE TEXT below — placeholder wording, rewrite it.
+  - type: article
+    year: 2025
+    title: "The effects of land privatization on pasture productivity in south-eastern Kazakhstan"
+    authors: ["Bukin, E.", "Robinson, S.", "Petrick, M."]
+    journal: "Land Use Policy"
+    detail: "158, 107741"
+    doi: "10.1016/j.landusepol.2025.107741"
+    selected: true
+    summary: "Satellite evidence that privatized pasture recovers faster than land left in common use."
+    description: >-
+      Uses the staggered rollout of pasture privatization in south-eastern Kazakhstan as a
+      natural experiment, pairing parcel-level tenure records with a long run of remotely
+      sensed vegetation indices. Privatized parcels show measurably higher productivity
+      than comparable parcels still held in common, with the gap widening over time.
+
+  - type: article
+    year: 2024
+    title: '"For whoever has will be given more"? Land rental decisions and technical efficiency in Ukraine'
+    title-short: "Land rental decisions and technical efficiency in Ukraine"
+    authors: ["Kvartiuk, V.", "Bukin, E.", "Herzfeld, T."]
+    journal: "Land Use Policy"
+    detail: "146, 107336"
+    doi: "10.1016/j.landusepol.2024.107336"
+    selected: true
+
+  - type: article
+    year: 2024
+    title: "Macroeconomic structural change likely increases inequality in India more than climate policy"
+    authors: ["Leimbach, M.", "Hübler, M.", "Mahlkow, H.", "Montrone, L.", "Bukin, E.", "Felbermayr, G.", "et al."]
+    journal: "Environmental Research Letters"
+    detail: "19(4), 044070"
+    doi: "10.1088/1748-9326/ad34e9"
+
+  - type: article
+    year: 2022
+    title: "The effects of international trade on structural convergence and CO~2~ emissions"
+    title-short: "International trade, structural convergence and CO~2~ emissions"
+    authors: ["Hübler, M.", "Bukin, E.", "Xi, Y."]
+    journal: "Environmental and Resource Economics"
+    detail: "83(3), 579–604"
+    doi: "10.1007/s10640-022-00698-7"
+    selected: true
+
+  - type: article
+    year: 2022
+    title: "Decentralized public farmland conveyance: rental rights auctioning in Ukraine"
+    authors: ["Kvartiuk, V.", "Herzfeld, T.", "Bukin, E."]
+    journal: "Land Use Policy"
+    detail: "114, 105983"
+    doi: "10.1016/j.landusepol.2022.105983"
+
+  # DOI still to be filled in — see the to-do list in README.md.
+  - type: article
+    year: 2021
+    title: "Determinants of corporate social responsibility among farms in Russia and Kazakhstan: a multilevel approach using survey data"
+    authors: ["Hajdu, A.", "Gagalyuk, T.", "Bukin, E.", "Petrick, M."]
+    journal: "IFAMAR"
+    detail: "24(4), 697–716"
+    doi: "10.22434/IFAMR2020.0197"
+
+  # ---- work in progress ------------------------------------------------------
+
+  # EXAMPLE TEXT in `description:` below — placeholder wording, rewrite it.
+  - type: wip
+    year: 2026
+    title: "Three decades of land reforms in Kazakhstan: economic impact evaluation"
+    authors: ["Bukin, E."]
+    summary: "Impact evaluation across 200 rayon-level units, combining administrative and geospatial data on agricultural production, development, and household well-being."
+    description: >-
+      Assembles thirty years of rayon-level administrative statistics alongside geospatial
+      measures of land cover, climate and livestock production, and traces how
+      graduall land allocation to the individualized ownership or use shaped
+      agricultural output, rural development, and household well-being.
+
+  - type: wip
+    year: 2026
+    title: "Urban land and property valuation in Ukraine: overcoming data constraints with real estate listing data"
+    authors: ["Bukin, E.", "Deininger, K."]
+    summary: "Mass-valuation estimates for urban property, combining listing data (Lviv case study) with Cadaster and Registry of Rights records."
+
+  # ---- working papers --------------------------------------------------------
+
+  - type: working-paper
+    year: 2024
+    title: "Reforming land valuation and taxation in Ukraine: a path towards greater sustainability, fairness, and transparency"
+    authors: ["Deininger, K. W.", "Ali, D. A.", "Bukin, E.", "Martyn, A."]
+    where: "Policy Research Working Paper Series"
+    doi: "10.1596/1813-9450-10998"
+
+  - type: working-paper
+    year: 2024
+    title: "Reforming land valuation and taxation in Ukraine — reproducibility package"
+    authors: ["Deininger, K.", "Ali, D. A.", "Bukin, E.", "Martyn, A."]
+    where: "World Bank"
+    doi: "10.60572/ke2n-6z71"
+
+  - type: working-paper
+    year: 2022
+    title: "Structural change likely increases inequality in India more than climate policy"
+    authors: ["Leimbach, M.", "Hübler, M.", "Mahlkow, H.", "Montrone, L.", "Bukin, E.", "Felbermayr, G.", "Kalkuhl, M.", "et al."]
+
+  - type: working-paper
+    year: 2020
+    title: "The effects of international trade on structural change and CO~2~ emissions"
+    authors: ["Hübler, M.", "Bukin, E.", "Xi, Y."]
+    where: "Kiel Working Paper 2174"
+
+  # ---- reports ---------------------------------------------------------------
+
+  - type: report
+    year: 2026
+    title: "People, jobs, and places: a spatial analysis of welfare disparities in low- and middle-income countries — reproducibility package"
+    authors: ["Nguyen, N. T. V.", "Stemmler, H.", "Bukin, E.", "Brunckhorst, B. J."]
+    where: "World Bank Reproducible Research Repository, FR_WLD_2026_682"
+    url: "https://reproducibility.worldbank.org/catalog/635/study-description"
+
+  - type: report
+    year: 2020
+    title: "Rental price dynamics of state-owned agricultural land in Ukraine"
+    authors: ["Kvartiuk, V.", "Herzfeld, T.", "Martyn, A.", "Bukin, E."]
+    where: "APD Report: ADP/ARP/01/2020"
+    url: "https://www.apd-ukraine.de/fileadmin/user_upload/Agrarpolitische_Berichte/Price_dynamics_eng.pdf"
+
+  - type: report
+    year: 2017
+    title: "OECD-FAO Agricultural Outlook 2017–2026 — meat chapter"
+    authors: ["FAO Trade and Markets Division"]
+
+  # ---- conference presentations ----------------------------------------------
+
+  - type: conference
+    year: 2024
+    title: "Quantifying effects of ownership fragmentation and use concentration on farmland sales and rental prices in Ukraine"
+    authors: ["Bukin, E."]
+    where: "32nd ICAE"
+
+  - type: conference
+    year: 2024
+    title: "The effects of privatization on pasture productivity in southern Kazakhstan"
+    authors: ["Bukin, E.", "Robinson, S.", "Petrick, M."]
+    where: "32nd ICAE, and World Bank Land Conference, Washington DC"
+
+  - type: conference
+    year: 2023
+    title: "Poverty-reduction effects of in-kind exchange and subsistence farming in Ukraine"
+    authors: ["Bukin, E.", "Petrick, M."]
+    where: "XVII EAAE Congress, Rennes"
+
+  - type: conference
+    year: 2021
+    title: "Determinants of farmland rental prices under imperfect competition and transaction costs: the case of Ukraine"
+    authors: ["Bukin, E."]
+    where: "16th EAAE Congress"
+
+  - type: conference
+    year: 2019
+    title: "Do land rental markets contribute to efficient land allocations? Ukrainian experience"
+    authors: ["Kvartiuk, V.", "Bukin, E.", "Herzfeld, T."]
+    where: "Land and Poverty Conference"
+
+  # ---- theses (academic CV only) ---------------------------------------------
+
+  # EXAMPLE TEXT below — placeholder wording, rewrite it.
+  - type: thesis
+    year: 2026
+    title: "Land privatization and pasture quality in southern Kazakhstan"
+    authors: ["Bukin, E."]
+    where: "PhD thesis, JLU Giessen"
+    summary: >-
+      Evaluating the impact of the land privatization natural experiment
+      started in 1990th on the agricultural productivity and output as well as
+      land quality in Kazakhstan using quasi-experimental methods on the plot-level
+      cadastral data on land allocation and remotely-sensed data on climate,
+      vegetation and land. Supervisor: Prof. Dr. Martin Petrick."
+    # description: >-
+
+  - type: thesis
+    year: 2015
+    title: "Improving competitiveness of the Ukrainian sugar industry"
+    authors: ["Bukin, E."]
+    where: "MSc thesis, Ghent University"
+    summary: "Magna cum laude, Erasmus Mundus IMRD. Supervisor: Prof. Dr. Jeroen Buysse."
+    description: >-
+      Examines the economic instability facing Ukrainian sugar production after
+      deregulation, and what policy instruments could restore competitiveness against
+      imported sugar and domestic substitutes.

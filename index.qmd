@@ -71,12 +71,6 @@ six hundred staff.
 [All publications →](publications.qmd){.meta}
 :::
 ::: {}
-[[2026]{.yr}[[Reforming land valuation and taxation in Ukraine: a path towards greater sustainability, fairness, and transparency]{.ttl}[Deininger, K., Ali, D. A., [Bukin, E.]{.me}, Martyn, A. · *Land Use Policy* 165, 107976]{.aut}]{}](https://doi.org/10.1016/j.landusepol.2026.107976){.pub}
-
-[[2025]{.yr}[[The effects of land privatization on pasture productivity in south-eastern Kazakhstan]{.ttl}[[Bukin, E.]{.me}, Robinson, S., Petrick, M. · *Land Use Policy* 158, 107741]{.aut}]{}](https://doi.org/10.1016/j.landusepol.2025.107741){.pub}
-
-[[2024]{.yr}[["For whoever has will be given more"? Land rental decisions and technical efficiency in Ukraine]{.ttl}[Kvartiuk, V., [Bukin, E.]{.me}, Herzfeld, T. · *Land Use Policy* 146, 107336]{.aut}]{}](https://doi.org/10.1016/j.landusepol.2024.107336){.pub}
-
-[[2022]{.yr}[[The effects of international trade on structural convergence and CO~2~ emissions]{.ttl}[Hübler, M., [Bukin, E.]{.me}, Xi, Y. · *Environmental and Resource Economics* 83(3), 579–604]{.aut}]{}](https://doi.org/10.1007/s10640-022-00698-7){.pub}
+{{< pubs selected=true >}}
 :::
 :::

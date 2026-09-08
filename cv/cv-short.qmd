@@ -55,10 +55,9 @@ Summa cum laude.
 
 ## Selected publications
 
-- Deininger, K., Ali, D. A., *Bukin, E.*, Martyn, A. (2026). Reforming land valuation and taxation in Ukraine. _Land Use Policy_ 165, 107976.
-- *Bukin, E.*, Robinson, S., Petrick, M. (2025). The effects of land privatization on pasture productivity in south-eastern Kazakhstan. _Land Use Policy_ 158, 107741.
-- Kvartiuk, V., *Bukin, E.*, Herzfeld, T. (2024). Land rental decisions and technical efficiency in Ukraine. _Land Use Policy_ 146, 107336.
-- Hübler, M., *Bukin, E.*, Xi, Y. (2022). International trade, structural convergence and CO#sub[2] emissions. _Environmental and Resource Economics_ 83(3), 579–604.
+<!-- Entries flagged `selected: true` in ../_publications.yml, trimmed titles. -->
+
+{{< pubs selected=true titles=short show=none >}}
 
 ## Skills
 

@@ -43,6 +43,32 @@ selections of the same material. Shared styling is in `cv/_typst-style.typ`, and
 `cv/_metadata.yml` points Typst at `fonts/`. The PDFs are linked from `index.qmd` and
 `cv.qmd` as `cv/cv-*.pdf`, so a full `quarto render` is what publishing needs.
 
+## Adding a publication
+
+Publications are data, not markup. Add one entry to `_publications.yml`:
+
+```yaml
+  - type: article          # article | wip | working-paper | report | conference | thesis
+    year: 2026
+    title: "Full title, with Markdown — subscripts as CO~2~"
+    authors: ["Coauthor, A.", "Bukin, E.", "Coauthor, B."]
+    journal: "Land Use Policy"
+    detail: "165, 107976"
+    doi: "10.1016/…"       # or url: for anything without a DOI
+    selected: true         # also show on the home page and in the short CV
+    summary: "One line, printed on the citation line."
+    description: >-
+      Optional paragraph, printed only where a page asks for show=full.
+```
+
+It then appears everywhere the `{{< pubs >}}` shortcode already selects it — the publications
+page, the home page, and the CV PDFs — with no other file to edit. The shortcode is
+`_templates/pubs.lua`; `_quarto.yml` wires both up. Field-by-field documentation is in the
+header comment of `_publications.yml`.
+
+Use `url:` instead of `doi:` for anything without one — a reproducibility package, a data
+catalogue entry, a conference programme.
+
 ## Structure
 
 | File | Page |
@@ -53,6 +79,8 @@ selections of the same material. Shared styling is in `cv/_typst-style.typ`, and
 | `projects.qmd` | Research streams + software |
 | `teaching.qmd` | JLU courses + ai4coding |
 | `notes.qmd` + `notes/` | Food notes (Quarto listing, RSS enabled) |
+| `_publications.yml` | The publication record — the only place papers are written down |
+| `_templates/` | Reusable rendering machinery — Lua shortcodes/filters, future templates |
 | `styles.scss` | The whole theme — Bootstrap variable overrides + ~200 lines of rules |
 
 ## Publishing
@@ -82,6 +110,7 @@ quarto publish gh-pages
 ## To do
 
 - Add real Scholar / ORCID / LinkedIn URLs in `_quarto.yml` (currently `#`).
-- Fill in the DOI for the 2021 IFAMAR paper in `publications.qmd` (currently `#`).
+- Replace the placeholder `summary:` / `description:` example text in `_publications.yml`
+  (the entries carrying it are flagged with an `# EXAMPLE TEXT` comment).
 - Replace the two placeholder food notes carried over from the template.
 - Drop photos into `images/notes/` for the food notes.

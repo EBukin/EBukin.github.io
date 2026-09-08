@@ -170,6 +170,19 @@ main.content { max-width: 1020px; }
 .pub .aut { font-size: 0.78rem; color: $muted; display: block; margin-top: 0.35rem; }
 .pub .aut .me { color: $ink; font-style: normal; }
 
+// A row carrying a long description: the rule moves to the wrapper so the prose
+// sits inside the entry, aligned with the title column of the .pub grid.
+.pub-entry { border-bottom: 1px solid $rule-soft; }
+.pub-entry .pub { border-bottom: 0; padding-bottom: 0.55rem; }
+.pub-more {
+  padding: 0 0 1.35rem calc(52px + 1.5rem);
+  max-width: 68ch;
+}
+.pub-more p { font-size: 0.86rem; line-height: 1.62; color: $muted; margin: 0; }
+@media (max-width: 575px) {
+  .pub-more { padding-left: 0; }
+}
+
 // ---- cv timeline ------------------------------------------------------------
 
 .timeline { border-left: 1px solid $rule; padding-left: 2rem; }

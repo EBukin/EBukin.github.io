@@ -12,52 +12,24 @@ toc-location: left
 # Peer-reviewed work, papers and talks {.display-name style="font-size:clamp(2.2rem,5vw,3.2rem)"}
 :::
 
+<!-- Every entry below comes from _publications.yml; add papers there, not here. -->
+
 ## Journal articles
 
-[[2026]{.yr}[[Reforming land valuation and taxation in Ukraine: a path towards greater sustainability, fairness, and transparency]{.ttl}[Deininger, K., Ali, D. A., [Bukin, E.]{.me}, Martyn, A. · *Land Use Policy* 165, 107976]{.aut}]{}](https://doi.org/10.1016/j.landusepol.2026.107976){.pub}
-
-[[2025]{.yr}[[The effects of land privatization on pasture productivity in south-eastern Kazakhstan]{.ttl}[[Bukin, E.]{.me}, Robinson, S., Petrick, M. · *Land Use Policy* 158, 107741]{.aut}]{}](https://doi.org/10.1016/j.landusepol.2025.107741){.pub}
-
-[[2024]{.yr}[["For whoever has will be given more"? Land rental decisions and technical efficiency in Ukraine]{.ttl}[Kvartiuk, V., [Bukin, E.]{.me}, Herzfeld, T. · *Land Use Policy* 146, 107336]{.aut}]{}](https://doi.org/10.1016/j.landusepol.2024.107336){.pub}
-
-[[2024]{.yr}[[Macroeconomic structural change likely increases inequality in India more than climate policy]{.ttl}[Leimbach, M., Hübler, M., Mahlkow, H., Montrone, L., [Bukin, E.]{.me}, Felbermayr, G., et al. · *Environmental Research Letters* 19(4), 044070]{.aut}]{}](https://doi.org/10.1088/1748-9326/ad34e9){.pub}
-
-[[2022]{.yr}[[The effects of international trade on structural convergence and CO~2~ emissions]{.ttl}[Hübler, M., [Bukin, E.]{.me}, Xi, Y. · *Environmental and Resource Economics* 83(3), 579–604]{.aut}]{}](https://doi.org/10.1007/s10640-022-00698-7){.pub}
-
-[[2022]{.yr}[[Decentralized public farmland conveyance: rental rights auctioning in Ukraine]{.ttl}[Kvartiuk, V., Herzfeld, T., [Bukin, E.]{.me} · *Land Use Policy* 114, 105983]{.aut}]{}](https://doi.org/10.1016/j.landusepol.2022.105983){.pub}
-
-[[2021]{.yr}[[Determinants of corporate social responsibility among farms in Russia and Kazakhstan: a multilevel approach using survey data]{.ttl}[Hajdu, A., Gagalyuk, T., [Bukin, E.]{.me}, Petrick, M. · *IFAMAR* 24(4), 697–716]{.aut}]{}](#){.pub}
+{{< pubs type=article show=full >}}
 
 ## Work in progress
 
-[[2026]{.yr}[[Three decades of land reforms in Kazakhstan: economic impact evaluation]{.ttl}[[Bukin, E.]{.me} · Impact evaluation across 200 rayon-level units, combining administrative and geospatial data on agricultural production, development, and household well-being.]{.aut}]{}](#){.pub}
-
-[[2026]{.yr}[[Urban land and property valuation in Ukraine: overcoming data constraints with real estate listing data]{.ttl}[[Bukin, E.]{.me}, Deininger, K. · Mass-valuation estimates for urban property, combining listing data (Lviv case study) with Cadaster and Registry of Rights records.]{.aut}]{}](#){.pub}
+{{< pubs type=wip show=full >}}
 
 ## Working papers
 
-[[2024]{.yr}[[Reforming land valuation and taxation in Ukraine: a path towards greater sustainability, fairness, and transparency]{.ttl}[Deininger, K. W., Ali, D. A., [Bukin, E.]{.me}, Martyn, A. · Policy Research Working Paper Series]{.aut}]{}](https://doi.org/10.1596/1813-9450-10998){.pub}
-
-[[2024]{.yr}[[Reforming land valuation and taxation in Ukraine — reproducibility package]{.ttl}[Deininger, K., Ali, D. A., [Bukin, E.]{.me}, Martyn, A. · World Bank]{.aut}]{}](https://doi.org/10.60572/ke2n-6z71){.pub}
-
-[[2022]{.yr}[[Structural change likely increases inequality in India more than climate policy]{.ttl}[Leimbach, M., Hübler, M., Mahlkow, H., Montrone, L., [Bukin, E.]{.me}, Felbermayr, G., Kalkuhl, M., et al.]{.aut}]{}](#){.pub}
-
-[[2020]{.yr}[[The effects of international trade on structural change and CO~2~ emissions]{.ttl}[Hübler, M., [Bukin, E.]{.me}, Xi, Y. · Kiel Working Paper 2174]{.aut}]{}](#){.pub}
+{{< pubs type=working-paper show=full >}}
 
 ## Reports
 
-[[2020]{.yr}[[Rental price dynamics of state-owned agricultural land in Ukraine]{.ttl}[Kvartiuk, V., Herzfeld, T., Martyn, A., [Bukin, E.]{.me} · APD Report]{.aut}]{}](#){.pub}
-
-[[2017]{.yr}[[OECD-FAO Agricultural Outlook 2017–2026 — meat chapter]{.ttl}[FAO Trade and Markets Division]{.aut}]{}](#){.pub}
+{{< pubs type=report show=full >}}
 
 ## Conference presentations
 
-[[2024]{.yr}[[Quantifying effects of ownership fragmentation and use concentration on farmland sales and rental prices in Ukraine]{.ttl}[[Bukin, E.]{.me} · 32nd ICAE]{.aut}]{}](#){.pub}
-
-[[2024]{.yr}[[The effects of privatization on pasture productivity in southern Kazakhstan]{.ttl}[[Bukin, E.]{.me}, Robinson, S., Petrick, M. · 32nd ICAE, and World Bank Land Conference, Washington DC]{.aut}]{}](#){.pub}
-
-[[2023]{.yr}[[Poverty-reduction effects of in-kind exchange and subsistence farming in Ukraine]{.ttl}[[Bukin, E.]{.me}, Petrick, M. · XVII EAAE Congress, Rennes]{.aut}]{}](#){.pub}
-
-[[2021]{.yr}[[Determinants of farmland rental prices under imperfect competition and transaction costs: the case of Ukraine]{.ttl}[[Bukin, E.]{.me} · 16th EAAE Congress]{.aut}]{}](#){.pub}
-
-[[2019]{.yr}[[Do land rental markets contribute to efficient land allocations? Ukrainian experience]{.ttl}[Kvartiuk, V., [Bukin, E.]{.me}, Herzfeld, T. · Land and Poverty Conference]{.aut}]{}](#){.pub}
+{{< pubs type=conference show=full >}}
