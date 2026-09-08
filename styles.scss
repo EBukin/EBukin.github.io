@@ -164,21 +164,71 @@ main.content { max-width: 1020px; }
   border-bottom: 1px solid $rule-soft;
   color: inherit;
 }
-.pub:hover { background: $tint; }
+// Only rows that actually do something react to the pointer. An entry with no DOI,
+// URL or internal page renders as a plain div and stays inert.
+a.pub:hover, summary.pub:hover { background: $tint; }
 .pub .yr { font-family: $headings-font-family; font-size: 0.94rem; color: $accent; }
 .pub .ttl { font-family: $headings-font-family; font-size: 1.18rem; line-height: 1.35; text-wrap: pretty; display: block; }
+.pub .ttl a { color: inherit; }
+.pub .ttl a:hover { color: $accent; }
 .pub .aut { font-size: 0.78rem; color: $muted; display: block; margin-top: 0.35rem; }
 .pub .aut .me { color: $ink; font-style: normal; }
-
-// A row carrying a long description: the rule moves to the wrapper so the prose
-// sits inside the entry, aligned with the title column of the .pub grid.
-.pub-entry { border-bottom: 1px solid $rule-soft; }
-.pub-entry .pub { border-bottom: 0; padding-bottom: 0.55rem; }
-.pub-more {
-  padding: 0 0 1.35rem calc(52px + 1.5rem);
-  max-width: 68ch;
+// The summary is prose, not more citation metadata, so it is set apart by family
+// rather than by size: serif like the title, but small and neutral in weight and
+// colour so it never competes with it. No measure cap — main.content already bounds
+// the column, and the line reads as cramped when it wraps at half the row's width.
+.pub .sum {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: $headings-font-family;
+  font-weight: 300;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: #4A4E52;
 }
-.pub-more p { font-size: 0.86rem; line-height: 1.62; color: $muted; margin: 0; }
+
+// An entry with a long description collapses behind a +, reusing the timeline's
+// disclosure pattern. The rule moves to <details> so the prose sits inside the entry.
+details.pub-entry { border-bottom: 1px solid $rule-soft; }
+details.pub-entry > summary.pub {
+  grid-template-columns: 52px 1fr 20px;
+  border-bottom: 0;
+  list-style: none;
+  cursor: pointer;
+}
+details.pub-entry > summary.pub::-webkit-details-marker { display: none; }
+.pub .plus {
+  font-size: 1.2rem;
+  color: $accent;
+  line-height: 1;
+  justify-self: end;
+  transition: transform 0.18s ease;
+}
+details.pub-entry[open] .plus { transform: rotate(45deg); }
+
+// Open, the description sits beside the entry rather than pushing the list down:
+// <details> becomes the grid, the row keeps the left column, the prose takes a
+// hairline-ruled aside on the right.
+details.pub-entry[open] {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 330px);
+  column-gap: 2.5rem;
+  align-items: start;
+}
+.pub-more {
+  padding: 1.35rem 0 1.35rem 1.6rem;
+  border-left: 1px solid $rule;
+}
+.pub-more p { font-size: 0.84rem; line-height: 1.6; color: $muted; margin: 0; }
+
+// Too narrow to sit two abreast — fall back to expanding downward.
+@media (max-width: 991px) {
+  details.pub-entry[open] { display: block; }
+  .pub-more {
+    border-left: 0;
+    padding: 0 0 1.35rem calc(52px + 1.5rem);
+  }
+}
 @media (max-width: 575px) {
   .pub-more { padding-left: 0; }
 }

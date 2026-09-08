@@ -1,15 +1,15 @@
 ---
-title: "Publications"
-pagetitle: "Publications — Eddie Bukin"
+# title: "Publications"
+pagetitle: "Publications: Eddie B."
 page-layout: full
 toc: true
 toc-location: left
 ---
 
-::: {style="padding:2rem 0 1rem; max-width:60ch"}
+::: {style="padding:2rem 0 1rem"}
 [Publications]{.eyebrow}
 
-# Peer-reviewed work, papers and talks {.display-name style="font-size:clamp(2.2rem,5vw,3.2rem)"}
+# Published works, talks, and other outputs {.display-name style="font-size:clamp(2.2rem,5vw,3.2rem)"}
 :::
 
 <!-- Every entry below comes from _publications.yml; add papers there, not here. -->

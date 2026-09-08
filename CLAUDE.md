@@ -63,9 +63,24 @@ bullets for Typst:
 ```
 
 `show=` controls how much of an entry's prose is printed: `summary` adds the one-line
-`summary:` to the citation, `full` also prints the `description:` paragraph. On the web a
-`description:` forces the row into a `.pub-entry` wrapper (block content cannot nest inside
-the `.pub` anchor), so `styles.scss` carries `.pub-entry` / `.pub-more` alongside `.pub`.
+`summary:` (its own `.sum` line on the web, run into the citation in the CVs), `full` also
+prints the `description:` paragraph.
+
+A web row takes one of three shapes, all handled in `web_row`:
+
+- **inert** — no `page:`, `url:` or `doi:`. A `<div class="pub">`, deliberately not a link;
+  a placeholder `href="#"` would only bounce the reader to the top of the page.
+- **link** — `<a class="pub">` over the whole row. It points at `page:` if set, else `url:`,
+  else `doi:` — most specific first, so adding a `page:` takes the row over from the DOI.
+  `page:` is a site-root-relative source path (`notes/foo.qmd`); the shortcode rewrites the
+  extension to `.html`.
+- **disclosure** — an entry with a `description:` under `show=full`. Raw
+  `<details class="pub-entry">` / `<summary class="pub">` with a `.plus`, the same pattern
+  `cv.qmd` uses for its timeline. Clicking expands rather than navigates, so the outbound
+  link moves onto the title. Block content cannot nest inside an `<a>` anyway.
+
+`styles.scss` carries `.sum`, `.plus`, `.pub-entry` and `.pub-more` alongside `.pub`, and
+scopes the hover tint to `a.pub` / `summary.pub` so inert rows stay inert.
 
 Never hand-write a publication row. Add the entry to `_publications.yml` and it appears
 wherever the matching shortcode already runs (`publications.qmd`, `index.qmd`,

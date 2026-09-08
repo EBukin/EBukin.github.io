@@ -55,11 +55,15 @@ Publications are data, not markup. Add one entry to `_publications.yml`:
     journal: "Land Use Policy"
     detail: "165, 107976"
     doi: "10.1016/…"       # or url: for anything without a DOI
+    page: notes/my-note.qmd  # a page on this site; takes the row over from the DOI
     selected: true         # also show on the home page and in the short CV
-    summary: "One line, printed on the citation line."
+    summary: "One line, on its own line under the authors."
     description: >-
-      Optional paragraph, printed only where a page asks for show=full.
+      Optional paragraph. Collapsed behind a + on pages that ask for show=full.
 ```
+
+A row links to `page`, else `url`, else `doi`. An entry with none of the three is not a
+link — it renders as an inert row rather than one that goes nowhere.
 
 It then appears everywhere the `{{< pubs >}}` shortcode already selects it — the publications
 page, the home page, and the CV PDFs — with no other file to edit. The shortcode is
@@ -78,7 +82,7 @@ catalogue entry, a conference programme.
 | `publications.qmd` | Everything, grouped by type |
 | `projects.qmd` | Research streams + software |
 | `teaching.qmd` | JLU courses + ai4coding |
-| `notes.qmd` + `notes/` | Food notes (Quarto listing, RSS enabled) |
+| `notes.qmd` + `notes/` | Research and food notes (Quarto listing, RSS enabled) |
 | `_publications.yml` | The publication record — the only place papers are written down |
 | `_templates/` | Reusable rendering machinery — Lua shortcodes/filters, future templates |
 | `styles.scss` | The whole theme — Bootstrap variable overrides + ~200 lines of rules |

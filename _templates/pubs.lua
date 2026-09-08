@@ -63,9 +63,10 @@ local function author_line(entry, me, mark)
   return join(parts, COMMA)
 end
 
--- Everything trailing the authors: an italicised journal with its volume and pages,
--- a plain venue, and the one-line `summary:` where the entry has one.
-local function venue_parts(entry, show)
+-- Everything trailing the authors on the citation line: an italicised journal with
+-- its volume and pages, or a plain venue. The `summary:` is deliberately not here —
+-- on the web it gets its own line, and only the CV runs it into the citation.
+local function venue_parts(entry)
   local parts = {}
   if entry.journal then
     local one = pandoc.Inlines{ pandoc.Emph(inls(entry.journal)) }
@@ -76,8 +77,12 @@ local function venue_parts(entry, show)
     parts[#parts + 1] = one
   end
   if entry.where then parts[#parts + 1] = inls(entry.where) end
-  if show ~= 'none' and entry.summary then parts[#parts + 1] = inls(entry.summary) end
   return parts
+end
+
+local function summary_of(entry, show)
+  if show == 'none' or entry.summary == nil then return nil end
+  return inls(entry.summary)
 end
 
 -- The CV punctuates each part as a sentence, but titles ending in "?" and
@@ -97,44 +102,80 @@ local function title_of(entry, short)
   return inls(entry.title)
 end
 
--- Entries with no public landing page keep the `#` placeholder used elsewhere on the site.
+-- Where a row points, most specific first: a page on this site, then an explicit
+-- URL, then the DOI. nil when the entry has nowhere to go — such rows must not be
+-- links at all, since a placeholder href only jerks the reader to the top of the page.
 local function href_of(entry)
+  if entry.page then
+    -- Site-root-relative, written as authored (`notes/foo.qmd`).
+    return (stringify(entry.page):gsub('%.qmd$', '.html'))
+  end
   if entry.url then return stringify(entry.url) end
   if entry.doi then return 'https://doi.org/' .. stringify(entry.doi) end
-  return '#'
+  return nil
 end
 
-local function web_row(entry, me, short, show)
+local function html_of(blocks)
+  return (pandoc.write(pandoc.Pandoc(blocks), 'html'):gsub('%s+$', ''))
+end
+
+-- The grid cells of one row: the year, then a stack of title / citation / summary.
+local function row_content(entry, me, short, show, title)
   local authors = author_line(entry, me, function(one)
     return pandoc.Inlines{ pandoc.Span(one, pandoc.Attr('', { 'me' })) }
   end)
 
-  local trailing = { authors }
-  for _, part in ipairs(venue_parts(entry, show)) do trailing[#trailing + 1] = part end
+  local citation = { authors }
+  for _, part in ipairs(venue_parts(entry)) do citation[#citation + 1] = part end
 
-  local body = pandoc.Span({
-    pandoc.Span(title_of(entry, short), pandoc.Attr('', { 'ttl' })),
-    pandoc.Span(join(trailing, MIDDOT), pandoc.Attr('', { 'aut' })),
-  })
+  local body = pandoc.List{
+    pandoc.Span(title, pandoc.Attr('', { 'ttl' })),
+    pandoc.Span(join(citation, MIDDOT), pandoc.Attr('', { 'aut' })),
+  }
 
-  local link = pandoc.Link({
-    pandoc.Span(inls(entry.year), pandoc.Attr('', { 'yr' })),
-    body,
-  }, href_of(entry), '', pandoc.Attr('', { 'pub' }))
-
-  -- A long description cannot live inside the row: .pub is an <a>, and block
-  -- content nested in a link is invalid HTML. It becomes a sibling instead, with
-  -- .pub-entry taking over the rule that normally sits under .pub. Rows without
-  -- one stay a bare paragraph, exactly as they were before descriptions existed.
-  local description = long_description(entry, show)
-  if description == nil then
-    return pandoc.Para{ link }
+  -- The short description reads as content, not as more citation metadata, so it
+  -- gets its own line under the authors rather than another ` · ` fragment.
+  local summary = summary_of(entry, show)
+  if summary then
+    body:insert(pandoc.Span(summary, pandoc.Attr('', { 'sum' })))
   end
 
-  return pandoc.Div({
-    pandoc.Plain{ link },
-    pandoc.Div(pandoc.Blocks{ pandoc.Para(description) }, pandoc.Attr('', { 'pub-more' })),
-  }, pandoc.Attr('', { 'pub-entry' }))
+  return pandoc.List{
+    pandoc.Span(inls(entry.year), pandoc.Attr('', { 'yr' })),
+    pandoc.Span(body),
+  }
+end
+
+local function web_row(entry, me, short, show)
+  local url         = href_of(entry)
+  local description = long_description(entry, show)
+  local title       = title_of(entry, short)
+
+  if description == nil then
+    local content = row_content(entry, me, short, show, title)
+    if url then
+      return pandoc.Plain{ pandoc.Link(content, url, '', pandoc.Attr('', { 'pub' })) }
+    end
+    -- Nowhere to go: render the row as a plain block rather than a link that
+    -- would only bounce the reader to the top of the page.
+    return pandoc.Div(pandoc.Blocks{ pandoc.Plain(content) }, pandoc.Attr('', { 'pub' }))
+  end
+
+  -- With a long description the row becomes a disclosure — clicking it expands the
+  -- prose instead of navigating — so any outbound link moves onto the title, and
+  -- the whole thing is emitted as raw <details>, the same pattern cv.qmd uses for
+  -- its timeline. Block content cannot nest inside an <a> anyway.
+  if url then title = pandoc.Inlines{ pandoc.Link(title, url, '') } end
+
+  local content = row_content(entry, me, short, show, title)
+  content:insert(pandoc.Span({ pandoc.Str('+') }, pandoc.Attr('', { 'plus' })))
+
+  return pandoc.RawBlock('html', table.concat({
+    '<details class="pub-entry">',
+    '<summary class="pub">', html_of{ pandoc.Plain(content) }, '</summary>',
+    '<div class="pub-more">', html_of{ pandoc.Para(description) }, '</div>',
+    '</details>',
+  }, '\n'))
 end
 
 local function cv_item(entry, me, short, show)
@@ -149,7 +190,12 @@ local function cv_item(entry, me, short, show)
   out:extend(title)
   if not ends_sentence(title) then out:insert(pandoc.Str('.')) end
 
-  for _, part in ipairs(venue_parts(entry, show)) do
+  -- The CV has no room for a separate line, so the summary runs into the citation.
+  local parts = venue_parts(entry)
+  local summary = summary_of(entry, show)
+  if summary then parts[#parts + 1] = summary end
+
+  for _, part in ipairs(parts) do
     out:insert(pandoc.Space())
     out:extend(part)
     if not ends_sentence(part) then out:insert(pandoc.Str('.')) end

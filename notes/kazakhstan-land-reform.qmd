@@ -1,0 +1,34 @@
+---
+title: "Three decades of land reform in Kazakhstan"
+subtitle: "Working notes · impact evaluation"
+date: 2026-09-01
+description: "What thirty years of rayon-level data say about decollectivization, share distribution, and the move to private title."
+categories: [research, Kazakhstan, land]
+---
+
+<!--
+  EXAMPLE PAGE — placeholder text, rewrite it. It exists to demonstrate the
+  `page:` field in _publications.yml: the work-in-progress entry on the
+  publications page links here instead of to a publisher.
+-->
+
+Working notes on the rayon-level impact evaluation. The paper itself is still in
+progress; this page is where the data assembly and the interim findings live.
+
+## What the data covers
+
+Thirty years of rayon-level administrative statistics for roughly 200 units, joined to
+geospatial measures of land cover, climate, and livestock production. The panel starts
+before decollectivization and runs through the move to individual ownership and use.
+
+## Interim findings
+
+Placeholder. Replace with the results worth showing before publication — the descriptive
+series, the identification strategy, and whatever the reader should take away if they
+never read the paper.
+
+::: {.chips}
+[Impact evaluation]{.chip-out}
+[Rayon panel]{.chip-out}
+[Geospatial]{.chip-out}
+:::

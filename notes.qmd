@@ -1,27 +1,30 @@
 ---
-title: "Where the food is good"
+title: "Notes"
 pagetitle: "Notes — Eddie Bukin"
 page-layout: full
 toc: false
 listing:
-  id: food-notes
+  id: all-notes
   contents: notes
   type: default
   sort: "date desc"
-  fields: [image, date, title, subtitle, description]
+  fields: [image, date, title, subtitle, description, categories]
   image-height: 250px
   date-format: "MMM YYYY"
+  categories: true
   feed: true
 ---
 
-::: {style="padding:2rem 0 1rem; max-width:60ch"}
+<!-- DRAFT WORDING — rewrite the lede below. -->
+
+::: {style="padding:2rem 0 1rem"}
 [Notes]{.eyebrow}
 
 ::: {.lede style="margin-top:1rem"}
-An occasional, unsystematic register of places worth the trip. No stars, no scores — just
-the dish that made the case, and roughly when I was there.
+Working notes on research in progress and the odd finding worth writing down, alongside an
+unsystematic register of places worth the trip. Filter by category.
 :::
 :::
 
-::: {#food-notes}
+::: {#all-notes}
 :::

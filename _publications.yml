@@ -23,9 +23,15 @@
 #   description   LONG description — a paragraph. Printed only where the shortcode
 #                 runs with show=full: below the row on the web, as an indented
 #                 continuation of the bullet in the CVs
-#   doi / url     `doi` becomes https://doi.org/…; `url` is used verbatim. With
-#                 neither, the row links to `#` like the site's other placeholders
+#   page          a page on this site to send the reader to instead of the
+#                 publisher — a note write-up, a project sub-page. Written
+#                 site-root-relative as authored, e.g. notes/kazakhstan-land-reform.qmd
+#   doi / url     `doi` becomes https://doi.org/…; `url` is used verbatim
 #   selected      true puts the entry on the home page and in the short CV
+#
+# A row points at `page`, else `url`, else `doi` — most specific first, so adding a
+# `page:` takes the row over from the DOI. An entry with none of the three is not a
+# link at all: it renders as an inert row rather than one that goes nowhere.
 #
 # Which pages print how much:
 #
@@ -126,6 +132,7 @@ publications:
     year: 2026
     title: "Three decades of land reforms in Kazakhstan: economic impact evaluation"
     authors: ["Bukin, E."]
+    page: notes/kazakhstan-land-reform.qmd
     summary: "Impact evaluation across 200 rayon-level units, combining administrative and geospatial data on agricultural production, development, and household well-being."
     description: >-
       Assembles thirty years of rayon-level administrative statistics alongside geospatial
@@ -232,7 +239,7 @@ publications:
       started in 1990th on the agricultural productivity and output as well as
       land quality in Kazakhstan using quasi-experimental methods on the plot-level
       cadastral data on land allocation and remotely-sensed data on climate,
-      vegetation and land. Supervisor: Prof. Dr. Martin Petrick."
+      vegetation and land. Supervisor: Prof. Dr. Martin Petrick.
     # description: >-
 
   - type: thesis
