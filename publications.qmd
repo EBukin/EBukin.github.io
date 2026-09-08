@@ -2,34 +2,53 @@
 # title: "Publications"
 pagetitle: "Publications: Eddie B."
 page-layout: full
+# The table of contents hangs in the left margin and never moves the column beside it
+# — see the "page frame" rules in styles.scss. It is dropped on a window too narrow to
+# hold it, which is why every section also names itself in its own label column.
 toc: true
 toc-location: left
 ---
 
-::: {style="padding:2rem 0 1rem"}
+::: {.page-head}
 [Publications]{.eyebrow}
 
-# Published works, talks, and other outputs {.display-name style="font-size:clamp(2.2rem,5vw,3.2rem)"}
+# Published works, talks, and other outputs {.display-name}
 :::
 
-<!-- Every entry below comes from _publications.yml; add papers there, not here. -->
+<!-- Every entry below comes from _publications.yml; add papers there, not here.
 
-## Journal articles
+     Each `## Name {.split}` is the same two-column row cv.qmd is built from — the
+     section name in the left label column, the rows on the rail to its right — but
+     written as a heading rather than as a `.label` div, because Quarto's table of
+     contents does not look inside a div and these sections have to be linkable.
+     styles.scss gives the heading the .eyebrow's look, so the two read alike. -->
 
+## Journal articles {.split}
+
+::: {.rail}
 {{< pubs type=article show=full >}}
+:::
 
-## Work in progress
+## Work in progress {.split}
 
+::: {.rail}
 {{< pubs type=wip show=full >}}
+:::
 
-## Working papers
+## Working papers {.split}
 
+::: {.rail}
 {{< pubs type=working-paper show=full >}}
+:::
 
-## Reports
+## Reports {.split}
 
+::: {.rail}
 {{< pubs type=report show=full >}}
+:::
 
-## Conference presentations
+## Conference presentations {.split}
 
+::: {.rail}
 {{< pubs type=conference show=full >}}
+:::

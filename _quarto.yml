@@ -6,13 +6,16 @@ project:
     # served from a branch rather than the Actions artifact.
     - .nojekyll
 
-# The publication record, merged into every page's metadata so that the
-# {{< pubs >}} shortcode can assemble it for the web pages and the CV PDFs alike.
+# The publication and CV records, merged into every page's metadata so that the
+# {{< pubs >}} and {{< cv >}} shortcodes can assemble them for the web pages and the
+# CV PDFs alike.
 metadata-files:
   - _publications.yml
+  - _cv.yml
 
 shortcodes:
   - _templates/pubs.lua
+  - _templates/cv.lua
 
 website:
   title: "Eddie Bukin"
@@ -39,17 +42,57 @@ website:
         href: teaching.qmd
       - text: Notes
         href: notes.qmd
-  page-footer:
-    left: "© 2026 Eddie Bukin · built with Quarto"
-    right:
+    # Profile links, as icons at the top right. Quarto renders `tools:` as its own block
+    # in the navbar; styles.scss orders it after the search field. This is the list to
+    # extend when another platform is worth linking — one entry each, in the order they
+    # should appear. `icon:` is a Bootstrap Icons name
+    # (https://icons.getbootstrap.com/) and `text:` becomes the tooltip and the
+    # accessible label.
+    #
+    # Bootstrap Icons has no Scholar or ORCID mark, so the last two entries name icons
+    # it does not define. Quarto emits the `<i class="bi bi-orcid">` regardless and
+    # nothing is drawn — styles.scss then masks the real logo into that empty box. Any
+    # other platform Bootstrap Icons misses, Hugging Face included, can be added the
+    # same way: pick a name here, then paint it in styles.scss beside those two.
+    tools:
       - icon: github
         href: https://github.com/EBukin
-      - text: Scholar
-        href: "#"
-      - text: ORCID
-        href: "#"
+        text: GitHub
       - icon: linkedin
-        href: "#"
+        href: https://www.linkedin.com/in/ebukin/
+        text: LinkedIn
+      - icon: google-scholar
+        href: "https://scholar.google.com/citations?hl=en&user=JtxmtwgAAAAJ&view_op=list_works&sortby=pubdate"
+        text: Google Scholar
+      - icon: orcid
+        href: https://orcid.org/0000-0002-1003-1260
+        text: ORCID
+  page-footer:
+    left: "© 2026 Eddie Bukin · built with Quarto"
+    # Icon and label together: the point of the footer is that reaching one of these is
+    # obvious, which a bare glyph is not. Scholar and ORCID have no Bootstrap icon, so
+    # they are text alone.
+    #
+    # Written as raw HTML rather than as a list of `- icon: / text: / href:` items
+    # because Quarto 1.10.18 renders that list wrong *in the footer*: every item after
+    # the first comes out carrying the LAST item's text — four links all reading
+    # "ORCID" — and an item given both `icon:` and `text:` loses its icon. The navbar's
+    # `tools:` above is a different code path and handles both correctly, which is why
+    # it is still written as items. Re-test this on a Quarto upgrade; if it is fixed,
+    # this can go back to being a list. The `bi bi-*` classes are Bootstrap Icons,
+    # already on every page because the navbar tools pull the stylesheet in. `bi-orcid`
+    # and `bi-google-scholar` are not Bootstrap Icons at all — they are the empty boxes
+    # styles.scss masks the real logos into, the same two classes the navbar uses.
+    #
+    # Raw HTML also bypasses `link-external-newwindow: true`, so each link says
+    # `target="_blank" rel="noopener"` itself — as any link added here must. All four
+    # point off-site. The `&` in the Scholar URL is written `&amp;` because raw HTML is
+    # passed through untouched and a bare `&` in an attribute is not valid HTML.
+    right: |
+      <a class="footer-link" href="https://github.com/EBukin" target="_blank" rel="noopener"><i class="bi bi-github"></i>GitHub</a>
+      <a class="footer-link" href="https://www.linkedin.com/in/ebukin/" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i>LinkedIn</a>
+      <a class="footer-link" href="https://scholar.google.com/citations?hl=en&amp;user=JtxmtwgAAAAJ&amp;view_op=list_works&amp;sortby=pubdate" target="_blank" rel="noopener"><i class="bi bi-google-scholar"></i>Scholar</a>
+      <a class="footer-link" href="https://orcid.org/0000-0002-1003-1260" target="_blank" rel="noopener"><i class="bi bi-orcid"></i>ORCID</a>
 
 format:
   html:

@@ -1,29 +1,38 @@
 ---
-title: "Curriculum vitae"
-pagetitle: "CV — Eddie Bukin"
+# title: "Curriculum vitae"
+pagetitle: "CV: Eddie Bukin"
 page-layout: full
+# No headings below the title — every section is named by the .eyebrow in its label
+# column — so a table of contents here would be an empty margin and nothing else.
 toc: false
-# Shown next to the PDF links; bump when the CV sources change.
-cv-updated: "September 2026"
+# The Short / Full switcher. Every entry below is printed at full depth, tagged with
+# the variants it belongs to; this script does the filtering in the browser.
+include-after-body: _templates/cv-views.html
 ---
 
-::: {.hero style="grid-template-columns:1fr auto; align-items:end; border-bottom:1px solid #E4E4E4; padding-bottom:2.6rem"}
-::: {}
+::: {.cv-head}
+::: {.cv-controls}
+<div class="cv-views" role="group" aria-label="How much of the CV to show" hidden>
+<button type="button" class="btn-view" data-view="short" aria-pressed="true">Short</button>
+<button type="button" class="btn-view" data-view="full" aria-pressed="false">Full</button>
+</div>
+
+::: {.cv-downloads}
+{{< cv-pdf variant=short >}} {{< cv-pdf variant=full >}}
+:::
+
+<!-- The date comes from `cv-me.updated` in _cv.yml, the same field the PDF footers
+print, so there is one place to bump when the record changes. -->
+[Typeset with Typst · updated {{< meta cv-me.updated >}}]{.meta}
+:::
+
 [Curriculum vitae]{.eyebrow}
 
-# Positions, degrees and appointments {.display-name style="font-size:clamp(2.2rem,5vw,3.2rem)"}
+# Appointments, degrees, and experience {.display-name}
 
-::: {.lede style="font-size:1.05rem; max-width:48ch; margin-top:1.2rem"}
-A condensed timeline — open any entry for detail. Complete records live in the PDFs.
-:::
-:::
-
-::: {style="display:flex; flex-direction:column; gap:0.5rem; min-width:210px"}
-[Short [2 p]{.qty}](cv/cv-short.pdf){.btn-flat style="justify-content:space-between"}
-[Full [9 p]{.qty}](cv/cv-full.pdf){.btn-outline-flat style="justify-content:space-between"}
-[Academic [5 p]{.qty}](cv/cv-academic.pdf){.btn-quiet style="justify-content:space-between"}
-
-[Typeset with Typst · updated {{< meta cv-updated >}}]{.meta style="font-size:0.68rem; letter-spacing:0.1em"}
+::: {.lede}
+<!-- A condensed timeline — choose how much of it to read, or open any single entry.
+The same record, typeset, is in the PDFs. -->
 :::
 :::
 
@@ -34,76 +43,7 @@ A condensed timeline — open any entry for detail. Complete records live in the
 ***
 :::
 ::: {.timeline}
-
-<details open>
-<summary><span><span class="when">Feb 2025 — present</span><span class="role">Economist, Global Poverty Department</span><span class="org">The World Bank · Washington DC</span></span><span class="plus">+</span></summary>
-<div class="body">
-
-Innovation and systems engineering; GeoPov, joining geospatial and micro data for global
-poverty analysis; fiscal microsimulations at the Micro-Modelling Lab; EU poverty mapping
-and missions to Poland; and continuing land-economics research with operational support
-to the Ukrainian State Cadastre.
-
-- Implemented agricultural land valuation adopted by the Ukrainian State Cadastre; consulted on LPIS and mass valuation.
-- Led Bank-wide adoption of AI-assisted coding in R/Stata; the [ai4coding](https://worldbank.github.io/ai4coding/) course reached 600+ staff.
-- Co-initiated GeoPov; introduced Positron and Quarto as Bank-standard tools for reproducible research.
-
-</div>
-</details>
-
-<details>
-<summary><span><span class="when">Jan 2020 — Dec 2024</span><span class="role">Lecturer (wissenschaftlicher Mitarbeiter)</span><span class="org">Justus Liebig University Giessen · Germany</span></span><span class="plus">+</span></summary>
-<div class="body">
-
-Research at the Institute for Agricultural Policy and Market Research on land markets and
-institutions, farm restructuring and returns to scale, rental-market efficiency in Ukraine,
-and land-policy evaluation in Kazakhstan — alongside two MSc courses and my doctoral thesis.
-
-- Introduced *Applied Econometrics*, teaching the path from cause to effect.
-- Researcher on the BMBF-funded ROCHADE project as CGE modeller and global trade data analyst.
-
-</div>
-</details>
-
-<details>
-<summary><span><span class="when">Mar 2018 — Jan 2025</span><span class="role">Economist, short-term consultant</span><span class="org">The World Bank · Poverty &amp; Equity Global Practice</span></span><span class="plus">+</span></summary>
-<div class="body">
-
-Microeconomic analysis of fiscal incidence, geospatial analysis, and country-level capacity
-building — delivered largely as reusable software: R packages and Shiny applications that let
-governments interrogate their own policy simulations.
-
-- [devCEQ](https://worldbank.github.io/devCEQ/) — fiscal microsimulation apps for Senegal, Côte d'Ivoire, Benin, Indonesia, Romania, Türkiye, El Salvador, Armenia.
-- [devPTIpack](https://worldbank.github.io/devPTIpack) — Project Targeting Index tools across Africa and Asia.
-- Founded the [EU Poverty Mapping](https://github.com/wbEUPM) GitHub organisation; land-economics research at DEC.
-
-</div>
-</details>
-
-<details>
-<summary><span><span class="when">Oct 2017 — Dec 2019</span><span class="role">Researcher</span><span class="org">IAMO · Halle (Saale), Germany</span></span><span class="plus">+</span></summary>
-<div class="body">
-
-Land and labour relationships in agriculture, focusing on principal–agent problems and
-contractual relations in Ukraine. Led the second wave of the IAMO Farm Survey in Kazakhstan
-and Central Asia — questionnaire design, pre-testing, interviewer training, and QA over 600
-collected responses.
-
-</div>
-</details>
-
-<details>
-<summary><span><span class="when">Sep 2014 — Jan 2018</span><span class="role">Trade Economist · Statistician</span><span class="org">FAO of the United Nations · Rome</span></span><span class="plus">+</span></summary>
-<div class="body">
-
-Policy briefs for the WTO 11th Ministerial, bilateral trade analysis, and the meat chapter of
-the *OECD-FAO Agricultural Outlook 2017–2026*, maintaining AGLINK-COSIMO country modules.
-Earlier, as statistician, implemented IPCC-compliant GHG estimation and built the first
-emissions-intensities database in FAOSTAT.
-
-</div>
-</details>
-
+{{< cv type=experience >}}
 :::
 :::
 
@@ -114,37 +54,7 @@ emissions-intensities database in FAOSTAT.
 ***
 :::
 ::: {.timeline}
-
-<details>
-<summary><span><span class="when">2024 — Dec 2026</span><span class="role">PhD, Agricultural Economics</span><span class="org">Justus Liebig University Giessen</span></span><span class="plus">+</span></summary>
-<div class="body">
-
-"Land privatization and pasture quality in southern Kazakhstan: evaluating the impact of a
-natural experiment." Supervisor: Prof. Dr. Martin Petrick.
-
-</div>
-</details>
-
-<details>
-<summary><span><span class="when">2013 — 2015</span><span class="role">MSc, Rural Development — magna cum laude</span><span class="org">Ghent · Humboldt Berlin · Pisa · Pretoria — Erasmus Mundus</span></span><span class="plus">+</span></summary>
-<div class="body">
-
-130 ECTS across four universities. Thesis: "Improving Competitiveness of the Ukrainian Sugar
-Industry: Economic Instability and Policy Implications." Supervisor: Prof. Dr. Jeroen Buysse.
-
-</div>
-</details>
-
-<details>
-<summary><span><span class="when">2008 — 2013</span><span class="role">MSc &amp; BSc, Economic Cybernetics — summa cum laude</span><span class="org">National University of Life and Environmental Sciences of Ukraine</span></span><span class="plus">+</span></summary>
-<div class="body">
-
-Agricultural economics and policy, applied mathematics and statistics, econometrics,
-quantitative risk analysis. Supervisor: Prof. Dr. Andrii Skrypnyk.
-
-</div>
-</details>
-
+{{< cv type=education >}}
 :::
 :::
 
@@ -155,6 +65,25 @@ quantitative risk analysis. Supervisor: Prof. Dr. Andrii Skrypnyk.
 ***
 :::
 ::: {}
-See the [teaching page](teaching.qmd) for courses and materials.
+::: {.timeline}
+{{< cv type=teaching >}}
+:::
+
+[All courses and materials →](teaching.qmd){.meta}
+:::
+:::
+
+::: {.section-split}
+::: {.label}
+[Background]{.eyebrow}
+
+***
+:::
+::: {}
+{{< cv type=skills >}}
+
+{{< cv type=languages >}}
+
+{{< cv type=scholarships >}}
 :::
 :::

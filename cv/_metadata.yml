@@ -1,7 +1,21 @@
-# Applies to every CV variant in this directory.
-# fonts/ is populated by scripts/fetch-fonts.{sh,ps1}; without it Typst falls
-# back to its defaults and the PDFs stop matching the web design.
+# Applies to every CV variant in this directory, so that neither .qmd carries format
+# wiring of its own and the two cannot drift apart.
+#
+# `format: typst:` here is also what overrides the project's `format: html:` from
+# _quarto.yml for this directory: the CVs are PDFs and nothing else.
 format:
   typst:
+    # _typst-style.typ is the whole PDF design — page, fonts, colours, the show rules
+    # for `##` and `###`, and the #cv-header() / #cv-entry() / #cv-note() functions
+    # that _templates/cv.lua calls.
+    include-in-header: _typst-style.typ
+    # fonts/ is populated by scripts/fetch-fonts.{sh,ps1}; without it Typst falls
+    # back to its defaults and the PDFs stop matching the web design.
     font-paths:
       - ../fonts
+    # Pinned, not defaulted. Quarto shifts headings down a level when a document has
+    # a `title:` and leaves them alone when it has not — and these documents have no
+    # `title:`, because the name is drawn by {{< cv-header >}} from _cv.yml. Fixing
+    # the shift at zero means `##` in the source is level 2 in _typst-style.typ's
+    # show rules whatever Quarto would otherwise have decided.
+    shift-heading-level-by: 0

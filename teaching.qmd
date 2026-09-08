@@ -1,62 +1,27 @@
 ---
-title: "Teaching"
+# title: "Teaching"
 pagetitle: "Teaching — Eddie Bukin"
 page-layout: full
 toc: false
 ---
 
-::: {style="padding:3rem 0 1rem"}
+::: {.page-head}
 [Teaching]{.eyebrow}
 
-# Courses and training {.display-name style="font-size:clamp(2.2rem,5vw,3.2rem)"}
+# Courses and training {.display-name}
 
-::: {.lede style="font-size:1.05rem; margin-top:1.2rem"}
+::: {.lede}
 Five years of MSc econometrics at Justus Liebig University Giessen, and a continuing
 training programme for economists at the World Bank.
 :::
 :::
 
-::: {.card-grid style="padding-top:2rem"}
+<!-- The courses come from _cv.yml — the same entries the CV page shows under Teaching
+     and cv-full.qmd prints. This page used to restate all three as cards, which meant
+     every course was written down twice. -->
 
-::: {.flat-card}
-[MSc · English · 2020–2024]{.eyebrow style="font-size:0.62rem; letter-spacing:0.16em"}
+## Courses {.split}
 
-### Introduction to Statistics and Econometrics
-
-Foundations for social-science research: probability, estimation, inference, and the linear
-model, taught with applied agricultural and development data.
-
-::: {.chips}
-[OLS]{.chip} [Inference]{.chip} [R]{.chip}
-:::
-:::
-
-::: {.flat-card}
-[MSc · English · 2020–2024]{.eyebrow style="font-size:0.62rem; letter-spacing:0.16em"}
-
-### Advanced Econometrics in the Social Sciences
-
-The mostly-harmless toolbox for getting from a cause to an effect: panel methods,
-instrumental variables, difference-in-differences, and regression discontinuity.
-
-::: {.chips}
-[DiD]{.chip} [IV]{.chip} [RDD]{.chip} [Panel data]{.chip}
-:::
-:::
-
-::: {.flat-card .featured}
-[Open Learning Campus · 2025–]{.eyebrow style="font-size:0.62rem; letter-spacing:0.16em"}
-
-### AI-assisted coding for economists
-
-A World Bank course on using AI responsibly in R and Stata workflows — taken by more than
-600 staff, with an accompanying seminar series.
-
-::: {.chips}
-[R · Stata]{.chip} [Reproducibility]{.chip}
-:::
-
-[worldbank.github.io/ai4coding →](https://worldbank.github.io/ai4coding/){.card-link}
-:::
-
+::: {.timeline}
+{{< cv type=teaching >}}
 :::

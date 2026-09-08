@@ -1,70 +1,46 @@
----
-title: "Eddie Bukin"
-subtitle: "Land and poverty economist — curriculum vitae, short form"
-format:
-  typst:
-    include-in-header: _typst-style.typ
-    keep-typ: false
----
+<!--
+  The two-page CV. Its sibling cv-full.qmd carries the note on how both are
+  assembled; the difference between them is entirely in the options below.
 
-Economist, Global Poverty Department, The World Bank · PhD candidate, Justus Liebig
-University Giessen · [github.com/EBukin](https://github.com/EBukin)
+  This variant keeps only the entries flagged `in: [short]` in ../_cv.yml and prints
+  one sentence of each (`show=summary`), preferring the `title-short:` / `place-short:`
+  forms so a heading stays on one line. Publications are every article, working paper and
+  report in ../_publications.yml, citations only — the whole list by type rather than the
+  `selected: true` subset, which is now the home page's own selection. It carries no
+  skills row; `in:` in ../_cv.yml is what says so.
+-->
+
+{{< cv-header >}}
 
 ## Profile
 
-Land and poverty economist with a decade of research and operational experience in Ukrainian
-land markets, institutions, and valuation. Peer-reviewed work on farmland pricing, rental-market
-efficiency, and land valuation and taxation; analysis code adopted by the Ukrainian State Cadaster
-as the basis for regression-based agricultural land valuation. Fluent across survey, administrative,
-and geospatial data (R, Python, Google Earth Engine, PostGIS). Dual Ukrainian and German national.
+{{< cv type=profile in=short >}}
 
 ## Experience
 
-### Economist (ETC2), The World Bank — Washington DC · Feb 2025 – present
-Global Poverty Department. GeoPov (geospatial × microdata); fiscal microsimulations at the
-Micro-Modelling Lab; EU poverty mapping; land-economics research and technical assistance to the
-Ukrainian State Cadastre. Leads Bank-wide adoption of AI-assisted coding (600+ staff trained).
-
-### Lecturer, Justus Liebig University Giessen — Germany · Jan 2020 – Dec 2024
-Land markets and institutions, farm restructuring, rental-market efficiency in Ukraine, land-policy
-evaluation in Kazakhstan. Introduced and taught two MSc econometrics courses. CGE modelling on the
-BMBF-funded ROCHADE project.
-
-### Economist (STC), The World Bank · Mar 2018 – Jan 2025
-Fiscal incidence analysis, geospatial analysis, and capacity building, delivered as reusable
-software: devCEQ, devPTIpack, lassopmm, and country Shiny applications.
-
-### Researcher, IAMO — Halle (Saale), Germany · Oct 2017 – Dec 2019
-Land and labour relations in Ukrainian agriculture. Led the second wave of the IAMO Farm Survey in
-Central Asia (600 responses).
-
-### Trade Economist / Statistician, FAO of the UN — Rome · Sep 2014 – Jan 2018
-WTO policy briefs, OECD-FAO Agricultural Outlook meat chapter, AGLINK-COSIMO modules; IPCC-compliant
-GHG estimation and the first emissions-intensities database in FAOSTAT.
+{{< cv type=experience in=short show=summary titles=short >}}
 
 ## Education
 
-### PhD, Agricultural Economics — JLU Giessen · 2024 – Dec 2026
-Land privatization and pasture quality in southern Kazakhstan. Supervisor: Prof. Dr. Martin Petrick.
+{{< cv type=education in=short show=summary titles=short >}}
 
-### MSc, Rural Development — Erasmus Mundus (Ghent, Humboldt, Pisa, Pretoria) · 2013 – 2015
-Magna cum laude, 130 ECTS.
+## Publications
 
-### MSc & BSc, Economic Cybernetics — NULES of Ukraine · 2008 – 2013
-Summa cum laude.
+<!-- The same three groups as cv-full.qmd, in the same order, and no conferences —
+     only the titles are trimmed here. -->
 
-## Selected publications
+### Peer-reviewed articles
 
-<!-- Entries flagged `selected: true` in ../_publications.yml, trimmed titles. -->
+{{< pubs type=article titles=short show=none >}}
 
-{{< pubs selected=true titles=short show=none >}}
+### Working papers and work in progress
 
-## Skills
+{{< pubs type=working-paper,wip titles=short show=none >}}
 
-Micro-econometrics and impact evaluation (10+ yrs) · survey and administrative microdata (8+ yrs) ·
-geospatial analysis in R and Python, Google Earth Engine, PostGIS (10+ yrs) · R and R Shiny package
-development (12+ yrs) · Stata (10+ yrs) · GAMS (6+ yrs) · Git, Docker, PostgreSQL.
+### Reports and policy work
+
+{{< pubs type=report titles=short show=none >}}
 
 ## Languages
 
-Ukrainian (native) · Russian C2 · English C2 · German B2 · Italian A2 · French A2
+{{< cv type=languages in=short >}}

@@ -25,6 +25,25 @@ $headings-font-weight:   300;
 $font-size-root:         16px;
 $line-height-base:       1.6;
 
+// Every list on the site — publications, CV entries, the notes listing — separates its
+// rows by this much above and below. One number, so the three cannot drift apart.
+$row-pad:      0.65rem;
+
+// The one content measure. Every page's <main> is exactly this wide, and the navbar
+// and the footer line up with it, so the six pages share one column and one centre.
+// See the "page frame" rules below for why this cannot be left to Quarto's own grid.
+$frame:        1060px;
+$frame-pad:    1.5rem;
+
+// A Quarto sidebar — the publications table of contents, the notes category filter —
+// hangs in the left margin BESIDE that frame rather than taking a column out of it,
+// and is dropped entirely when the window is too narrow to hold one. $aside-min is
+// the width at which there is room: the frame, plus an aside and its gutter on each
+// side, plus a little air.
+$aside-w:      180px;
+$aside-gap:    1.75rem;
+$aside-min:    1480px;
+
 $border-color:  $rule;
 $border-radius: 0;
 
@@ -48,29 +67,210 @@ $footer-bg: $body-bg;
 .navbar .navbar-brand img { height: 34px; width: 34px; }
 .navbar .brand-name {
   font-family: $headings-font-family;
-  font-size: 1rem;
+  font-size: 1.05rem;
   letter-spacing: 0.02em;
   color: $ink !important;
 }
 .navbar-nav .nav-link {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
+// The profile links come from `navbar: tools:` in _quarto.yml. Quarto's own CSS orders
+// the tool block at 900 and the search box at 999 — tools first; this puts them the other
+// way round, icons to the right of the search field. Flip this one number to lead with
+// them instead. Adding a platform is a matter of one more entry in that list; the styling
+// here is per-tool and does not care how many there are.
+.quarto-navbar-tools {
+  order: 1000;
+  margin-left: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+.quarto-navbar-tools .quarto-navigation-tool {
+  display: inline-flex;
+  align-items: center;
+  color: $muted;
+  font-size: 1.05rem;
+  line-height: 1;
+  padding: 0.2rem 0.35rem;
+}
+.quarto-navbar-tools .quarto-navigation-tool:hover { color: $accent; }
+
+// Scholar and ORCID have no Bootstrap Icons glyph, so `tools:` in _quarto.yml names two
+// icons Bootstrap Icons does not define. Quarto emits `<i class="bi bi-orcid">` all the
+// same, no `::before` content rule matches it, and nothing is drawn — which leaves a
+// correctly-named, empty box to paint the real logo into. The marks are the official
+// ones from simple-icons, inlined as data URIs (no extra request, and no path to break
+// when the compiled stylesheet moves) and used as a mask rather than an image, so they
+// take `currentColor` and follow the same muted-to-accent hover as the two real glyphs
+// beside them.
+//
+// Deliberately not scoped to the navbar: the footer writes the same two classes by hand
+// (see _quarto.yml), so the class alone is what carries the logo, wherever it appears.
+.bi-orcid,
+.bi-google-scholar {
+  display: block;
+  width: 1em;
+  height: 1em;
+  background-color: currentColor;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+.bi-orcid {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2024%2024%22%3E%3Cpath%20d=%22M12%200C5.372%200%200%205.372%200%2012s5.372%2012%2012%2012%2012-5.372%2012-12S18.628%200%2012%200zM7.369%204.378c.525%200%20.947.431.947.947s-.422.947-.947.947a.95.95%200%200%201-.947-.947c0-.525.422-.947.947-.947zm-.722%203.038h1.444v10.041H6.647V7.416zm3.562%200h3.9c3.712%200%205.344%202.653%205.344%205.025%200%202.578-2.016%205.025-5.325%205.025h-3.919V7.416zm1.444%201.303v7.444h2.297c3.272%200%204.022-2.484%204.022-3.722%200-2.016-1.284-3.722-4.097-3.722h-2.222z%22/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2024%2024%22%3E%3Cpath%20d=%22M12%200C5.372%200%200%205.372%200%2012s5.372%2012%2012%2012%2012-5.372%2012-12S18.628%200%2012%200zM7.369%204.378c.525%200%20.947.431.947.947s-.422.947-.947.947a.95.95%200%200%201-.947-.947c0-.525.422-.947.947-.947zm-.722%203.038h1.444v10.041H6.647V7.416zm3.562%200h3.9c3.712%200%205.344%202.653%205.344%205.025%200%202.578-2.016%205.025-5.325%205.025h-3.919V7.416zm1.444%201.303v7.444h2.297c3.272%200%204.022-2.484%204.022-3.722%200-2.016-1.284-3.722-4.097-3.722h-2.222z%22/%3E%3C/svg%3E");
+}
+.bi-google-scholar {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2024%2024%22%3E%3Cpath%20d=%22M5.242%2013.769L0%209.5%2012%200l12%209.5-5.242%204.269C17.548%2011.249%2014.978%209.5%2012%209.5c-2.977%200-5.548%201.748-6.758%204.269zM12%2010a7%207%200%201%200%200%2014%207%207%200%200%200%200-14z%22/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2024%2024%22%3E%3Cpath%20d=%22M5.242%2013.769L0%209.5%2012%200l12%209.5-5.242%204.269C17.548%2011.249%2014.978%209.5%2012%209.5c-2.977%200-5.548%201.748-6.758%204.269zM12%2010a7%207%200%201%200%200%2014%207%207%200%200%200%200-14z%22/%3E%3C/svg%3E");
+}
+
+
+// A footer, not a colophon: one line high, and set large enough to actually read. The
+// links carry their platform's name beside its icon, so reaching GitHub is a matter of
+// seeing the word rather than recognising the glyph.
 .nav-footer {
   border-top: 1px solid $rule;
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
-  color: $faint;
-  padding: 2.2rem 0 2.6rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: $muted;
+  padding: 0.9rem 0 1rem;
+  min-height: 0;
 }
-main.content { max-width: 1020px; }
+// The right-hand links are hand-written in _quarto.yml (see the comment there), so they
+// are ordinary anchors rather than Quarto's .nav-link items, and the icon sits inside
+// the anchor beside its label.
+.nav-footer a { color: $muted; }
+.nav-footer a:hover { color: $accent; }
+.nav-footer .footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-left: 1.4rem;
+}
+.nav-footer .footer-link .bi { font-size: 1rem; line-height: 1; }
+// Quarto gives the footer's three columns `flex: 1 1 0` each, which was fine while
+// the footer ran the width of the window and is not now that it shares the content
+// frame: a third of the measure is not enough to keep the four profile links on one
+// line. The two columns that carry anything size themselves instead, and the empty
+// middle one takes up the slack between them.
+.nav-footer .nav-footer-left,
+.nav-footer .nav-footer-right { flex: 0 1 auto; }
+// Pandoc wraps each footer column's content in a <p>; its bottom margin is most of what
+// made the footer three lines tall.
+.nav-footer p { margin-bottom: 0; }
+
+// ---- page frame -------------------------------------------------------------
+
+// One column, one centre, on every page — set here rather than left to Quarto.
+//
+// Quarto lays each page out on a named grid and places <main> with a class it picks
+// from that page's own front matter: `column-page` normally, but `column-page-right`
+// (grid-column: body-content-start/page-end) as soon as the page asks for a table of
+// contents, and a listing page gets a different grid template again. The effect was
+// that publications.qmd started visibly further right than index.qmd and cv.qmd, for
+// no reason a reader could see. Taking the whole grid row and then setting our own
+// measure makes the class Quarto chose irrelevant: the six pages line up.
+//
+// $frame is the outer width, padding included, so the navbar and the footer can be
+// given the same two lines and share the column.
+#quarto-content > main.content {
+  grid-column: 1 / -1;
+  width: 100%;
+  max-width: $frame;
+  margin-inline: auto;
+  padding-inline: $frame-pad;
+}
+.navbar > .navbar-container,
+.nav-footer {
+  max-width: $frame;
+  margin-inline: auto;
+  padding-inline: $frame-pad;
+}
+
+// Quarto's two sidebars — #quarto-sidebar carries a `toc-location: left` table of
+// contents, #quarto-margin-sidebar the category filter of a listing — are grid items
+// that would now sit underneath the content, since <main> spans the whole row. Both
+// are lifted out of the grid instead and hung in the left margin: fixed, so the frame
+// above never moves to make room for them, and never on the right, so that a page
+// with one is still recognisably the same page as a page without.
+//
+// Below $aside-min there is no margin to hang them in, and they are dropped rather
+// than allowed to push the reading column around. Nothing is lost that the page does
+// not already say: the section names are in the left label column of each
+// .section-split, and the categories are repeated on every note.
+#quarto-content > #quarto-sidebar,
+#quarto-content > #quarto-margin-sidebar { display: none; }
+
+@media (min-width: $aside-min) {
+  #quarto-content > #quarto-sidebar,
+  #quarto-content > #quarto-margin-sidebar {
+    display: block;
+    position: fixed;
+    // 64px is body.nav-fixed's own padding-top — the height of the fixed navbar.
+    top: calc(64px + 2.6rem);
+    right: calc(50% + #{$frame * 0.5} + #{$aside-gap});
+    width: min(#{$aside-w}, calc(50% - #{$frame * 0.5} - #{$aside-gap} - 1rem));
+    max-height: calc(100vh - 64px - 5rem);
+    overflow-y: auto;
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+  #quarto-content > #quarto-sidebar > * { padding: 0; }
+}
+
+// Both asides read as one thing: a quiet, small-caps list of places to jump to.
+#TOC h2#toc-title,
+#quarto-margin-sidebar .quarto-listing-category-title {
+  font-family: $font-family-sans-serif;
+  font-size: 0.76rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: $accent;
+  margin: 0 0 0.7rem;
+}
+#TOC ul { list-style: none; margin: 0; padding: 0; }
+#TOC li { margin: 0; }
+#TOC .nav-link {
+  display: block;
+  padding: 0.3rem 0;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  color: $muted;
+  border: 0;
+}
+#TOC .nav-link:hover { color: $accent; }
+#TOC .nav-link.active { color: $ink; }
+#quarto-margin-sidebar .quarto-listing-category .category {
+  padding: 0.3rem 0;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  color: $muted;
+  cursor: pointer;
+}
+#quarto-margin-sidebar .quarto-listing-category .category:hover,
+#quarto-margin-sidebar .quarto-listing-category .category.active { color: $accent; }
+#quarto-margin-sidebar .quarto-category-count { color: $faint; }
+
+// The CV switcher hides entries by setting `el.hidden`, and the UA stylesheet's rule
+// for [hidden] is only `display: none` — which loses to any author `display:`. Two of
+// the things it has to hide carry one (`.section-split` is a grid, `.chips` a flex),
+// so without this the switcher silently hides nothing. Toggle visibility with
+// `el.hidden`, never with an inline style, and this stays true everywhere.
+[hidden] { display: none !important; }
 
 // ---- typographic primitives -------------------------------------------------
 
 .eyebrow {
-  font-size: 0.66rem;
-  letter-spacing: 0.22em;
+  font-size: 0.76rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: $accent;
 }
@@ -90,20 +290,59 @@ main.content { max-width: 1020px; }
   max-width: 52ch;
   text-wrap: pretty;
 }
-.meta { font-size: 0.8rem; color: $muted; }
+.meta { font-size: 0.85rem; color: $muted; }
 
-// two-column section: sticky label left, content right
-.section-split {
+// Two-column section: label left, content right. The label is one short word, so it
+// gets a narrow column and a modest gutter — the content column is where the reading
+// happens, and on the CV it carries a full paragraph per entry.
+//
+// Two spellings of the same row, and the difference is not cosmetic. `.section-split`
+// is a div holding a `.label` and a content column, and is what a section named by an
+// .eyebrow uses. `section.split` is that row built out of `## Name {.split}` instead:
+// Quarto's table of contents walks only the top level of a document and does not look
+// inside a div, so a section that has to be linkable — every section of
+// publications.qmd — must leave its heading where Pandoc put it and let the <section>
+// Pandoc wrapped around it be the grid.
+.section-split,
+section.split {
   display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 3.5rem;
+  grid-template-columns: 150px 1fr;
+  gap: 2rem;
   border-top: 1px solid $rule;
-  padding: 3.4rem 0;
+  padding: 1.6rem 0;
 }
+// The heading holds the top of the label column; everything Pandoc put after it
+// stacks down the content column, however many rows that turns out to be.
+section.split > h2 { grid-area: 1 / 1; }
+section.split > :not(h2) { grid-column: 2; }
+
 .section-split > .label .eyebrow { display: block; margin-bottom: 0.6rem; }
 .section-split > .label hr { width: 28px; border-top: 1px solid $rule; margin: 0; opacity: 1; }
+// The heading is a label, not a title: same size, tracking and colour as the .eyebrow
+// on the CV, so that which of the two spellings a section used is invisible.
+section.split > h2 {
+  font-family: $font-family-sans-serif;
+  font-size: 0.76rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: $accent;
+  margin: 0 0 0.6rem;
+  padding: 0;
+  border: 0;
+}
 @media (max-width: 767px) {
-  .section-split { grid-template-columns: 1fr; gap: 1.4rem; }
+  .section-split,
+  section.split { grid-template-columns: 1fr; gap: 1.4rem; }
+  section.split > :not(h2) { grid-column: 1; }
+}
+
+// The hairline every list on the site hangs off, and the indent that goes with it.
+// The CV timeline, the publication rows and the notes listing all sit on it, so the
+// three line up down the page instead of each choosing its own left edge.
+.rail, .timeline { border-left: 1px solid $rule; padding-left: 2rem; }
+@media (max-width: 575px) {
+  .rail, .timeline { padding-left: 1.2rem; }
 }
 
 // ---- home -------------------------------------------------------------------
@@ -116,6 +355,57 @@ main.content { max-width: 1020px; }
   padding: 4.4rem 0 3.6rem;
 }
 @media (max-width: 767px) { .hero { grid-template-columns: 1fr; gap: 2.2rem; } }
+
+// The header every page that is a list opens with: an eyebrow, the title, and where
+// there is one a standfirst. It used to be an anonymous div carrying two inline
+// `style=` attributes, copied into publications.qmd, projects.qmd, teaching.qmd and
+// notes.qmd — four copies that had already drifted apart by a rem of padding. The CV
+// header below is this block plus a second column for the switcher and the download
+// links, which is why the two share every type rule.
+.page-head { padding: 2rem 0 1.4rem; }
+.page-head > section { margin: 0; }
+
+// The CV header: the same hero, tightened. The right column is controls rather than a
+// portrait, so it takes only the width it needs and sits on the baseline of the lede,
+// and the page starts closer to the "Curriculum vitae" title above it. The rule that
+// closes the header off is the first .section-split's own border-top. Everything here
+// used to be four inline style= attributes in cv.qmd.
+// The CV page header. The switcher and the download links sit top right and keep the
+// place they had; everything else runs the full measure underneath them, so the title
+// and the standfirst are not boxed into a narrow left column.
+.cv-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 2.5rem;
+  align-items: start;
+  padding: 2rem 0 1.4rem;
+}
+.cv-head > .cv-controls { grid-area: 1 / 2; justify-self: end; }
+// The kicker is the only bare paragraph directly inside .cv-head — the "updated" line
+// lives inside .cv-controls — so it can be placed without a wrapper of its own.
+.cv-head > p:first-of-type { grid-area: 1 / 1; margin: 0; }
+// Quarto wraps an h1 and everything beneath it in <section class="level1">, so the
+// element that has to span both columns is that section, not the heading itself.
+// Both are listed so the rule survives the title being rendered either way.
+.cv-head > section,
+.cv-head > .display-name,
+.cv-head > .lede { grid-column: 1 / -1; }
+.cv-head > section { margin-top: 0.9rem; }
+.page-head .display-name,
+.cv-head .display-name { font-size: clamp(2.2rem, 5vw, 3.2rem); }
+.page-head h1.display-name,
+.cv-head h1.display-name { margin: 0; }
+.page-head .lede,
+.cv-head .lede {
+  font-size: 1.05rem;
+  max-width: none;
+  margin-top: 0.9rem;
+}
+@media (max-width: 767px) {
+  .cv-head { grid-template-columns: 1fr; row-gap: 1.2rem; }
+  .cv-head > .cv-controls { grid-area: auto; justify-self: stretch; }
+  .cv-head > p:first-of-type { grid-area: auto; }
+}
 
 .portrait { position: relative; }
 .portrait::before {
@@ -141,7 +431,7 @@ main.content { max-width: 1020px; }
   align-items: center;
   gap: 0.6rem;
   padding: 0.7rem 1.25rem;
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   transition: all 0.15s ease;
@@ -160,7 +450,12 @@ main.content { max-width: 1020px; }
   display: grid;
   grid-template-columns: 52px 1fr;
   gap: 1.5rem;
-  padding: 1.35rem 0;
+  // As on `.timeline summary`, and for the same reason: without it the cells stretch
+  // to the height of the tallest, and the + in the last one is then a glyph at the top
+  // of a row-high box. `transform: rotate(45deg)` turns that box about its centre, so
+  // the + swung down and out past the edge of the row on the way to becoming an ×.
+  align-items: start;
+  padding: $row-pad 0;
   border-bottom: 1px solid $rule-soft;
   color: inherit;
 }
@@ -171,7 +466,7 @@ a.pub:hover, summary.pub:hover { background: $tint; }
 .pub .ttl { font-family: $headings-font-family; font-size: 1.18rem; line-height: 1.35; text-wrap: pretty; display: block; }
 .pub .ttl a { color: inherit; }
 .pub .ttl a:hover { color: $accent; }
-.pub .aut { font-size: 0.78rem; color: $muted; display: block; margin-top: 0.35rem; }
+.pub .aut { font-size: 0.84rem; color: $muted; display: block; margin-top: 0.35rem; }
 .pub .aut .me { color: $ink; font-style: normal; }
 // The summary is prose, not more citation metadata, so it is set apart by family
 // rather than by size: serif like the title, but small and neutral in weight and
@@ -206,37 +501,100 @@ details.pub-entry > summary.pub::-webkit-details-marker { display: none; }
 }
 details.pub-entry[open] .plus { transform: rotate(45deg); }
 
-// Open, the description sits beside the entry rather than pushing the list down:
-// <details> becomes the grid, the row keeps the left column, the prose takes a
-// hairline-ruled aside on the right.
-details.pub-entry[open] {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(240px, 330px);
-  column-gap: 2.5rem;
-  align-items: start;
-}
+// Open, the description drops into the row, which is what a CV entry does. It used
+// to open sideways instead, into a hairline-ruled aside on the right — so the same +
+// meant two different movements depending on which list the reader was in. The
+// measure and the type below are .timeline .body's, deliberately: the prose under an
+// opened paper and the prose under an opened post should be the same prose.
+//
+// Unlike the CV, the collapsed .sum stays visible: _publications.yml does not require
+// `description:` to open with `summary:` the way _cv.yml does, so the two lines are
+// two different sentences here and hiding either loses one of them.
 .pub-more {
-  padding: 1.35rem 0 1.35rem 1.6rem;
-  border-left: 1px solid $rule;
+  padding: 0.5rem 0 $row-pad calc(52px + 1.5rem);
+  max-width: 84ch;
 }
-.pub-more p { font-size: 0.84rem; line-height: 1.6; color: $muted; margin: 0; }
+.pub-more p, .pub-more li { font-size: 0.94rem; line-height: 1.65; }
+.pub-more p, .pub-more ul, .pub-more ol { margin-bottom: 0.5rem; }
+.pub-more > *:last-child { margin-bottom: 0; }
 
-// Too narrow to sit two abreast — fall back to expanding downward.
-@media (max-width: 991px) {
-  details.pub-entry[open] { display: block; }
-  .pub-more {
-    border-left: 0;
-    padding: 0 0 1.35rem calc(52px + 1.5rem);
-  }
-}
+// No room to indent past the year column at this width.
 @media (max-width: 575px) {
   .pub-more { padding-left: 0; }
 }
 
+// ---- cv header controls -----------------------------------------------------
+
+// Two rows in the CV hero's right column: the view switcher, which changes what the
+// page shows, and below it the links that download a typeset PDF. They are different
+// kinds of act, so they do not share a style — the switcher is a set of real buttons,
+// the downloads are quiet links.
+.cv-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 250px;
+}
+.cv-controls .meta { font-size: 0.76rem; letter-spacing: 0.1em; }
+
+// Switcher and downloads share one two-column track, so each PDF button sits exactly
+// under the view it belongs to and the pair reads as one control.
+.cv-views, .cv-downloads > p {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.4rem;
+  margin: 0;
+}
+// A <button> inherits nothing from the page, so the family, background and cursor all
+// have to be said out loud; the rest matches .btn-outline-flat's sizing.
+.btn-view {
+  justify-content: center;
+  font-family: inherit;
+  background: none;
+  cursor: pointer;
+  border: 1px solid $rule;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: $muted;
+  transition: all 0.15s ease;
+}
+.btn-view:hover { border-color: $accent; color: $accent; }
+.btn-view[aria-pressed="true"] { background: $ink; border-color: $ink; color: #FFFFFF; }
+
+// The download links are secondary to the switcher above them, so they sit at about
+// half its height and start in the accent rather than in ink — read as a quiet offer,
+// not as a second set of view buttons. Pointing at one commits it to black.
+.btn-pdf {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.32rem 0.6rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid $accent;
+  color: $accent !important;
+  transition: all 0.15s ease;
+}
+.btn-pdf:hover,
+.btn-pdf:focus-visible {
+  background: $ink;
+  border-color: $ink;
+  color: #FFFFFF !important;
+}
+.cv-controls .meta { margin-top: 0.5rem; }
+
 // ---- cv timeline ------------------------------------------------------------
 
-.timeline { border-left: 1px solid $rule; padding-left: 2rem; }
-.timeline details { border-bottom: 1px solid $rule-soft; padding: 1.35rem 0; }
+// Quarto's own stylesheet carries `details { margin-bottom: 1em }`, which applies to
+// every CV entry and every expandable publication row. Sixteen pixels on top of the
+// row's own padding is most of what made the timeline read looser than the publication
+// list beside it, so both kinds of row give it back and rely on $row-pad alone.
+details.cv-entry, details.pub-entry { margin-bottom: 0; }
+
+.timeline details { border-bottom: 1px solid $rule-soft; padding: $row-pad 0; }
 .timeline summary {
   list-style: none;
   cursor: pointer;
@@ -246,47 +604,138 @@ details.pub-entry[open] {
   align-items: start;
 }
 .timeline summary::-webkit-details-marker { display: none; }
-.timeline .when { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: $accent; display: block; }
-.timeline .role { font-family: $headings-font-family; font-size: 1.35rem; line-height: 1.3; display: block; margin-top: 0.3rem; }
-.timeline .org { font-size: 0.82rem; color: $muted; display: block; margin-top: 0.2rem; }
+.timeline .when { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: $accent; display: block; }
+.timeline .role { font-family: $headings-font-family; font-size: 1.3rem; line-height: 1.25; display: block; margin-top: 0.1rem; }
+.timeline .org { font-size: 0.86rem; color: $muted; display: block; margin-top: 0.08rem; }
 .timeline .plus { font-size: 1.2rem; color: $accent; line-height: 1; justify-self: end; transition: transform 0.18s ease; }
 .timeline details[open] .plus { transform: rotate(45deg); }
-.timeline .body { padding-top: 1.1rem; max-width: 62ch; }
+// 84ch, not the column's full width: with a narrow label the content column runs to
+// well over a hundred characters, and the eye loses the line coming back.
+.timeline .body { padding-top: 0.5rem; max-width: 84ch; }
 .timeline .body p, .timeline .body li { font-size: 0.94rem; line-height: 1.65; }
+// Bootstrap gives paragraphs and lists a 1rem bottom margin; on the last one in an open
+// entry that is pure dead space above the next row's rule — the same thing .pub-more
+// zeroes out for a publication.
+.timeline .body p, .timeline .body ul, .timeline .body ol { margin-bottom: 0.5rem; }
+.timeline .body > *:last-child { margin-bottom: 0; }
 
-// ---- cards (projects, teaching, notes) --------------------------------------
+// The collapsed row's one sentence — the same idea as .pub .sum, but sans-serif and
+// smaller, because it sits under a serif role heading rather than beside a title.
+.timeline .sum {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: #33363A;
+  max-width: 70ch;
+}
+// _cv.yml requires `description:` to open with the exact text of `summary:`, so on
+// open the collapsed copy steps aside and the body takes over the same words: the
+// sentence reads as expanding into the long text rather than being repeated.
+.timeline details[open] > summary .sum { display: none; }
 
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1rem;
-}
-.flat-card {
-  border: 1px solid $rule;
-  padding: 1.5rem;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-.flat-card.featured { border-color: $accent; background: $tint; }
-.flat-card h3 { font-size: 1.3rem; line-height: 1.3; margin: 0; }
-.flat-card p { font-size: 0.88rem; line-height: 1.6; margin: 0; }
-.flat-card .card-link {
-  margin-top: auto;
-  padding-top: 0.5rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: $accent;
-  overflow-wrap: anywhere;
-}
+// ---- chips ------------------------------------------------------------------
+
+// There used to be a second, filled `.chip` here, and a `.flat-card` / `.card-grid`
+// pair that projects.qmd and teaching.qmd built their tiles out of. Both pages are
+// lists now — the same list the CV is — so nothing on the site draws a card, and the
+// rules for one have gone rather than sitting here waiting to be used by accident.
 .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-.chip { padding: 0.3rem 0.65rem; background: $rule-soft; font-size: 0.7rem; color: #2A2A2A; }
-.chip-out { padding: 0.3rem 0.7rem; border: 1px solid $rule; font-size: 0.7rem; color: $muted; }
+.chip-out { padding: 0.3rem 0.7rem; border: 1px solid $rule; font-size: 0.78rem; color: $muted; }
+// The CV's flat lists — skills, languages, scholarships — stack in one section, each
+// naming itself. The label sits inside .cv-list rather than beside it so that when the
+// view switcher hides a row by setting [hidden] on the wrapper, the name goes too.
+.cv-list + .cv-list { margin-top: 0.7rem; }
+.cv-list > .eyebrow { display: block; margin-bottom: 0.55rem; }
 
 // ---- notes listing ----------------------------------------------------------
 
-.quarto-listing-default .listing-item { border-bottom: 1px solid $rule-soft; padding: 1.6rem 0; }
-.quarto-listing-default .listing-title { font-family: $headings-font-family; font-weight: 400; }
-.note-place { font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: $accent; }
+// Quarto builds a listing out of its own markup, so the notes list cannot be emitted
+// by {{ cv }} the way the CV and the projects pages are. It is dressed to match one
+// instead, element for element: the date takes .timeline .when's small-caps accent,
+// the title its serif .role, the subtitle its muted .org, the description the .sum
+// underneath, and the categories the chips the CV's flat lists use. Sitting inside a
+// .rail on notes.qmd, the result is the same row as a CV entry that has nothing to
+// disclose.
+//
+// The rules are written against `div.quarto-post`, which is what a `type: default`
+// listing actually emits — the `.listing-item` these once named exists in no Quarto
+// version this site has been built with, so none of it was doing anything.
+// Quarto insets the whole listing by `margin-right: 2em` to leave room for the
+// margin column it normally sits beside. That column hangs in the left margin here,
+// so the inset only stopped the rows reaching the same right edge as the CV entries
+// and the publication rows.
+.quarto-listing-container-default { margin-right: 0; }
+
+// .image-right / .image-left are two classes and would otherwise out-specify a
+// single-class selector on flex-direction, leaving the date beside the row instead
+// of above it. Which of the two Quarto writes depends on the listing's settings, so
+// both are named rather than guessed at.
+div.quarto-post,
+div.quarto-post.image-right,
+div.quarto-post.image-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 0;
+  padding: $row-pad 0;
+  border-bottom: 1px solid $rule-soft;
+}
+// The date leads the row rather than sitting off to one side, so it reads as the
+// timeline's period line.
+div.quarto-post .metadata { order: 1; flex-basis: auto; margin: 0; padding: 0; }
+// Quarto prints the categories between the subtitle and the description; a CV entry
+// keeps its chips at the foot of the row, so .body becomes a column of its own and
+// says what order it wants them in.
+div.quarto-post .body {
+  order: 2;
+  flex-basis: auto;
+  display: flex;
+  flex-direction: column;
+}
+div.quarto-post .body > h3.listing-title { order: 1; }
+div.quarto-post .body > .listing-subtitle { order: 2; }
+div.quarto-post .body > .listing-description { order: 3; }
+div.quarto-post .body > .listing-categories { order: 4; }
+div.quarto-post .listing-date {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: $accent;
+}
+div.quarto-post .body h3.listing-title {
+  font-family: $headings-font-family;
+  font-weight: 300;
+  font-size: 1.3rem;
+  line-height: 1.25;
+  margin: 0.1rem 0 0;
+}
+div.quarto-post .body h3.listing-title a:hover { color: $accent; }
+div.quarto-post .body .listing-subtitle {
+  font-size: 0.86rem;
+  color: $muted;
+  margin: 0.08rem 0 0;
+}
+div.quarto-post .listing-description { margin: 0.3rem 0 0; }
+div.quarto-post .listing-description p {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: #33363A;
+  max-width: 70ch;
+  margin: 0;
+}
+div.quarto-post .listing-categories {
+  gap: 0.4rem;
+  padding: 0;
+  margin-top: 0.5rem;
+}
+div.quarto-post .listing-categories .listing-category {
+  margin: 0;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid $rule;
+  border-radius: 0;
+  font-size: 0.78rem;
+  text-transform: none;
+  color: $muted;
+}
+div.quarto-post .listing-categories .listing-category:hover { border-color: $accent; color: $accent; }

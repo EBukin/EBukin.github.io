@@ -1,5 +1,5 @@
 ---
-title: "Notes"
+# title: "Notes"
 pagetitle: "Notes — Eddie Bukin"
 page-layout: full
 toc: false
@@ -8,8 +8,10 @@ listing:
   contents: notes
   type: default
   sort: "date desc"
-  fields: [image, date, title, subtitle, description, categories]
-  image-height: 250px
+  # No `image`: images/notes/ does not exist, so every row drew a grey placeholder
+  # box. The row is dressed as a CV entry instead — date, title, subtitle, one
+  # sentence, tags — by the .quarto-post rules in styles.scss.
+  fields: [date, title, subtitle, description, categories]
   date-format: "MMM YYYY"
   categories: true
   feed: true
@@ -17,14 +19,20 @@ listing:
 
 <!-- DRAFT WORDING — rewrite the lede below. -->
 
-::: {style="padding:2rem 0 1rem"}
+::: {.page-head}
 [Notes]{.eyebrow}
 
-::: {.lede style="margin-top:1rem"}
+# Working notes and places worth the trip {.display-name}
+
+::: {.lede}
 Working notes on research in progress and the odd finding worth writing down, alongside an
-unsystematic register of places worth the trip. Filter by category.
+unsystematic register of places worth the trip. Every note is tagged by topic.
 :::
 :::
 
+## All notes {.split}
+
+::: {.rail}
 ::: {#all-notes}
+:::
 :::

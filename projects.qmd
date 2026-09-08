@@ -1,108 +1,34 @@
 ---
-title: "Projects"
+# title: "Projects"
 pagetitle: "Projects — Eddie Bukin"
 page-layout: full
 toc: false
 ---
 
-::: {style="padding:3rem 0 1rem"}
+::: {.page-head}
 [Projects]{.eyebrow}
 
-# Research streams and software {.display-name style="font-size:clamp(2.2rem,5vw,3.2rem)"}
+# Research streams and software {.display-name}
 
-::: {.lede style="font-size:1.05rem; margin-top:1.2rem"}
+::: {.lede}
 Two kinds of work, kept side by side on purpose: long-running research programmes, and the
 tools built so that other people can do the analysis themselves.
 :::
 :::
 
-::: {.section-split}
-::: {.label}
-[Research streams]{.eyebrow}
+<!-- Both lists come from _cv.yml, the same record the CV page and the PDFs are built
+     from; add a project or a package there, not here. The page used to draw them as a
+     grid of cards, which made the one thing on the site that is a list of work look
+     unlike every other list of work. -->
 
-***
-:::
-::: {.card-grid}
+## Research streams {.split}
 
-::: {.flat-card}
-### Land reform in Kazakhstan
-
-Thirty years of land-allocation reform evaluated across 200 rayon-level units, combining
-administrative and geospatial data with the natural experiment of pasture privatization.
-
-::: {.chips}
-[Impact evaluation]{.chip} [Google Earth Engine]{.chip}
-:::
+::: {.timeline}
+{{< cv type=project >}}
 :::
 
-::: {.flat-card}
-### Land valuation in Ukraine
+## Software {.split}
 
-Mass valuation of agricultural and urban land — regression-based methods adopted by the
-State Cadaster, and listing-data approaches for urban property where records are thin.
-
-::: {.chips}
-[Cadaster]{.chip} [Machine learning]{.chip} [PostGIS]{.chip}
-:::
-:::
-
-::: {.flat-card}
-### GeoPov
-
-A World Bank working programme joining microdata with geospatial data to read spatial
-income and welfare disparities.
-
-::: {.chips}
-[Poverty mapping]{.chip} [Microdata]{.chip}
-:::
-:::
-
-:::
-:::
-
-::: {.section-split}
-::: {.label}
-[Software]{.eyebrow}
-
-***
-:::
-::: {.card-grid}
-
-::: {.flat-card}
-### peaApp
-
-R Shiny application for poverty and equity analysis — packaging country workflows into
-something a counterpart can run without an analyst in the room.
-
-[R · Shiny]{.chip}
-:::
-
-::: {.flat-card}
-### devCEQ
-
-R package for scaling up fiscal microsimulation Shiny apps — deployed for Senegal, Côte
-d'Ivoire, Benin, Indonesia, Romania, Türkiye, El Salvador, and Armenia.
-
-[worldbank.github.io/devCEQ →](https://worldbank.github.io/devCEQ/){.card-link}
-:::
-
-::: {.flat-card}
-### devPTIpack
-
-Project Targeting Index tooling: spatial and micro data combined to improve how development
-projects choose where to work.
-
-[worldbank.github.io/devPTIpack →](https://worldbank.github.io/devPTIpack){.card-link}
-:::
-
-::: {.flat-card}
-### lassopmm
-
-Lassoing welfare dynamics — synthetic panel construction with machine learning, packaged
-for reuse.
-
-[R]{.chip}
-:::
-
-:::
+::: {.timeline}
+{{< cv type=software >}}
 :::

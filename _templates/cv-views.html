@@ -1,0 +1,105 @@
+<!--
+  cv-views.html — the Short / Full switcher for cv.qmd, pulled in by that
+  page's `include-after-body:`. The only JavaScript on the site.
+
+  Progressive enhancement, not a renderer. The cv shortcode (_templates/cv.lua) prints
+  EVERY entry of _cv.yml on the HTML page, at full depth, tagging each one with the CV
+  variants it belongs to — details.cv-entry for a dated entry, div.chips.cv-entry for a
+  flat list, both carrying a data-in attribute such as "short full". Nothing
+  below writes content; it only decides which of those entries is shown, and how deep:
+
+    short      the entries of the 2-page CV, collapsed to their one sentence
+    full       every entry, open
+
+  A .section-split whose every entry has been hidden is hidden too, so its label in the
+  left column goes with it.
+
+  Without JavaScript the buttons never appear — they are `hidden` in the markup and
+  cleared here — and the page stays exactly what the filter emitted: the complete CV,
+  every entry visible and closed, each one openable on its own. That also means the
+  `[hidden] { display: none !important; }` rule in styles.scss is load-bearing: the UA
+  stylesheet's `display: none` for [hidden] loses to `.section-split { display: grid }`
+  and `.chips { display: flex }`.
+
+  Nothing in this comment may look like a Quarto shortcode: include-after-body files go
+  through the shortcode pass, so a literal one here is expanded into the page.
+-->
+<script>
+(function () {
+  "use strict";
+
+  // A list, not an object: a hash of "#constructor" would find a key on any object.
+  var VIEWS = ["short", "full"];
+  var DEFAULT_VIEW = "short";
+
+  var group    = document.querySelector(".cv-views");
+  var buttons  = document.querySelectorAll(".cv-views .btn-view");
+  var entries  = document.querySelectorAll(".cv-entry[data-in]");
+  var sections = document.querySelectorAll(".section-split");
+
+  // Nothing to switch between: leave the page exactly as it was rendered.
+  if (!group || !buttons.length || !entries.length) return;
+
+  function isView(name) {
+    return VIEWS.indexOf(name) > -1;
+  }
+
+  // cv.html#full deep-links to a view; anything else falls back.
+  function fromHash() {
+    var name = (window.location.hash || "").replace(/^#/, "");
+    return isView(name) ? name : DEFAULT_VIEW;
+  }
+
+  function inVariant(el, view) {
+    return (" " + (el.getAttribute("data-in") || "") + " ").indexOf(" " + view + " ") > -1;
+  }
+
+  function apply(view) {
+    var i, j, el, shown;
+
+    for (i = 0; i < entries.length; i++) {
+      el = entries[i];
+      shown = inVariant(el, view);
+      el.hidden = !shown;
+      // Short is the scan — one sentence an entry, with .sum visible because the row
+      // stays closed. Full is the read, so its entries open into the long text.
+      if (el.tagName === "DETAILS") el.open = shown && view !== "short";
+    }
+
+    // A section whose every entry has just been hidden takes its label with it.
+    for (i = 0; i < sections.length; i++) {
+      var inside = sections[i].querySelectorAll("[data-in]");
+      var any = false;
+      for (j = 0; j < inside.length; j++) {
+        if (!inside[j].hidden) { any = true; break; }
+      }
+      sections[i].hidden = inside.length > 0 && !any;
+    }
+
+    for (i = 0; i < buttons.length; i++) {
+      buttons[i].setAttribute(
+        "aria-pressed", buttons[i].getAttribute("data-view") === view ? "true" : "false"
+      );
+    }
+  }
+
+  for (var i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("click", function (event) {
+      var view = event.currentTarget.getAttribute("data-view");
+      if (!isView(view)) return;
+      apply(view);
+      // Shareable, but without a history entry per click.
+      if (window.history && window.history.replaceState) {
+        try { window.history.replaceState(null, "", "#" + view); } catch (e) {}
+      }
+    });
+  }
+
+  window.addEventListener("hashchange", function () { apply(fromHash()); });
+
+  // The switcher is markup-hidden until this runs, so a page without JavaScript never
+  // shows a control that does nothing.
+  group.hidden = false;
+  apply(fromHash());
+})();
+</script>

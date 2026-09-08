@@ -1,13 +1,15 @@
 ---
-title: "Eddie Bukin"
-pagetitle: "Eddie Bukin — land and poverty economist"
+# title: "Eddie Bukin"
+pagetitle: "Eddie Bukin: Land and Poverty Economist"
 page-layout: full
 toc: false
 ---
 
 ::: {.hero}
 ::: {}
-[Land and Poverty Economist @ the World Bank &nbsp;/&nbsp; PhD Candidate · JLU Giessen]{.eyebrow}
+[Land and Poverty Economist @ the World Bank &nbsp;/&nbsp;]{.eyebrow}
+
+[PhD Candidate · JLU Giessen]{.eyebrow}
 
 # Eddie Bukin {.display-name}
 
@@ -25,7 +27,6 @@ State Cadaster as the basis for regression-based agricultural land valuation.
 ::: {.btn-row style="padding-top:0.6rem"}
 [CV — short [PDF · 2p]{.qty}](cv/cv-short.pdf){.btn-flat}
 [CV — full [PDF]{.qty}](cv/cv-full.pdf){.btn-outline-flat}
-[Publications only](cv/cv-academic.pdf){.btn-quiet}
 :::
 :::
 
@@ -70,7 +71,7 @@ six hundred staff.
 
 [All publications →](publications.qmd){.meta}
 :::
-::: {}
+::: {.rail}
 {{< pubs selected=true >}}
 :::
 :::

@@ -27,7 +27,8 @@
 #                 publisher — a note write-up, a project sub-page. Written
 #                 site-root-relative as authored, e.g. notes/kazakhstan-land-reform.qmd
 #   doi / url     `doi` becomes https://doi.org/…; `url` is used verbatim
-#   selected      true puts the entry on the home page and in the short CV
+#   selected      true puts the entry on the home page. Nothing else reads it: the
+#                 two-page CV prints the whole `type: article` list, not a selection
 #
 # A row points at `page`, else `url`, else `doi` — most specific first, so adding a
 # `page:` takes the row over from the DOI. An entry with none of the three is not a
@@ -37,8 +38,8 @@
 #
 #   publications.qmd    show=full     both descriptions
 #   index.qmd           (default)     summary only
-#   cv/cv-academic.qmd  (default)     summary only, except theses at show=full
-#   cv/cv-short.qmd     show=none     citations only, to hold it to two pages
+#   cv/cv-short.qmd     show=none     every peer-reviewed article, citations only
+#   cv/cv-full.qmd      show=none     every entry, grouped into ### sections by type
 
 author-me: "Bukin, E."
 
@@ -226,7 +227,7 @@ publications:
     authors: ["Kvartiuk, V.", "Bukin, E.", "Herzfeld, T."]
     where: "Land and Poverty Conference"
 
-  # ---- theses (academic CV only) ---------------------------------------------
+  # ---- theses ------------------------------------------------------------------
 
   # EXAMPLE TEXT below — placeholder wording, rewrite it.
   - type: thesis
