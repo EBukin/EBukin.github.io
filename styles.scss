@@ -187,11 +187,19 @@ $footer-bg: $body-bg;
   margin-inline: auto;
   padding-inline: $frame-pad;
 }
-.navbar > .navbar-container,
-.nav-footer {
+.navbar > .navbar-container {
   max-width: $frame;
   margin-inline: auto;
   padding-inline: $frame-pad;
+}
+// The footer is framed one level up, on <footer> itself, because .nav-footer carries
+// the hairline that closes the page off: padding it to the frame would have put that
+// border on the padding edge, 1.5rem wider each side than every other rule on the
+// page. Padding the parent and giving .nav-footer the measure alone lines the two up.
+.footer { padding-inline: $frame-pad; }
+.nav-footer {
+  max-width: calc(#{$frame} - #{$frame-pad} * 2);
+  margin-inline: auto;
 }
 
 // Quarto's two sidebars — #quarto-sidebar carries a `toc-location: left` table of
@@ -214,7 +222,7 @@ $footer-bg: $body-bg;
     display: block;
     position: fixed;
     // 64px is body.nav-fixed's own padding-top — the height of the fixed navbar.
-    top: calc(64px + 2.6rem);
+    top: 300px;
     right: calc(50% + #{$frame * 0.5} + #{$aside-gap});
     width: min(#{$aside-w}, calc(50% - #{$frame * 0.5} - #{$aside-gap} - 1rem));
     max-height: calc(100vh - 64px - 5rem);
