@@ -8,8 +8,11 @@
   flat list, both carrying a data-in attribute such as "short full". Nothing
   below writes content; it only decides which of those entries is shown, and how deep:
 
-    short      the entries of the 2-page CV, collapsed to their one sentence
-    full       every entry, open
+    short      the entries of the 2-page CV, closed — the summary line of each
+    full       every entry, open on what its summary leaves out
+
+  Full is the default. The page is a CV and a reader who has opened it wants to read it,
+  not to be handed a scan of it; cv.html#short deep-links to the other one.
 
   A .section-split whose every entry has been hidden is hidden too, so its label in the
   left column goes with it.
@@ -30,7 +33,7 @@
 
   // A list, not an object: a hash of "#constructor" would find a key on any object.
   var VIEWS = ["short", "full"];
-  var DEFAULT_VIEW = "short";
+  var DEFAULT_VIEW = "full";
 
   var group    = document.querySelector(".cv-views");
   var buttons  = document.querySelectorAll(".cv-views .btn-view");
@@ -61,8 +64,9 @@
       el = entries[i];
       shown = inVariant(el, view);
       el.hidden = !shown;
-      // Short is the scan — one sentence an entry, with .sum visible because the row
-      // stays closed. Full is the read, so its entries open into the long text.
+      // Short is the scan — every row closed, each showing its summary line and no
+      // more. Full is the read, so its entries open into what the summary leaves out;
+      // the summary line stays visible above it either way.
       if (el.tagName === "DETAILS") el.open = shown && view !== "short";
     }
 

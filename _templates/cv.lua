@@ -23,8 +23,9 @@
 --                     them — the tight headings the two-page CV needs
 --   show=summary      how much of an entry's prose to print (default "summary"):
 --                       none      heading only
---                       summary   heading + the one-sentence `summary:`
---                       full      heading + the whole `description:`, and references
+--                       summary   heading + `summary:`
+--                       full      heading + `summary:` and then `description:`, which
+--                                 continues it rather than repeating it, and references
 --   limit=4           keep at most N entries
 --
 -- Entries come out in file order. Unlike publications nothing is sorted: `period:`
@@ -201,17 +202,19 @@ local function flatten(text)
   return (text:gsub('%s+', ' '):gsub('^%s*(.-)%s*$', '%1'))
 end
 
--- The rule _cv.yml states — a description opens with its summary sentence, so that
--- expanding an entry on the web reads as the sentence growing rather than repeating
--- itself. Nothing can enforce it, so say so at render time instead of shipping it.
-local function warn_on_drift(entry)
+-- The rule _cv.yml states — a description carries what its summary does not, because
+-- everything that prints the one prints the other above it: the web row keeps its
+-- `.sum` visible when it opens, and show=full sets the summary as the entry's first
+-- paragraph. Nothing can enforce it, so say so at render time instead of shipping an
+-- entry that says the same thing twice.
+local function warn_on_repeat(entry)
   if entry.summary == nil or entry.description == nil then return end
   local summary = flatten(stringify(inls(entry.summary)))
   local body    = flatten(stringify(blks(entry.description)))
-  if body:sub(1, #summary) ~= summary then
-    log_warn('cv: `description:` does not begin with `summary:` for "' ..
-             stringify(inls(entry.title or '?')) .. '" — opening this entry on the ' ..
-             'web will not read as the sentence expanding.')
+  if summary ~= '' and body:sub(1, #summary) == summary then
+    log_warn('cv: `description:` repeats `summary:` for "' ..
+             stringify(inls(entry.title or '?')) .. '" — the two are printed one after ' ..
+             'the other, so the entry would say the same thing twice.')
   end
 end
 
@@ -238,30 +241,39 @@ local function web_entry(entry)
     head:insert(pandoc.Span(inls(entry.place), pandoc.Attr('', { 'org' })))
   end
 
-  -- The collapsed row's one sentence. `.sum` is the class pubs.lua already uses for
-  -- the same idea; styles.scss gives it a .timeline variant. It is hidden when the
-  -- entry opens, because the body below repeats it as its opening sentence.
+  -- The row's short form. `.sum` is the class pubs.lua already uses for the same idea;
+  -- styles.scss gives it a .timeline variant. It stays visible when the entry opens,
+  -- because _cv.yml requires `description:` to carry what it does not say: the body
+  -- below continues the line rather than replacing it.
   local summary = summary_of(entry, 'summary')
   if summary then
     head:insert(pandoc.Span(summary, pandoc.Attr('', { 'sum' })))
   end
 
   -- The web page always carries the whole story; the switcher decides what shows.
-  local body = description_of(entry, 'full')
-  if body == nil and summary ~= nil then
-    body = pandoc.Blocks{ pandoc.Para(summary) }
+  local body    = description_of(entry, 'full')
+  local variant = table.concat(variants_of(entry), ' ')
+
+  -- With the summary no longer repeated below it, an entry that has no `description:`
+  -- has nothing to disclose, so it is a plain row and carries no +: a control that
+  -- opened onto an empty box would be a control that does nothing. It keeps the
+  -- .cv-entry class and the data-in attribute, which is all the switcher reads.
+  if body == nil or #body == 0 then
+    return pandoc.Blocks{
+      pandoc.Div(pandoc.Blocks{ pandoc.Plain(pandoc.Span(head)) },
+                 pandoc.Attr('', { 'cv-entry' }, { ['data-in'] = variant })),
+    }
   end
 
   return pandoc.Blocks{
-    pandoc.RawBlock('html', '<details class="cv-entry" data-in="' ..
-                            table.concat(variants_of(entry), ' ') .. '">'),
+    pandoc.RawBlock('html', '<details class="cv-entry" data-in="' .. variant .. '">'),
     pandoc.RawBlock('html', '<summary>'),
     pandoc.Plain{
       pandoc.Span(head),
       pandoc.Span({ pandoc.Str('+') }, pandoc.Attr('', { 'plus' })),
     },
     pandoc.RawBlock('html', '</summary>'),
-    pandoc.Div(body or pandoc.Blocks{}, pandoc.Attr('', { 'body' })),
+    pandoc.Div(body, pandoc.Attr('', { 'body' })),
     pandoc.RawBlock('html', '</details>'),
   }
 end
@@ -318,18 +330,22 @@ local function cv_entry(entry, show, short)
   end
   call[#call + 1] = ')'
 
-  local body = description_of(entry, show)
-  if body == nil then
-    local summary = summary_of(entry, show)
-    if summary then body = pandoc.Blocks{ pandoc.Para(summary) } end
-  end
+  -- The summary first and the description after it, never one instead of the other:
+  -- _cv.yml requires the description to continue the summary rather than restate it,
+  -- so at show=full the two are the opening paragraph and the rest of one passage.
+  -- summary_of() is nil at show=none and description_of() at anything below full, so
+  -- the three depths fall out of the two calls.
+  local body = pandoc.Blocks{}
+  local summary = summary_of(entry, show)
+  if summary then body:insert(pandoc.Para(summary)) end
+  local detail = description_of(entry, show)
+  if detail then body:extend(detail) end
 
   -- The references note belongs to the entry, so it is indented with the rest of it
   -- rather than left hanging back out at the margin.
   if show == 'full' and entry.references then
     local line = pandoc.Inlines{ pandoc.Emph{ pandoc.Str('References:') }, pandoc.Space() }
     line:extend(inls(entry.references))
-    body = body or pandoc.Blocks{}
     body:insert(pandoc.Plain(typst_call{ '#cv-note[', line, ']' }))
   end
 
@@ -492,8 +508,8 @@ return {
       show = 'summary'
     end
 
-    -- The web page carries every entry at full depth and lets the Short / Full /
-    -- Academic buttons filter and collapse it, so `show=` is a PDF concern only.
+    -- The web page carries every entry at full depth and lets the Short / Full
+    -- buttons filter and collapse it, so `show=` is a PDF concern only.
     if quarto.doc.is_format('html') then
       local blocks = pandoc.Blocks{}
       for _, entry in ipairs(entries) do
@@ -503,7 +519,7 @@ return {
           blocks:insert(pandoc.Div(prose_of(entry), pandoc.Attr('', { 'cv-entry' },
                         { ['data-in'] = table.concat(variants_of(entry), ' ') })))
         else
-          warn_on_drift(entry)
+          warn_on_repeat(entry)
           blocks:extend(web_entry(entry))
         end
       end

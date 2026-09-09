@@ -168,11 +168,13 @@ Three shapes of entry, told apart by `type:`:
 
 - **dated** — `experience`, `education`, `teaching`, `project`, `software`. `period:` /
   `title:` / `place:` (each of the latter two with an optional `-short` twin, used only at
-  `titles=short` so the two-page CV keeps its headings to one line), a
-  one-sentence `summary:`, a Markdown `description:` that may carry paragraphs and bullet
-  lists, and an optional `references:` line printed only in the PDFs and only at `show=full`.
-  HTML gets a `<details class="cv-entry">` timeline row; Typst gets a `#cv-entry()` call with
-  the three fields passed separately, followed by the prose.
+  `titles=short` so the two-page CV keeps its headings to one line), a short `summary:`,
+  a Markdown `description:` carrying what the summary does not — paragraphs and bullet
+  lists both work — and an optional `references:` line printed only in the PDFs and only at
+  `show=full`. HTML gets a `<details class="cv-entry">` timeline row, or a plain
+  `<div class="cv-entry">` where an entry has no `description:` to put behind the `+`;
+  Typst gets a `#cv-entry()` call with the three fields passed separately, followed by
+  the prose.
   `project` and `software` are the two `projects.qmd` is built from. They are the same shape
   and go through the same code, but no `{{< cv >}}` call in `cv/` asks for them, so neither
   reaches a PDF; and neither carries a `period:`, because nothing in the record dates a
@@ -209,19 +211,23 @@ belongs to (`short` and `full`; omitted means both). The PDFs filter on it with
 display string, not a date — so entries come out in file order and reordering the CV means
 moving lines in `_cv.yml`.
 
-**A `description:` must open with the exact text of its `summary:`.** Opening an entry on the
-web replaces the one sentence with the long text, so the row has to read as that sentence
-growing rather than repeating itself. Nothing can enforce it, so `cv.lua` compares the two on
-collapsed whitespace and logs `(W) cv: ...` at render time when they drift apart. A clean
-render of the two CVs prints no such line; treat one as a defect.
+**A `description:` must not repeat its `summary:`.** Everything that prints the long text
+prints the short form above it — the web row keeps its `.sum` visible when it opens, and
+`show=full` sets the summary as the entry's opening paragraph in the PDF — so a description
+carries only what the summary leaves out. Nothing can enforce it, so `cv.lua` compares the
+two on collapsed whitespace and logs `(W) cv: ...` at render time when a description opens
+by restating its summary. A clean render of `cv.qmd` prints no such line; treat one as a
+defect. An entry with no `description:` at all is fine, and comes out as a plain row with
+no `+`, because there would be nothing behind it.
 
 `cv.qmd` is now section headings and `{{< cv >}}` calls — none of the raw `<details>` markup it
-used to carry is left in the file. The Short / Full / Academic buttons are the only JavaScript
-on the site: `_templates/cv-views.html`, pulled in by that page's `include-after-body:`. It
-renders nothing. `{{< cv >}}` prints every entry at full depth tagged with `data-in`, and the
-script hides the ones the chosen view excludes, opens the rest, and hides a `.section-split`
-whose entries have all gone. Without JavaScript the buttons stay `hidden` and the page is
-simply the complete CV.
+used to carry is left in the file. The Short / Full buttons are the only JavaScript on the
+site: `_templates/cv-views.html`, pulled in by that page's `include-after-body:`. It renders
+nothing. `{{< cv >}}` prints every entry at full depth tagged with `data-in`, and the script
+hides the ones the chosen view excludes, opens the rest, and hides a `.section-split` whose
+entries have all gone. **Full is the default view**, so opening the page gives the whole CV
+already open; `cv.html#short` deep-links to the scan. Without JavaScript the buttons stay
+`hidden` and the page is simply the complete CV, every entry closed on its summary.
 
 **What is still written twice.** One thing: the `.lede` bio on `index.qmd`, which says the same
 as the `type: profile` entries in `_cv.yml` at a third length and in the first person. It is
@@ -284,9 +290,19 @@ introduce CSS:
 - Layout: `.hero`, `.page-head`, `.section-split` / `section.split` (label left, content
   right), `.rail` (the hairline every list hangs off, and the indent with it)
 - Type: `.eyebrow`, `.display-name`, `.lede`, `.meta`, `.rule-short`
+- Links: `$link-color` is `$ink`, so a link is invisible in running text until hovered.
+  The prose-link rule is written as **`main.content a:not([class])`** — every link on
+  this site that is a row, a control or a label carries a class (`.pub`, `.btn-*`,
+  `.meta`, `.no-external`, Quarto's navbar/footer/TOC classes), so what is left
+  classless is exactly what Markdown wrote inside a sentence. Those get the accent and
+  an underline. It is one rule rather than a list of containers, so a page that grows a
+  new kind of prose is covered without touching the stylesheet. The single exception is
+  re-asserted directly below it: `main.content .pub .ttl a`, the outbound link a
+  disclosure-shaped publication row puts on its title, which is a row and not a
+  sentence and keeps the list's ink.
 - Components: `.chips` with `.chip-out`, `.btn-flat` / `.btn-outline-flat` / `.btn-quiet`
   (+ `.qty` for the trailing count), `.timeline` (CV entries are `<details>`/`<summary>`,
-  emitted by `{{< cv >}}`), `.pub`
+  or a plain `<div>` where there is nothing to disclose, emitted by `{{< cv >}}`), `.pub`
 
 There is no card. `.card-grid`, `.flat-card`, `.featured`, `.card-link` and the filled
 `.chip` are gone with the two pages that used them; a list of work on this site is a list.
@@ -304,9 +320,9 @@ spelling a section used is invisible.
 **The `+` means one thing.** A CV entry and a publication row both open downward, into the
 row, with the same measure and the same type. The publication row used to open sideways into
 a ruled aside on the right, so the same control did two different things depending on which
-list the reader was in. One difference survives, and it is a difference in the data: a CV
-entry hides its collapsed `.sum` on open because `_cv.yml` requires `description:` to begin
-with `summary:`, while `_publications.yml` does not, so a publication row keeps both lines.
+list the reader was in. Both keep their collapsed `.sum` visible on open, too: neither record
+lets a `description:` open by repeating its `summary:`, so in both lists the two are two
+different sentences and hiding either would lose one. The `+` only ever adds.
 
 **The notes listing is dressed, not generated.** Quarto emits its own markup for a listing, so
 those rows cannot come from a shortcode the way the CV's and the projects' do. `styles.scss`

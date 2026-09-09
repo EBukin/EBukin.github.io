@@ -318,6 +318,34 @@ $footer-bg: $body-bg;
 }
 .meta { font-size: 0.85rem; color: $muted; }
 
+// A link inside a sentence. $link-color is $ink — the body colour — so until the
+// pointer is over one there is nothing to see: the CV entry bodies, where every
+// project and package names its own site, read as flat text. Prose links take the
+// accent and an underline instead, which is the one pair of signals that does not
+// depend on a pointer being present at all.
+//
+// Written as "any link in the reading column carrying no class of its own", because
+// on this site every link that is a row, a control or a label has one: `.pub` for a
+// publication row, `.btn-flat` / `.btn-outline-flat` / `.btn-pdf` / `.btn-view` for a
+// control, `.meta` for a "more" line, `.no-external` for a notes-listing title, and
+// Quarto's own classes for the navbar, footer and table of contents. What is left
+// classless is exactly what Markdown wrote inside a paragraph, a bullet or a summary
+// line — and it is one rule rather than a list of containers that has to be extended
+// every time a page grows a new kind of prose.
+main.content a:not([class]) {
+  color: $accent;
+  text-decoration: underline;
+  text-decoration-thickness: 0.06em;
+  text-underline-offset: 0.18em;
+  text-decoration-color: rgba($accent, 0.45);
+}
+// Darkening to ink on hover rather than lightening: the link stays legible under the
+// pointer, and the movement is the same one .pub makes when a row is hovered.
+main.content a:not([class]):hover {
+  color: $ink;
+  text-decoration-color: $ink;
+}
+
 // Two-column section: label left, content right. The label is one short word, so it
 // gets a narrow column and a modest gutter — the content column is where the reading
 // happens, and on the CV it carries a full paragraph per entry.
@@ -490,8 +518,14 @@ section.split > h2 {
 a.pub:hover, summary.pub:hover { background: $tint; }
 .pub .yr { font-family: $headings-font-family; font-size: 0.94rem; color: $accent; }
 .pub .ttl { font-family: $headings-font-family; font-size: 1.18rem; line-height: 1.35; text-wrap: pretty; display: block; }
-.pub .ttl a { color: inherit; }
-.pub .ttl a:hover { color: $accent; }
+// The one classless link on the site that is not prose. A publication row of the
+// disclosure shape puts its outbound link on the title, because the + has taken the
+// row and block content cannot nest inside an <a> — but it is still a row and not a
+// sentence, so it keeps the list's own treatment. `main.content` is named here only
+// to out-specify the prose-link rule above; without it the two rows that have a
+// title link would be underlined and red where the other eleven are not.
+main.content .pub .ttl a { color: inherit; text-decoration: none; }
+main.content .pub .ttl a:hover { color: $accent; }
 .pub .aut { font-size: 0.84rem; color: $muted; display: block; margin-top: 0.35rem; }
 .pub .aut .me { color: $ink; font-style: normal; }
 // The summary is prose, not more citation metadata, so it is set apart by family
@@ -533,9 +567,9 @@ details.pub-entry[open] .plus { transform: rotate(45deg); }
 // measure and the type below are .timeline .body's, deliberately: the prose under an
 // opened paper and the prose under an opened post should be the same prose.
 //
-// Unlike the CV, the collapsed .sum stays visible: _publications.yml does not require
-// `description:` to open with `summary:` the way _cv.yml does, so the two lines are
-// two different sentences here and hiding either loses one of them.
+// The collapsed .sum stays visible, exactly as it does in the CV: neither record lets
+// a `description:` open by repeating its `summary:`, so the two lines are two different
+// sentences and hiding either loses one of them.
 .pub-more {
   padding: 0.5rem 0 $row-pad calc(52px + 1.5rem);
   max-width: 84ch;
@@ -620,7 +654,10 @@ details.pub-entry[open] .plus { transform: rotate(45deg); }
 // list beside it, so both kinds of row give it back and rely on $row-pad alone.
 details.cv-entry, details.pub-entry { margin-bottom: 0; }
 
-.timeline details { border-bottom: 1px solid $rule-soft; padding: $row-pad 0; }
+// Every row in the timeline, disclosing or not: an entry with no `description:` in
+// _cv.yml comes out of the shortcode as a plain div rather than a <details>, because a
+// + that opened onto an empty box would be a control that does nothing.
+.timeline .cv-entry { border-bottom: 1px solid $rule-soft; padding: $row-pad 0; }
 .timeline summary {
   list-style: none;
   cursor: pointer;
@@ -655,10 +692,10 @@ details.cv-entry, details.pub-entry { margin-bottom: 0; }
   color: #33363A;
   max-width: 70ch;
 }
-// _cv.yml requires `description:` to open with the exact text of `summary:`, so on
-// open the collapsed copy steps aside and the body takes over the same words: the
-// sentence reads as expanding into the long text rather than being repeated.
-.timeline details[open] > summary .sum { display: none; }
+// It stays put when the entry opens. _cv.yml requires `description:` to carry what the
+// summary does not, so the long text below continues the line rather than restating it,
+// and hiding the short form on open would lose a sentence — the same reason .pub .sum
+// stays visible in the publication list.
 
 // ---- chips ------------------------------------------------------------------
 

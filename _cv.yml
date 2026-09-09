@@ -48,12 +48,12 @@
 #                 to one line. Same idea as `title-short:` in _publications.yml
 #   place         employer, university or programme, plus location
 #   place-short   optional trimmed place, same rule as `title-short`
-#   summary       ONE SENTENCE. On the web it sits in the collapsed row; in the CVs it
-#                 is the whole entry at show=summary
-#   description   the long text, Markdown — links, emphasis and bullet lists all work.
-#                 MUST BEGIN WITH THE EXACT TEXT OF `summary:`, because opening an
-#                 entry on the web replaces the sentence with this. cv.lua warns at
-#                 render time if the two have drifted apart
+#   summary       the short form, a sentence or two. It is the row on the web, closed
+#                 and open alike, and the whole entry in the CVs at show=summary
+#   description   what the summary does NOT say, Markdown — links, emphasis and bullet
+#                 lists all work. MUST NOT REPEAT `summary:`. The two are printed one
+#                 after the other, so this continues the summary rather than restating
+#                 it; cv.lua warns at render time if it opens by repeating it
 #   references    optional; people who can be contacted about the position. Printed
 #                 only in the PDFs, and only at show=full
 #
@@ -81,10 +81,10 @@
 # ---------------------------------------------------------------------------------
 # Which page prints how much:
 #
-#   cv.qmd              every entry, both summary and description; the buttons choose
+#   cv.qmd              every entry, summary then description; the buttons choose depth
 #   projects.qmd        type=project and type=software
 #   teaching.qmd        type=teaching
-#   cv/cv-full.qmd      in=full      show=full       long text, references
+#   cv/cv-full.qmd      in=full      show=full       summary + long text, references
 #   cv/cv-short.qmd     in=short     show=summary    one sentence per entry
 #
 # The two-page CV prints languages but no skills, which is why `type: skills` is
@@ -153,48 +153,74 @@ cv:
     place: "The World Bank · Washington DC"
     in: [short, full]
     summary: >-
-      Innovation and systems engineering for global poverty analysis, as well as
-      land-economics research and operational support to the Ukrainian State Cadastre.
-    description: |
-      Innovation and systems engineering for global poverty analysis, as well as
-      land-economics research and operational support to the Ukrainian State Cadastre.
-      The work programme in the Global Poverty Department (WKPEP):
+      As a land and poverty economist in the Global Poverty Department (WKPEP) I build
+      client-ready solutions for poverty mapping and small area estimation,
+      introduced AI-assisted coding in R and Stata to economists Bank-wide and
+      conduct research on the impact evaluation with the Development Research
+      Group (DEC).
 
-      - *Land economics and Ukraine.* Co-authored research on the Ukrainian land market;
-        technical assistance to the State Cadaster; consulting on the Land Parcel
-        Identification System (LPIS) and mass valuation of agricultural land; piloted
-        mass appraisal of urban land. Implemented the agricultural land valuation
-        adopted by the Ukrainian State Cadastre.
+    description: >-
+      Highlights:
+
+      - *Land economics and Ukraine.* Research on the Ukrainian land market and
+        technical assistance to the State Cadaster: consulting on the Land Parcel
+        Identification System (LPIS) and on mass valuation of agricultural land, and
+        piloting the mass appraisal of urban land.
+      - *Microdata analysis, small area estimation and poverty mapping.* Contributed
+        to EU-wide poverty mapping and to missions to Poland, and trained the Polish
+        national statistical office to run small area estimates of its own.
       - *AI-assisted coding.* Led the Bank-wide initiative on AI-assisted coding in R
         and Stata. Launched a seminar series and internal training; the
         [ai4coding](https://worldbank.github.io/ai4coding/) course reached 600+ staff
         through the Open Learning Campus; introduced Positron and Quarto as
         Bank-standard tools for reproducible research.
-      - *GeoPov.* Co-initiated the department programme joining geospatial and micro
-        data to read spatial income and welfare disparities.
-      - *Micro Modelling Lab.* Engineered data pipelines for macro–micro fiscal
-        microsimulations as part of the MML standardization initiative.
-      - *EU poverty mapping.* Contributed to EU-wide poverty mapping and missions to
-        Poland; trained the Polish national statistical office.
+      - *GeoPov.* Co-initiated the GeoPov work programme on the nexus of remotely
+        sensed geospatial and individual microdata, measuring the extent and the
+        determinants of spatial income and welfare disparities.
+      - *Micro Modelling Lab.* Engineered the data pipelines behind macro–micro fiscal
+        microsimulation modelling, and wrote the guidance for scaling and replicating
+        the method across countries.
+
     references: "Klaus W. Deininger; Carolina Diaz-Bonilla; Nobuo Yoshida"
 
   - type: experience
     period: "Jan 2020 — Dec 2024"
-    title: "Lecturer (wissenschaftlicher Mitarbeiter)"
+    title: "Lecturer and researcher"
     title-short: "Lecturer"
     place: "Justus Liebig University Giessen · Germany"
     in: [short, full]
-    summary: "Research at the Institute for Agricultural Policy and Market Research on land markets and institutions, alongside two MSc courses and a doctoral thesis."
-    description: |
-      Research at the Institute for Agricultural Policy and Market Research on land
-      markets and institutions, alongside two MSc courses and a doctoral thesis.
-      Farm restructuring and returns to scale, rental-market efficiency in Ukraine,
-      land-policy evaluation in Kazakhstan, and resource market failures in transition
-      agriculture.
+    summary: >-
+      As a researcher at the Institute for Agricultural Policy and Market Research I
+      worked across a range of micro- and macroeconomic topics, focusing on land
+      markets and on policy impact evaluation. Alongside this I taught two
+      Master's-level courses in applied econometrics for the social sciences, and
+      wrote my PhD thesis.
 
-      - Introduced *Applied Econometrics*, teaching the path from cause to effect.
-      - Researcher on the BMBF-funded ROCHADE project as CGE modeller and global trade
-        data analyst.
+    description: >-
+      Highlights:
+
+      - *Teaching.* The challenge was to equip an interdisciplinary cohort of
+        development economists with an intuition for causal thinking and the know-how
+        to implement statistical analysis and hypothesis testing. I taught the
+        introductory course to the full cohort and Applied Econometrics to a
+        self-selected group.
+      - *Research.* A microeconometric portfolio built on farm-level data:
+        [land market efficiency in Ukraine](https://doi.org/10.1016/j.landusepol.2024.107336)
+        and the [land privatization reform in Kazakhstan](https://doi.org/10.1016/j.landusepol.2025.107741),
+        which yielded [several publications](https://ebukin.github.io/publications.html) in *Land Use Policy*
+        and other journals. On [ROCHADE](https://rochade-project.org/en/front-page) — a
+        project funded by the German Federal Ministry of Education and Research (BMBF,
+        01LA1828A/B/C/D) — I worked as macroeconomist, trade data analyst, CGE modeller
+        and GAMS programmer, publishing in
+        [Environmental and Resource Economics](https://link.springer.com/article/10.1007/s10640-022-00698-7)
+        and [Environmental Research Letters](https://iopscience.iop.org/article/10.1088/1748-9326/ad34e9).
+      - *PhD thesis.* On Kazakhstan's land privatization reform, assessing the impact
+        of the policy on both agricultural production and land productivity. It pairs
+        cadastral records of land allocation and parcel geometry covering 100 million
+        hectares with remotely sensed measures of climate, vegetation and land cover,
+        and identifies the effect with quasi-experimental methods: staggered and
+        continuous-treatment difference-in-differences (DiD).
+
     references: "Prof. Dr. Martin Petrick"
 
   - type: experience
@@ -206,9 +232,8 @@ cv:
     in: [short, full]
     summary: "Microeconomic analysis of fiscal incidence, geospatial analysis and country-level capacity building, delivered largely as reusable software."
     description: |
-      Microeconomic analysis of fiscal incidence, geospatial analysis and country-level
-      capacity building, delivered largely as reusable software. R packages and Shiny
-      applications let governments interrogate their own policy simulations.
+      R packages and Shiny applications let governments interrogate their own policy
+      simulations.
 
       - [devCEQ](https://worldbank.github.io/devCEQ/) — fiscal microsimulation apps for
         Senegal, Côte d'Ivoire, Benin, Indonesia, Romania, Türkiye, El Salvador and
@@ -229,10 +254,9 @@ cv:
     in: [short, full]
     summary: "Land and labour relationships in agriculture, focusing on principal–agent problems and contractual relations in Ukraine."
     description: |
-      Land and labour relationships in agriculture, focusing on principal–agent problems
-      and contractual relations in Ukraine. Led the second wave of the IAMO Farm Survey
-      in Kazakhstan and Central Asia — questionnaire design, pre-testing, interviewer
-      training, and QA/QC over 600 collected responses.
+      Led the second wave of the IAMO Farm Survey in Kazakhstan and Central Asia —
+      questionnaire design, pre-testing, interviewer training, and QA/QC over 600
+      collected responses.
 
   - type: experience
     period: "Sep 2014 — Jan 2018"
@@ -243,12 +267,11 @@ cv:
     in: [short, full]
     summary: "Policy briefs for the WTO 11th Ministerial, bilateral trade analysis, and the meat chapter of the *OECD-FAO Agricultural Outlook 2017–2026*."
     description: |
-      Policy briefs for the WTO 11th Ministerial, bilateral trade analysis, and the meat
-      chapter of the *OECD-FAO Agricultural Outlook 2017–2026*. Maintained the
-      AGLINK-COSIMO country modules, and contributed the Import Surges and Price
-      Depressions review and an R Shiny application for trade data exploration. Earlier,
-      as statistician, implemented IPCC-compliant GHG estimation methodology and QA/QC
-      protocols, and built the first emissions-intensities database in FAOSTAT.
+      Maintained the AGLINK-COSIMO country modules, and contributed the Import Surges
+      and Price Depressions review and an R Shiny application for trade data
+      exploration. Earlier, as statistician, implemented IPCC-compliant GHG estimation
+      methodology and QA/QC protocols, and built the first emissions-intensities
+      database in FAOSTAT.
 
   - type: experience
     period: "2010 — 2015"
@@ -257,12 +280,11 @@ cv:
     in: [full]
     summary: "Internships and junior research posts in inclusive business models, transfer pricing and agricultural information systems."
     description: |
-      Internships and junior research posts in inclusive business models, transfer
-      pricing and agricultural information systems. PGSARD, Pretoria — intern, inclusive
-      business models impact assessment (2014–2015). National University of State Tax
-      Service of Ukraine — junior researcher, transfer pricing in agricultural exports
-      (2012–2013). NULES of Ukraine — junior researcher, information systems (2010–2011).
-      Kapfgut, Twann, Switzerland — agricultural intern (2011).
+      PGSARD, Pretoria — intern, inclusive business models impact assessment
+      (2014–2015). National University of State Tax Service of Ukraine — junior
+      researcher, transfer pricing in agricultural exports (2012–2013). NULES of
+      Ukraine — junior researcher, information systems (2010–2011). Kapfgut, Twann,
+      Switzerland — agricultural intern (2011).
 
   # ---- education ---------------------------------------------------------------
 
@@ -274,10 +296,9 @@ cv:
     in: [short, full]
     summary: "Land privatization and pasture quality in southern Kazakhstan, evaluating the impact of a natural experiment."
     description: |
-      Land privatization and pasture quality in southern Kazakhstan, evaluating the
-      impact of a natural experiment. The thesis pairs cadastral records of land
-      allocation with remotely sensed measures of climate, vegetation and land cover.
-      Supervisor: Prof. Dr. Martin Petrick.
+      The thesis pairs cadastral records of land allocation with remotely sensed
+      measures of climate, vegetation and land cover. Supervisor: Prof. Dr. Martin
+      Petrick.
 
   - type: education
     period: "2013 — 2015"
@@ -287,7 +308,6 @@ cv:
     in: [short, full]
     summary: "130 ECTS across four universities under the Erasmus Mundus IMRD programme."
     description: |
-      130 ECTS across four universities under the Erasmus Mundus IMRD programme.
       Thesis: "Improving Competitiveness of the Ukrainian Sugar Industry: Economic
       Instability and Policy Implications." Supervisor: Prof. Dr. Jeroen Buysse.
 
@@ -299,9 +319,7 @@ cv:
     in: [short, full]
     summary: "Agricultural economics and policy, applied mathematics and statistics, econometrics, and quantitative risk analysis."
     description: |
-      Agricultural economics and policy, applied mathematics and statistics,
-      econometrics, and quantitative risk analysis. MSc 70 ECTS, BSc 240 ECTS.
-      Supervisor: Prof. Dr. Andrii Skrypnyk.
+      MSc 70 ECTS, BSc 240 ECTS. Supervisor: Prof. Dr. Andrii Skrypnyk.
 
   # ---- teaching ----------------------------------------------------------------
 
@@ -312,8 +330,7 @@ cv:
     in: [full]
     summary: "Foundations for social-science research: probability, estimation, inference, and the linear model."
     description: |
-      Foundations for social-science research: probability, estimation, inference, and
-      the linear model. Taught with applied agricultural and development data.
+      Taught with applied agricultural and development data.
 
   - type: teaching
     period: "2020 — 2024"
@@ -322,8 +339,8 @@ cv:
     in: [full]
     summary: "The mostly-harmless toolbox for getting from a cause to an effect."
     description: |
-      The mostly-harmless toolbox for getting from a cause to an effect. Panel methods,
-      instrumental variables, difference-in-differences, and regression discontinuity.
+      Panel methods, instrumental variables, difference-in-differences, and regression
+      discontinuity.
 
   - type: teaching
     period: "2025 — present"
@@ -332,8 +349,7 @@ cv:
     in: [full]
     summary: "A World Bank course on using AI responsibly in R and Stata workflows, taken by more than 600 staff."
     description: |
-      A World Bank course on using AI responsibly in R and Stata workflows, taken by
-      more than 600 staff. An accompanying seminar series runs alongside it.
+      An accompanying seminar series runs alongside it.
       [worldbank.github.io/ai4coding](https://worldbank.github.io/ai4coding/)
 
   # ---- projects and software -----------------------------------------------------
@@ -352,7 +368,6 @@ cv:
     place: "Justus Liebig University Giessen · PhD research"
     summary: "Thirty years of land-allocation reform evaluated across 200 rayon-level units."
     description: |
-      Thirty years of land-allocation reform evaluated across 200 rayon-level units.
       Administrative statistics are combined with geospatial measures of land cover,
       climate and vegetation, and with the natural experiment of pasture privatization
       that the thesis itself evaluates.
@@ -362,9 +377,8 @@ cv:
     place: "The World Bank · Ukrainian State Cadaster"
     summary: "Mass valuation of agricultural and urban land in a deliberately data-scarce environment."
     description: |
-      Mass valuation of agricultural and urban land in a deliberately data-scarce
-      environment. The regression-based method for agricultural land was adopted by the
-      State Cadaster; the urban work combines real estate listing data with Cadaster and
+      The regression-based method for agricultural land was adopted by the State
+      Cadaster; the urban work combines real estate listing data with Cadaster and
       Registry of Rights records, piloted on Lviv.
 
   - type: project
@@ -372,25 +386,22 @@ cv:
     place: "The World Bank · Global Poverty Department"
     summary: "A departmental programme joining microdata with geospatial data to read spatial income and welfare disparities."
     description: |
-      A departmental programme joining microdata with geospatial data to read spatial
-      income and welfare disparities. Co-initiated in the Global Poverty Department.
+      Co-initiated in the Global Poverty Department.
 
   - type: software
     title: "peaApp"
     place: "R Shiny application"
     summary: "Poverty and equity analysis, packaged so that a counterpart can run it without an analyst in the room."
     description: |
-      Poverty and equity analysis, packaged so that a counterpart can run it without an
-      analyst in the room. The country workflows are wrapped in an R Shiny application.
+      The country workflows are wrapped in an R Shiny application.
 
   - type: software
     title: "devCEQ"
     place: "R package"
     summary: "Scaling up fiscal microsimulation Shiny apps."
     description: |
-      Scaling up fiscal microsimulation Shiny apps. Deployed for Senegal, Côte d'Ivoire,
-      Benin, Indonesia, Romania, Türkiye, El Salvador and Armenia, with capacity building
-      in Indonesia and Georgia.
+      Deployed for Senegal, Côte d'Ivoire, Benin, Indonesia, Romania, Türkiye, El
+      Salvador and Armenia, with capacity building in Indonesia and Georgia.
       [worldbank.github.io/devCEQ](https://worldbank.github.io/devCEQ/)
 
   - type: software
@@ -398,8 +409,7 @@ cv:
     place: "R package"
     summary: "Project Targeting Index tooling: spatial and micro data combined to improve how development projects choose where to work."
     description: |
-      Project Targeting Index tooling: spatial and micro data combined to improve how
-      development projects choose where to work. Applied across Africa and Asia.
+      Applied across Africa and Asia.
       [worldbank.github.io/devPTIpack](https://worldbank.github.io/devPTIpack)
 
   - type: software
@@ -407,8 +417,7 @@ cv:
     place: "R package"
     summary: "Lassoing welfare dynamics — synthetic panel construction with machine learning, packaged for reuse."
     description: |
-      Lassoing welfare dynamics — synthetic panel construction with machine learning,
-      packaged for reuse. Written for the Poverty & Equity Global Practice.
+      Written for the Poverty & Equity Global Practice.
 
   # ---- flat lists --------------------------------------------------------------
 
