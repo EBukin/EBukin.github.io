@@ -316,17 +316,26 @@ cv:
     references: "Francesco N. Tubiello; Holger Matthey; Ekaterina Krivonos"
 
   - type: experience
-    period: "2010 — 2015"
-    title: "Earlier positions"
+    period: "2009 — 2014"
+    title: "Earlier positions and internships"
     place: "Pretoria · Kyiv · Twann"
     in: [full]
-    summary: "Internships and junior research posts in inclusive business models, transfer pricing and agricultural information systems."
+    summary: >-
+      Alongside my studies: research posts in Ukraine, household survey
+      fieldwork in South Africa, and six months on a Swiss vineyard.
     description: |
-      PGSARD, Pretoria — intern, inclusive business models impact assessment
-      (2014–2015). National University of State Tax Service of Ukraine — junior
-      researcher, transfer pricing in agricultural exports (2012–2013). NULES of
-      Ukraine — junior researcher, information systems (2010–2011). Kapfgut, Twann,
-      Switzerland — agricultural intern (2011).
+      - 2014, six months — *Intern and survey enumerator*, Postgraduate School
+        of Agriculture and Rural Development, University of Pretoria. Collected
+        household data for an impact assessment of inclusive business models.
+      - 2012–2013 — *Research assistant*, National University of the State Tax
+        Service of Ukraine. Studied transfer pricing in agricultural exports.
+      - 2011, six months — *Farm worker and intern*, Kapfgut wine estate, Twann,
+        Switzerland. Full-time vineyard and farm work.
+      - 2009–2011 — *Junior researcher*, Information Systems Department,
+        National University of Life and Environmental Sciences of Ukraine.
+
+    references: "Prof. Dr. Andrii Skrypnyk"
+
 
   # ---- education ---------------------------------------------------------------
 
@@ -371,43 +380,61 @@ cv:
   - type: education
     period: "2008 — 2013"
     title: "MSc & BSc, Economic Cybernetics — summa cum laude"
-    place: "National University of Life and Environmental Sciences of Ukraine"
+    place: "National University of Life and Environmental Sciences of Ukraine, Kyiv"
     place-short: "NULES of Ukraine"
     in: [short, full]
-    summary: "Agricultural economics and policy, applied mathematics and statistics, econometrics, and quantitative risk analysis."
-    description: |
-      MSc 70 ECTS, BSc 240 ECTS. Supervisor: Prof. Dr. Andrii Skrypnyk.
+    summary: >-
+      Five years of quantitative economics straight after school: applied
+      mathematics, optimization, statistics and econometrics, used for
+      agricultural policy at the macro level and farm management at the micro
+      level.
+    description: >-
+      BSc (240 ECTS) and MSc (70 ECTS). Contributed to several academic papers
+      published in Ukraine. Supervisor: Prof. Dr. Andrii Skrypnyk.
 
   # ---- teaching ----------------------------------------------------------------
+
+  - type: teaching
+    period: "2026"
+    title: "AI-assisted coding for economists"
+    place: "The World Bank"
+    in: [short, full]
+    summary: >-
+      Internal course on coding in R and Stata with AI and GitHub Copilot, taken
+      by more than 600 World Bank staff.
+    description: >-
+      Course materials are open at
+      [worldbank.github.io/ai4coding](https://worldbank.github.io/ai4coding/).
+      Establishing the course also included enabling the relevant software
+      bank-wide, namely enabling Quarto and Positron IDE as bank-wide software.
 
   - type: teaching
     period: "2020 — 2024"
     title: "Introduction to Statistics and Econometrics"
     place: "MSc · English · JLU Giessen"
     in: [full]
-    summary: "Foundations for social-science research: probability, estimation, inference, and the linear model."
-    description: |
-      Taught with applied agricultural and development data.
+    summary: >-
+      Compulsory course in the Transition Management master's programme, taught
+      in English to about 50 students a year.
+    description: >-
+      Brought a cohort from mixed academic backgrounds to a common baseline in
+      statistics for the social sciences, with a focus on statistical inference
+      and hypothesis testing.
 
   - type: teaching
     period: "2020 — 2024"
     title: "Advanced Econometrics in the Social Sciences"
     place: "MSc · English · JLU Giessen"
-    in: [full]
-    summary: "The mostly-harmless toolbox for getting from a cause to an effect."
-    description: |
-      Panel methods, instrumental variables, difference-in-differences, and regression
-      discontinuity.
+    in: [short, full]
+    summary: >-
+      Causal inference for a smaller, self-selected cohort: randomized
+      controlled trials, instrumental variables, difference-in-differences and
+      regression discontinuity.
+    description: >-
+      Built on the *Mostly Harmless Econometrics* toolbox, the course trained
+      students to think critically about cause and effect: which method fits a
+      question, how to apply it, and why.
 
-  - type: teaching
-    period: "2025 — present"
-    title: "AI-assisted coding for economists"
-    place: "World Bank Open Learning Campus"
-    in: [full]
-    summary: "A World Bank course on using AI responsibly in R and Stata workflows, taken by more than 600 staff."
-    description: |
-      An accompanying seminar series runs alongside it.
-      [worldbank.github.io/ai4coding](https://worldbank.github.io/ai4coding/)
 
   # ---- projects and software -----------------------------------------------------
   #
@@ -501,7 +528,7 @@ cv:
     in: [short, full]
     items:
       - "Ukrainian (mother tongue)"
-      - "German B2"
+      - "German C1"
       - "English C2"
       - "Russian C2"
       - "Italian A2"
