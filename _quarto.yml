@@ -22,6 +22,11 @@ website:
   description: "Land and poverty economist — World Bank, JLU Giessen."
   site-url: https://ebukin.github.io
   repo-url: https://github.com/EBukin/EBukin.github.io
+  # Writes _site/llms.txt (an index of every page, per llmstxt.org) and a plain
+  # Markdown twin of each page beside its HTML (cv.html -> cv.llms.md), stripped of
+  # navbar, footer and scripts, so a language model can read the site without
+  # parsing it. Needs `site-url:` above for the absolute links in the index.
+  llms-txt: true
   favicon: assets/logo.svg
   navbar:
     logo: assets/logo.svg

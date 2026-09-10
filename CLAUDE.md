@@ -363,6 +363,13 @@ copy of the local render. Its one non-obvious step is `bash scripts/fetch-fonts.
 Typst's defaults and the PDFs quietly stop matching the web design. There is no R or Python
 to set up — the site has no executable chunks.
 
+**LLM-readable copies.** `website: llms-txt: true` in `_quarto.yml` makes every render
+also write `_site/llms.txt` — an index of the pages in the llmstxt.org format — and a
+`*.llms.md` Markdown twin next to each page's HTML. Both are Quarto's own (the option
+exists in the CI pin 1.9.37 as well as locally), so there is nothing to maintain: a new
+page appears in both on its next render. They are project-level outputs, so a
+single-page render does not refresh them.
+
 **Navbar and footer links.** Profile links live in two places in `_quarto.yml`, written two
 different ways, and the difference is not cosmetic:
 
