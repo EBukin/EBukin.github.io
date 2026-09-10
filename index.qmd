@@ -65,13 +65,13 @@ six hundred staff.
 
 ::: {.section-split}
 ::: {.label}
-[Selected work]{.eyebrow}
+[Peer-reviewed articles]{.eyebrow}
 
 ***
 
 [All publications →](publications.qmd){.meta}
 :::
 ::: {.rail}
-{{< pubs selected=true >}}
+{{< pubs type=article >}}
 :::
 :::

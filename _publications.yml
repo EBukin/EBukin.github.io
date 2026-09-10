@@ -27,8 +27,9 @@
 #                 publisher — a note write-up, a project sub-page. Written
 #                 site-root-relative as authored, e.g. notes/kazakhstan-land-reform.qmd
 #   doi / url     `doi` becomes https://doi.org/…; `url` is used verbatim
-#   selected      true puts the entry on the home page. Nothing else reads it: the
-#                 two-page CV prints the whole `type: article` list, not a selection
+#   selected      read only by {{< pubs selected=true >}}, and no page makes that call at
+#                 present: the home page and both CVs print the whole `type: article`
+#                 list. Kept so that a selection can come back by changing one shortcode
 #
 # A row points at `page`, else `url`, else `doi` — most specific first, so adding a
 # `page:` takes the row over from the DOI. An entry with none of the three is not a
@@ -234,19 +235,19 @@ publications:
 
   # ---- theses ------------------------------------------------------------------
 
-  # EXAMPLE TEXT below — placeholder wording, rewrite it.
-  - type: thesis
-    year: 2026
-    title: "Land privatization and pasture quality in southern Kazakhstan: evaluating the impact of a natural experiment"
-    authors: ["Bukin, E."]
-    where: "PhD thesis, JLU Giessen"
-    summary: >-
-      Evaluates the impact of Kazakhstan's land privatization, a natural
-      experiment begun in the 1990s, on agricultural productivity and output and
-      on land quality, applying quasi-experimental methods to plot-level cadastral
-      records of land allocation and to remotely sensed data on climate,
-      vegetation and land cover. Supervisor: Prof. Dr. Martin Petrick.
-    # description: >-
+  # # EXAMPLE TEXT below — placeholder wording, rewrite it.
+  # - type: thesis
+  #   year: 2026
+  #   title: "Land privatization and pasture quality in southern Kazakhstan: evaluating the impact of a natural experiment"
+  #   authors: ["Bukin, E."]
+  #   where: "PhD thesis, JLU Giessen"
+  #   summary: >-
+  #     Evaluates the impact of Kazakhstan's land privatization, a natural
+  #     experiment begun in the 1990s, on agricultural productivity and output and
+  #     on land quality, applying quasi-experimental methods to plot-level cadastral
+  #     records of land allocation and to remotely sensed data on climate,
+  #     vegetation and land cover. Supervisor: Prof. Dr. Martin Petrick.
+  #   # description: >-
 
   - type: thesis
     year: 2015

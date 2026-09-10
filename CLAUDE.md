@@ -140,7 +140,7 @@ scopes the hover tint to `a.pub` / `summary.pub` so inert rows stay inert.
 Never hand-write a publication row. Add the entry to `_publications.yml` and it appears
 wherever the matching shortcode already runs (`publications.qmd`, `index.qmd`, and both
 CVs). Field documentation is in the file's header comment. Two things about which CV prints
-what: `selected: true` now reaches only `index.qmd` — both CVs select by `type:` instead —
+what: nothing reads `selected: true` at present — `index.qmd` and both CVs select by `type:`, so every peer-reviewed article is on the home page —
 and **neither CV prints `type: conference`**, deliberately; those entries live on
 `publications.qmd` alone. The full CV groups articles, working papers and work in progress,
 reports, and theses under `###` subheadings; the short CV prints the same groups minus
