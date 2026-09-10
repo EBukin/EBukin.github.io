@@ -36,12 +36,12 @@ website:
         href: cv.qmd
       - text: Publications
         href: publications.qmd
-      - text: Projects
-        href: projects.qmd
-      - text: Teaching
-        href: teaching.qmd
-      - text: Notes
-        href: notes.qmd
+      # - text: Projects
+      #   href: projects.qmd
+      # - text: Teaching
+      #   href: teaching.qmd
+      # - text: Notes
+      #   href: notes.qmd
     # Profile links, as icons at the top right. Quarto renders `tools:` as its own block
     # in the navbar; styles.scss orders it after the search field. This is the list to
     # extend when another platform is worth linking — one entry each, in the order they

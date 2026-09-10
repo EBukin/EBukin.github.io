@@ -117,12 +117,11 @@ publications:
     detail: "114, 105983"
     doi: "10.1016/j.landusepol.2022.105983"
 
-  # DOI still to be filled in — see the to-do list in README.md.
   - type: article
     year: 2021
     title: "Determinants of corporate social responsibility among farms in Russia and Kazakhstan: a multilevel approach using survey data"
     authors: ["Hajdu, A.", "Gagalyuk, T.", "Bukin, E.", "Petrick, M."]
-    journal: "IFAMAR"
+    journal: "International Food and Agribusiness Management Review"
     detail: "24(4), 697–716"
     doi: "10.22434/IFAMR2020.0197"
 
@@ -137,9 +136,9 @@ publications:
     summary: "Impact evaluation across 200 rayon-level units, combining administrative and geospatial data on agricultural production, development, and household well-being."
     description: >-
       Assembles thirty years of rayon-level administrative statistics alongside geospatial
-      measures of land cover, climate and livestock production, and traces how
-      graduall land allocation to the individualized ownership or use shaped
-      agricultural output, rural development, and household well-being.
+      measures of land cover, climate and livestock production, and traces how the
+      gradual allocation of land to individual ownership or use shaped agricultural
+      output, rural development, and household well-being.
 
   - type: wip
     year: 2026
@@ -152,7 +151,7 @@ publications:
   - type: working-paper
     year: 2024
     title: "Reforming land valuation and taxation in Ukraine: a path towards greater sustainability, fairness, and transparency"
-    authors: ["Deininger, K. W.", "Ali, D. A.", "Bukin, E.", "Martyn, A."]
+    authors: ["Deininger, K.", "Ali, D. A.", "Bukin, E.", "Martyn, A."]
     where: "Policy Research Working Paper Series"
     doi: "10.1596/1813-9450-10998"
 
@@ -187,7 +186,7 @@ publications:
     year: 2020
     title: "Rental price dynamics of state-owned agricultural land in Ukraine"
     authors: ["Kvartiuk, V.", "Herzfeld, T.", "Martyn, A.", "Bukin, E."]
-    where: "APD Report: ADP/ARP/01/2020"
+    where: "German-Ukrainian Agricultural Policy Dialogue, Agro Policy Report APD/APR/01/2020"
     url: "https://www.apd-ukraine.de/fileadmin/user_upload/Agrarpolitische_Berichte/Price_dynamics_eng.pdf"
 
   - type: report
@@ -201,23 +200,29 @@ publications:
     year: 2024
     title: "Quantifying effects of ownership fragmentation and use concentration on farmland sales and rental prices in Ukraine"
     authors: ["Bukin, E."]
-    where: "32nd ICAE"
+    where: "32nd ICAE, New Delhi"
 
   - type: conference
     year: 2024
     title: "The effects of privatization on pasture productivity in southern Kazakhstan"
     authors: ["Bukin, E.", "Robinson, S.", "Petrick, M."]
-    where: "32nd ICAE, and World Bank Land Conference, Washington DC"
+    where: "32nd ICAE, New Delhi"
+
+  - type: conference
+    year: 2024
+    title: "The effects of pasture privatization on vegetation in southern Kazakhstan: evidence from a rich cadastral dataset"
+    authors: ["Bukin, E.", "Robinson, S.", "Petrick, M."]
+    where: "World Bank Land Conference, Washington DC"
 
   - type: conference
     year: 2023
     title: "Poverty-reduction effects of in-kind exchange and subsistence farming in Ukraine"
     authors: ["Bukin, E.", "Petrick, M."]
-    where: "XVII EAAE Congress, Rennes"
+    where: "17th EAAE Congress, Rennes"
 
   - type: conference
     year: 2021
-    title: "Determinants of farmland rental prices under imperfect competition and transaction costs: the case of Ukraine"
+    title: "Determinants of farmland rental prices under imperfect competition and transaction costs: the case of the land rental market in Ukraine"
     authors: ["Bukin, E."]
     where: "16th EAAE Congress"
 
@@ -225,29 +230,29 @@ publications:
     year: 2019
     title: "Do land rental markets contribute to efficient land allocations? Ukrainian experience"
     authors: ["Kvartiuk, V.", "Bukin, E.", "Herzfeld, T."]
-    where: "Land and Poverty Conference"
+    where: "World Bank Land and Poverty Conference, Washington DC"
 
   # ---- theses ------------------------------------------------------------------
 
   # EXAMPLE TEXT below — placeholder wording, rewrite it.
   - type: thesis
     year: 2026
-    title: "Land privatization and pasture quality in southern Kazakhstan"
+    title: "Land privatization and pasture quality in southern Kazakhstan: evaluating the impact of a natural experiment"
     authors: ["Bukin, E."]
     where: "PhD thesis, JLU Giessen"
     summary: >-
-      Evaluating the impact of the land privatization natural experiment
-      started in 1990th on the agricultural productivity and output as well as
-      land quality in Kazakhstan using quasi-experimental methods on the plot-level
-      cadastral data on land allocation and remotely-sensed data on climate,
-      vegetation and land. Supervisor: Prof. Dr. Martin Petrick.
+      Evaluates the impact of Kazakhstan's land privatization, a natural
+      experiment begun in the 1990s, on agricultural productivity and output and
+      on land quality, applying quasi-experimental methods to plot-level cadastral
+      records of land allocation and to remotely sensed data on climate,
+      vegetation and land cover. Supervisor: Prof. Dr. Martin Petrick.
     # description: >-
 
   - type: thesis
     year: 2015
-    title: "Improving competitiveness of the Ukrainian sugar industry"
+    title: "Improving competitiveness of the Ukrainian sugar industry: economic instability and policy implications"
     authors: ["Bukin, E."]
-    url: https://libcatalog.ugent.be/permalink/32RUG_INST/klssi4/alma990022172910409161
+    url: "https://libcatalog.ugent.be/permalink/32RUG_INST/1hqfqgf/alma990022172910409161"
     where: "MSc thesis, Ghent University"
     summary: "Magna cum laude, Erasmus Mundus IMRD. Supervisor: Prof. Dr. Jeroen Buysse."
     description: >-
