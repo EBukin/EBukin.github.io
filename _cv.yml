@@ -155,20 +155,22 @@ cv:
     summary: >-
       As a land and poverty economist in the Global Poverty Department (WKPEP) I build
       client-ready solutions for poverty mapping and small area estimation,
-      introduced AI-assisted coding in R and Stata to economists Bank-wide and
-      conduct research on the impact evaluation with the Development Research
-      Group (DEC).
+      introduced AI-assisted coding in R and Stata to economists Bank-wide,
+      contributed to the fiscal insidences analysis and distributional analysis
+      of macro-shocks on households as well as conduct research on the
+      impact evaluation of land reforms with the Development Research Group (DEC).
 
-    description: >-
+    description: |
       Highlights:
 
       - *Land economics and Ukraine.* Research on the Ukrainian land market and
         technical assistance to the State Cadaster: consulting on the Land Parcel
         Identification System (LPIS) and on mass valuation of agricultural land, and
-        piloting the mass appraisal of urban land.
+        piloting the [mass appraisal of urban land](https://doi.org/10.1016/j.landusepol.2026.107976).
       - *Microdata analysis, small area estimation and poverty mapping.* Contributed
         to EU-wide poverty mapping and to missions to Poland, and trained the Polish
         national statistical office to run small area estimates of its own.
+        Developed R-Shiny based dashboard on extracting
       - *AI-assisted coding.* Led the Bank-wide initiative on AI-assisted coding in R
         and Stata. Launched a seminar series and internal training; the
         [ai4coding](https://worldbank.github.io/ai4coding/) course reached 600+ staff
@@ -176,10 +178,14 @@ cv:
         Bank-standard tools for reproducible research.
       - *GeoPov.* Co-initiated the GeoPov work programme on the nexus of remotely
         sensed geospatial and individual microdata, measuring the extent and the
-        determinants of spatial income and welfare disparities.
-      - *Micro Modelling Lab.* Engineered the data pipelines behind macro–micro fiscal
-        microsimulation modelling, and wrote the guidance for scaling and replicating
-        the method across countries.
+        determinants of spatial income and welfare disparities. Led development
+        of the [project targeting index](https://worldbank.github.io/devPTIpack/)
+        and its application across countries.
+      - *Micro Modelling Lab.* Engineered the data pipelines behind macro–micro
+        microsimulations, and [guided economists on scaling and replicating] (https://worldbank.github.io/mml/)
+        these method across countries. Created infrastructure for the R-Shiny
+        based dashboards for fiscal incidences analysis [devCEQ](https://worldbank.github.io/devCEQ/)
+        and supported countries in implementing this analysis.
 
     references: "Klaus W. Deininger; Carolina Diaz-Bonilla; Nobuo Yoshida"
 
@@ -196,7 +202,7 @@ cv:
       Master's-level courses in applied econometrics for the social sciences, and
       wrote my PhD thesis.
 
-    description: >-
+    description: |
       Highlights:
 
       - *Teaching.* The challenge was to equip an interdisciplinary cohort of
@@ -230,33 +236,46 @@ cv:
     place: "The World Bank · Poverty & Equity Global Practice"
     place-short: "The World Bank"
     in: [short, full]
-    summary: "Microeconomic analysis of fiscal incidence, geospatial analysis and country-level capacity building, delivered largely as reusable software."
-    description: |
-      R packages and Shiny applications let governments interrogate their own policy
-      simulations.
+    summary: >-
+      Microeconomic analysis of fiscal incidence using Commitment to Equity
+      Methodology (CEQ) and counterfactual simulation of how the alternative
+      fiscal and social spending policies may affect the welface and inequality
+      in the countries. Also I led geospatial data analysis for projects
+      targeting and country-level capacity building. Developed numerous R-Shiny
+      web-based tools for country-specific fiscal insidences analysis and
+      enabling clients and internal users to leverage large data and complex models.
 
-      - [devCEQ](https://worldbank.github.io/devCEQ/) — fiscal microsimulation apps for
-        Senegal, Côte d'Ivoire, Benin, Indonesia, Romania, Türkiye, El Salvador and
-        Armenia, with capacity building in Indonesia and Georgia.
-      - [devPTIpack](https://worldbank.github.io/devPTIpack) — Project Targeting Index
-        tools across Africa and Asia.
-      - Founded the [EU Poverty Mapping](https://github.com/wbEUPM) GitHub organisation
-        and its initial guidelines; land-economics research at DEC on transparent land
-        governance in Ukraine.
-      - Shiny tools for fragility and conflict risk monitoring (Iraq), spatial poverty
-        explorers (Latin America, Indonesia), rural diagnostics, and the lassopmm
-        package.
+    description: |
+      Highlights:
+
+      - *Fiscal incidence and distributional analysis.* developed the
+        [devCEQ](https://worldbank.github.io/devCEQ/) R package - infrastructure
+        for calsing up country-specific simulations. Developed country-specific
+        simulaitons for Senegal, Côte d'Ivoire, Benin, Indonesia, Romania,
+        Türkiye, El Salvador and Armenia. Performed capacity and trained
+        representatitves of hte governments on FIA in Indonesia and Georgia.
+      - *Project Targeting Index.* Developed infrastructure and methodolgoy for
+        the geospatial data analysis purposed in improving spatial targeting of
+        the development projects. [devPTIpack](https://worldbank.github.io/devPTIpack/)
+        R package serves as a tool more than 30 country-specific analysis on the
+        project targeting index (PTI).
+      - *Conducted research* on land-economics with the transparent land governance
+        in Ukraine project in DEC.
 
   - type: experience
     period: "Oct 2017 — Dec 2019"
     title: "Researcher"
     place: "IAMO · Halle (Saale), Germany"
     in: [short, full]
-    summary: "Land and labour relationships in agriculture, focusing on principal–agent problems and contractual relations in Ukraine."
-    description: |
-      Led the second wave of the IAMO Farm Survey in Kazakhstan and Central Asia —
-      questionnaire design, pre-testing, interviewer training, and QA/QC over 600
-      collected responses.
+    summary: >-
+      Led research on the land and labour relationships in agriculture,
+      focusing on principal–agent problems and contractual relations on land
+      in Ukraine and Central Asia. Led a second wave of the IAMO Farm Survey in
+      Kazakhstan and Asia — questionnaire design, pre-testing, interviewer training,
+      and QA/QC over 600 collected responses.
+    description: >-
+      - *Research results* on the land relations in Ukraine are published in
+        the series of articles and reports, see. [Publications](/publications.qmd).
 
   - type: experience
     period: "Sep 2014 — Jan 2018"
@@ -265,13 +284,36 @@ cv:
     place: "FAO of the United Nations · Rome"
     place-short: "FAO of the UN · Rome"
     in: [short, full]
-    summary: "Policy briefs for the WTO 11th Ministerial, bilateral trade analysis, and the meat chapter of the *OECD-FAO Agricultural Outlook 2017–2026*."
+    summary: >-
+      As a statistician I've contributed to development
+      of the Agri-Environmental Indicators and Emissions databases in FAOSTAT,
+      implemented statistical methodologies and quality assurance and control
+      protocols. As a trade economist, I have contributed to the
+      *OECD-FAO Agricultural Outlook 2017–2026* and maintained the Meat module of the
+      AGLINK-COSIMO partial equilibrium model as well as contributed to the
+      report writing.
+
     description: |
-      Maintained the AGLINK-COSIMO country modules, and contributed the Import Surges
-      and Price Depressions review and an R Shiny application for trade data
-      exploration. Earlier, as statistician, implemented IPCC-compliant GHG estimation
-      methodology and QA/QC protocols, and built the first emissions-intensities
-      database in FAOSTAT.
+      Highlights:
+
+      - *GHG emissions statistics.* Elaborated the GHG estimation methodology,
+        coded the computation in R (tidyverse, git) and built the QA/QC
+        validation; updated the agricultural inputs domains from UN Comtrade data.
+      - *AGLINK-COSIMO and the Outlook.* Maintained FAO's country modules of the
+        model — database and parameters — for the meat market, prepared the
+        2017–2026 meat projections, and co-wrote the meat
+        [commodity snapshot](https://openknowledge.fao.org/server/api/core/bitstreams/0636f93f-3e48-4a07-a4c8-712448752df9/content)
+        and commodity chapter. Supported the team's GAMS modelling and automated
+        its reporting in R Markdown.
+      - *Trade policy.* Developed FAO policy briefs for the WTO 11th Ministerial
+        Conference in Buenos Aires, contributed to FAO's review of import surges
+        and price depressions, and organised a workshop on WTO dispute settlement
+        in Kyiv.
+      - *Trade data tools.* Analysed UN Comtrade data for reporting and for trade
+        and nutrition research; built an R package, a teaching website and R Shiny
+        apps for managing and exploring trade data.
+
+    references: "Francesco N. Tubiello; Holger Matthey; Ekaterina Krivonos"
 
   - type: experience
     period: "2010 — 2015"
@@ -289,27 +331,42 @@ cv:
   # ---- education ---------------------------------------------------------------
 
   - type: education
-    period: "2024 — Dec 2026"
+    period: "2024 — Ongoing"
     title: "PhD, Agricultural Economics"
     place: "Justus Liebig University Giessen"
     place-short: "JLU Giessen"
     in: [short, full]
-    summary: "Land privatization and pasture quality in southern Kazakhstan, evaluating the impact of a natural experiment."
-    description: |
-      The thesis pairs cadastral records of land allocation with remotely sensed
-      measures of climate, vegetation and land cover. Supervisor: Prof. Dr. Martin
-      Petrick.
+    summary: >-
+      Thesis: “Land privatization and pasture quality in southern Kazakhstan:
+      evaluating the impact of a natural experiment.” Supervisor: Prof. Dr.
+      Martin Petrick.
+    description: >-
+      The thesis evaluates the impact of land privatization on pasture quality
+      with quasi-experimental methods, combining cadastral records with remotely
+      sensed measures of climate, vegetation and land cover. Part of it is
+      published as
+      [The effects of land privatization on pasture productivity in south-eastern Kazakhstan](https://doi.org/10.1016/j.landusepol.2025.107741)
+      in *Land Use Policy* (2025).
 
   - type: education
     period: "2013 — 2015"
     title: "MSc, Rural Development — magna cum laude"
     place: "Ghent · Humboldt Berlin · Pisa · Pretoria — Erasmus Mundus"
-    place-short: "Erasmus Mundus"
+    place-short: "Erasmus Mundus IMRD"
     in: [short, full]
-    summary: "130 ECTS across four universities under the Erasmus Mundus IMRD programme."
+    summary: >-
+      Erasmus Mundus International Master of Science in Rural Development
+      (130 ECTS): development economics and agricultural and development policy
+      analysis, applying empirical methods and econometrics.
     description: |
-      Thesis: "Improving Competitiveness of the Ukrainian Sugar Industry: Economic
-      Instability and Policy Implications." Supervisor: Prof. Dr. Jeroen Buysse.
+      A joint degree taught across four universities: Ghent University
+      (Belgium), the University of Pisa (Italy), the University of Pretoria
+      (South Africa) and Humboldt University of Berlin (Germany), where I
+      defended my thesis.
+
+      Thesis: “[Improving Competitiveness of the Ukrainian Sugar Industry: Economic Instability and Policy Implications](https://libcatalog.ugent.be/permalink/32RUG_INST/1hqfqgf/alma990022172910409161)”, which developed and
+      interpreted a partial equilibrium model in GAMS for agricultural policy
+      analysis. Supervisor: Prof. Dr. Jeroen Buysse.
 
   - type: education
     period: "2008 — 2013"
