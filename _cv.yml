@@ -210,7 +210,7 @@ cv:
 
   - type: experience
     period: "Feb 2025 — present"
-    title: "Economist, Global Poverty Department"
+    title: "Economist, Global Poverty (full-time)"
     title-short: "Economist (ETC2)"
     place: "The World Bank · Washington DC"
     in: [short, full]
@@ -251,7 +251,7 @@ cv:
 
   - type: experience
     period: "Jan 2020 — Dec 2024"
-    title: "Lecturer and researcher"
+    title: "Lecturer and researcher (part-time)"
     title-short: "Lecturer"
     place: "Justus Liebig University Giessen · Germany"
     in: [short, full]
@@ -279,18 +279,12 @@ cv:
         modeller and GAMS programmer, publishing in
         [Environmental and Resource Economics](https://link.springer.com/article/10.1007/s10640-022-00698-7)
         and [Environmental Research Letters](https://iopscience.iop.org/article/10.1088/1748-9326/ad34e9).
-      - *PhD thesis.* On Kazakhstan's land privatization reform, assessing the impact
-        of the policy on both agricultural production and land productivity. It pairs
-        cadastral records of land allocation and parcel geometry covering 100 million
-        hectares with remotely sensed measures of climate, vegetation and land cover,
-        and identifies the effect with quasi-experimental methods: staggered and
-        continuous-treatment difference-in-differences.
 
     references: "Prof. Dr. Martin Petrick"
 
   - type: experience
     period: "Mar 2018 — Jan 2025"
-    title: "Economist, short-term consultant"
+    title: "Economist, short-term consultant (part-time)"
     title-short: "Economist (STC)"
     place: "The World Bank · Poverty & Equity Global Practice"
     place-short: "The World Bank"
@@ -319,7 +313,7 @@ cv:
 
   - type: experience
     period: "Oct 2017 — Dec 2019"
-    title: "Researcher"
+    title: "Researcher (part-time)"
     place: "Leibniz Institute of Agricultural Development in Transition Economies (IAMO) · Halle (Saale), Germany"
     place-short: "IAMO · Halle (Saale), Germany"
     in: [short, full]
@@ -335,7 +329,7 @@ cv:
 
   - type: experience
     period: "Jun 2015 — Jan 2018"
-    title: "Trade economist and statistician"
+    title: "Trade economist and statistician (full-time)"
     title-short: "Trade economist / statistician"
     place: "Food and Agriculture Organization of the United Nations · Rome"
     place-short: "FAO · Rome"
@@ -597,7 +591,7 @@ cv:
     label: "Scholarships"
     in: [full]
     items:
-      - "IAMO Leibniz Association PhD Scholarship (2017–2020)"
+      - "IAMO Leibniz Association Scholarship (2017–2020)"
       - "Erasmus+ post-graduation internship grant (2015–2016)"
       - "Erasmus Mundus Scholarship, IMRD (2013–2015)"
       - "Zavtra.UA Scholarship, Victor Pinchuk Foundation (2011–2013)"
