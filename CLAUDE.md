@@ -245,11 +245,13 @@ entries have all gone. **Full is the default view**, so opening the page gives t
 already open; `cv.html#short` deep-links to the scan. Without JavaScript the buttons stay
 `hidden` and the page is simply the complete CV, every entry closed on its summary.
 
-**What is still written twice.** One thing: the `.lede` bio on `index.qmd`, which says the same
-as the `type: profile` entries in `_cv.yml` at a third length and in the first person. It is
-not generated, so a change of framing has to land there as well as in the record — check both
-rather than assuming one place. Everything else about the person — positions, degrees, courses,
-skills, languages, scholarships, papers, contact links, the CV profile paragraphs — is
+**The home-page bio is a profile too.** The `.lede` on `index.qmd` used to be the one piece of
+prose written twice; it is now `{{< cv type=profile in=ds-causal-short >}}`, so editing that
+entry in `_cv.yml` changes the home page. `cv.qmd` shows only the `full` and `short` profiles,
+so this one stays off the CV page. What the home page still writes by hand — `pagetitle:`,
+the eyebrows and the Current focus section — is page copy, and has to be checked against the
+record when the framing changes. Everything about the person — positions, degrees, courses,
+skills, languages, scholarships, papers, contact links, every profile paragraph — is
 written down once, in `_cv.yml` or `_publications.yml`. When the CV record changes, bump
 `cv-me.updated:` in `_cv.yml`; it is printed in both PDF footers and, via
 `{{< meta cv-me.updated >}}`, next to the download buttons on `cv.qmd`.

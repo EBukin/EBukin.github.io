@@ -33,7 +33,7 @@
 #   text        the About / Profile paragraph at the top of a CV, Markdown, one
 #               entry per variant chosen with `in:`. This is the last piece of CV
 #               prose that used to be written in the .qmd files. The index.qmd bio is
-#               still written separately, because it is written to a different length
+#               one of these too: the `ds-causal-short` profile
 #
 # A DATED ENTRY — type: experience | education | teaching | project | software
 #
@@ -84,6 +84,7 @@
 #
 #   cv.qmd              every entry, summary then description, and the short and full
 #                       profiles under Highlights; the buttons choose depth
+#   index.qmd           the ds-causal-short profile, as the lede under the name
 #   projects.qmd        type=project and type=software
 #   teaching.qmd        type=teaching
 #   cv/cv-full.qmd      in=full      show=full       summary + long text, references
@@ -157,36 +158,26 @@ cv:
       analysis code adopted by the Ukrainian State Cadaster. Fluent across survey,
       administrative and geospatial data (R, Stata, Python, Google Earth Engine).
 
-  # Written for vacancy 2026-JRC.B.2-SVQ-FGIV-003067 — Economic Analyst, tax modelling,
-  # Fiscal Policy Analysis Unit, JRC Seville. Printed by cv/Bukin-cv-JRC-tax-2026.qmd only.
-  #
-  # CONFIRM before sending: the CEQ sentence says "taxes and transfers" because that is
-  # what the CEQ method covers by construction. If the country models included VAT,
-  # excises or personal income tax explicitly, or simulated a VAT reform, name them —
-  # consumption taxes are the core of this post.
   - type: profile
     in: [JRC-tax-2026]
     text: |
-      Economist specialising in fiscal microsimulation and applied economic modelling,
-      with a decade of quantitative policy analysis at the World Bank, FAO and in
-      academia. Since 2018 I have built Commitment to Equity (CEQ) fiscal incidence models
-      for eight countries, Romania among them — measuring how taxes and transfers are
-      distributed across households, and simulating how alternative tax and spending
-      policies would change welfare and inequality — and developed devCEQ, the R package
-      that scales these microsimulations across countries. At the World Bank's
-      Micro-Modelling Lab I engineer the data pipelines that carry macroeconomic scenarios
-      down to household microdata. My tax-policy research includes the reform of land
-      valuation and land taxation in Ukraine (*Land Use Policy*, 2026), and earlier
-      analysis of transfer pricing in Ukrainian agricultural exports. I have also
-      maintained and applied equilibrium models in GAMS — FAO's AGLINK-COSIMO country
-      modules for the OECD-FAO Agricultural Outlook, and a CGE model for the BMBF-funded
-      ROCHADE project — and work across household, farm-level and administrative
-      microdata in R, Stata and Python. I have trained government counterparts and
-      national statistical offices, organised seminar series and workshops, and taught
-      econometrics at master's level.
+      Economist and data scientist specialising in fiscal microsimulation and applied
+      economic modelling, with a decade of quantitative policy analysis at the World
+      Bank, FAO and in academia. Since 2018 I have carried out Commitment to Equity (CEQ)
+      fiscal incidence analysis for countries in Africa, Asia, Europe and Latin America,
+      measuring how taxes and transfers shape equity and inequality across households.
+      I built R Shiny tools that simulate the counterfactual welfare effects of
+      alternative tax and spending policies, and developed devCEQ, the R package that
+      scales this analysis across countries. At the World Bank's Micro-Modelling Lab I
+      engineer the data pipelines that carry macroeconomic scenarios down to household
+      microdata. I have programmed in R, Stata, Python and GAMS for more than a decade,
+      and maintained partial and general equilibrium models: FAO's AGLINK-COSIMO country
+      modules for the OECD-FAO Agricultural Outlook 2017–2026, and a CGE model for the
+      BMBF-funded ROCHADE project. I have also worked with household, farm-level and
+      administrative microdata for poverty measurement and small area estimation,
+      trained government counterparts and national statistical offices, organised
+      seminar series and workshops, and taught econometrics at master's level.
 
-  # Its two-page counterpart. No CV prints it yet; the variant name differs from the
-  # long one's so that Bukin-cv-JRC-tax-2026.qmd prints one paragraph rather than both.
   - type: profile
     in: [JRC-tax-2026-short]
     text: |
@@ -196,6 +187,24 @@ cv:
       and taxation reform in Ukraine; equilibrium modelling in GAMS for the OECD-FAO
       Agricultural Outlook and a CGE project. Works across household, farm-level and
       administrative microdata (R, Stata, Python).
+
+  # Generic profile for data science and causal inference roles on micro-level data.
+  # It is the lede on index.qmd, which prints it with {{< cv type=profile
+  # in=ds-causal-short >}}; no CV prints it yet.
+  - type: profile
+    in: [ds-causal-short]
+    text: |
+      Applied economist and data scientist who turns messy micro-level data into causal
+      evidence, and that evidence into tools that others use. For more than a decade,
+      at the World Bank, FAO and in academia, I have measured how households, farms and
+      land markets respond to policy, pairing quasi-experimental methods with survey,
+      administrative and satellite data. I then build the analysis to scale:
+      open-source R packages, solutions implemented by governments and national
+      statistical offices, and training for the people who carry them forward.
+      Innovation drives my work, and I bring it into the teams and work of my
+      colleagues: helping them put generative AI to use in coding and analysis, adopt
+      modern, reproducible workflows, and build the capacity to keep innovating on
+      their own.
 
   # ---- experience --------------------------------------------------------------
 

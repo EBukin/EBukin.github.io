@@ -7,8 +7,7 @@ toc: false
 
 ::: {.hero}
 ::: {}
-[Land and Poverty Economist @ the World Bank &nbsp;/&nbsp;]{.eyebrow}
-
+[Land and Poverty Economist @ the World Bank]{.eyebrow}\
 [PhD Candidate · JLU Giessen]{.eyebrow}
 
 # Eddie Bukin {.display-name}
@@ -17,11 +16,7 @@ toc: false
 :::
 
 ::: {.lede}
-Economist working where poverty, fiscal policy and land meet. At the World Bank I build
-the tools behind distributional analysis — fiscal incidence microsimulations, poverty
-maps, and GeoPov's pairing of geospatial and micro data. My research evaluates land
-markets and land reform in Ukraine and Kazakhstan, from peer-reviewed work on farmland
-valuation and taxation to analysis code adopted by the Ukrainian State Cadaster.
+{{< cv type=profile in=ds-causal-short >}}
 :::
 
 ::: {.btn-row style="padding-top:0.6rem"}
