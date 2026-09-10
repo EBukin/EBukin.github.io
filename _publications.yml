@@ -75,12 +75,12 @@ publications:
     detail: "158, 107741"
     doi: "10.1016/j.landusepol.2025.107741"
     selected: true
-    summary: "Satellite evidence that privatized pasture recovers faster than land left in common use."
-    description: >-
-      Uses the staggered rollout of pasture privatization in south-eastern Kazakhstan as a
-      natural experiment, pairing parcel-level tenure records with a long run of remotely
-      sensed vegetation indices. Privatized parcels show measurably higher productivity
-      than comparable parcels still held in common, with the gap widening over time.
+    # summary: "Satellite evidence that privatized pasture recovers faster than land left in common use."
+    # description: >-
+    #   Uses the staggered rollout of pasture privatization in south-eastern Kazakhstan as a
+    #   natural experiment, pairing parcel-level tenure records with a long run of remotely
+    #   sensed vegetation indices. Privatized parcels show measurably higher productivity
+    #   than comparable parcels still held in common, with the gap widening over time.
 
   - type: article
     year: 2024

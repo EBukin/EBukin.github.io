@@ -29,6 +29,24 @@ $line-height-base:       1.6;
 // rows by this much above and below. One number, so the three cannot drift apart.
 $row-pad:      0.65rem;
 
+// The prose under a row — a summary line and the description that opens beneath it,
+// in the CV and the publication list alike. Both stop at $measure, and it is in rem
+// rather than ch so that the serif .pub .sum and the sans description above and below
+// each other end on the same edge: ch is the width of a "0" in the element's own face
+// and size, so a shared 84ch would still give two different lines.
+//
+// $detail-size is the description's size in both lists, and it is set against the
+// smaller-looking of the two summaries. Spectral's x-height is 0.450 em and Plex's
+// 0.516, so a .pub .sum at 0.98rem reads as Plex at 0.855rem; anything above that and
+// the long text looks larger than the short text it continues.
+$measure:      45rem;
+$detail-size:  0.85rem;
+// Its line spacing and the gap between its paragraphs and lists. The leading is the
+// summary's own (1.5 on .pub .sum, 1.55 on .timeline .sum), so the text does not loosen
+// when the row opens.
+$detail-leading: 1.5;
+$detail-gap:     0.35rem;
+
 // The one content measure. Every page's <main> is exactly this wide, and the navbar
 // and the footer line up with it, so the six pages share one column and one centre.
 // See the "page frame" rules below for why this cannot be left to Quarto's own grid.
@@ -530,8 +548,9 @@ main.content .pub .ttl a:hover { color: $accent; }
 .pub .aut .me { color: $ink; font-style: normal; }
 // The summary is prose, not more citation metadata, so it is set apart by family
 // rather than by size: serif like the title, but small and neutral in weight and
-// colour so it never competes with it. No measure cap — main.content already bounds
-// the column, and the line reads as cramped when it wraps at half the row's width.
+// colour so it never competes with it. Capped at $measure, the same edge as the
+// .pub-more under it; at the site's frame the column is narrower than that anyway, so
+// the cap only matters if $frame grows.
 .pub .sum {
   display: block;
   margin-top: 0.5rem;
@@ -540,6 +559,7 @@ main.content .pub .ttl a:hover { color: $accent; }
   font-size: 0.98rem;
   line-height: 1.5;
   color: #4A4E52;
+  max-width: $measure;
 }
 
 // An entry with a long description collapses behind a +, reusing the timeline's
@@ -575,12 +595,17 @@ details.pub-entry[open] .plus { transform: rotate(45deg); }
 // The collapsed .sum stays visible, exactly as it does in the CV: neither record lets
 // a `description:` open by repeating its `summary:`, so the two lines are two different
 // sentences and hiding either loses one of them.
+//
+// Left, it is indented past the year column; right, past the + column and its gap, so
+// the prose fills exactly the cell the .sum above it sits in. The cap goes on the
+// children rather than the box, so the padding is never counted against $measure.
 .pub-more {
-  padding: 0.5rem 0 $row-pad calc(52px + 1.5rem);
-  max-width: 84ch;
+  padding: 0.5rem calc(20px + 1.5rem) $row-pad calc(52px + 1.5rem);
+  font-size: $detail-size;
 }
-.pub-more p, .pub-more li { font-size: 0.94rem; line-height: 1.65; }
-.pub-more p, .pub-more ul, .pub-more ol { margin-bottom: 0.5rem; }
+.pub-more > * { max-width: $measure; }
+.pub-more p, .pub-more li { line-height: $detail-leading; }
+.pub-more p, .pub-more ul, .pub-more ol { margin-bottom: $detail-gap; }
 .pub-more > *:last-child { margin-bottom: 0; }
 
 // No room to indent past the year column at this width.
@@ -677,14 +702,20 @@ details.cv-entry, details.pub-entry { margin-bottom: 0; }
 .timeline .org { font-size: 0.86rem; color: $muted; display: block; margin-top: 0.08rem; }
 .timeline .plus { font-size: 1.2rem; color: $accent; line-height: 1; justify-self: end; transition: transform 0.18s ease; }
 .timeline details[open] .plus { transform: rotate(45deg); }
-// 84ch, not the column's full width: with a narrow label the content column runs to
-// well over a hundred characters, and the eye loses the line coming back.
-.timeline .body { padding-top: 0.5rem; max-width: 84ch; }
-.timeline .body p, .timeline .body li { font-size: 0.94rem; line-height: 1.65; }
+// The body fills the same cell as the .sum above it: padded right by the + column and
+// the summary grid's gap, and each paragraph or list capped at the same $measure, so
+// the short text and the long text end on one edge. The cap sits on the children, not
+// the box, so the padding is never counted against it.
+.timeline .body {
+  padding: 0.5rem calc(20px + 1.25rem) 0 0;
+  font-size: $detail-size;
+}
+.timeline .body > * { max-width: $measure; }
+.timeline .body p, .timeline .body li { line-height: $detail-leading; }
 // Bootstrap gives paragraphs and lists a 1rem bottom margin; on the last one in an open
 // entry that is pure dead space above the next row's rule — the same thing .pub-more
 // zeroes out for a publication.
-.timeline .body p, .timeline .body ul, .timeline .body ol { margin-bottom: 0.5rem; }
+.timeline .body p, .timeline .body ul, .timeline .body ol { margin-bottom: $detail-gap; }
 .timeline .body > *:last-child { margin-bottom: 0; }
 
 // The collapsed row's one sentence — the same idea as .pub .sum, but sans-serif and
@@ -695,7 +726,7 @@ details.cv-entry, details.pub-entry { margin-bottom: 0; }
   font-size: 0.9rem;
   line-height: 1.55;
   color: #33363A;
-  max-width: 70ch;
+  max-width: $measure;
 }
 // It stays put when the entry opens. _cv.yml requires `description:` to carry what the
 // summary does not, so the long text below continues the line rather than restating it,
@@ -789,7 +820,7 @@ div.quarto-post .listing-description p {
   font-size: 0.9rem;
   line-height: 1.55;
   color: #33363A;
-  max-width: 70ch;
+  max-width: $measure;
   margin: 0;
 }
 div.quarto-post .listing-categories {

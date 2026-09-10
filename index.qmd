@@ -17,11 +17,11 @@ toc: false
 :::
 
 ::: {.lede}
-Land and poverty economist with a decade of research and operational experience in
-Ukrainian land markets, institutions, and valuation. I combine rigorous impact evaluation
-with the practical business of making land data usable — from peer-reviewed work on
-farmland pricing and rental-market efficiency to analysis code adopted by the Ukrainian
-State Cadaster as the basis for regression-based agricultural land valuation.
+Economist working where poverty, fiscal policy and land meet. At the World Bank I build
+the tools behind distributional analysis — fiscal incidence microsimulations, poverty
+maps, and GeoPov's pairing of geospatial and micro data. My research evaluates land
+markets and land reform in Ukraine and Kazakhstan, from peer-reviewed work on farmland
+valuation and taxation to analysis code adopted by the Ukrainian State Cadaster.
 :::
 
 ::: {.btn-row style="padding-top:0.6rem"}

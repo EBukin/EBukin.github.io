@@ -38,6 +38,13 @@ print, so there is one place to bump when the record changes. -->
 
 ## Highlights {.split}
 
+<!-- The generic profiles from _cv.yml, one per view: the switcher shows the full one
+     under Full and the short one under Short. Job-specific profiles never appear here,
+     because both calls filter on a public variant. -->
+{{< cv type=profile in=full >}}
+
+{{< cv type=profile in=short >}}
+
 :::
 :::
 

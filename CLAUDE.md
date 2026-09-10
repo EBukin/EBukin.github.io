@@ -55,6 +55,17 @@ has not; fixing it at zero means `##` in the source is level 2 in the show rules
 Quarto would otherwise decide. `index.qmd` and `cv.qmd` link to `cv/cv-*.pdf`, so anything
 short of a full `quarto render` leaves those links dead in `_site/`.
 
+Beside those two public CVs sit **application CVs**, one per vacancy —
+`cv/Bukin-cv-JRC-tax-2026.qmd` so far. Each is named `Bukin-cv-<vacancy>.qmd` for the PDF it
+becomes, because that PDF goes out as an attachment as it is. Each is `cv-full.qmd` with its `## About` filled by a
+profile tagged with a job-specific variant (`in: [JRC-tax-2026]`) instead of `in: [full]`;
+every other section is the full CV, so a correction to the record reaches them too. They
+render with everything else and are deleted from `_site/cv/` by the publish workflow before
+upload (see Publishing), so they are never on the live site. Do not try to keep them out of
+the render with `project: render:` instead: a file excluded there is rendered *outside* the
+project when named on the command line, loses the `cv` and `pubs` shortcodes, and comes out
+as an empty PDF beside its source.
+
 **The PDF design** is `cv/_typst-style.typ`, and it is a plain-Typst adaptation of
 [modern-cv](https://typst.app/universe/package/modern-cv/) — itself a port of Awesome-CV:
 centred name over one contact line, accent-coloured section headings each ruled off, every
@@ -207,7 +218,12 @@ Three shapes of entry, told apart by `type:`:
 
 `in:` is the analogue of `selected:` in `_publications.yml`: it names the variants an entry
 belongs to (`short` and `full`; omitted means both). The PDFs filter on it with
-`in=`, so a CV variant is a selection, not a separate copy. Nothing is sorted — `period:` is a
+`in=`, so a CV variant is a selection, not a separate copy. Profiles are the one place a
+variant may be neither: an application CV asks for its own name (`in=JRC-tax-2026`), and a
+two-page counterpart it does not print yet takes a different name (`JRC-tax-2026-short`) so
+that the long CV gets one paragraph rather than both. `cv.qmd` prints the `full` and `short`
+profiles under Highlights, one per view, and filters on those two names — which is what keeps
+an application profile off the web page. Nothing is sorted — `period:` is a
 display string, not a date — so entries come out in file order and reordering the CV means
 moving lines in `_cv.yml`.
 
@@ -233,7 +249,7 @@ already open; `cv.html#short` deep-links to the scan. Without JavaScript the but
 as the `type: profile` entries in `_cv.yml` at a third length and in the first person. It is
 not generated, so a change of framing has to land there as well as in the record — check both
 rather than assuming one place. Everything else about the person — positions, degrees, courses,
-skills, languages, scholarships, papers, contact links, the two CV profile paragraphs — is
+skills, languages, scholarships, papers, contact links, the CV profile paragraphs — is
 written down once, in `_cv.yml` or `_publications.yml`. When the CV record changes, bump
 `cv-me.updated:` in `_cv.yml`; it is printed in both PDF footers and, via
 `{{< meta cv-me.updated >}}`, next to the download buttons on `cv.qmd`.
@@ -358,10 +374,13 @@ build output, `_site/` stays gitignored. **Merging into `main` publishes** — r
 first, and treat a `(W) cv:` line as a blocker rather than shipping it.
 
 The workflow pins Quarto 1.9.37 while local is 1.10.x, so CI is the second opinion, not a
-copy of the local render. Its one non-obvious step is `bash scripts/fetch-fonts.sh` before
+copy of the local render. It has two non-obvious steps. `bash scripts/fetch-fonts.sh` before
 `quarto render`: `fonts/` is gitignored, and without that step the Typst builds fall back to
-Typst's defaults and the PDFs quietly stop matching the web design. There is no R or Python
-to set up — the site has no executable chunks.
+Typst's defaults and the PDFs quietly stop matching the web design. And after it, "Keep
+application CVs off the site" deletes every PDF in `_site/cv/` except `cv-full.pdf` and
+`cv-short.pdf` — an allowlist, so a new application CV is covered whatever it is called,
+and a new *public* CV has to be added to it. There is no R or Python to set up — the site
+has no executable chunks.
 
 **LLM-readable copies.** `website: llms-txt: true` in `_quarto.yml` makes every render
 also write `_site/llms.txt` — an index of the pages in the llmstxt.org format — and a

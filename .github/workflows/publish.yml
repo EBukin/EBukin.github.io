@@ -40,6 +40,15 @@ jobs:
       - name: Render
         run: quarto render
 
+      # Application CVs (cv/Bukin-cv-JRC-tax-2026.qmd and any like it) are built by the
+      # render above but written for one vacancy each, so they are not published.
+      # An allowlist rather than a name pattern, so a new one is covered whatever it
+      # is called. They cannot be left out of the render instead: a file excluded
+      # from `project: render:` is rendered outside the project and loses the
+      # shortcodes.
+      - name: Keep application CVs off the site
+        run: find _site/cv -type f -name '*.pdf' ! -name 'cv-full.pdf' ! -name 'cv-short.pdf' -print -delete
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

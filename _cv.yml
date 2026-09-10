@@ -69,7 +69,8 @@
 #   in            which CV variants include the entry: short or full.
 #                 The analogue of `selected:` in _publications.yml. Omitted means both.
 #                 On the web page this becomes a data-in attribute and the Short / Full
-#                 buttons filter on it
+#                 buttons filter on it. A profile may instead name a job-specific
+#                 variant, such as JRC-tax-2026 — see the note above the profiles
 #
 # Markdown is parsed in every field, so a subscript is written `CO~2~` once and comes
 # out as <sub>2</sub> in HTML and CO#sub[2] in Typst. Never write format-specific
@@ -81,11 +82,14 @@
 # ---------------------------------------------------------------------------------
 # Which page prints how much:
 #
-#   cv.qmd              every entry, summary then description; the buttons choose depth
+#   cv.qmd              every entry, summary then description, and the short and full
+#                       profiles under Highlights; the buttons choose depth
 #   projects.qmd        type=project and type=software
 #   teaching.qmd        type=teaching
 #   cv/cv-full.qmd      in=full      show=full       summary + long text, references
 #   cv/cv-short.qmd     in=short     show=summary    one sentence per entry
+#   cv/Bukin-cv-JRC-tax-2026.qmd     as cv-full.qmd, but its About is the
+#                                    JRC-tax-2026 profile. Never deployed
 #
 # The two-page CV prints languages but no skills, which is why `type: skills` is
 # `in: [full]` — and why the Short view of cv.qmd hides that row too.
@@ -115,34 +119,83 @@ cv:
   #
   # One paragraph per variant, written to its own length. Nothing else in the CVs is
   # prose about the person.
+  #
+  # `full` and `short` are the generic pair: the About / Profile paragraph of the two
+  # public PDFs, and the Highlights paragraph on cv.qmd. A profile tagged with any other
+  # variant name is written for one application and is printed only by the CV file that
+  # asks for that name. No page on the site does, and the publish workflow deletes
+  # every PDF but the two public ones before it deploys, so those CVs are built by
+  # every render and published by none.
 
   - type: profile
     in: [full]
     text: |
-      Land and poverty economist with a decade of research and hands-on operational
-      experience in Ukrainian land markets, institutions, and valuation. My work combines
-      rigorous impact evaluation with the practical business of making land data usable:
-      published peer-reviewed research on farmland pricing, rental-market efficiency, and
-      land valuation and taxation in Ukraine, and direct technical assistance to the State
-      Cadaster — including analysis code adopted as the basis for regression-based
-      agricultural land valuation. My current pipeline extends this into urban mass
-      valuation (real estate listing data combined with Cadaster and Registry of Rights
-      records) and a large-scale impact evaluation of land reform in Kazakhstan. I work
-      fluently across survey, administrative, and geospatial data (R, Python, Google Earth
-      Engine, PostGIS), and have consulted on the Land Parcel Identification System and
-      mass valuation of agricultural land. Alongside my research I have several years'
-      experience teaching applied econometrics and impact-evaluation methods and building
-      analytical capacity with clients and national statistical offices.
+      Economist working where poverty, fiscal policy and land meet, with a decade of
+      quantitative policy analysis at the World Bank, FAO and in academia. At the World
+      Bank I build the tools behind poverty and distributional analysis: Commitment to
+      Equity (CEQ) fiscal incidence microsimulations for eight countries and the devCEQ R
+      package that scales them, the data pipelines that link macroeconomic scenarios to
+      household microdata, small area estimates for poverty mapping, and GeoPov, which
+      joins geospatial and micro data to measure spatial welfare disparities. My research
+      is in land economics and impact evaluation: peer-reviewed work on farmland markets,
+      valuation and taxation in Ukraine — including analysis code adopted by the State
+      Cadaster as the basis for regression-based agricultural land valuation — and a
+      quasi-experimental evaluation of land privatization in Kazakhstan. I have built
+      equilibrium models in GAMS for the OECD-FAO Agricultural Outlook and a CGE project,
+      and work across survey, administrative and geospatial data in R, Stata, Python and
+      Google Earth Engine. I have taught econometrics at master's level, trained
+      government counterparts and national statistical offices, and built a course on
+      AI-assisted coding taken by more than 600 World Bank staff.
 
   - type: profile
     in: [short]
     text: |
-      Land and poverty economist with a decade of research and operational experience in
-      Ukrainian land markets, institutions, and valuation. Peer-reviewed work on farmland
-      pricing, rental-market efficiency, and land valuation and taxation; analysis code
-      adopted by the Ukrainian State Cadaster as the basis for regression-based
-      agricultural land valuation. Fluent across survey, administrative, and geospatial
-      data (R, Python, Google Earth Engine, PostGIS).
+      Economist working on poverty, fiscal policy and land, with a decade of quantitative
+      policy analysis at the World Bank, FAO and in academia. Builds fiscal incidence
+      microsimulations (CEQ) and poverty-mapping tools; peer-reviewed research on land
+      markets, valuation and taxation in Ukraine and on land reform in Kazakhstan, with
+      analysis code adopted by the Ukrainian State Cadaster. Fluent across survey,
+      administrative and geospatial data (R, Stata, Python, Google Earth Engine).
+
+  # Written for vacancy 2026-JRC.B.2-SVQ-FGIV-003067 — Economic Analyst, tax modelling,
+  # Fiscal Policy Analysis Unit, JRC Seville. Printed by cv/Bukin-cv-JRC-tax-2026.qmd only.
+  #
+  # CONFIRM before sending: the CEQ sentence says "taxes and transfers" because that is
+  # what the CEQ method covers by construction. If the country models included VAT,
+  # excises or personal income tax explicitly, or simulated a VAT reform, name them —
+  # consumption taxes are the core of this post.
+  - type: profile
+    in: [JRC-tax-2026]
+    text: |
+      Economist specialising in fiscal microsimulation and applied economic modelling,
+      with a decade of quantitative policy analysis at the World Bank, FAO and in
+      academia. Since 2018 I have built Commitment to Equity (CEQ) fiscal incidence models
+      for eight countries, Romania among them — measuring how taxes and transfers are
+      distributed across households, and simulating how alternative tax and spending
+      policies would change welfare and inequality — and developed devCEQ, the R package
+      that scales these microsimulations across countries. At the World Bank's
+      Micro-Modelling Lab I engineer the data pipelines that carry macroeconomic scenarios
+      down to household microdata. My tax-policy research includes the reform of land
+      valuation and land taxation in Ukraine (*Land Use Policy*, 2026), and earlier
+      analysis of transfer pricing in Ukrainian agricultural exports. I have also
+      maintained and applied equilibrium models in GAMS — FAO's AGLINK-COSIMO country
+      modules for the OECD-FAO Agricultural Outlook, and a CGE model for the BMBF-funded
+      ROCHADE project — and work across household, farm-level and administrative
+      microdata in R, Stata and Python. I have trained government counterparts and
+      national statistical offices, organised seminar series and workshops, and taught
+      econometrics at master's level.
+
+  # Its two-page counterpart. No CV prints it yet; the variant name differs from the
+  # long one's so that Bukin-cv-JRC-tax-2026.qmd prints one paragraph rather than both.
+  - type: profile
+    in: [JRC-tax-2026-short]
+    text: |
+      Economist specialising in fiscal microsimulation and applied economic modelling.
+      CEQ fiscal incidence models of taxes and transfers for eight countries since 2018,
+      and the devCEQ R package that scales them; published research on land valuation
+      and taxation reform in Ukraine; equilibrium modelling in GAMS for the OECD-FAO
+      Agricultural Outlook and a CGE project. Works across household, farm-level and
+      administrative microdata (R, Stata, Python).
 
   # ---- experience --------------------------------------------------------------
 
@@ -169,7 +222,6 @@ cv:
       - *Microdata analysis, small area estimation and poverty mapping.* Contributed
         to EU-wide poverty mapping and to missions to Poland, and trained the Polish
         national statistical office to produce its own small area estimates.
-        Developed R-Shiny based dashboard on extracting
       - *AI-assisted coding.* Launched a seminar series and internal training,
         including the [ai4coding](https://worldbank.github.io/ai4coding/) course,
         which reached 600+ staff through the Open Learning Campus; introduced
