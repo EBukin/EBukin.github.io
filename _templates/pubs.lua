@@ -128,8 +128,12 @@ local function row_content(entry, me, short, show, title)
   local citation = { authors }
   for _, part in ipairs(venue_parts(entry)) do citation[#citation + 1] = part end
 
+  -- Spaces between the cells, as in cv.lua: never seen on the page, where each one
+  -- is a block or a grid cell, but they keep "2025The effects of…" apart in the
+  -- plain-text copies of the page (the llms.txt Markdown, the search index).
   local body = pandoc.List{
     pandoc.Span(title, pandoc.Attr('', { 'ttl' })),
+    pandoc.Space(),
     pandoc.Span(join(citation, MIDDOT), pandoc.Attr('', { 'aut' })),
   }
 
@@ -137,11 +141,13 @@ local function row_content(entry, me, short, show, title)
   -- gets its own line under the authors rather than another ` · ` fragment.
   local summary = summary_of(entry, show)
   if summary then
+    body:insert(pandoc.Space())
     body:insert(pandoc.Span(summary, pandoc.Attr('', { 'sum' })))
   end
 
   return pandoc.List{
     pandoc.Span(inls(entry.year), pandoc.Attr('', { 'yr' })),
+    pandoc.Space(),
     pandoc.Span(body),
   }
 end
@@ -168,7 +174,8 @@ local function web_row(entry, me, short, show)
   if url then title = pandoc.Inlines{ pandoc.Link(title, url, '') } end
 
   local content = row_content(entry, me, short, show, title)
-  content:insert(pandoc.Span({ pandoc.Str('+') }, pandoc.Attr('', { 'plus' })))
+  -- Empty: styles.scss draws the + with `::before`, as it does for the CV's rows.
+  content:insert(pandoc.Span({}, pandoc.Attr('', { 'plus' })))
 
   return pandoc.RawBlock('html', table.concat({
     '<details class="pub-entry">',

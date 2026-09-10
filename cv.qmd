@@ -12,10 +12,14 @@ include-after-body: _templates/cv-views.html
 
 ::: {.cv-head}
 ::: {.cv-controls}
+<!-- Buttons do nothing in the llms.txt Markdown copy of this page, which is the
+     whole CV already, so they are left out of it. -->
+::: {.content-hidden when-format="llms-txt"}
 <div class="cv-views" role="group" aria-label="How much of the CV to show" hidden>
 <button type="button" class="btn-view" data-view="short" aria-pressed="false">Short</button>
 <button type="button" class="btn-view" data-view="full" aria-pressed="true">Full</button>
 </div>
+:::
 
 ::: {.cv-downloads}
 {{< cv-pdf variant=short >}} {{< cv-pdf variant=full >}}

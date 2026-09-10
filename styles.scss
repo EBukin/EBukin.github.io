@@ -561,6 +561,11 @@ details.pub-entry > summary.pub::-webkit-details-marker { display: none; }
 }
 details.pub-entry[open] .plus { transform: rotate(45deg); }
 
+// The + is drawn here rather than written into the markup by pubs.lua and cv.lua, so
+// it is decoration and not text: the llms.txt Markdown copy of a page, and the search
+// index, would otherwise end every disclosing row with a stray "+".
+.pub .plus::before, .timeline .plus::before { content: "+"; }
+
 // Open, the description drops into the row, which is what a CV entry does. It used
 // to open sideways instead, into a hairline-ruled aside on the right — so the same +
 // meant two different movements depending on which list the reader was in. The

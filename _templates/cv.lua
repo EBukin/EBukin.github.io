@@ -230,25 +230,24 @@ end
 -- `grid-template-columns: 1fr 20px` grid: all the text belongs to the first cell and
 -- the + to the second.
 local function web_entry(entry)
+  -- The parts are joined by a space. On the page it is never seen — every part is
+  -- `display: block` — but the plain-text copies of the page (the llms.txt Markdown,
+  -- the search index) would otherwise run "Feb 2025 — presentEconomist" together.
   local head = pandoc.List{}
-  if entry.period then
-    head:insert(pandoc.Span(inls(entry.period), pandoc.Attr('', { 'when' })))
+  local function part(inlines, class)
+    if #head > 0 then head:insert(pandoc.Space()) end
+    head:insert(pandoc.Span(inlines, pandoc.Attr('', { class })))
   end
-  if entry.title then
-    head:insert(pandoc.Span(inls(entry.title), pandoc.Attr('', { 'role' })))
-  end
-  if entry.place then
-    head:insert(pandoc.Span(inls(entry.place), pandoc.Attr('', { 'org' })))
-  end
+  if entry.period then part(inls(entry.period), 'when') end
+  if entry.title  then part(inls(entry.title),  'role') end
+  if entry.place  then part(inls(entry.place),  'org')  end
 
   -- The row's short form. `.sum` is the class pubs.lua already uses for the same idea;
   -- styles.scss gives it a .timeline variant. It stays visible when the entry opens,
   -- because _cv.yml requires `description:` to carry what it does not say: the body
   -- below continues the line rather than replacing it.
   local summary = summary_of(entry, 'summary')
-  if summary then
-    head:insert(pandoc.Span(summary, pandoc.Attr('', { 'sum' })))
-  end
+  if summary then part(summary, 'sum') end
 
   -- The web page always carries the whole story; the switcher decides what shows.
   local body    = description_of(entry, 'full')
@@ -270,7 +269,9 @@ local function web_entry(entry)
     pandoc.RawBlock('html', '<summary>'),
     pandoc.Plain{
       pandoc.Span(head),
-      pandoc.Span({ pandoc.Str('+') }, pandoc.Attr('', { 'plus' })),
+      -- Empty: styles.scss draws the + with `::before`, so it is decoration rather
+      -- than text and stays out of the page's plain-text copies.
+      pandoc.Span({}, pandoc.Attr('', { 'plus' })),
     },
     pandoc.RawBlock('html', '</summary>'),
     pandoc.Div(body, pandoc.Attr('', { 'body' })),
