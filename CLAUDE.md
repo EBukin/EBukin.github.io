@@ -237,8 +237,12 @@ defect. An entry with no `description:` at all is fine, and comes out as a plain
 no `+`, because there would be nothing behind it.
 
 `cv.qmd` is now section headings and `{{< cv >}}` calls — none of the raw `<details>` markup it
-used to carry is left in the file. The Short / Full buttons are the only JavaScript on the
-site: `_templates/cv-views.html`, pulled in by that page's `include-after-body:`. It renders
+used to carry is left in the file. The Short / Full buttons are the only JavaScript the site
+writes itself (the rest is Quarto's own, plus the Google Analytics tag and its opt-in
+consent banner that `website: google-analytics:` and `cookie-consent:` in `_quarto.yml`
+put on every page — the inline `gtag('config')` is held back until a visitor accepts,
+though Quarto still loads the gtag.js library itself unconditionally):
+`_templates/cv-views.html`, pulled in by that page's `include-after-body:`. It renders
 nothing. `{{< cv >}}` prints every entry at full depth tagged with `data-in`, and the script
 hides the ones the chosen view excludes, opens the rest, and hides a `.section-split` whose
 entries have all gone. **Full is the default view**, so opening the page gives the whole CV
@@ -426,6 +430,8 @@ logos work in both because the `mask-image` rules are keyed on `.bi-orcid` /
 ## Known placeholders
 
 No `href="#"` is left anywhere in the sources — every profile link now points somewhere real.
+The one in the built footer, "Cookie Preferences", is Quarto's own from `cookie-consent:`: it
+reopens the consent dialog by its `id="open_preferences_center"` and is not a placeholder.
 What remains unfinished is content, not markup: eleven entries in `_publications.yml` carry no
 `doi:`, `url:` or `page:` and so render as deliberately inert rows; some `description:` text is
 still flagged `# EXAMPLE TEXT`; the lede on `notes.qmd` is still marked DRAFT WORDING; and the

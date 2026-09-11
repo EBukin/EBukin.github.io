@@ -27,6 +27,21 @@ website:
   # navbar, footer and scripts, so a language model can read the site without
   # parsing it. Needs `site-url:` above for the absolute links in the index.
   llms-txt: true
+  # GA4 property for ebukin.github.io. Quarto writes the standard gtag.js snippet into
+  # the <head> of every HTML page from this ID alone, so it is set here rather than
+  # pasted as raw HTML. The CV PDFs and the *.llms.md twins do not carry it.
+  google-analytics: "G-N49SWLEHRF"
+  # Opt-in consent for the tag above. Quarto writes the inline `gtag('config', …)` block
+  # as `type="text/plain" cookie-consent="tracking"`, so no hit is sent and no _ga
+  # cookie is set until a visitor accepts. The gtag.js loader itself is NOT gated — the
+  # browser still fetches it from googletagmanager.com on every page load; gating that
+  # too would mean replacing `google-analytics:` with a hand-written include. `express`
+  # is the opt-in type GDPR asks for (`implied` would track until they object). Quarto
+  # appends a "Cookie Preferences" link to the footer so the choice can be revisited.
+  cookie-consent:
+    type: express
+    style: simple
+    palette: light
   favicon: assets/logo.svg
   navbar:
     logo: assets/logo.svg
