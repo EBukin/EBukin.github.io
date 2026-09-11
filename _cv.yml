@@ -210,7 +210,7 @@ cv:
 
   - type: experience
     period: "Feb 2025 — present"
-    title: "Economist, Global Poverty (full-time)"
+    title: "Economist, Global Poverty (full-time: 40 h/week)"
     title-short: "Economist (ETC2)"
     place: "The World Bank · Washington DC"
     in: [short, full]
@@ -251,7 +251,7 @@ cv:
 
   - type: experience
     period: "Jan 2020 — Dec 2024"
-    title: "Lecturer and researcher (part-time)"
+    title: "Lecturer and researcher (part-time: 20 h/week)"
     title-short: "Lecturer"
     place: "Justus Liebig University Giessen · Germany"
     in: [short, full]
@@ -284,7 +284,7 @@ cv:
 
   - type: experience
     period: "Mar 2018 — Jan 2025"
-    title: "Economist, short-term consultant (part-time)"
+    title: "Economist, short-term consultant (part-time: 100-150 days/year)"
     title-short: "Economist (STC)"
     place: "The World Bank · Poverty & Equity Global Practice"
     place-short: "The World Bank"
@@ -313,7 +313,7 @@ cv:
 
   - type: experience
     period: "Oct 2017 — Dec 2019"
-    title: "Researcher (part-time)"
+    title: "Researcher (part-time: 20 h/week)"
     place: "Leibniz Institute of Agricultural Development in Transition Economies (IAMO) · Halle (Saale), Germany"
     place-short: "IAMO · Halle (Saale), Germany"
     in: [short, full]
