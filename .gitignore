@@ -8,3 +8,11 @@
 
 /.quarto/
 OLD CVS/
+
+# Private contact details for the application CVs — phone, email, location. The repo
+# is public: this file must never be committed. _cv-private.example.yml is the template.
+/_cv-private.yml
+# Quarto's intermediate Typst source for a CV, which carries those same details if a
+# failed render leaves it behind. The style file is the only .typ that is source.
+/cv/*.typ
+!/cv/_typst-style.typ

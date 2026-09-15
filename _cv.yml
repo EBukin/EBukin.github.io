@@ -17,9 +17,11 @@
 #   headline    the one-line professional identity, under the name in the accent
 #   positions   current appointments, joined with ` · ` on the line below
 #   links       the contact line: one `text:` / `url:` pair per link, in order.
-#               Deliberately no postal address, no phone, no date of birth and no
-#               email — only what the website already publishes. Adding any of them
-#               is one entry here. `_quarto.yml` keeps its own copy of these URLs for
+#               Only what the website already publishes: this file is in a public
+#               repository. Location, nationality, phone and email go in the
+#               gitignored _cv-private.yml instead (shape in _cv-private.example.yml),
+#               printed only by a CV that asks with {{< cv-header private=true >}}.
+#               `_quarto.yml` keeps its own copy of these URLs for
 #               the navbar and footer and cannot read this file, so the two lists
 #               have to be kept in step by hand
 #   updated     printed in the PDF footer, and next to the download buttons on

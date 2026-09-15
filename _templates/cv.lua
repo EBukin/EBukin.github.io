@@ -394,6 +394,38 @@ local function download_name(meta, variant)
   return handle .. '-' .. os.date('%Y%m%d') .. '-' .. variant .. '.pdf'
 end
 
+-- The contact details the website does not publish — location, nationality, phone,
+-- email — for the CVs that are sent out rather than put online. The repository is
+-- public, so they cannot go in _cv.yml: they live in _cv-private.yml at the project
+-- root, which .gitignore keeps out of it (_cv-private.example.yml shows the shape).
+--
+-- A CV asks for them with {{< cv-header private=true >}}, and nothing else reads the
+-- file. It is read here rather than listed under `metadata-files:` for that reason:
+-- metadata-files would merge it into every page, the web pages included. Where the
+-- file is absent the CV prints without the line — which is what happens in CI, where
+-- there is no copy, so CI says nothing about it.
+local PRIVATE_FILE = '_cv-private.yml'
+
+local function private_contact(kwargs)
+  if option(kwargs, 'private') ~= 'true' then return {} end
+  local root = quarto.project and quarto.project.directory
+  local handle = root and io.open(pandoc.path.join({ root, PRIVATE_FILE }), 'r')
+  if not handle then
+    if not os.getenv('GITHUB_ACTIONS') then
+      log_warn('cv-header: private=true, but there is no ' .. PRIVATE_FILE ..
+               ' at the project root; copy _cv-private.example.yml and fill it in.')
+    end
+    return {}
+  end
+  local yaml = handle:read('a')
+  handle:close()
+  -- Read as a YAML front-matter block, so the fields arrive exactly as _cv.yml's do:
+  -- Markdown parsed once, written out by Pandoc for the format.
+  local meta = pandoc.read('---\n' .. yaml .. '\n---\n', 'markdown').meta
+  local private = meta['cv-private']
+  return private and private.contact or {}
+end
+
 return {
   -- {{< cv-header >}} — the identity block at the top of a typeset CV, every field
   -- read from `cv-me:` in _cv.yml. cv/_typst-style.typ lays it out; this only has to
@@ -436,6 +468,16 @@ return {
       call[#call + 1] = '['
       call[#call + 1] = inls(one)
       call[#call + 1] = '], '
+    end
+    call[#call + 1] = '), details: ('
+    for _, one in ipairs(private_contact(kwargs)) do
+      if one.text then
+        call[#call + 1] = '['
+        call[#call + 1] = one.url
+          and pandoc.Inlines{ pandoc.Link(inls(one.text), stringify(one.url)) }
+          or inls(one.text)
+        call[#call + 1] = '], '
+      end
     end
     call[#call + 1] = '), links: ('
     for _, one in ipairs(me.links or {}) do

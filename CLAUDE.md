@@ -58,8 +58,10 @@ short of a full `quarto render` leaves those links dead in `_site/`.
 Beside those two public CVs sit **application CVs**, one per vacancy —
 `cv/Bukin-cv-JRC-tax-2026.qmd` so far. Each is named `Bukin-cv-<vacancy>.qmd` for the PDF it
 becomes, because that PDF goes out as an attachment as it is. Each is `cv-full.qmd` with its `## About` filled by a
-profile tagged with a job-specific variant (`in: [JRC-tax-2026]`) instead of `in: [full]`;
-every other section is the full CV, so a correction to the record reaches them too. They
+profile tagged with a job-specific variant (`in: [JRC-tax-2026]`) instead of `in: [full]`,
+and its header opened with `{{< cv-header private=true >}}` so that it carries the private
+contact details (see `cv-header` below); every other section is the full CV, so a
+correction to the record reaches them too. They
 render with everything else and are deleted from `_site/cv/` by the publish workflow before
 upload (see Publishing), so they are never on the live site. Do not try to keep them out of
 the render with `project: render:` instead: a file excluded there is rendered *outside* the
@@ -206,10 +208,17 @@ Three shapes of entry, told apart by `type:`:
   `#show: cv-body` rule and the `#set document(title:)` line that gives the PDF its own
   metadata title (injected with `quarto.doc.include_text`, guarded by a module-level flag
   because Quarto runs the shortcode filter over a document more than once). It renders
-  nothing on the web — `cv.qmd` sits under the site navbar and its own hero already. Note
-  what is deliberately *not* in `cv-me.links`: no postal address, no phone, no date of birth
-  and no email, only what the website already publishes. Adding any of them is one entry
-  there. `_quarto.yml` keeps its own copy of those URLs for the navbar and footer and cannot
+  nothing on the web — `cv.qmd` sits under the site navbar and its own hero already.
+  `cv-me.links` holds only what the website already publishes, because `_cv.yml` is in a
+  public repository. Location, nationality, phone and email live in **`_cv-private.yml`** at
+  the project root — gitignored, copied by hand from the committed `_cv-private.example.yml`
+  — and are printed, as a line of their own above the links, only by a CV that asks with
+  `{{< cv-header private=true >}}`: the application CVs do, the two public ones must not.
+  Nothing else reads that file (it is deliberately not a `metadata-files:` entry, which would
+  merge it into every web page), and CI has no copy, so there the line is simply left out.
+  `/cv/*.typ` is gitignored as well, all but `_typst-style.typ`, because Quarto's
+  intermediate Typst source for an application CV would carry the same details if a failed
+  render left it behind. `_quarto.yml` keeps its own copy of those URLs for the navbar and footer and cannot
   read `_cv.yml`, so those two lists are kept in step by hand.
 - `{{< cv-pdf variant=short|full >}}` — every link to a CV PDF on the site: the two in the
   CV page header and, with `class=` and a Markdown `label=`, the two buttons on the home

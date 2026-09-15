@@ -1,0 +1,22 @@
+# The contact details the website does not publish, for the CVs that are sent out
+# rather than put online. Copy this file to _cv-private.yml, beside it at the project
+# root, and fill that copy in. .gitignore keeps _cv-private.yml out of the repository,
+# which is public — never put these details in _cv.yml, and never commit the copy.
+#
+# Printed only by a CV whose header asks for them: {{< cv-header private=true >}}. The
+# application CVs in cv/ do; cv-full.qmd and cv-short.qmd, the two that go on the site,
+# do not. They come out as one line of their own, above the public links, in the order
+# written here. CI has no copy of this file, so there the line is simply left out.
+#
+# Each entry is a `text:`, plus a `url:` when it should be a link — tel: for a phone,
+# mailto: for an email. Add or drop entries freely: a postal address or a date of
+# birth is one more.
+
+cv-private:
+  contact:
+    - text: "City, Country"
+    - text: "Nationality: Country"
+    - text: "+00 000 000 0000"
+      url: "tel:+000000000000"
+    - text: "name@example.com"
+      url: "mailto:name@example.com"

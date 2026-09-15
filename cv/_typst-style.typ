@@ -146,7 +146,10 @@
 
 // The identity block, called once per document by {{< cv-header >}} with every
 // argument filled from `cv-me:` in _cv.yml. `first` / `last` are split from `name:`
-// so the surname can carry the weight, as it does in Awesome-CV.
+// so the surname can carry the weight, as it does in Awesome-CV. `details` is the one
+// argument that does not come from there: the private contact line — location, phone,
+// email — read from the gitignored _cv-private.yml, and empty unless the CV asked for
+// it with private=true. It sits above the public links, in the same type.
 // Laid out as an explicit stack rather than as four paragraphs: the gaps between
 // these lines are a fixed part of the design, and paragraph spacing is not — Quarto's
 // template has an opinion about that one.
@@ -155,6 +158,7 @@
   last: none,
   headline: none,
   positions: (),
+  details: (),
   links: (),
   footline: none,
 ) = {
@@ -171,6 +175,9 @@
   }
   if positions.len() > 0 {
     lines.push(text(size: size-small, fill: muted, positions.join([ · ])))
+  }
+  if details.len() > 0 {
+    lines.push(text(size: size-tiny, fill: muted, details.join(text(fill: soft)[ · ])))
   }
   if links.len() > 0 {
     lines.push(text(size: size-tiny, fill: muted, links.join(text(fill: soft)[ · ])))

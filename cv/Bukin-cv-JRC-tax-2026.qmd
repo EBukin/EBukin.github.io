@@ -7,6 +7,11 @@
   other section is the full CV, entry for entry, so a correction to the record lands
   here as well. Like its siblings it states no fact about the person.
 
+  Its header asks for private=true, so unlike the two public CVs it also carries the
+  contact details the website does not publish — location, nationality, phone, email —
+  read from ../_cv-private.yml, which is gitignored. Without that file the line is
+  simply left out.
+
   The file is named for the PDF it becomes, Bukin-cv-JRC-tax-2026.pdf: that PDF goes
   out as an attachment as it is, so the source carries the name the attachment should.
 
@@ -17,7 +22,7 @@
   rendered outside the project when named, and loses the cv and pubs shortcodes.
 -->
 
-{{< cv-header >}}
+{{< cv-header private=true >}}
 
 ## About
 
