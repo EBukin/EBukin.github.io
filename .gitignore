@@ -9,8 +9,11 @@
 /.quarto/
 OLD CVS/
 
-# Private contact details for the application CVs — phone, email, location. The repo
-# is public: this file must never be committed. _cv-private.example.yml is the template.
+# Private contact details for the application CVs — phone, email, location, birth. The
+# repo is public: this file must never be committed. _cv-private.example.yml is its
+# template, and is tracked on purpose — do not list it here. A .gitignore entry has no
+# effect on a file git already tracks, so listing it would only hide it from a fresh
+# clone if it were ever untracked; real details belong in _cv-private.yml, never in it.
 /_cv-private.yml
 # Quarto's intermediate Typst source for a CV, which carries those same details if a
 # failed render leaves it behind. The style file is the only .typ that is source.
