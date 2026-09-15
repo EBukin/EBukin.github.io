@@ -1,6 +1,6 @@
 ---
 # title: "Eddie Bukin"
-pagetitle: "Eddie Bukin: Applied Economist and Open Source Software Enthusiast"
+pagetitle: "Eddie Bukin: Applied Economist and Open Source Data Scientist"
 page-layout: full
 toc: false
 ---

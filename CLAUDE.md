@@ -56,7 +56,10 @@ Quarto would otherwise decide. `index.qmd` and `cv.qmd` link to `cv/cv-*.pdf`, s
 short of a full `quarto render` leaves those links dead in `_site/`.
 
 Beside those two public CVs sit **application CVs**, one per vacancy —
-`cv/Bukin-cv-JRC-tax-2026.qmd` so far. Each is named `Bukin-cv-<vacancy>.qmd` for the PDF it
+`cv/Bukin-cv-JRC-tax-2026.qmd` so far — plus `cv/Bukin-cv-general.qmd`, the one to send where
+no vacancy has a CV of its own. Its profile (`in: [general]`) starts from the website's
+framing, the `ds-causal-short` lede, and carries the fiscal-incidence and tooling work of the
+JRC one, written in its own words. Each is named `Bukin-cv-<vacancy>.qmd` for the PDF it
 becomes, because that PDF goes out as an attachment as it is. Each is `cv-full.qmd` with its `## About` filled by a
 profile tagged with a job-specific variant (`in: [JRC-tax-2026]`) instead of `in: [full]`,
 and its header opened with `{{< cv-header private=true >}}` so that it carries the private

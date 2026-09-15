@@ -93,13 +93,15 @@
 #   cv/cv-short.qmd     in=short     show=summary    one sentence per entry
 #   cv/Bukin-cv-JRC-tax-2026.qmd     as cv-full.qmd, but its About is the
 #                                    JRC-tax-2026 profile. Never deployed
+#   cv/Bukin-cv-general.qmd          as cv-full.qmd, but its About is the general
+#                                    profile. Never deployed
 #
 # The two-page CV prints languages but no skills, which is why `type: skills` is
 # `in: [full]` — and why the Short view of cv.qmd hides that row too.
 
 cv-me:
   name: "Eduard Bukin"
-  headline: "Applied Economist and Open Source Software Enthusiast"
+  headline: "Applied Economist and Open Source Data Scientist"
   positions:
     - "Economist, Global Poverty Department, The World Bank"
     - "PhD candidate, Justus Liebig University Giessen"
@@ -189,6 +191,35 @@ cv:
       and taxation reform in Ukraine; equilibrium modelling in GAMS for the OECD-FAO
       Agricultural Outlook and a CGE project. Works across household, farm-level and
       administrative microdata (R, Stata, Python).
+
+  # The general application profile, printed only by cv/Bukin-cv-general.qmd — the CV
+  # to send where no vacancy-specific one has been written. It starts from the website's
+  # framing (the ds-causal-short lede) and carries the fiscal-incidence and tooling work
+  # of the JRC-tax-2026 profile, in its own words rather than either one's.
+  - type: profile
+    in: [general]
+    text: |
+      Applied economist and data scientist who turns the nexus of micro, spatial and
+      administrative data into causal evidence, and that evidence into tools that others
+      use. For more than a decade, at the World Bank, FAO and in academia, I have
+      measured how households, farms and land markets respond to policy using
+      quasi-experimental methods. Since 2018 I have carried out fiscal incidence analysis
+      and poverty measurement for countries in Africa, Asia, Europe and Latin America. I
+      build the pipelines and R Shiny tools that simulate the welfare effects of
+      alternative tax and spending policies, macroeconomic shocks and climate change, and
+      I have developed the supporting R package and infrastructure that scale this
+      analysis and enable others to carry it out on their own. Over the same period my
+      research has focused on agricultural and development economics, assessing how
+      policies affect land markets, valuation and taxation. I have also contributed to
+      operational work, such as capacity building for statistical offices and cadastres
+      in European and Asian countries. My technical capabilities are shaped by
+      open-source software development and data science, so I embrace Git and GitHub,
+      rely heavily on R and Python, and work with cloud-based solutions for spatial data
+      analysis such as Google Earth Engine. Finally, I like to innovate and to enable
+      others by motivating and teaching them, whether that means teaching applied
+      econometrics to master's students at JLU Giessen or leading the adoption of
+      AI-assisted coding among economists at the World Bank. I believe that sharing and
+      enabling others is the only way to scale the impact of my work.
 
   # Generic profile for data science and causal inference roles on micro-level data.
   # It is the lede on index.qmd, which prints it with {{< cv type=profile
