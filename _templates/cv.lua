@@ -39,11 +39,11 @@
 --                       the person: there is nowhere in them left to state one.
 --                       Nothing on the web; cv.qmd has the site header and its own
 --                       hero above it already
---   {{< cv-pdf >}}      the download link for one of the typeset CVs. It exists as a
---                       shortcode only so the saved file can be named after the
---                       reader's benefit rather than the repo's layout: cv-short.pdf
---                       on the server arrives as Bukin-2026-09-08-short.pdf in their
---                       downloads folder
+--   {{< cv-pdf >}}      the download link for one of the typeset CVs, on cv.qmd and
+--                       index.qmd alike. It exists as a shortcode only so the saved
+--                       file can be named after the reader's benefit rather than the
+--                       repo's layout: cv-short.pdf on the server arrives as
+--                       ebukin-cv-20260915-short.pdf in their downloads folder
 
 local stringify = pandoc.utils.stringify
 
@@ -381,14 +381,17 @@ local function select_entries(meta, kwargs)
   return entries
 end
 
--- The name the browser saves the file under: surname, the date the site was built,
--- and which CV it is. The surname comes from `author-me` in _publications.yml ("Bukin,
--- E." -> "Bukin") so there is no second place to update it.
+-- The name the browser saves the file under: initials and surname run together in lower
+-- case, "cv", the date the site was built, and which CV it is —
+-- ebukin-cv-20260915-full.pdf. The handle comes from `author-me` in _publications.yml
+-- ("Bukin, E." -> "ebukin") so there is no second place to update it.
 local function download_name(meta, variant)
-  local who = meta['author-me'] and stringify(meta['author-me']) or 'CV'
-  who = who:match('^[^,]+') or who
-  who = who:gsub('%s+$', ''):gsub('%s', '-')
-  return who .. '-' .. os.date('%Y-%m-%d') .. '-' .. variant .. '.pdf'
+  local who = meta['author-me'] and stringify(meta['author-me']) or ''
+  local surname, given = who:match('^([^,]+),(.*)$')
+  if surname == nil then surname, given = who, '' end
+  local handle = ((given .. surname):lower():gsub('[^%w]', ''))
+  if handle == '' then handle = 'cv' else handle = handle .. '-cv' end
+  return handle .. '-' .. os.date('%Y%m%d') .. '-' .. variant .. '.pdf'
 end
 
 return {
@@ -466,24 +469,32 @@ return {
     }
   end,
 
-  -- {{< cv-pdf variant=short label=PDF >}} — a download link, not a viewer link: the
-  -- `download` attribute is what stops the browser opening the PDF in a tab instead.
+  -- {{< cv-pdf variant=short class=btn-flat label="CV [PDF]{.qty}" >}} — a download
+  -- link, not a viewer link: the `download` attribute is what stops the browser opening
+  -- the PDF in a tab instead. Every link to a CV PDF on the site goes through here, so
+  -- every download arrives under the same name. `class` defaults to btn-pdf, the quiet
+  -- link cv.qmd uses; `label` is Markdown and defaults to "PDF".
   ['cv-pdf'] = function(args, kwargs, meta)
     local variant = option(kwargs, 'variant')
     if variant == '' then
       log_warn('cv-pdf: needs variant=short or variant=full.')
       return pandoc.Blocks{}
     end
-    local label = option(kwargs, 'label')
-    if label == '' then label = 'PDF' end
+    local class = option(kwargs, 'class')
+    if class == '' then class = 'btn-pdf' end
 
-    -- Both links read "PDF", and which is which is carried by the button each one
-    -- sits under. That works by eye and not at all by ear, hence the aria-label.
-    return pandoc.RawInline('html', table.concat({
-      '<a class="btn-pdf" href="cv/cv-', variant, '.pdf" download="',
-      download_name(meta, variant), '" aria-label="Download the ', variant,
-      ' CV as PDF">', label, '</a>',
-    }))
+    local attrs = { download = download_name(meta, variant) }
+    local label = option(kwargs, 'label')
+    if label == '' then
+      -- Both of cv.qmd's links read "PDF", and which is which is carried by the button
+      -- each one sits under. That works by eye and not at all by ear, hence the
+      -- aria-label. A label that names the CV itself needs none.
+      label = 'PDF'
+      attrs['aria-label'] = 'Download the ' .. variant .. ' CV as PDF'
+    end
+
+    return pandoc.Link(inls(label), 'cv/cv-' .. variant .. '.pdf', '',
+                       pandoc.Attr('', { class }, attrs))
   end,
 
   ['cv'] = function(args, kwargs, meta)

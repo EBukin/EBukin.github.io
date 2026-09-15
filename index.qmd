@@ -20,8 +20,8 @@ toc: false
 :::
 
 ::: {.btn-row style="padding-top:0.6rem"}
-[CV — short [PDF · 2p]{.qty}](cv/cv-short.pdf){.btn-flat}
-[CV — full [PDF]{.qty}](cv/cv-full.pdf){.btn-outline-flat}
+{{< cv-pdf variant=short class=btn-flat label="CV — short [PDF · 2p]{.qty}" >}}
+{{< cv-pdf variant=full class=btn-outline-flat label="CV — full [PDF]{.qty}" >}}
 :::
 :::
 

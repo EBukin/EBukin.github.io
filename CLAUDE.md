@@ -211,10 +211,13 @@ Three shapes of entry, told apart by `type:`:
   and no email, only what the website already publishes. Adding any of them is one entry
   there. `_quarto.yml` keeps its own copy of those URLs for the navbar and footer and cannot
   read `_cv.yml`, so those two lists are kept in step by hand.
-- `{{< cv-pdf variant=short|full >}}` — the two download links in the CV page header. It
-  emits an `<a download="…">` so the browser saves the file rather than opening it, named
-  `<surname>-<build date>-<variant>.pdf` — the surname read from `author-me:` in
-  `_publications.yml`, so there is no second place to keep it in step.
+- `{{< cv-pdf variant=short|full >}}` — every link to a CV PDF on the site: the two in the
+  CV page header and, with `class=` and a Markdown `label=`, the two buttons on the home
+  page. It emits an `<a download="…">` so the browser saves the file rather than opening
+  it, named `<initials><surname>-cv-<YYYYMMDD build date>-<variant>.pdf` in lower case —
+  `ebukin-cv-20260915-full.pdf` — the name read from `author-me:` in `_publications.yml`,
+  so there is no second place to keep it in step. Link to a CV PDF any other way and the
+  download arrives as `cv-full.pdf`.
 
 `in:` is the analogue of `selected:` in `_publications.yml`: it names the variants an entry
 belongs to (`short` and `full`; omitted means both). The PDFs filter on it with

@@ -118,12 +118,13 @@ It then appears wherever the `{{< cv >}}` shortcode already selects it — the t
 {{< cv type=experience limit=3 >}}        cap the list
 ```
 
-The same file provides `{{< cv-pdf variant=short >}}`, which writes one of the two PDF
-download links in the page header. It exists as a shortcode so the saved file is named
-for the reader — `cv-short.pdf` on the server arrives as `Bukin-2026-09-08-short.pdf` —
-and so the link carries `download`, which is what makes the browser save the PDF instead
-of opening it in a tab. The surname comes from `author-me:` in `_publications.yml` and
-the date is the day the site was built.
+The same file provides `{{< cv-pdf variant=short >}}`, which writes every CV download
+link on the site — the two in the CV page header and the two buttons on the home page.
+It exists as a shortcode so the saved file is named for the reader — `cv-short.pdf` on
+the server arrives as `ebukin-cv-20260915-short.pdf` — and so the link carries
+`download`, which is what makes the browser save the PDF instead of opening it in a tab.
+The name comes from `author-me:` in `_publications.yml` and the date is the day the site
+was built.
 
 `show=` decides how much of an entry's prose is printed: `summary` the one sentence, `full`
 the whole `description:` plus the `references:` line. The shortcode is `_templates/cv.lua`,
