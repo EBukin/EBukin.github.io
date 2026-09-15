@@ -19,7 +19,7 @@ shortcodes:
 
 website:
   title: "Eddie Bukin"
-  description: "Land and poverty economist — World Bank, JLU Giessen."
+  description: "Applied Economist — World Bank, JLU Giessen."
   site-url: https://ebukin.github.io
   repo-url: https://github.com/EBukin/EBukin.github.io
   # Writes _site/llms.txt (an index of every page, per llmstxt.org) and a plain
