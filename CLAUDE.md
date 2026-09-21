@@ -56,20 +56,39 @@ Quarto would otherwise decide. `index.qmd` and `cv.qmd` link to `cv/cv-*.pdf`, s
 short of a full `quarto render` leaves those links dead in `_site/`.
 
 Beside those two public CVs sit **application CVs**, one per vacancy —
-`cv/Bukin-cv-JRC-tax-2026.qmd` so far — plus `cv/Bukin-cv-general.qmd`, the one to send where
-no vacancy has a CV of its own. Its profile (`in: [general]`) starts from the website's
-framing, the `ds-causal-short` lede, and carries the fiscal-incidence and tooling work of the
-JRC one, written in its own words. Each is named `Bukin-cv-<vacancy>.qmd` for the PDF it
-becomes, because that PDF goes out as an attachment as it is. Each is `cv-full.qmd` with its `## About` filled by a
-profile tagged with a job-specific variant (`in: [JRC-tax-2026]`) instead of `in: [full]`,
-and its header opened with `{{< cv-header private=true >}}` so that it carries the private
-contact details (see `cv-header` below); every other section is the full CV, so a
-correction to the record reaches them too. They
-render with everything else and are deleted from `_site/cv/` by the publish workflow before
+`cv/Bukin-cv-JRC-tax-2026.qmd` and `cv/Bukin-cv-R-training-NSO.qmd` so far — plus
+`cv/Bukin-cv-general.qmd`, the one to send where no vacancy has a CV of its own. Its profile
+(`in: [general]`) starts from the website's framing, the `ds-causal-short` lede, and carries
+the fiscal-incidence and tooling work of the JRC one, written in its own words. Each is named
+`Bukin-cv-<vacancy>.qmd` for the PDF it becomes, because that PDF goes out as an attachment
+as it is. Each opens its header with `{{< cv-header private=true >}}` so that it carries the
+private contact details (see `cv-header` below), and each still states no fact of its own:
+what differs between them is which record they read and in what order. They render with
+everything else and are deleted from `_site/cv/` by the publish workflow before
 upload (see Publishing), so they are never on the live site. Do not try to keep them out of
 the render with `project: render:` instead: a file excluded there is rendered *outside* the
 project when named on the command line, loses the `cv` and `pubs` shortcodes, and comes out
 as an empty PDF beside its source.
+
+An application CV comes in one of **two shapes**, and which one it needs is decided by
+whether the record can be *reselected* or has to be *reworded*. `Bukin-cv-JRC-tax-2026.qmd`
+and `Bukin-cv-general.qmd` are the first shape: `cv-full.qmd` with one line changed, so every
+section but `## About` is the full CV. `cv/Bukin-cv-R-training-NSO.qmd` is the second — for
+training posts at national statistical offices, where the reader is buying a teacher of
+statistics. It reorders the CV (Education above Experience; Teaching and training promoted
+into a section of its own above Experience; an `R packages and tools` section no other CV
+prints; no scholarships) and rewrites the employer entries so that FAO leads with official
+statistics, JLU with five years of teaching and IAMO with survey data collection. `in:`
+cannot do that — it selects entries, it cannot reword them — so those entries come from a
+**second record**, `_cv-r-training.yml`, read with `from=` (see `{{< cv >}}` below). Its
+calls that carry no `from=` still read `_cv.yml` and `_publications.yml`, so education,
+software, languages and every publication stay in one place. It is four pages, the same as
+`cv-full.pdf` and one shorter than `Bukin-cv-general.pdf`, with the publication list costing
+it nothing — it renders inside the space already on the last page.
+
+Reach for a second record only when the *words* have to change. A different selection of the
+same words is `in:`, and a different opening paragraph is a `profile` entry; both are
+cheaper, and neither can drift out of step with the record the way a rewritten entry can.
 
 **The PDF design** is `cv/_typst-style.typ`, and it is a plain-Typst adaptation of
 [modern-cv](https://typst.app/universe/package/modern-cv/) — itself a port of Awesome-CV:
@@ -174,6 +193,7 @@ the file into all page metadata and registers `_templates/cv.lua`, which impleme
 
 ```
 {{< cv type=experience >}}          one type, or "skills,languages" (required)
+{{< cv from=r-training type=experience >}}  read _cv-r-training.yml, not _cv.yml
 {{< cv type=education in=short >}}  keep only entries whose `in:` names this variant
 {{< cv type=teaching show=full >}}  none | summary (default) | full
 {{< cv type=experience titles=short >}}  prefer `title-short:` / `place-short:`
@@ -233,7 +253,19 @@ Three shapes of entry, told apart by `type:`:
 
 `in:` is the analogue of `selected:` in `_publications.yml`: it names the variants an entry
 belongs to (`short` and `full`; omitted means both). The PDFs filter on it with
-`in=`, so a CV variant is a selection, not a separate copy. Profiles are the one place a
+`in=`, so a CV variant is a selection, not a separate copy — until it cannot be, which is
+what **`from=`** is for. `from=r-training` makes a single `{{< cv >}}` call read
+`_cv-r-training.yml` at the project root instead of the merged `_cv.yml`, for the one CV
+whose employer entries had to be reworded rather than reselected (see the application-CV note
+above). `cv.lua` opens that file itself, the way it opens `_cv-private.yml`, and deliberately
+**not** through `metadata-files:` — which would merge an alternative CV's prose into every
+page of the website. So an alternative record is off the site at the mechanism level and not
+merely by the publish allowlist. `from=` is per call, so one document mixes the two records
+freely and everything it does not reword keeps coming from `_cv.yml`. An alternative file *is*
+a variant: its entries carry no `in:` and its calls pass no `in=`, and a `from=… in=full` call
+would match nothing. It may also carry a partial `cv-me:` — `_cv-r-training.yml` names only a
+`headline:` — and every field it does not name falls back to `_cv.yml`, so the name, the links
+and `updated:` are still written down once. Profiles are the one place a
 variant may be neither: an application CV asks for its own name (`in=JRC-tax-2026`), and a
 two-page counterpart it does not print yet takes a different name (`JRC-tax-2026-short`) so
 that the long CV gets one paragraph rather than both. `cv.qmd` prints the `full` and `short`

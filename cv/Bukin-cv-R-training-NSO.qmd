@@ -1,0 +1,96 @@
+<!--
+  The application CV for training roles at national statistical offices — teaching
+  statistics and R to the staff of statistical offices in southern Africa and
+  comparable posts.
+
+  It differs from its siblings in more than one paragraph. Bukin-cv-general.qmd and
+  Bukin-cv-JRC-tax-2026.qmd are cv-full.qmd with a different About; this one reorders
+  the CV and rewrites the employer entries, because the reader is buying a teacher of
+  statistics rather than a researcher:
+
+    - Education comes BEFORE experience. The statistics training is the credential
+      here, and the Erasmus Mundus place line names Pretoria.
+    - Teaching and training is a section of its own, above experience, and mixes
+      university courses with counterpart training. In _cv.yml the second is a bullet
+      inside an employer, which is the wrong place for it in front of this reader.
+    - The employer entries are rewritten rather than reselected, and therefore come
+      from a second record, ../_cv-r-training.yml, via `from=r-training`. FAO leads
+      with official statistics, JLU with five years of teaching, IAMO with survey data
+      collection. See that file's header for why `in:` could not do this.
+    - R packages and tools is printed here and in no other CV: for this audience the
+      packages are the evidence behind the R claim.
+    - Scholarships are dropped, to keep the whole thing to about three pages.
+
+  Every call WITHOUT `from=` still reads ../_cv.yml and ../_publications.yml — the
+  education entries, the software entries, the languages and every publication — so a
+  correction to the record reaches this CV too. Like its siblings it states no fact
+  about the person.
+
+  Its header asks for private=true, so it carries the contact details the website does
+  not publish — location, nationality, phone, email — read from ../_cv-private.yml,
+  which is gitignored. Without that file the line is simply left out, which is what
+  happens in CI.
+
+  The file is named for the PDF it becomes, Bukin-cv-R-training-NSO.pdf: that PDF goes
+  out as an attachment as it is, so the source carries the name the attachment should.
+
+  It is built by every render, like its siblings, and lands in ../_site/cv/. It is not
+  published: the deploy step in ../.github/workflows/publish.yml deletes every PDF in
+  _site/cv/ except cv-full.pdf and cv-short.pdf before uploading the site.
+-->
+
+{{< cv-header private=true from=r-training >}}
+
+## Profile
+
+{{< cv from=r-training type=profile >}}
+
+<!-- Brought forward, above experience, and printed at show=summary: the point is
+     where it sits, not how much of it there is. Not titles=short — that would
+     replace the Erasmus Mundus place line with "Erasmus Mundus IMRD" and lose
+     Pretoria with it. -->
+
+## Education
+
+{{< cv type=education in=full show=summary >}}
+
+## Teaching and training
+
+{{< cv from=r-training type=teaching show=full >}}
+
+## Professional experience
+
+{{< cv from=r-training type=experience show=full >}}
+
+<!-- type=software is in no other CV. Here it is the evidence behind the R claim, so
+     it gets a section — one line each, from ../_cv.yml unchanged. -->
+
+## R packages and tools
+
+{{< cv type=software show=summary >}}
+
+## Publications
+
+### Peer-reviewed articles
+
+{{< pubs type=article show=none >}}
+
+### Working papers and work in progress
+
+{{< pubs type=working-paper,wip show=none >}}
+
+### Reports and policy work
+
+{{< pubs type=report show=none >}}
+
+### Theses
+
+{{< pubs type=thesis show=none >}}
+
+## Skills
+
+{{< cv from=r-training type=skills >}}
+
+## Languages
+
+{{< cv type=languages in=full >}}

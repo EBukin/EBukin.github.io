@@ -18,6 +18,10 @@
 -- Options:
 --
 --   type=experience   one type, or a comma-separated set; omitted means every type
+--   from=r-training   read _cv-r-training.yml at the project root instead of the
+--                     merged _cv.yml — an alternative record for an application CV
+--                     that has to tell the same jobs a different way. Per call, so
+--                     one document mixes the two. See the note above record_file()
 --   in=short          keep only entries whose `in:` list names this variant
 --   titles=short      prefer `title-short:` / `place-short:` where an entry defines
 --                     them — the tight headings the two-page CV needs
@@ -361,15 +365,89 @@ local function cv_list(entry)
   return cv_detail(pandoc.Blocks{ pandoc.Para(join(parts, MIDDOT)) })
 end
 
+-- ---- alternative records ------------------------------------------------------
+--
+-- `in:` selects entries; it cannot reword them. An application CV that has to tell the
+-- same jobs a different way — a teaching CV where the employer entries lead with what
+-- was taught rather than what was researched — therefore needs a second record, and
+-- `from=` names it: `from=r-training` reads `_cv-r-training.yml` at the project root.
+--
+-- Read from disk here rather than listed under `metadata-files:` in _quarto.yml, and
+-- for the same reason _cv-private.yml is: metadata-files would merge the alternative
+-- record into EVERY page's metadata, the web pages included. This way an alternative
+-- CV is off the website at the mechanism level and not merely by the publish
+-- workflow's allowlist.
+--
+-- `from=` is per call, so one document mixes the two records freely: the sections that
+-- are reworded read the alternative file, and everything that is not — education,
+-- languages, publications — keeps coming from _cv.yml, where a correction still lands
+-- in one place. An alternative file IS a variant, so its entries carry no `in:` and
+-- its calls pass no `in=`; adding one to a `from=` call would match nothing.
+--
+-- It may also carry a partial `cv-me:` — a headline written for this audience — and
+-- the fields it does not name fall back to _cv.yml's, so the name, the links and the
+-- updated date are still written down once.
+
+local RECORDS = {}
+
+local function record_file(name)
+  if RECORDS[name] ~= nil then return RECORDS[name] end
+  local file = '_cv-' .. name .. '.yml'
+  local root = quarto.project and quarto.project.directory
+  local handle = root and io.open(pandoc.path.join({ root, file }), 'r')
+  if not handle then
+    quarto.log.error('cv: from="' .. name .. '" — there is no ' .. file ..
+                     ' at the project root.')
+    RECORDS[name] = false
+    return false
+  end
+  local yaml = handle:read('a')
+  handle:close()
+  -- Read as a YAML front-matter block, so every field arrives exactly as _cv.yml's
+  -- do: Markdown parsed once, written out by Pandoc for the format.
+  RECORDS[name] = pandoc.read('---\n' .. yaml .. '\n---\n', 'markdown').meta
+  return RECORDS[name]
+end
+
+-- The record a call reads: the alternative one when it asks with `from=`, the merged
+-- _cv.yml otherwise. `false` when a named record cannot be read — NOT _cv.yml, because
+-- falling back there would fill an application CV with the generic wording it was
+-- written to replace, and it would look right. An empty section is the louder failure.
+local function record_of(kwargs, meta)
+  local name = option(kwargs, 'from')
+  if name == '' then return meta end
+  return record_file(name)
+end
+
+-- `cv-me:` for the header, field by field: an alternative record overrides only what
+-- it names. Listed explicitly rather than merged with pairs() so the fallback is
+-- readable and a new field has to be added here deliberately. Here an unreadable
+-- record DOES fall back to _cv.yml: the identity block is the same person either way,
+-- and record_file() has already said what is missing.
+local ME_FIELDS = { 'name', 'headline', 'positions', 'links', 'updated' }
+
+local function me_of(kwargs, meta)
+  local base = meta['cv-me']
+  local rec  = record_of(kwargs, meta)
+  local over = rec and rec ~= meta and rec['cv-me'] or nil
+  if over == nil then return base end
+  if base == nil then return over end
+  local merged = {}
+  for _, field in ipairs(ME_FIELDS) do
+    if over[field] ~= nil then merged[field] = over[field] else merged[field] = base[field] end
+  end
+  return merged
+end
+
 -- ---- selection ---------------------------------------------------------------
 
-local function select_entries(meta, kwargs)
+local function select_entries(record, kwargs)
   local types   = type_set(option(kwargs, 'type'))
   local variant = option(kwargs, 'in')
   local limit   = tonumber(option(kwargs, 'limit'))
 
   local entries = {}
-  for _, entry in ipairs(meta.cv) do
+  for _, entry in ipairs(record) do
     local wanted = true
     if types and not types[stringify(entry.type or '')] then wanted = false end
     if variant ~= '' and not has_variant(entry, variant) then wanted = false end
@@ -436,7 +514,10 @@ return {
   ['cv-header'] = function(args, kwargs, meta)
     if quarto.doc.is_format('html') then return pandoc.Blocks{} end
 
-    local me = meta['cv-me']
+    -- me_of(), not meta['cv-me'], so {{< cv-header from=r-training >}} can take the
+    -- headline written for one application while the name, links and updated date
+    -- still come from _cv.yml.
+    local me = me_of(kwargs, meta)
     if me == nil then
       quarto.log.error('cv-header: no `cv-me` in metadata — is _cv.yml still listed ' ..
                        'under `metadata-files:` in _quarto.yml?')
@@ -540,20 +621,30 @@ return {
   end,
 
   ['cv'] = function(args, kwargs, meta)
-    if meta.cv == nil then
-      quarto.log.error('cv: no `cv` in metadata — is _cv.yml still listed under ' ..
-                       '`metadata-files:` in _quarto.yml?')
+    local from = option(kwargs, 'from')
+    local rec  = record_of(kwargs, meta)
+    -- record_file() has already said why; printing _cv.yml's entries in place of the
+    -- ones this CV asked for would be worse than printing none.
+    if not rec then return pandoc.Blocks{} end
+
+    local record = rec.cv
+    if record == nil then
+      quarto.log.error(from == ''
+        and 'cv: no `cv` in metadata — is _cv.yml still listed under ' ..
+            '`metadata-files:` in _quarto.yml?'
+        or  'cv: from="' .. from .. '" — _cv-' .. from .. '.yml has no `cv:` list.')
       return pandoc.Blocks{}
     end
 
     local short   = option(kwargs, 'titles') == 'short'
     local show    = option(kwargs, 'show')
-    local entries = select_entries(meta, kwargs)
+    local entries = select_entries(record, kwargs)
 
     -- A mistyped type= would otherwise render an empty section in silence.
     if #entries == 0 then
       log_warn('cv: type="' .. option(kwargs, 'type') .. '" in="' ..
-               option(kwargs, 'in') .. '" matched no entries in _cv.yml.')
+               option(kwargs, 'in') .. '" matched no entries in ' ..
+               (from == '' and '_cv.yml' or '_cv-' .. from .. '.yml') .. '.')
     end
 
     if show == '' then show = 'summary' end

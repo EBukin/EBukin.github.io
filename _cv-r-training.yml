@@ -1,0 +1,299 @@
+# The alternative CV record for training roles at national statistical offices —
+# read by cv/Bukin-cv-R-training-NSO.qmd and by nothing else.
+#
+# Why this file exists. `in:` in _cv.yml selects entries; it cannot reword them. This
+# CV needs the same six jobs told a different way: FAO leading with official
+# statistics rather than trade, JLU leading with five years of teaching rather than
+# with research, IAMO with survey data collection rather than with principal–agent
+# theory. So the entries that are reworded live here, and _templates/cv.lua reads them
+# when a call says `from=r-training`.
+#
+# What is NOT here. Everything this CV does not rephrase — education, languages,
+# software, every publication — is still read from _cv.yml and _publications.yml by
+# calls that carry no `from=`. A correction to the record reaches this CV too. Only add
+# an entry here when its *words* have to change for this audience; never copy one
+# across just to keep the file looking complete.
+#
+# How it is read. _templates/cv.lua opens this file directly (the way it opens
+# _cv-private.yml), NOT via `metadata-files:` in _quarto.yml — which would merge it
+# into every page of the website, including the public ones. That is what keeps this
+# CV off the site at the mechanism level rather than only by the publish workflow's
+# allowlist.
+#
+# This file IS the variant, so no entry carries `in:` and no call passes `in=`; a
+# `from=r-training in=full` call would match nothing at all.
+#
+# Every entry is written SHORTER than its counterpart in _cv.yml, because this CV is
+# meant to be read by someone recruiting a teacher, not audited by a panel: the full
+# account stays in cv-full.qmd. Two or three bullets per employer is the ceiling, and
+# `title:` and `place:` are kept to one line each — no `title-short:` / `place-short:`
+# twins, because no call here passes titles=short. Keep it that way when editing; the
+# page count is the point.
+#
+# `cv-me:` below is partial on purpose: it names only the headline. Name, positions,
+# links and the updated date fall back to `cv-me:` in _cv.yml, so they are still
+# written down once. Bump `cv-me.updated:` THERE, not here.
+#
+# Field documentation is the header comment of _cv.yml; the vocabulary is identical.
+
+cv-me:
+  # The website's headline is "Applied Economist and Open Source Data Scientist",
+  # which says neither statistician nor teacher. This one leads with both, because
+  # both are what the vacancy is buying.
+  headline: "Applied Economist. Statistician and R Programming Educator."
+
+cv:
+
+  # ---- profile -----------------------------------------------------------------
+
+  - type: profile
+    text: |
+      Statistician and applied economist who has spent a decade producing official
+      statistics, analysing household survey microdata, and teaching others to do the
+      same in R. My training is quantitative from the start — five years of applied
+      mathematics, statistics and econometrics — and my first full-time post was at
+      FAO's Statistics Division, where I implemented estimation methodology, coded the
+      computation in R and built the QA/QC that turned country submissions into
+      published FAOSTAT series. I then taught statistics and econometrics in R at
+      master's level for five consecutive years at JLU Giessen, and I have trained
+      statistical offices and government counterparts to run the analysis themselves:
+      small area estimation with Statistics Poland, fiscal incidence microsimulation
+      with counterparts in Indonesia and Georgia, and a course on AI-assisted coding in
+      R and Stata taken by more than 600 World Bank staff. My own work runs entirely on
+      open source — published R packages, R Shiny applications in the hands of
+      government users, and reproducible Git-based workflows that I teach alongside the
+      statistics. I read part of my master's at the University of Pretoria, where I
+      also led household survey fieldwork.
+
+  # ---- teaching and training ---------------------------------------------------
+  #
+  # The centre of gravity of this CV, and the reason it is a section of its own above
+  # Experience rather than a list beneath it. University courses and counterpart
+  # training sit side by side deliberately: for a statistical office the second is the
+  # relevant credential, and in _cv.yml it is a bullet buried inside an employer.
+  #
+  # Reverse-chronological, like every other section. One sentence of description each
+  # — the summary already carries the claim.
+
+  - type: teaching
+    period: "2026"
+    title: "AI-assisted coding for economists, in R and Stata"
+    place: "The World Bank · Open Learning Campus"
+    summary: >-
+      Designed and taught the Bank's internal course on using AI assistants and
+      GitHub Copilot to write R and Stata code; taken by more than 600 staff.
+    description: >-
+      Delivering it meant changing the toolchain as well as teaching it: I had Quarto
+      and the Positron IDE made available as Bank-wide software so that participants
+      could practise reproducible workflows rather than only hear about them. Materials
+      are open at [worldbank.github.io/ai4coding](https://worldbank.github.io/ai4coding/).
+
+  - type: teaching
+    period: "2025"
+    title: "Small area estimation and poverty mapping"
+    place: "Statistics Poland (GUS) · with The World Bank"
+    summary: >-
+      Trained the Polish national statistical office to produce its own small area
+      estimates of poverty — the method, the code that runs it, and the diagnostics
+      that say whether an estimate can be published.
+    description: >-
+      Taught against the office's own survey and census data rather than a worked
+      example, so that what the participants left with ran on the inputs they actually
+      hold.
+
+  - type: teaching
+    period: "2018 — 2025"
+    title: "Fiscal incidence microsimulation with the CEQ method"
+    place: "Government counterparts, Indonesia and Georgia · The World Bank"
+    summary: >-
+      Trained ministry analysts to build and run their own tax-and-transfer
+      microsimulations on household survey data, using the R tooling I developed for
+      the purpose.
+    description: >-
+      The point of the training was handover: the
+      [devCEQ](https://worldbank.github.io/devCEQ/) package and its R Shiny front end
+      exist so that a counterpart team can re-run the analysis, change the policy
+      parameters and defend the results without the consultant who built it.
+
+  - type: teaching
+    period: "2020 — 2024"
+    title: "Introduction to Statistics and Econometrics"
+    place: "MSc · in English · JLU Giessen"
+    summary: >-
+      Compulsory master's course, about 50 students a year for five consecutive years,
+      taught in English and delivered in R throughout.
+    description: >-
+      The cohort arrived from mixed academic backgrounds and many had never programmed,
+      so the course taught the statistics and the tooling together: descriptive
+      statistics, sampling and estimation, inference and hypothesis testing, each one
+      introduced and then carried out by the students in R on real data. They left able
+      to load, clean, describe and test a dataset of their own — the same outcome a
+      statistical office wants from training its staff.
+
+  - type: teaching
+    period: "2020 — 2024"
+    title: "Advanced Econometrics in the Social Sciences"
+    place: "MSc · in English · JLU Giessen"
+    summary: >-
+      A causal-inference course I designed and introduced, taught in R to a smaller,
+      self-selected cohort: randomized controlled trials, instrumental variables,
+      difference-in-differences and regression discontinuity.
+    description: >-
+      Built on the *Mostly Harmless Econometrics* toolbox, it trained students to
+      implement each method themselves rather than read about it, and to judge which
+      one a question actually calls for.
+
+  # ---- experience --------------------------------------------------------------
+  #
+  # The same six entries as _cv.yml and the same dates, rewritten so that each leads
+  # with what this reader is buying: statistics at FAO, microdata and poverty
+  # measurement at the Bank, survey data collection at IAMO, teaching at JLU, and all
+  # three together in the current post. Three bullets each at most.
+
+  - type: experience
+    period: "Feb 2025 — present"
+    title: "Economist, Global Poverty (full-time)"
+    place: "The World Bank · Washington DC"
+    summary: >-
+      Statistics, microdata and teaching in one post: I build the small area estimation
+      and poverty mapping tools that statistical offices run themselves, engineer the
+      microdata pipelines behind distributional analysis, and lead the Bank's adoption
+      of AI-assisted coding in R and Stata.
+    description: |
+      - *Small area estimation and poverty mapping.* Built client-ready estimation
+        tools, contributed to EU-wide poverty mapping, and trained the Polish national
+        statistical office to produce its own estimates.
+      - *Teaching and methodological innovation.* Launched an internal seminar series
+        and the [ai4coding](https://worldbank.github.io/ai4coding/) course, which
+        reached 600+ staff, and introduced Positron and Quarto as Bank-standard tools
+        for reproducible research.
+      - *Geospatial and micro statistics.* Co-initiated GeoPov, which joins remotely
+        sensed data to household microdata to measure spatial welfare disparities, and
+        engineered the pipelines behind the Bank's
+        [macro–micro simulations](https://worldbank.github.io/mml/).
+
+    references: "Carolina Diaz-Bonilla; Nobuo Yoshida; Klaus W. Deininger"
+
+  - type: experience
+    period: "Jan 2020 — Dec 2024"
+    title: "Lecturer in statistics and econometrics; researcher (20 h/week)"
+    place: "Institute for Agricultural Policy and Market Research · JLU Giessen"
+    summary: >-
+      Five consecutive years teaching statistics and econometrics in R at master's
+      level — the compulsory introductory course to the full cohort, and an advanced
+      causal-inference course I designed and introduced — alongside microeconometric
+      research on land markets and policy evaluation.
+    description: |
+      - *Teaching.* I wrote the syllabus and materials, taught the sessions and
+        examined the cohort. The challenge each year was the one a statistical office
+        faces when it retrains its staff: mixed backgrounds, uneven programming
+        experience, and a need to leave the room able to run the analysis rather than
+        to recognise it.
+      - *Research.* Microeconometric work on
+        [land market efficiency in Ukraine](https://doi.org/10.1016/j.landusepol.2024.107336)
+        and [land privatization in Kazakhstan](https://doi.org/10.1016/j.landusepol.2025.107741),
+        published in *Land Use Policy* and elsewhere, and CGE modelling in GAMS on the
+        BMBF-funded [ROCHADE](https://rochade-project.org/en/front-page) project.
+
+    references: "Prof. Dr. Martin Petrick"
+
+  - type: experience
+    period: "Mar 2018 — Jan 2025"
+    title: "Economist, short-term consultant (100–150 days/year)"
+    place: "The World Bank · Poverty & Equity Global Practice"
+    summary: >-
+      Household survey microdata for poverty measurement and policy analysis across
+      Africa, Asia, Europe and Latin America, and the R tooling that put the analysis
+      in the hands of the government analysts who had to maintain it.
+    description: |
+      - *Poverty measurement and microdata.* Worked country by country with household
+        budget and labour force surveys — harmonisation, welfare aggregates, QA/QC —
+        to measure who is poor and how taxes and transfers change that.
+      - *Fiscal incidence.* Developed the
+        [devCEQ](https://worldbank.github.io/devCEQ/) R package and built simulations
+        for Senegal, Côte d'Ivoire, Benin, Indonesia, Romania, Türkiye, El Salvador and
+        Armenia, training government counterparts to run them.
+      - *Geospatial targeting.* Developed the Project Targeting Index methodology and
+        the [devPTIpack](https://worldbank.github.io/devPTIpack/) R package, which
+        underpins more than 30 country analyses.
+
+  - type: experience
+    period: "Oct 2017 — Dec 2019"
+    title: "Researcher — survey data collection and management (20 h/week)"
+    place: "IAMO Leibniz Institute · Halle (Saale), Germany"
+    summary: >-
+      Led the second wave of the IAMO Farm Survey in Kazakhstan and other Central Asian
+      countries end to end — questionnaire design, pre-testing, interviewer training,
+      and the QA/QC that turned 600 collected interviews into an analysis dataset.
+    description: >-
+      Running a survey in the field is the other half of knowing what a statistic
+      means, and it is where the QA/QC habits I teach come from. The data supported
+      research on land and labour relations in agriculture, published in a
+      [series of articles and reports](https://ebukin.github.io/publications.html).
+
+  - type: experience
+    period: "Jun 2015 — Jan 2018"
+    title: "Statistician and trade economist (full-time)"
+    place: "Statistics Division and Trade & Markets Division · FAO · Rome"
+    summary: >-
+      Produced official statistics for FAOSTAT, FAO's global statistical database:
+      implemented estimation methodology, coded the computation in R, built the QA/QC
+      validation behind it, and compiled country-level data from national submissions
+      and UN Comtrade into published series.
+    description: |
+      - *Official statistics.* Implemented the greenhouse gas estimation methodology
+        and coded it in R (tidyverse, git) with its QA/QC validation; developed the
+        first version of FAOSTAT's emissions intensities database; updated the
+        agricultural inputs domains from UN Comtrade. This is the work of a statistical
+        office at global scale: country submissions in, documented and validated series
+        out.
+      - *Statistical tooling.* Built an R package, a teaching website and R Shiny
+        applications for managing and exploring trade data, and automated the team's
+        reporting in R Markdown — the same reproducible practice I now teach.
+      - *Outlook and trade policy.* Maintained FAO's AGLINK-COSIMO country modules for
+        the meat market and prepared the *OECD-FAO Agricultural Outlook 2017–2026* meat
+        projections; wrote policy briefs for the WTO 11th Ministerial Conference and
+        organised a workshop on WTO dispute settlement in Kyiv.
+
+    references: "Francesco N. Tubiello; Holger Matthey; Ekaterina Krivonos"
+
+  - type: experience
+    period: "2010 — 2015"
+    title: "Earlier positions and internships"
+    place: "Pretoria · Kyiv"
+    summary: >-
+      Alongside my studies: household survey fieldwork in South Africa and research
+      posts in Ukraine.
+    description: |
+      - 2014–2015, eight months — *Intern*, Postgraduate School of Agriculture and
+        Rural Development, **University of Pretoria**, South Africa. Led fieldwork and
+        household data collection for an impact assessment of inclusive business models
+        on emerging farmers, across four case studies.
+      - 2010–2013 — *Junior researcher* at the National University of Life and
+        Environmental Sciences of Ukraine (research data management and analysis in R
+        and PostgreSQL) and at the National University of the State Tax Service of
+        Ukraine (transfer pricing in agricultural exports).
+
+    references: "Prof. Dr. Andrii Skrypnyk"
+
+  # ---- flat lists --------------------------------------------------------------
+  #
+  # Reordered and reworded for this reader: teaching first, R second, then the survey
+  # and official-statistics skills, then the analysis. _cv.yml's list leads with causal
+  # inference, which is the right order for a research post and the wrong one here.
+  # Languages are not repeated — that call reads _cv.yml.
+
+  - type: skills
+    label: "Skills"
+    items:
+      - "Teaching statistics and econometrics (6+ yrs)"
+      - "Training statistical offices and government counterparts (8+ yrs)"
+      - "R, R Shiny and package development (12+ yrs)"
+      - "Reproducible workflows: Git, GitHub, Quarto, R Markdown (10+ yrs)"
+      - "Survey design, data collection and QA/QC (8+ yrs)"
+      - "Official statistics and statistical databases (3+ yrs)"
+      - "Household survey microdata and poverty measurement (8+ yrs)"
+      - "Small area estimation and poverty mapping (5+ yrs)"
+      - "Causal inference and impact evaluation (8+ yrs)"
+      - "Geospatial data analysis: R / Python / Google Earth Engine (8+ yrs)"
+      - "Stata (10+ yrs)"
