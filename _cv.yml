@@ -271,8 +271,8 @@ cv:
       - *GeoPov.* Co-initiated the GeoPov work programme, which combines remotely
         sensed geospatial data with microdata to measure the extent and
         determinants of spatial income and welfare disparities. Led the development
-        of the [Project Targeting Index](https://worldbank.github.io/devPTIpack/)
-        and its application across countries.
+        of the [Project Targeting Index](https://github.com/wbPTI) and its application
+        across countries.
       - *Micro-Modelling Lab (MML).* Engineered the data pipelines behind macro–micro
         simulations and
         [guided economists in scaling and replicating these methods across countries](https://worldbank.github.io/mml/).
@@ -336,11 +336,15 @@ cv:
         [devCEQ](https://worldbank.github.io/devCEQ/) R package — infrastructure
         for scaling up country-specific simulations — and built simulations for
         Senegal, Côte d'Ivoire, Benin, Indonesia, Romania, Türkiye, El Salvador
-        and Armenia. Trained government counterparts in Indonesia and Georgia.
+        and Armenia, with the country code and dashboards open at the
+        [Equity Policy Lab](https://github.com/wbEPL). Trained government counterparts
+        in Indonesia and Georgia.
       - *Project Targeting Index (PTI).* Developed the methodology and
         infrastructure for geospatial analysis that improves the spatial targeting
         of development projects. The [devPTIpack](https://worldbank.github.io/devPTIpack/)
-        R package underpins more than 30 country-specific PTI analyses.
+        R package underpins more than 30 country-specific PTI analyses; the package,
+        the dashboard guidelines and the country applications are open at
+        [github.com/wbPTI](https://github.com/wbPTI).
       - *Land economics.* Supported DEC's Transparent Land Governance in Ukraine
         project and co-authored several papers.
 
@@ -477,20 +481,95 @@ cv:
       published in Ukraine. Supervisor: Prof. Dr. Andrii Skrypnyk.
 
   # ---- teaching ----------------------------------------------------------------
+  #
+  # THE ONLY RECORD OF TEACHING, for every CV and every page. _cv-r-training.yml used
+  # to carry a second, reworded copy of these five entries for the NSO application CV;
+  # it does not any more, and Bukin-cv-R-training-NSO.qmd reads them from here with a
+  # call that carries no `from=`. What that CV actually needed was never different
+  # words but a different POSITION — Teaching lifted into a section of its own above
+  # Experience — and position is a property of the .qmd, not of the record. The two
+  # copies had already begun to drift; this is why `from=` is a last resort.
+  #
+  # Every course ends its `summary:` — NOT its `description:` — with a materials line,
+  # and the line always names a PAIR per cohort: the website first, its source
+  # repository second. A course taught more than once has one pair per year, because
+  # the materials differ each time and a single link would silently stand for the wrong
+  # cohort. The site link is written as ebukin.github.io/<repo>/ whether or not that
+  # site is published yet — the address is the stable fact, the deployment is not.
+  #
+  # The links live in the summary because a CV may print teaching at show=summary and
+  # drop the descriptions entirely — Bukin-cv-general.qmd and Bukin-cv-JRC-tax-2026.qmd
+  # both do, since neither is applying for a teaching post. A link buried in the
+  # description would vanish from exactly the CVs that have room for nothing but the
+  # link, so keep every materials line in `summary:`.
 
   - type: teaching
     period: "2026"
     title: "AI-assisted coding for economists"
-    place: "The World Bank"
+    place: "The World Bank · Open Learning Campus"
     in: [short, full]
     summary: >-
-      Internal course on coding in R and Stata with AI and GitHub Copilot, taken
-      by more than 600 World Bank staff.
+      Designed and taught the Bank's internal course on using AI assistants and GitHub
+      Copilot to write R and Stata code; taken by more than 600 staff. Materials —
+      [site](https://worldbank.github.io/ai4coding/) ·
+      [source](https://github.com/worldbank/ai4coding).
     description: >-
-      Course materials are open at
-      [worldbank.github.io/ai4coding](https://worldbank.github.io/ai4coding/).
-      Setting up the course included making Quarto and the Positron IDE
-      available as Bank-wide software.
+      Delivering it meant changing the toolchain as well as teaching it: I had Quarto
+      and the Positron IDE made available as Bank-wide software so that participants
+      could practise reproducible workflows rather than only hear about them.
+
+  # The two week-long counterpart programmes. They are entries here, and not just a
+  # clause inside their employers above, because each one is a course: a cohort, a
+  # syllabus that runs from the theory to the code, and a handover it is judged on.
+  # Reverse-chronological with the rest, so they sit between 2026 and the JLU years.
+
+  - type: teaching
+    period: "2025"
+    title: "Small area estimation and poverty mapping"
+    place: "Statistics Poland (GUS) · Poznań · with The World Bank"
+    in: [short, full]
+    summary: >-
+      A week with the national statistical office, teaching its statisticians to
+      produce their own small area estimates of poverty for Poland at NUTS-2 and
+      NUTS-3 level: the method, the R code that runs it, and how to maintain and
+      extend the toolbox afterwards. Curriculum and code —
+      [wbEUPM/eupm-pl](https://github.com/wbEUPM/eupm-pl).
+    description: |
+      I wrote the software the course teaches before teaching it — R packages and
+      structured data pipelines carrying the office's survey and census inputs through
+      direct estimation and Fay–Herriot modelling to a subnational poverty map — and
+      then delivered it in person at the Poznań centre. The week ran against the
+      office's own data rather than a worked example, so the code was being improved
+      and handed over at the same time, and it closed on the part that decides whether
+      a toolbox outlives the project: how to maintain it and develop it further without
+      me.
+
+  - type: teaching
+    period: "2018 — 2025"
+    title: "Fiscal incidence microsimulation with the CEQ method"
+    place: "Ministries of finance and social policy · The World Bank"
+    in: [short, full]
+    summary: >-
+      A week-long course per country for government analysts: the theory and mechanics
+      of tax-and-transfer incidence on household survey microdata, the R and Stata code
+      that implements it, and the R Shiny application that leaves the analysis in their
+      hands. Tooling — [Equity Policy Lab](https://github.com/wbEPL) ·
+      [devCEQ](https://worldbank.github.io/devCEQ/).
+    description: |
+      I took the lead on the analysis these courses teach — country by country, the
+      microsimulations that measure on household survey data how taxes and subsidies
+      reach household welfare — and then adapted that methodology into web-based
+      applications in R Shiny, deployed on Posit Connect and Shiny Server. What the
+      client receives is therefore a tool rather than a report: ministries of finance
+      and social policy simulate counterfactual tax and subsidy policies themselves and
+      read off the distributional, poverty and inequality consequences for households.
+      Each engagement hands over the simulation code in R and Stata alongside the
+      dashboard.
+
+      In Indonesia and Georgia I joined the country missions to teach it: a week each,
+      opening on the incidence theory and the mechanics behind the numbers, moving to
+      the code behind the tools, and closing on the capacity to develop them further —
+      in R or in whichever language the counterpart team already works in.
 
   - type: teaching
     period: "2020 — 2024"
@@ -498,12 +577,20 @@ cv:
     place: "MSc · English · JLU Giessen"
     in: [full]
     summary: >-
-      Compulsory course in the Transition Management master's programme, taught
-      in English to about 50 students a year.
+      Compulsory course in the Transition Management master's programme: about 50
+      students a year for five consecutive years, taught in English and delivered in
+      R throughout. Materials, one set per cohort —
+      [2023–24](https://ebukin.github.io/mk68-2023-24-public/)
+      ([source](https://github.com/EBukin/mk68-2023-24-public)) ·
+      [2022–23](https://ebukin.github.io/mk68-2022-23-public/)
+      ([source](https://github.com/EBukin/mk68-2022-23-public)) ·
+      [2021–22](https://ebukin.github.io/mk68-2021-22/)
+      ([source](https://github.com/EBukin/mk68-2021-22)).
     description: >-
-      Brought a cohort from mixed academic backgrounds to a common baseline in
-      statistics for the social sciences, with a focus on statistical inference
-      and hypothesis testing.
+      Many in the cohort had never programmed, so the course taught the statistics and
+      the tooling together: descriptive statistics, sampling and estimation, inference
+      and hypothesis testing, each carried out by the students in R on real data. They
+      left able to clean, describe and test a dataset of their own.
 
   - type: teaching
     period: "2020 — 2024"
@@ -511,13 +598,17 @@ cv:
     place: "MSc · English · JLU Giessen"
     in: [short, full]
     summary: >-
-      Causal inference for a smaller, self-selected cohort: randomized
-      controlled trials, instrumental variables, difference-in-differences and
-      regression discontinuity.
+      A causal-inference course I designed and introduced, taught in R to a smaller,
+      self-selected cohort: randomized controlled trials, instrumental variables,
+      difference-in-differences and regression discontinuity. Materials, one set per
+      cohort — [2023](https://ebukin.github.io/mp223-2023-aem-R-public/)
+      ([source](https://github.com/EBukin/mp223-2023-aem-R-public)) ·
+      [2022](https://ebukin.github.io/mp223-2022-aem-R-public/)
+      ([source](https://github.com/EBukin/mp223-2022-aem-R-public)).
     description: >-
-      Built on the *Mostly Harmless Econometrics* toolbox, the course trained
-      students to think critically about cause and effect: which method fits a
-      question, how to apply it, and why.
+      Built on the *Mostly Harmless Econometrics* toolbox, it trained students to
+      implement each method themselves rather than read about it, and to judge which
+      one a question actually calls for.
 
 
   # ---- projects and software -----------------------------------------------------
@@ -555,8 +646,7 @@ cv:
     summary: "A departmental programme combining microdata with geospatial data to measure spatial income and welfare disparities."
     description: |
       Co-initiated; it also carries the
-      [Project Targeting Index](https://worldbank.github.io/devPTIpack/) into
-      country applications.
+      [Project Targeting Index](https://github.com/wbPTI) into country applications.
 
   - type: software
     title: "peaApp"
@@ -572,7 +662,8 @@ cv:
     description: |
       Deployed for Senegal, Côte d'Ivoire, Benin, Indonesia, Romania, Türkiye, El
       Salvador and Armenia, with capacity building in Indonesia and Georgia.
-      [worldbank.github.io/devCEQ](https://worldbank.github.io/devCEQ/)
+      [worldbank.github.io/devCEQ](https://worldbank.github.io/devCEQ/) ·
+      [github.com/wbEPL](https://github.com/wbEPL)
 
   - type: software
     title: "devPTIpack"
@@ -580,7 +671,8 @@ cv:
     summary: "Project Targeting Index tooling: spatial and micro data combined to improve how development projects choose where to work."
     description: |
       Used in more than 30 country-specific analyses across Africa and Asia.
-      [worldbank.github.io/devPTIpack](https://worldbank.github.io/devPTIpack/)
+      [worldbank.github.io/devPTIpack](https://worldbank.github.io/devPTIpack/) ·
+      [github.com/wbPTI](https://github.com/wbPTI)
 
   - type: software
     title: "lassopmm"

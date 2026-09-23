@@ -11,16 +11,22 @@ toc: false
 # Courses and training {.display-name}
 
 ::: {.lede}
-Five years of MSc econometrics at Justus Liebig University Giessen, and a continuing
-training programme for economists at the World Bank.
+Five years of MSc statistics and econometrics at Justus Liebig University Giessen;
+week-long courses that hand fiscal incidence microsimulation and poverty mapping over
+to the finance ministries and national statistical offices that have to run them; and a
+continuing training programme for economists at the World Bank.
 :::
 :::
 
-<!-- The courses come from _cv.yml — the same entries the CV page shows under Teaching
-     and cv-full.qmd prints. This page used to restate all three as cards, which meant
-     every course was written down twice. -->
+<!-- Every entry comes from _cv.yml — the same records the CV page shows under Teaching
+     and cv-full.qmd prints. This page used to restate the university courses as cards,
+     which meant every course was written down twice.
 
-## Courses {.split}
+     University teaching and counterpart training are one list on purpose: both are a
+     cohort taken from the theory to the code, and separating them would suggest the
+     second is something other than teaching. -->
+
+## Courses and training {.split}
 
 ::: {.timeline}
 {{< cv type=teaching >}}

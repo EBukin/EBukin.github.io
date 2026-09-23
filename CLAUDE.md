@@ -72,23 +72,44 @@ as an empty PDF beside its source.
 
 An application CV comes in one of **two shapes**, and which one it needs is decided by
 whether the record can be *reselected* or has to be *reworded*. `Bukin-cv-JRC-tax-2026.qmd`
-and `Bukin-cv-general.qmd` are the first shape: `cv-full.qmd` with one line changed, so every
-section but `## About` is the full CV. `cv/Bukin-cv-R-training-NSO.qmd` is the second — for
+and `Bukin-cv-general.qmd` are the first shape: `cv-full.qmd` with two lines changed, so
+every section but `## About` and `## Teaching` is the full CV. Their About is a profile of
+their own, and their Teaching prints at `show=summary` rather than `show=full` — neither is a
+teaching application, so a course is worth a line there and no more. `cv/Bukin-cv-R-training-NSO.qmd` is the second — for
 training posts at national statistical offices, where the reader is buying a teacher of
 statistics. It reorders the CV (Education above Experience; Teaching and training promoted
 into a section of its own above Experience; an `R packages and tools` section no other CV
 prints; no scholarships) and rewrites the employer entries so that FAO leads with official
 statistics, JLU with five years of teaching and IAMO with survey data collection. `in:`
 cannot do that — it selects entries, it cannot reword them — so those entries come from a
-**second record**, `_cv-r-training.yml`, read with `from=` (see `{{< cv >}}` below). Its
-calls that carry no `from=` still read `_cv.yml` and `_publications.yml`, so education,
-software, languages and every publication stay in one place. It is four pages, the same as
-`cv-full.pdf` and one shorter than `Bukin-cv-general.pdf`, with the publication list costing
-it nothing — it renders inside the space already on the last page.
+**second record**, `_cv-r-training.yml`, read with `from=` (see `{{< cv >}}` below). That
+record holds a profile, the six employer entries and a skills list, and nothing else. Its
+calls that carry no `from=` still read `_cv.yml` and `_publications.yml`, so teaching,
+education, software, languages and every publication stay in one place.
+
+**Teaching is the worked example of what `from=` is NOT for.** That record used to carry a
+reworded copy of all five teaching entries, on the reasoning that they are the centre of
+gravity of this CV — which they are. But being central is not the same as needing different
+words: what the CV wanted was a different *position* for them, a section above Experience,
+which the `.qmd` decides by itself. The two copies drifted within a fortnight, and the
+entries now live only in `_cv.yml`, read here by a plain `{{< cv type=teaching show=full >}}`.
+Before reaching for `from=`, ask whether what you want is really different wording, or only
+different placement or a different selection; the last two are free.
+
+It is four pages, one shorter than `cv-full.pdf` and `Bukin-cv-general.pdf`, with the
+publication list costing it nothing — it renders inside the space already on the last page.
+Four is a budget, not an observation, and holding it is now harder in one specific way: the
+teaching entries are shared, so they cannot be trimmed for this CV alone. The slack has to
+come from what this file still owns — its profile and its employer entries — and there is a
+natural source there, because promoting teaching into its own section makes any employer
+bullet that merely *names* a course redundant with the section above it. Both the JLU and the
+current World Bank entries were cut back that way. A fifth page carrying two lines is the
+failure mode; check the count after editing either record.
 
 Reach for a second record only when the *words* have to change. A different selection of the
-same words is `in:`, and a different opening paragraph is a `profile` entry; both are
-cheaper, and neither can drift out of step with the record the way a rewritten entry can.
+same words is `in:`, a different opening paragraph is a `profile` entry, and a different
+*place* in the document is just the order of calls in the `.qmd`; all three are cheaper, and
+none of them can drift out of step with the record the way a rewritten entry can.
 
 **The PDF design** is `cv/_typst-style.typ`, and it is a plain-Typst adaptation of
 [modern-cv](https://typst.app/universe/package/modern-cv/) — itself a port of Awesome-CV:
@@ -282,6 +303,47 @@ two on collapsed whitespace and logs `(W) cv: ...` at render time when a descrip
 by restating its summary. A clean render of `cv.qmd` prints no such line; treat one as a
 defect. An entry with no `description:` at all is fine, and comes out as a plain row with
 no `+`, because there would be nothing behind it.
+
+**Teaching is a section of courses, not of university courses.** The five `type: teaching`
+entries in `_cv.yml` mix master's courses at JLU with the week-long counterpart programmes —
+small area estimation with Statistics Poland at Poznań, and fiscal incidence microsimulation
+for ministries of finance and social policy in Indonesia and Georgia. The counterpart ones
+are entries in their own right, and not merely a clause inside the employer that paid for
+them, because each is a course with a cohort, a syllabus running from the theory to the code,
+and a handover it is judged on; the employer entries above them only have room to name them.
+`teaching.qmd`, `cv.qmd` and `cv-full.qmd` therefore all print both kinds in one list, and
+`Bukin-cv-R-training-NSO.qmd` prints the same five, from the same place, in a section of its
+own above Experience — position is all it changes. The
+tooling each one teaches is linked from the entry: [wbEUPM/eupm-pl](https://github.com/wbEUPM/eupm-pl)
+for poverty mapping, [wbEPL](https://github.com/wbEPL) for fiscal incidence, and
+[wbPTI](https://github.com/wbPTI) for the Project Targeting Index — organisation first, package
+site second, since the organisation is what a reader can browse.
+
+**Every teaching entry ends its `summary:` on a materials line, and the unit is a cohort,
+not a course.** The line names a *pair* — the website first, its source repository second —
+and a course taught more than once carries one pair per year, because the materials were
+rewritten each time and one link would silently stand for the wrong cohort. So `mk68` (the
+introductory course) lists 2023–24, 2022–23 and 2021–22, and `mp223` (the advanced one) lists
+2023 and 2022. The website is always written `ebukin.github.io/<repo>/` even where that site
+is not published: the address is the stable fact and the deployment is not, so the link is
+written once and starts working when the site does.
+
+**The materials line belongs in `summary:`, never in `description:`** — this is the one place
+the usual division of labour between the two fields is overridden on purpose. A CV that is
+not applying for a teaching post prints teaching at `show=summary` and drops every
+description, so a link written into the description would disappear from precisely the CVs
+that have room for nothing else. Putting it in the summary means it survives every depth: it
+is the visible row on `teaching.qmd` and `cv.qmd`, the whole entry in the general and JRC
+CVs, and the opening paragraph above the long text in `cv-full.pdf` and the NSO CV. The
+consequence on the web is that `.sum` now carries links inside a `<summary>` element — the
+same thing a disclosure-shaped publication row already does with `.ttl`, so the pattern is
+not new. `_cv.yml` carries the rule as a comment above its teaching entries.
+
+Some of those repositories are private today and the links 404 for a reader who is not
+signed in — `EBukin/mk68-2021-22` and `EBukin/mk68-2022-23-public`, and the GitHub Pages
+sites for all three `mk68` cohorts. They are written anyway, by the rule above. Making the
+repositories public, and publishing their sites, is what fixes them; do not quietly delete
+a link instead.
 
 `cv.qmd` is now section headings and `{{< cv >}}` calls — none of the raw `<details>` markup it
 used to carry is left in the file. The Short / Full buttons are the only JavaScript the site

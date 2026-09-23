@@ -38,7 +38,11 @@
 
 ## Teaching
 
-{{< cv type=teaching in=full show=full >}}
+<!-- show=summary, unlike cv-full.qmd: this is not a teaching application, so the
+     courses are worth a line each and no more. The materials links survive the cut
+     because they live in `summary:` in ../_cv.yml, not in `description:`. -->
+
+{{< cv type=teaching in=full show=summary >}}
 
 ## Publications
 
