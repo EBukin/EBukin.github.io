@@ -17,7 +17,8 @@
 --
 -- Options:
 --
---   type=experience   one type, or a comma-separated set; omitted means every type
+--   type=experience   one type, or a comma-separated set; omitted means every type.
+--                     `type=expertise` is HTML-only — see web_skills() below
 --   from=r-training   read _cv-r-training.yml at the project root instead of the
 --                     merged _cv.yml — an alternative record for an application CV
 --                     that has to tell the same jobs a different way. Per call, so
@@ -305,6 +306,51 @@ local function web_list(entry)
 
   return pandoc.Div(inner, pandoc.Attr('', { 'cv-list', 'cv-entry' },
                     { ['data-in'] = table.concat(variants_of(entry), ' ') }))
+end
+
+-- `type: expertise` — the grouped skills taxonomy, and the one type that is rendered
+-- for the web and for nothing else. Each entry is a GROUP, and it comes out as a whole
+-- `.section-split` row of its own: the `label:` in the narrow left column under a
+-- rule, the skills on the rail to its right. That is why this returns the wrapper and
+-- web_entry() does not — every other section on cv.qmd writes its own `.section-split`
+-- by hand around the call, but ten groups cannot each be written by hand around one.
+--
+-- No new CSS: a skill reuses the entry row the CV timeline already has, `.role` over
+-- `.sum`, in the shape `project` and `software` entries take when they carry no date
+-- and have nothing to disclose. The `data-in` on each row is what lets the Short /
+-- Full switcher hide the group and take its label with it.
+local function web_skills(entry)
+  local variant = table.concat(variants_of(entry), ' ')
+
+  local rows = pandoc.Blocks{}
+  for _, item in ipairs(entry.skills or {}) do
+    local head = pandoc.List{}
+    if item.name then
+      head:insert(pandoc.Span(inls(item.name), pandoc.Attr('', { 'role' })))
+    end
+    if item.text then
+      -- Joined by a space for the same reason web_entry() does it: both spans are
+      -- `display: block` on the page, but the llms.txt copy and the search index are
+      -- plain text and would otherwise run the name into its description.
+      if #head > 0 then head:insert(pandoc.Space()) end
+      head:insert(pandoc.Span(inls(item.text), pandoc.Attr('', { 'sum' })))
+    end
+    rows:insert(pandoc.Div(pandoc.Blocks{ pandoc.Plain(pandoc.Span(head)) },
+                           pandoc.Attr('', { 'cv-entry' }, { ['data-in'] = variant })))
+  end
+
+  local label = pandoc.Blocks{}
+  if entry.label then
+    label:insert(pandoc.Plain{
+      pandoc.Span(inls(entry.label), pandoc.Attr('', { 'eyebrow' })),
+    })
+    label:insert(pandoc.HorizontalRule())
+  end
+
+  return pandoc.Div(pandoc.Blocks{
+    pandoc.Div(label, pandoc.Attr('', { 'label' })),
+    pandoc.Div(rows,  pandoc.Attr('', { 'timeline' })),
+  }, pandoc.Attr('', { 'section-split' }))
 end
 
 -- ---- typst ------------------------------------------------------------------
@@ -658,7 +704,9 @@ return {
     if quarto.doc.is_format('html') then
       local blocks = pandoc.Blocks{}
       for _, entry in ipairs(entries) do
-        if entry.items then
+        if entry.skills then
+          blocks:insert(web_skills(entry))
+        elseif entry.items then
           blocks:insert(web_list(entry))
         elseif entry.text then
           blocks:insert(pandoc.Div(prose_of(entry), pandoc.Attr('', { 'cv-entry' },
@@ -673,7 +721,20 @@ return {
 
     local blocks = pandoc.Blocks{}
     for _, entry in ipairs(entries) do
-      if entry.items then
+      if entry.skills then
+        -- `type: expertise` is the website's own section and has no PDF form: forty
+        -- skills at two lines each is most of a page, and a CV that wants a skills
+        -- section wants the reader to finish it. So it is skipped here, silently, the
+        -- way `project` and `software` are simply never asked for by a CV.
+        --
+        -- Silently, and not with a warning, because there is no reliable way to ask
+        -- from inside a shortcode whether this document is really a PDF. Quarto runs
+        -- the filter over a document more than once — the quirk cv-header works around
+        -- with a module-level flag — and on at least one of those passes a plain HTML
+        -- page answers to is_format('typst') as well as to is_format('html'). Both
+        -- spellings of the guard made every render of cv.qmd print ten warnings about
+        -- PDFs it was not making, which is worse than no warning at all.
+      elseif entry.items then
         blocks:extend(cv_list(entry))
       elseif entry.text then
         blocks:extend(cv_detail(prose_of(entry)))

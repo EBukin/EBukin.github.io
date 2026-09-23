@@ -62,9 +62,6 @@
 
 {{< pubs type=thesis show=none >}}
 
-## Skills
-
-{{< cv type=skills in=full >}}
 
 ## Languages
 

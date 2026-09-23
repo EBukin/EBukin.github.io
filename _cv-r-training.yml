@@ -196,25 +196,3 @@ cv:
         PostgreSQL) and at the National University of the State Tax Service of Ukraine.
 
     references: "Prof. Dr. Andrii Skrypnyk"
-
-  # ---- flat lists --------------------------------------------------------------
-  #
-  # Reordered and reworded for this reader: teaching first, R second, then the survey
-  # and official-statistics skills, then the analysis. _cv.yml's list leads with causal
-  # inference, which is the right order for a research post and the wrong one here.
-  # Languages are not repeated — that call reads _cv.yml.
-
-  - type: skills
-    label: "Skills"
-    items:
-      - "Teaching statistics and econometrics (6+ yrs)"
-      - "Training statistical offices and government counterparts (8+ yrs)"
-      - "R, R Shiny and package development (12+ yrs)"
-      - "Reproducible workflows: Git, GitHub, Quarto, R Markdown (10+ yrs)"
-      - "Survey design, data collection and QA/QC (8+ yrs)"
-      - "Official statistics and statistical databases (3+ yrs)"
-      - "Household survey microdata and poverty measurement (8+ yrs)"
-      - "Small area estimation and poverty mapping (5+ yrs)"
-      - "Causal inference and impact evaluation (8+ yrs)"
-      - "Geospatial data analysis: R / Python / Google Earth Engine (8+ yrs)"
-      - "Stata (10+ yrs)"

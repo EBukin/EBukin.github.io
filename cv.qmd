@@ -85,6 +85,15 @@ print, so there is one place to bump when the record changes. -->
 :::
 :::
 
+<!-- The skills taxonomy, and the only part of this page that writes no
+     `.section-split` of its own: `type: expertise` is ten groups and the shortcode
+     emits a whole labelled section per group, so the call sits at the top level here
+     rather than inside a wrapper. It is web-only: cv.lua renders `type: expertise` for
+     HTML and skips it for Typst, so no PDF carries it. Every group is `in: [full]`, so
+     the Short view drops the lot. -->
+
+{{< cv type=expertise >}}
+
 ::: {.section-split}
 ::: {.label}
 [Background]{.eyebrow}
@@ -92,8 +101,6 @@ print, so there is one place to bump when the record changes. -->
 ***
 :::
 ::: {}
-{{< cv type=skills >}}
-
 {{< cv type=languages >}}
 
 <!-- {{< cv type=scholarships >}} -->

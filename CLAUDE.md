@@ -213,7 +213,7 @@ the file into all page metadata and registers `_templates/cv.lua`, which impleme
 `{{< cv >}}` shortcode:
 
 ```
-{{< cv type=experience >}}          one type, or "skills,languages" (required)
+{{< cv type=experience >}}          one type, or "languages,scholarships" (required)
 {{< cv from=r-training type=experience >}}  read _cv-r-training.yml, not _cv.yml
 {{< cv type=education in=short >}}  keep only entries whose `in:` names this variant
 {{< cv type=teaching show=full >}}  none | summary (default) | full
@@ -221,7 +221,7 @@ the file into all page metadata and registers `_templates/cv.lua`, which impleme
 {{< cv type=experience limit=3 >}}  cap the list
 ```
 
-Three shapes of entry, told apart by `type:`:
+Four shapes of entry, told apart by `type:`:
 
 - **dated** — `experience`, `education`, `teaching`, `project`, `software`. `period:` /
   `title:` / `place:` (each of the latter two with an optional `-short` twin, used only at
@@ -238,12 +238,39 @@ Three shapes of entry, told apart by `type:`:
   research stream or a package and an invented range would be worse than no line at all. A
   row without one simply opens on its title, and the section label above it carries the
   accent instead.
-- **flat** — `skills`, `languages`, `scholarships`. Only `items:`, a list of strings. Rendered
+- **flat** — `languages`, `scholarships`. Only `items:`, a list of strings. Rendered
   as `.chip-out` chips on the web and as one ` · `-joined paragraph in the PDFs; `show=` does
   not apply to them.
 - **prose** — `profile`. Only `text:`, the `## About` / `## Profile` paragraph at the top of a
   CV, one entry per variant chosen with `in:`. The one shape that comes out identically in
   both formats, and `show=` does not apply to it either.
+- **skill group** — `expertise`, and the only shape that has no PDF form at all. A `label:`
+  naming the group and a `skills:` list of `name:` / `text:` pairs. `skills:` rather than
+  `items:` is what tells it apart from a flat list in `cv.lua`. `show=` does not apply.
+
+**The skills taxonomy is the website's alone.** `type: expertise` is ten groups and some
+forty skills, each a name over a line of detail, and `cv.lua` renders it for HTML and skips
+it for Typst — so `{{< cv type=expertise >}}` on `cv.qmd` is the only call anywhere and no
+CV carries it. The flat `type: skills` chip row the PDFs used to print is gone with it,
+from both records: every fact it held is in the taxonomy, and keeping both would have been
+two records of one thing drifting apart, which the teaching entries had already taught once.
+The PDFs got the space back — `Bukin-cv-JRC-tax-2026.pdf` fell to four pages on the change.
+
+It is also the one call that writes no `.section-split` around itself. Every other section
+of `cv.qmd` is a hand-written wrapper holding a `.label` and a content column, but ten
+groups cannot each be written by hand, so the shortcode emits the whole labelled section per
+group and the call sits at the top level of the page. Inside, a skill reuses the row the CV
+timeline already has — `.role` over `.sum`, the shape a `project` or `software` entry takes
+when it has no date and nothing to disclose — so the taxonomy introduced no CSS. Each row
+carries `data-in="full"`, which is what lets the Short view hide every group and take its
+label with it.
+
+The Typst branch skips `expertise` **silently**, and that is deliberate rather than lazy: a
+shortcode cannot reliably ask whether the document it is in is really a PDF. Quarto runs the
+filter over a document more than once — the quirk `cv-header` works around with a
+module-level flag — and on at least one of those passes a plain HTML page answers to
+`is_format('typst')` as well as to `is_format('html')`. A guard written either way made
+every render of `cv.qmd` print ten warnings about PDFs it was not making.
 
 `_templates/cv.lua` also provides two shortcodes that take no entries at all:
 
