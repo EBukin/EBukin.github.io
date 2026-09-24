@@ -58,6 +58,14 @@
 #                 it; cv.lua warns at render time if it opens by repeating it
 #   references    optional; people who can be contacted about the position. Printed
 #                 only in the PDFs, and only at show=full
+#   materials     teaching only. Where the course's materials are, AS DATA: a `lead:`
+#                 (the words before the dash — "Materials, one set per cohort") and
+#                 `sets:`, one per cohort, each a `url:`, an optional `source:`
+#                 repository, an optional `name:` (the cohort, "2023–24"; the address
+#                 stands in without one), a `text:` saying what the set holds, and an
+#                 optional `note:` for a caveat. cv.lua appends the one-line form to
+#                 `summary:` wherever the summary prints, and prints the whole block
+#                 only at show=materials — teaching.qmd. See the teaching section
 #
 # A FLAT LIST — type: languages | scholarships
 #
@@ -101,7 +109,8 @@
 #                       profiles under Highlights; the buttons choose depth
 #   index.qmd           the ds-causal-short profile, as the lede under the name
 #   projects.qmd        type=project and type=software
-#   teaching.qmd        type=teaching
+#   teaching.qmd        type=teaching show=materials — every course open, with the
+#                       materials block under it
 #   cv/cv-full.qmd      in=full      show=full       summary + long text, references
 #   cv/cv-short.qmd     in=short     show=summary    one sentence per entry
 #   cv/Bukin-cv-JRC-tax-2026.qmd     as cv-full.qmd, but its About is the
@@ -638,18 +647,28 @@ cv:
   # Experience — and position is a property of the .qmd, not of the record. The two
   # copies had already begun to drift; this is why `from=` is a last resort.
   #
-  # Every course ends its `summary:` — NOT its `description:` — with a materials line,
-  # and the line always names a PAIR per cohort: the website first, its source
-  # repository second. A course taught more than once has one pair per year, because
-  # the materials differ each time and a single link would silently stand for the wrong
-  # cohort. The site link is written as ebukin.github.io/<repo>/ whether or not that
-  # site is published yet — the address is the stable fact, the deployment is not.
+  # Every course carries its materials AS DATA, in `materials:` — one set per cohort,
+  # the website first and its source repository second, because the materials were
+  # rewritten each year and a single link would silently stand for the wrong cohort.
+  # cv.lua reads the sets two ways. Everywhere the summary prints — the row on cv.qmd,
+  # every CV at every depth — it appends the one-line form to it: "Materials, one set
+  # per cohort — 2023–24 (source) · 2022–23 (source)." And at show=materials, which
+  # only teaching.qmd asks for, it prints a block under the entry instead, with each
+  # set's addresses, its `text:` and its `note:`. The line used to be written into
+  # `summary:` by hand; generating it is what keeps every address written down once.
   #
-  # The links live in the summary because a CV may print teaching at show=summary and
-  # drop the descriptions entirely — Bukin-cv-general.qmd and Bukin-cv-JRC-tax-2026.qmd
-  # both do, since neither is applying for a teaching post. A link buried in the
-  # description would vanish from exactly the CVs that have room for nothing but the
-  # link, so keep every materials line in `summary:`.
+  # The line rides with the summary and not the description because a CV that is not
+  # applying for a teaching post prints teaching at show=summary and drops every
+  # description — Bukin-cv-general.qmd and Bukin-cv-JRC-tax-2026.qmd both do — and a
+  # link that lived in the description would vanish from exactly the CVs that have
+  # room for nothing but the link.
+  #
+  # The site address is written as ebukin.github.io/<repo>/ whether or not that site is
+  # published yet — the address is the stable fact, the deployment is not — and a set
+  # whose repository is still private says so in its `note:` rather than losing the
+  # link. A `text:` describes the SET, what was written for that cohort and how it is
+  # organised; the course itself is the `summary:` and `description:` above it, so the
+  # two must not say the same thing.
 
   - type: teaching
     period: "2026"
@@ -658,13 +677,24 @@ cv:
     in: [short, full]
     summary: >-
       Designed and taught the Bank's internal course on using AI assistants and GitHub
-      Copilot to write R and Stata code; taken by more than 600 staff. Materials —
-      [site](https://worldbank.github.io/ai4coding/) ·
-      [source](https://github.com/worldbank/ai4coding).
+      Copilot to write R and Stata code; taken by more than 600 staff.
     description: >-
       Delivering it meant changing the toolchain as well as teaching it: I had Quarto
       and the Positron IDE made available as Bank-wide software so that participants
       could practise reproducible workflows rather than only hear about them.
+    materials:
+      sets:
+        - url: "https://worldbank.github.io/ai4coding/"
+          source: "https://github.com/worldbank/ai4coding"
+          text: >-
+            Two days in the classroom with a self-study block between them. Before the
+            first day, a setup guide for Stata, R and Python with Positron, Quarto, Git
+            and GitHub Copilot, with troubleshooting for each step; day one, live
+            demonstrations of cleaning data, reproducing an existing analysis and
+            handling sensitive data under the Bank's guidelines; four guided self-study
+            exercises; day two, multi-step agentic tasks, external tools through MCP
+            and prompts written for one's own work. The April 2026 sessions at
+            headquarters were recorded for Bank staff.
 
   # The two week-long counterpart programmes. They are entries here, and not just a
   # clause inside their employers above, because each one is a course: a cohort, a
@@ -680,8 +710,7 @@ cv:
       A week with the national statistical office, teaching its statisticians to
       produce their own small area estimates of poverty for Poland at NUTS-2 and
       NUTS-3 level: the method, the R code that runs it, and how to maintain and
-      extend the toolbox afterwards. Curriculum and code —
-      [wbEUPM/eupm-pl](https://github.com/wbEUPM/eupm-pl).
+      extend the toolbox afterwards.
     description: |
       I wrote the software the course teaches before teaching it — R packages and
       structured data pipelines carrying the office's survey and census inputs through
@@ -691,6 +720,18 @@ cv:
       and handed over at the same time, and it closed on the part that decides whether
       a toolbox outlives the project: how to maintain it and develop it further without
       me.
+    materials:
+      lead: "Curriculum and code"
+      sets:
+        - url: "https://github.com/wbEUPM/eupm-pl"
+          text: >-
+            A Quarto project that takes the office's statisticians through the pipeline
+            one step at a time — the geometries, direct estimates from the survey, the
+            auxiliary variables, Fay–Herriot models within a year and across years,
+            their multivariate extension, an exploratory pass over the resulting poverty
+            estimates and a comparison of the models — with the R functions and scripts
+            behind each step and a pinned package environment, so that the office can
+            rerun and extend it on its own.
 
   - type: teaching
     period: "2018 — 2025"
@@ -701,8 +742,7 @@ cv:
       A week-long course per country for government analysts: the theory and mechanics
       of tax-and-transfer incidence on household survey microdata, the R and Stata code
       that implements it, and the R Shiny application that leaves the analysis in their
-      hands. Tooling — [Equity Policy Lab](https://github.com/wbEPL) ·
-      [devCEQ](https://worldbank.github.io/devCEQ/).
+      hands.
     description: |
       I took the lead on the analysis these courses teach — country by country, the
       microsimulations that measure on household survey data how taxes and subsidies
@@ -718,6 +758,24 @@ cv:
       opening on the incidence theory and the mechanics behind the numbers, moving to
       the code behind the tools, and closing on the capacity to develop them further —
       in R or in whichever language the counterpart team already works in.
+    materials:
+      lead: "Tooling"
+      sets:
+        - name: "Equity Policy Lab"
+          url: "https://github.com/wbEPL"
+          text: >-
+            The GitHub organisation of the World Bank's Equity Policy Lab, where the
+            country microsimulation models and their Shiny applications are kept — most
+            of them private to the client government — beside a public
+            [example fiscal microsimulation model](https://github.com/wbEPL/Example_FiscalSim_v1)
+            written for training.
+        - name: "devCEQ"
+          url: "https://worldbank.github.io/devCEQ/"
+          source: "https://github.com/worldbank/devCEQ"
+          text: >-
+            The R package the applications are built with. Its site documents how a
+            country's incidence analysis becomes an interactive tool that a ministry
+            analyst can run, and the package source is beside it.
 
   - type: teaching
     period: "2020 — 2024"
@@ -727,18 +785,53 @@ cv:
     summary: >-
       Compulsory course in the Transition Management master's programme: about 50
       students a year for five consecutive years, taught in English and delivered in
-      R throughout. Materials, one set per cohort —
-      [2023–24](https://ebukin.github.io/mk68-2023-24-public/)
-      ([source](https://github.com/EBukin/mk68-2023-24-public)) ·
-      [2022–23](https://ebukin.github.io/mk68-2022-23-public/)
-      ([source](https://github.com/EBukin/mk68-2022-23-public)) ·
-      [2021–22](https://ebukin.github.io/mk68-2021-22/)
-      ([source](https://github.com/EBukin/mk68-2021-22)).
+      R throughout.
     description: >-
       Many in the cohort had never programmed, so the course taught the statistics and
       the tooling together: descriptive statistics, sampling and estimation, inference
       and hypothesis testing, each carried out by the students in R on real data. They
       left able to clean, describe and test a dataset of their own.
+    materials:
+      lead: "Materials, one set per cohort"
+      sets:
+        - name: "2023–24"
+          url: "https://ebukin.github.io/mk68-2023-24-public/"
+          source: "https://github.com/EBukin/mk68-2023-24-public"
+          text: >-
+            Seven weeks of revealjs lecture decks, thirteen in all: population and
+            sample; descriptive statistics; distributions, variance and quantiles;
+            bivariate data, correlation and causation; cause and effect in randomised
+            trials and the first hypothesis tests; the central limit theorem, the
+            t-distribution and confidence intervals; simple and multiple regression,
+            bias and the regression assumptions. With them, the PDF handouts as they
+            were distributed to the 2023–24 and 2024–25 cohorts.
+          # note: >-
+          #   The repository is public; the site is not published yet, and the first
+          #   address will start working when it is.
+        - name: "2022–23"
+          url: "https://ebukin.github.io/mk68-2022-23-public/"
+          source: "https://github.com/EBukin/mk68-2022-23-public"
+          text: >-
+            Eight weeks of revealjs decks on the same syllabus, with a longer regression
+            block at the end: a recap of simple regression and its causal reading,
+            linearity, bias and efficiency, and multiple regression worked through on
+            land prices and on a production function.
+          # note: >-
+          #   The repository is private and the site unpublished; both addresses will
+          #   start working when it is opened.
+        - name: "2021–22"
+          url: "https://ebukin.github.io/mk68-2021-22/"
+          source: "https://github.com/EBukin/mk68-2021-22"
+          text: >-
+            The R Markdown (xaringan) decks of the early cohorts, in three blocks —
+            introduction, ceteris paribus, sample versus population, descriptive
+            statistics and hypothesis testing; simple and multiple linear regression and
+            linearity; bias, collinearity, endogeneity and heteroscedasticity — and the
+            homework: problem sets drawn from a bank of ten exercises, generated in five
+            variants each, with their solutions.
+          # note: >-
+          #   The repository is private and the site unpublished; both addresses will
+          #   start working when it is opened.
 
   - type: teaching
     period: "2020 — 2024"
@@ -748,16 +841,40 @@ cv:
     summary: >-
       A causal-inference course I designed and introduced, taught in R to a smaller,
       self-selected cohort: randomized controlled trials, instrumental variables,
-      difference-in-differences and regression discontinuity. Materials, one set per
-      cohort — [2023](https://ebukin.github.io/mp223-2023-aem-R-public/)
-      ([source](https://github.com/EBukin/mp223-2023-aem-R-public)) ·
-      [2022](https://ebukin.github.io/mp223-2022-aem-R-public/)
-      ([source](https://github.com/EBukin/mp223-2022-aem-R-public)).
+      difference-in-differences and regression discontinuity.
     description: >-
       Built on the *Mostly Harmless Econometrics* toolbox, it trained students to
       implement each method themselves rather than read about it, and to judge which
       one a question actually calls for.
-
+    materials:
+      lead: "Materials, one set per cohort"
+      sets:
+        - name: "2023"
+          url: "https://ebukin.github.io/mp223-2023-aem-R-public/"
+          source: "https://github.com/EBukin/mp223-2023-aem-R-public"
+          text: >-
+            A fifteen-week plan with each week's materials beside it: thirteen lecture
+            decks in HTML and PDF — introduction and selection bias, R and RStudio,
+            multiple regression in two parts, interaction terms,
+            difference-in-differences, omitted variable bias, panel regression and the
+            production function, instrumental variables with worked examples, regression
+            discontinuity — seven exercises as downloadable R projects with their data,
+            from a randomised trial to instrumental variables, and recorded walkthroughs
+            of the lectures and the exercises on YouTube.
+        - name: "2022"
+          url: "https://ebukin.github.io/mp223-2022-aem-R-public/"
+          source: "https://github.com/EBukin/mp223-2022-aem-R-public"
+          text: >-
+            Rebuilt in September 2026 as a course site organised by topic rather than
+            by week. Seven topics — introduction, data wrangling, describing data,
+            simple regression, multiple regression, panel regression, instrumental
+            variables — each with its decks, its exercises and its download on one
+            page: fifteen revealjs lecture decks; twenty R exercises, most of them
+            published as rendered walkthroughs that show the code with its output; the
+            exercises of each topic packaged as an RStudio project with its data in
+            place, ready to open and run; a ten-part video series on getting started
+            with R; and, for every topic, the reading, cheat sheets and tutorials that
+            go with it.
 
   # ---- projects and software -----------------------------------------------------
   #

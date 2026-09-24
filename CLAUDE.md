@@ -41,8 +41,11 @@ All six are the same page: a `.page-head` (or the CV's `.cv-head`, which is that
 column of controls), then a run of two-column sections with the section's name in a narrow
 left column and a list on a hairline `.rail` to its right. Four of them state no fact of
 their own — `publications.qmd` is five `{{< pubs >}}` calls, `projects.qmd` two `{{< cv >}}`
-calls, `teaching.qmd` one, and `notes.qmd` a listing — so a page is a choice of what to show
-and nothing else. `projects.qmd` and `teaching.qmd` used to draw their content as a grid of
+calls, `teaching.qmd` one (at `show=materials`, the one page that asks for that depth) plus a
+reuse note that is page copy, and `notes.qmd` a listing — so a page is a choice of what to show
+and nothing else. Only Home, CV, Publications and Teaching are in the navbar at present;
+`projects.qmd` and `notes.qmd` are commented out of it in `_quarto.yml` and reachable by
+address alone. `projects.qmd` and `teaching.qmd` used to draw their content as a grid of
 cards, written out by hand and, in teaching's case, duplicating `_cv.yml` word for word.
 
 **CV PDFs.** `cv/` holds two Typst-only documents that render to `_site/cv/cv-*.pdf`.
@@ -216,7 +219,8 @@ the file into all page metadata and registers `_templates/cv.lua`, which impleme
 {{< cv type=experience >}}          one type, or "languages,scholarships" (required)
 {{< cv from=r-training type=experience >}}  read _cv-r-training.yml, not _cv.yml
 {{< cv type=education in=short >}}  keep only entries whose `in:` names this variant
-{{< cv type=teaching show=full >}}  none | summary (default) | full
+{{< cv type=teaching show=full >}}  none | summary (default) | full | materials
+{{< cv type=teaching show=materials >}}  full, printed open, plus the `materials:` block (web only)
 {{< cv type=experience titles=short >}}  prefer `title-short:` / `place-short:`
 {{< cv type=experience limit=3 >}}  cap the list
 ```
@@ -228,7 +232,9 @@ Four shapes of entry, told apart by `type:`:
   `titles=short` so the two-page CV keeps its headings to one line), a short `summary:`,
   a Markdown `description:` carrying what the summary does not — paragraphs and bullet
   lists both work — and an optional `references:` line printed only in the PDFs and only at
-  `show=full`. HTML gets a `<details class="cv-entry">` timeline row, or a plain
+  `show=full`. A teaching entry adds `materials:`, the structured record of where its
+  materials are (see **Teaching materials are data** below). HTML gets a
+  `<details class="cv-entry">` timeline row, or a plain
   `<div class="cv-entry">` where an entry has no `description:` to put behind the `+`;
   Typst gets a `#cv-entry()` call with the three fields passed separately, followed by
   the prose.
@@ -358,31 +364,40 @@ for poverty mapping, [wbEPL](https://github.com/wbEPL) for fiscal incidence, and
 [wbPTI](https://github.com/wbPTI) for the Project Targeting Index — organisation first, package
 site second, since the organisation is what a reader can browse.
 
-**Every teaching entry ends its `summary:` on a materials line, and the unit is a cohort,
-not a course.** The line names a *pair* — the website first, its source repository second —
-and a course taught more than once carries one pair per year, because the materials were
-rewritten each time and one link would silently stand for the wrong cohort. So `mk68` (the
-introductory course) lists 2023–24, 2022–23 and 2021–22, and `mp223` (the advanced one) lists
-2023 and 2022. The website is always written `ebukin.github.io/<repo>/` even where that site
-is not published: the address is the stable fact and the deployment is not, so the link is
-written once and starts working when the site does.
+**Teaching materials are data, and the unit is a cohort, not a course.** Every teaching
+entry carries a `materials:` block: a `lead:` (the words before the dash — "Materials, one
+set per cohort") and `sets:`, one per cohort, each with a `url:` (the website), an optional
+`source:` (its repository), an optional `name:` (the cohort, "2023–24"; without one the
+address stands in), a Markdown `text:` saying what the set holds and how it is organised,
+and an optional `note:` for a caveat. One set per cohort because the materials were
+rewritten each year and one link would silently stand for the wrong cohort: `mk68` (the
+introductory course) lists 2023–24, 2022–23 and 2021–22, and `mp223` (the advanced one)
+lists 2023 and 2022. The website is always written `ebukin.github.io/<repo>/` even where
+that site is not published: the address is the stable fact and the deployment is not, so
+the link is written once and starts working when the site does.
 
-**The materials line belongs in `summary:`, never in `description:`** — this is the one place
-the usual division of labour between the two fields is overridden on purpose. A CV that is
-not applying for a teaching post prints teaching at `show=summary` and drops every
-description, so a link written into the description would disappear from precisely the CVs
-that have room for nothing else. Putting it in the summary means it survives every depth: it
-is the visible row on `teaching.qmd` and `cv.qmd`, the whole entry in the general and JRC
-CVs, and the opening paragraph above the long text in `cv-full.pdf` and the NSO CV. The
-consequence on the web is that `.sum` now carries links inside a `<summary>` element — the
-same thing a disclosure-shaped publication row already does with `.ttl`, so the pattern is
-not new. `_cv.yml` carries the rule as a comment above its teaching entries.
+`cv.lua` reads the sets two ways. **Everywhere a summary prints, it appends the one-line
+form to it** — "Materials, one set per cohort — 2023–24 (source) · 2022–23 (source)." —
+so the row on `cv.qmd` and every CV at every depth end on the line the summary used to
+carry by hand. The line rides with the summary and never the description on purpose: a
+CV that is not applying for a teaching post prints teaching at `show=summary` and drops
+every description, so a link that lived there would disappear from precisely the CVs that
+have room for nothing else. **At `show=materials`, which only `teaching.qmd` asks for, it
+prints the block instead**: the entry comes out as a plain `div.cv-entry.is-open` rather
+than a `<details>` — summary, description, then a `.materials` block with one `.material`
+row per set (name, the two addresses written out as addresses, `text:`, `note:`) —
+because that page exists for the detail and a `+` on every course would only stand between
+the reader and it. The PDFs have no block form: a Typst render given `show=materials`
+prints `full`. A `text:` describes the *set* and must not restate the course's `summary:`
+or `description:` above it. `_cv.yml` carries the rule as a comment above its teaching
+entries.
 
 Some of those repositories are private today and the links 404 for a reader who is not
 signed in — `EBukin/mk68-2021-22` and `EBukin/mk68-2022-23-public`, and the GitHub Pages
-sites for all three `mk68` cohorts. They are written anyway, by the rule above. Making the
-repositories public, and publishing their sites, is what fixes them; do not quietly delete
-a link instead.
+sites for all three `mk68` cohorts. They are written anyway, by the rule above, and each
+such set says so in its `note:`, which the teaching page prints under the addresses.
+Making the repositories public, and publishing their sites, is what fixes them — and what
+retires the note; do not quietly delete a link instead.
 
 `cv.qmd` is now section headings and `{{< cv >}}` calls — none of the raw `<details>` markup it
 used to carry is left in the file. The Short / Full buttons are the only JavaScript the site

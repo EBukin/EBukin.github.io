@@ -31,6 +31,10 @@
 --                       summary   heading + `summary:`
 --                       full      heading + `summary:` and then `description:`, which
 --                                 continues it rather than repeating it, and references
+--                       materials full, and on the web the `materials:` block as well —
+--                                 one row per cohort, printed open, under the entry.
+--                                 teaching.qmd is the one page that asks. A PDF given
+--                                 it prints `full`; see web_materials() below
 --   limit=4           keep at most N entries
 --
 -- Entries come out in file order. Unlike publications nothing is sorted: `period:`
@@ -176,9 +180,75 @@ local function pick(entry, name, short)
   return inls(entry[name])
 end
 
-local function summary_of(entry, show)
-  if show == 'none' or entry.summary == nil then return nil end
-  return inls(entry.summary)
+-- ---- materials ----------------------------------------------------------------
+--
+-- `materials:` on a teaching entry says where the course's materials are — one `sets:`
+-- item per cohort, each with a `url:`, an optional `source:` repository, an optional
+-- `name:` (the cohort, "2023–24"; the address stands in when there is none), a `text:`
+-- saying what the set holds, and an optional `note:` for a caveat such as a repository
+-- that is still private. It is read two ways:
+--
+--   the LINE    "Materials, one set per cohort — 2023–24 (source) · 2022–23 (source)."
+--               appended to the entry's `summary:` wherever the summary prints — the
+--               row on cv.qmd, and every CV at every depth. The summary used to carry
+--               it by hand; generating it here is what keeps the addresses written
+--               down once. `lead:` is the wording before the dash
+--   the BLOCK   at show=materials, on the web only: one row per set with its name, its
+--               addresses, its `text:` and its `note:`, in place of the line — the
+--               detail teaching.qmd exists for
+--
+-- The line goes in the summary and not the description on purpose: a CV that is not
+-- applying for a teaching post prints teaching at show=summary and drops every
+-- description, and a link that lived there would vanish from exactly the CVs that
+-- have room for nothing else.
+
+-- "https://ebukin.github.io/mk68-2023-24-public/" -> "ebukin.github.io/mk68-2023-24-public".
+-- The address is the stable fact, as the contact line of the PDF header already
+-- treats it, so it is what a link reads when the record gives it no other name.
+local function address_of(url)
+  return (url:gsub('^https?://', ''):gsub('/$', ''))
+end
+
+local function materials_line(materials)
+  local parts = {}
+  for _, set in ipairs(materials.sets or {}) do
+    if set.url then
+      local url  = stringify(set.url)
+      local name = set.name and inls(set.name) or txt(address_of(url))
+      local one  = pandoc.Inlines{ pandoc.Link(name, url) }
+      if set.source then
+        one:extend{ pandoc.Space(), pandoc.Str('('),
+                    pandoc.Link(txt('source'), stringify(set.source)), pandoc.Str(')') }
+      end
+      parts[#parts + 1] = one
+    end
+  end
+  if #parts == 0 then return nil end
+
+  local line = pandoc.Inlines{}
+  line:extend(inls(materials.lead or 'Materials'))
+  line:extend{ pandoc.Space(), pandoc.Str('—'), pandoc.Space() }
+  line:extend(join(parts, MIDDOT))
+  line:insert(pandoc.Str('.'))
+  return line
+end
+
+-- `bare` leaves the materials line off: the web row at show=materials prints the block
+-- instead, and would otherwise carry every address twice.
+local function summary_of(entry, show, bare)
+  if show == 'none' then return nil end
+  local line = (entry.materials and not bare) and materials_line(entry.materials) or nil
+  if entry.summary == nil then return line end
+  -- A fresh list rather than the metadata's own: the shortcode runs more than once
+  -- over a document, and extending the record in place would append the line again
+  -- each time.
+  local out = pandoc.Inlines{}
+  out:extend(inls(entry.summary))
+  if line then
+    out:insert(pandoc.Space())
+    out:extend(line)
+  end
+  return out
 end
 
 local function description_of(entry, show)
@@ -234,7 +304,60 @@ end
 -- The three spans sit inside one unclassed wrapper because `.timeline summary` is a
 -- `grid-template-columns: 1fr 20px` grid: all the text belongs to the first cell and
 -- the + to the second.
-local function web_entry(entry)
+-- The `materials:` block under a course at show=materials: one `.material` row per set,
+-- each a name, an address line, the `text:` and any `note:`. Only the web has it — the
+-- PDFs print the one-line form inside the summary (see materials_line above), because
+-- a page of addresses per course is not what a CV is for.
+local function web_materials(materials)
+  local rows = pandoc.Blocks{}
+  for _, set in ipairs(materials.sets or {}) do
+    local blocks = pandoc.Blocks{}
+    if set.name then
+      blocks:insert(pandoc.Plain{
+        pandoc.Span(inls(set.name), pandoc.Attr('', { 'material-name' })),
+      })
+    end
+
+    -- The addresses, written out as addresses: this is the line a reader follows, and
+    -- a reader of the llms.txt copy or a print-out follows it by reading it.
+    local links = {}
+    for _, field in ipairs{ 'url', 'source' } do
+      if set[field] then
+        local url = stringify(set[field])
+        links[#links + 1] = pandoc.Inlines{ pandoc.Link(txt(address_of(url)), url) }
+      end
+    end
+    if #links > 0 then
+      blocks:insert(pandoc.Div(pandoc.Blocks{ pandoc.Plain(join(links, MIDDOT)) },
+                               pandoc.Attr('', { 'material-links' })))
+    end
+
+    local text = blks(set.text)
+    if text and #text > 0 then
+      blocks:insert(pandoc.Div(text, pandoc.Attr('', { 'material-text' })))
+    end
+    local note = blks(set.note)
+    if note and #note > 0 then
+      blocks:insert(pandoc.Div(note, pandoc.Attr('', { 'material-note' })))
+    end
+    rows:insert(pandoc.Div(blocks, pandoc.Attr('', { 'material' })))
+  end
+  if #rows == 0 then return nil end
+
+  local out = pandoc.Blocks{
+    pandoc.Plain{
+      pandoc.Span(inls(materials.lead or 'Materials'), pandoc.Attr('', { 'materials-head' })),
+    },
+  }
+  out:extend(rows)
+  return pandoc.Div(out, pandoc.Attr('', { 'materials' }))
+end
+
+-- `open` is show=materials: the row is printed as a plain div with everything visible —
+-- the summary, the description and the materials block — rather than as a <details>.
+-- teaching.qmd exists for that detail, and a + that had to be pressed on every course
+-- would only stand between the reader and it.
+local function web_entry(entry, open)
   -- The parts are joined by a space. On the page it is never seen — every part is
   -- `display: block` — but the plain-text copies of the page (the llms.txt Markdown,
   -- the search index) would otherwise run "Feb 2025 — presentEconomist" together.
@@ -250,13 +373,26 @@ local function web_entry(entry)
   -- The row's short form. `.sum` is the class pubs.lua already uses for the same idea;
   -- styles.scss gives it a .timeline variant. It stays visible when the entry opens,
   -- because _cv.yml requires `description:` to carry what it does not say: the body
-  -- below continues the line rather than replacing it.
-  local summary = summary_of(entry, 'summary')
+  -- below continues the line rather than replacing it. The materials line is left off
+  -- an open row, whose block below carries every address in full.
+  local summary = summary_of(entry, 'summary', open)
   if summary then part(summary, 'sum') end
 
   -- The web page always carries the whole story; the switcher decides what shows.
   local body    = description_of(entry, 'full')
   local variant = table.concat(variants_of(entry), ' ')
+
+  if open then
+    local blocks = pandoc.Blocks{ pandoc.Plain(pandoc.Span(head)) }
+    if body and #body > 0 then
+      blocks:insert(pandoc.Div(body, pandoc.Attr('', { 'body' })))
+    end
+    local materials = entry.materials and web_materials(entry.materials) or nil
+    if materials then blocks:insert(materials) end
+    return pandoc.Blocks{
+      pandoc.Div(blocks, pandoc.Attr('', { 'cv-entry', 'is-open' }, { ['data-in'] = variant })),
+    }
+  end
 
   -- With the summary no longer repeated below it, an entry that has no `description:`
   -- has nothing to disclose, so it is a plain row and carries no +: a control that
@@ -712,13 +848,15 @@ return {
     end
 
     if show == '' then show = 'summary' end
-    if show ~= 'none' and show ~= 'summary' and show ~= 'full' then
-      quarto.log.error('cv: show="' .. show .. '" is not one of none, summary, full.')
+    if show ~= 'none' and show ~= 'summary' and show ~= 'full' and show ~= 'materials' then
+      quarto.log.error('cv: show="' .. show .. '" is not one of none, summary, full, materials.')
       show = 'summary'
     end
 
     -- The web page carries every entry at full depth and lets the Short / Full
-    -- buttons filter and collapse it, so `show=` is a PDF concern only.
+    -- buttons filter and collapse it, so `show=` is a PDF concern — with one
+    -- exception: show=materials is what prints the materials block under a course,
+    -- open, and that is a web concern (teaching.qmd) and nothing else.
     if quarto.doc.is_format('html') then
       local blocks = pandoc.Blocks{}
       for _, entry in ipairs(entries) do
@@ -731,11 +869,15 @@ return {
                         { ['data-in'] = table.concat(variants_of(entry), ' ') })))
         else
           warn_on_repeat(entry)
-          blocks:extend(web_entry(entry))
+          blocks:extend(web_entry(entry, show == 'materials'))
         end
       end
       return blocks
     end
+
+    -- A PDF has no block form for the materials — the line in the summary is its
+    -- whole share of them — so the depth above `full` is `full` here.
+    if show == 'materials' then show = 'full' end
 
     local blocks = pandoc.Blocks{}
     for _, entry in ipairs(entries) do

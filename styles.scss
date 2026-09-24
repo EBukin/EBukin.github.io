@@ -733,6 +733,69 @@ details.cv-entry, details.pub-entry { margin-bottom: 0; }
 // and hiding the short form on open would lose a sentence — the same reason .pub .sum
 // stays visible in the publication list.
 
+// ---- teaching materials -----------------------------------------------------
+//
+// The block `{{< cv type=teaching show=materials >}}` prints under each course on
+// teaching.qmd, and nowhere else: one `.material` row per cohort (`materials.sets:` in
+// _cv.yml) — the cohort's name, the addresses of its site and its source, what the set
+// holds, and any caveat. On that page the entry is printed OPEN, a plain
+// `.cv-entry.is-open` rather than a <details>, because the page exists for the detail
+// and a + that had to be pressed on every course would only be in the way. With no +
+// column to clear, the body runs to the same right edge as the block under it.
+.timeline .is-open .body { padding-right: 0; }
+
+.materials {
+  margin-top: 0.9rem;
+  font-size: $detail-size;
+}
+.materials > * { max-width: $measure; }
+// The block's name, at the size and weight of a `.skill-head`: a level below the
+// `.eyebrow` that names the section, and the same accent small caps as the period
+// line above it, so it reads as part of the entry rather than as a new section.
+.materials-head {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $accent;
+  margin-bottom: 0.4rem;
+}
+// Each cohort hangs off a finer rail of its own inside the timeline's, so the three
+// cohorts of one course read as one course's three sets and not as three more entries.
+.material {
+  border-left: 1px solid $rule-soft;
+  padding: 0.1rem 0 0.1rem 0.9rem;
+}
+.material + .material { margin-top: 0.7rem; }
+.material-name {
+  display: block;
+  font-family: $headings-font-family;
+  font-size: 1.02rem;
+  line-height: 1.3;
+  color: $ink;
+}
+// The addresses are the line a reader follows, so they keep the prose-link accent and
+// underline rather than the list's invisible-until-hovered ink — they are the point of
+// the page, not a row in it.
+.material-links {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: $muted;
+  margin-top: 0.1rem;
+  overflow-wrap: anywhere;
+}
+.material-text { margin-top: 0.3rem; }
+.material-text p, .material-text li { line-height: $detail-leading; }
+.material-text p, .material-text ul, .material-text ol { margin-bottom: $detail-gap; }
+.material-text > *:last-child { margin-bottom: 0; }
+.material-note {
+  margin-top: 0.25rem;
+  font-size: 0.78rem;
+  font-style: italic;
+  color: $faint;
+}
+.material-note p { margin: 0; }
+
 // ---- chips ------------------------------------------------------------------
 
 // There used to be a second, filled `.chip` here, and a `.flat-card` / `.card-grid`

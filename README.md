@@ -113,7 +113,8 @@ It then appears wherever the `{{< cv >}}` shortcode already selects it — the t
 ```
 {{< cv type=experience >}}                one type, or "skills,languages" (required)
 {{< cv type=education in=short >}}        only entries whose `in:` names this variant
-{{< cv type=teaching show=full >}}        none | summary (default) | full
+{{< cv type=teaching show=full >}}        none | summary (default) | full | materials
+{{< cv type=teaching show=materials >}}   full, printed open, plus the `materials:` block (web only)
 {{< cv type=experience titles=short >}}   prefer the `-short` fields
 {{< cv type=experience limit=3 >}}        cap the list
 ```
@@ -139,7 +140,7 @@ the header comment of `_cv.yml`.
 | `cv.qmd` | Web CV — expandable timeline |
 | `publications.qmd` | Everything, grouped by type |
 | `projects.qmd` | Research streams + software |
-| `teaching.qmd` | JLU courses + ai4coding |
+| `teaching.qmd` | Courses and training, every course open with its materials block — the one page that asks for `show=materials` |
 | `notes.qmd` + `notes/` | Research and food notes (Quarto listing, RSS enabled) |
 | `_publications.yml` | The publication record — the only place papers are written down |
 | `_cv.yml` | The CV record — positions, degrees, courses, skills, languages, scholarships |

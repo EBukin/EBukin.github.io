@@ -8,19 +8,25 @@ toc: false
 ::: {.page-head}
 [Teaching]{.eyebrow}
 
-# Courses and training {.display-name}
+# Courses, training and their materials {.display-name}
 
 ::: {.lede}
 Five years of MSc statistics and econometrics at Justus Liebig University Giessen;
 week-long courses that hand fiscal incidence microsimulation and poverty mapping over
-to the finance ministries and national statistical offices that have to run them; and a
-continuing training programme for economists at the World Bank.
+to the finance ministries and national statistical offices that have to run them; and
+the World Bank's own course on AI-assisted coding. Every course was taught in R, and
+each entry below says what was written for it — slides, worked exercises, downloadable
+projects, recordings — cohort by cohort, and where it lives.
 :::
 :::
 
 <!-- Every entry comes from _cv.yml — the same records the CV page shows under Teaching
-     and cv-full.qmd prints. This page used to restate the university courses as cards,
-     which meant every course was written down twice.
+     and the CV PDFs print. This is the one page that asks for show=materials: each
+     course is printed open, its description visible, and under it the `materials:`
+     block — one row per cohort, with the addresses of that cohort's site and source
+     and what the set holds. Everywhere else the same sets print as the one-line
+     "Materials — 2023–24 (source) · …" that ends the course's summary. Add a cohort
+     or a site in _cv.yml, not here.
 
      University teaching and counterpart training are one list on purpose: both are a
      cohort taken from the theory to the code, and separating them would suggest the
@@ -29,5 +35,13 @@ continuing training programme for economists at the World Bank.
 ## Courses and training {.split}
 
 ::: {.timeline}
-{{< cv type=teaching >}}
+{{< cv type=teaching show=materials >}}
 :::
+
+## Reusing the materials {.split}
+
+The course sites are published so that students can return to them after the course
+and other instructors can build on them. Every site has its source repository beside
+it, holding the slide decks, the exercises and the data they use. Reuse or adapt any
+of it with credit and a link back to this site. Where a repository is still private,
+the entry above says so, and its addresses will start working when it is opened.
