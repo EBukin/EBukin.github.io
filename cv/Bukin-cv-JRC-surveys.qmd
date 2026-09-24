@@ -1,0 +1,72 @@
+<!--
+  The application CV for vacancy 2026-JRC.B.2-SVQ-FGIV-003067 — Economic Analyst, indicators
+  and data analysis, Fiscal Policy Analysis Unit, JRC Seville.
+
+  It is cv-full.qmd with one change: the About paragraph is the profile tagged
+  `in: [JRC-indicators-2026]` in ../_cv.yml rather than the generic `in: [full]` one. Every
+  other section is the full CV, entry for entry, so a correction to the record lands
+  here as well. Like its siblings it states no fact about the person.
+
+  Its header asks for private=true, so unlike the two public CVs it also carries the
+  contact details the website does not publish — location, nationality, phone, email —
+  read from ../_cv-private.yml, which is gitignored. Without that file the line is
+  simply left out.
+
+  The file is named for the PDF it becomes, Bukin-cv-JRC-indicators-2026.pdf: that PDF goes
+  out as an attachment as it is, so the source carries the name the attachment should.
+
+  It is built by every render, like its siblings, and lands in ../_site/cv/. It is not
+  published: the deploy step in ../.github/workflows/publish.yml deletes every PDF in
+  _site/cv/ except cv-full.pdf and cv-short.pdf before uploading the site. It cannot
+  be kept out of the render instead — a file excluded from `project: render:` is
+  rendered outside the project when named, and loses the cv and pubs shortcodes.
+-->
+
+{{< cv-header private=true >}}
+
+## About
+
+{{< cv type=profile in=JRC-survey-FGIV-003132 >}}
+
+## Work experience
+
+{{< cv type=experience in=full show=full >}}
+
+## Education
+
+{{< cv type=education in=full show=full >}}
+
+## Teaching
+
+<!-- show=summary, unlike cv-full.qmd: this is not a teaching application, so the
+     courses are worth a line each and no more. The materials links survive the cut
+     because they live in `summary:` in ../_cv.yml, not in `description:`. -->
+
+{{< cv type=teaching in=full show=summary >}}
+
+## Publications
+
+### Peer-reviewed articles
+
+{{< pubs type=article show=none >}}
+
+### Working papers and work in progress
+
+{{< pubs type=working-paper,wip show=none >}}
+
+### Reports and policy work
+
+{{< pubs type=report show=none >}}
+
+### Theses
+
+{{< pubs type=thesis show=none >}}
+
+
+## Languages
+
+{{< cv type=languages in=full >}}
+
+## Scholarships
+
+{{< cv type=scholarships in=full >}}

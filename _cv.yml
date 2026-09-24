@@ -230,6 +230,42 @@ cv:
       as reliably as by people.
 
   - type: profile
+    in: [JRC-survey-FGIV-003132]
+    text: |
+      Applied economist and open-source data scientist with a decade of
+      quantitative policy analysis at the World Bank, FAO and in academia,
+      working almost entirely on survey microdata: collecting it, turning it
+      into evidence, and building the tools that let others do the same.
+      My survey experience starts in the field: I led household data collection
+      for an impact assessment in South Africa and the second wave of the IAMO
+      Farm Survey in Kazakhstan and neighbouring Central Asian countries,
+      from questionnaire design and pre-testing to interviewer training and
+      quality control, and designed the sampling frame for a randomised
+      controlled trial on land institutions in Ukraine. Since 2018 I have used
+      household surveys at the World Bank for fiscal incidence and
+      counterfactual microsimulation with the Commitment to Equity method,
+      and for poverty mapping through unit-level small area estimation that
+      combines survey, census, administrative and geospatial data, including
+      in the EU poverty-mapping project. R and R Shiny are the centre of
+      my toolbox; I built the devCEQ package and Shiny applications that let
+      ministry analysts run their own simulations and see the results.
+      My research applies quasi-experimental designs and microeconometrics
+      to farm survey, cadastral and satellite data, with peer-reviewed
+      articles and a PhD evaluating land privatisation in Kazakhstan.
+      Innovation and capacity building are, for me, one job: I brought
+      version control and reproducible pipelines to economists' workflows,
+      made Positron and Quarto standard tools at the World Bank, and designed
+      and taught the Bank's internal course on AI-assisted coding in R and
+      Stata, which created a demand for skills that colleagues now pursue on
+      their own. I have taught statistics and econometrics to master's students
+      for five years and trained finance ministry analysts in Indonesia and
+      Georgia and Statistics Poland's statisticians in small area estimation,
+      each time leaving behind code they maintain themselves. I am now
+      exploring how retrieval-augmented generation and Model Context Protocol
+      interfaces can speed up survey analysis and make survey methodology as
+      accessible to AI agents as to people.
+
+  - type: profile
     in: [JRC-tax-2026-short]
     text: |
       Economist specialising in fiscal microsimulation and applied economic modelling.
