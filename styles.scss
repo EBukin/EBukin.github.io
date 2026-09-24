@@ -747,6 +747,64 @@ details.cv-entry, details.pub-entry { margin-bottom: 0; }
 .cv-list + .cv-list { margin-top: 0.7rem; }
 .cv-list > .eyebrow { display: block; margin-bottom: 0.55rem; }
 
+// ---- skills taxonomy --------------------------------------------------------
+//
+// The one list on the site that is a reference rather than a reading: forty-odd
+// entries whose job is to be scanned, not read in order. So it drops everything the
+// other lists use to give a row room — the hairline, $row-pad, the $measure cap — and
+// packs into columns instead. Two sections, both emitted by {{< cv type=expertise >}}.
+//
+// CSS columns rather than a grid, because the groups are uneven and a grid would leave
+// the short ones padding out a tall row. `break-inside` is what keeps a group whole:
+// without it a heading ends one column and its bullets start the next.
+.skills {
+  columns: 2;
+  column-gap: 2.25rem;
+  font-size: 0.82rem;
+}
+.skill-group {
+  break-inside: avoid;
+  page-break-inside: avoid;
+  margin: 0 0 0.85rem;
+}
+// The subgroup name. Smaller and tighter than the .eyebrow naming the section in the
+// left column, so the two levels do not read as the same thing in two places.
+.skill-head {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $accent;
+  margin-bottom: 0.22rem;
+}
+// Bootstrap's list margins and disc marker are both wrong here; the marker is drawn as
+// a faint middot instead, hanging outside the text so the bullets align on one edge.
+.skills ul {
+  margin: 0;
+  padding-left: 0.8rem;
+  list-style: none;
+}
+.skills li {
+  position: relative;
+  line-height: 1.4;
+  margin-bottom: 0.16rem;
+  color: $muted;
+}
+.skills li::before {
+  content: "·";
+  position: absolute;
+  left: -0.7rem;
+  color: $faint;
+}
+// The term carries the ink and the detail stays muted, which is what lets a reader run
+// down the left edge of the list and stop only at the one they came for.
+.skill-name { color: $ink; font-weight: 500; }
+
+// One column once the frame stops being wide enough for two readable ones.
+@media (max-width: 900px) {
+  .skills { columns: 1; }
+}
+
 // ---- notes listing ----------------------------------------------------------
 
 // Quarto builds a listing out of its own markup, so the notes list cannot be emitted

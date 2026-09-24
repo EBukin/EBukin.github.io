@@ -698,223 +698,171 @@ cv:
 
   # ---- expertise ---------------------------------------------------------------
   #
-  # WEBSITE ONLY. No PDF prints these: cv.lua renders `type: expertise` for HTML and
-  # emits nothing at all for Typst, so a CV that asked for them by mistake gets a
-  # render-time warning rather than forty pages of skills. The flat `type: skills` chip
-  # row that the PDFs used to carry is gone with them; every fact it held is below, and
-  # keeping both would have been two records of the same thing drifting apart, which is
-  # the mistake the teaching entries above already taught once.
+  # WEBSITE ONLY. cv.lua renders `type: expertise` for HTML and skips it for Typst, so
+  # no PDF carries it; `{{< cv type=expertise >}}` on cv.qmd is the only call anywhere.
+  # The flat `type: skills` chip row the PDFs used to print is gone, and every fact it
+  # held is below.
   #
-  # Each entry is one GROUP and comes out as a section of its own on cv.qmd: the
-  # `label:` in the narrow left column, the skills listed on the rail to its right,
-  # each a name in the entry face over its own line of detail. The shape is `skills:`
-  # — a list of `name:` / `text:` pairs — rather than `items:`, which is the flat
-  # string list the chip rows use and is what tells the two apart in cv.lua.
+  # TWO entries, and only two: one section of technical skills and one of professional
+  # ones. Each is a `.section-split` on cv.qmd — its `label:` in the narrow left column,
+  # its groups packed into two columns on the right.
   #
-  # All of them are `in: [full]`, so the Short view of cv.qmd drops the whole taxonomy:
-  # a scan is the one thing forty-odd skills cannot be.
+  # Three levels, and the shape is a reference list rather than a list of work:
+  #
+  #   label       the section  — "Technical skills"
+  #   groups      the subgroups, each with a `name:` and its own `skills:`
+  #   skills      the bullets, each a `name:` and a `text:` that is a PHRASE and not a
+  #               sentence. Keep them to one line on a wide screen; this list is read
+  #               by scanning, and a bullet that wraps three times stops being one.
+  #
+  # `groups:` is what tells this shape from a flat list in cv.lua, which dispatches on
+  # `items:` for chips and `text:` for prose.
+  #
+  # Both are `in: [full]`, so the Short view of cv.qmd drops the taxonomy whole: a scan
+  # is the one thing forty-odd skills cannot be.
 
   - type: expertise
-    label: "Programming languages"
+    label: "Technical skills"
     in: [full]
-    skills:
-      - name: "R"
-        text: >-
-          12+ years, daily use. Advanced programming, tidyverse, econometrics,
-          microsimulation, geospatial analysis.
-      - name: "Stata"
-        text: >-
-          10+ years. Data management, econometric estimation, survey and household
-          microdata analysis.
-      - name: "Python"
-        text: "8+ years. Data processing, geospatial and remote-sensing workflows."
-      - name: "GAMS"
-        text: >-
-          5+ years. Programming and maintenance of partial and general equilibrium
-          models (AGLINK-COSIMO, CGE).
+    groups:
+      - name: "Programming"
+        skills:
+          - name: "R"
+            text: "12+ yrs, daily. tidyverse, econometrics, microsimulation, geospatial"
+          - name: "Stata"
+            text: "10+ yrs. Data management, estimation, household survey microdata"
+          - name: "Python"
+            text: "8+ yrs. Data processing, geospatial and remote-sensing workflows"
+          - name: "GAMS"
+            text: "5+ yrs. Partial and general equilibrium models (AGLINK-COSIMO, CGE)"
+
+      - name: "Software development"
+        skills:
+          - name: "Git and GitHub"
+            text: "10+ yrs. Multi-author projects, public repositories, documentation"
+          - name: "R packages"
+            text: >-
+              12+ yrs. Author of [devCEQ](https://worldbank.github.io/devCEQ/) and
+              [devPTIpack](https://worldbank.github.io/devPTIpack/) (30+ country analyses)
+          - name: "R Shiny"
+            text: "Client-facing dashboards for policy makers and non-technical users"
+          - name: "Testing"
+            text: "TDD with unit tests, modular design, code review, documentation"
+          - name: "Tooling"
+            text: "Positron IDE, Quarto, R Markdown"
+
+      - name: "AI and LLMs"
+        skills:
+          - name: "AI-assisted coding"
+            text: "GitHub Copilot and LLM tools in R and Stata; institution-wide training"
+          - name: "LLM integration"
+            text: "Large language models inside data and analysis workflows"
+          - name: "RAG"
+            text: "Retrieval pipelines connecting LLMs to domain documents and data"
+          - name: "Knowledge systems"
+            text: "Knowledge bases built for LLM applications"
+          - name: "Agents"
+            text: "Design and build LLM-based agents"
+
+      - name: "Data engineering"
+        skills:
+          - name: "Pipelines (ETL)"
+            text: "8+ yrs. Survey, administrative, trade and geospatial data; Databricks"
+          - name: "SQL"
+            text: "PostgreSQL since 2010. Relational design and querying"
+          - name: "PostGIS"
+            text: "Spatial databases and spatial queries"
+          - name: "DuckDB"
+            text: "3+ yrs. Analytical queries on large datasets"
+          - name: "Data quality"
+            text: "Validation frameworks, QA/QC, harmonisation for official statistics"
+          - name: "Data collection"
+            text: "Survey design, questionnaires, pre-testing, enumerator training"
+
+      - name: "GIS and remote sensing"
+        skills:
+          - name: "Analysis"
+            text: "8+ yrs. Raster and vector processing; climate, vegetation, land cover"
+          - name: "Tools"
+            text: "R, Python, QGIS, Google Earth Engine"
+          - name: "Data"
+            text: "Satellite products, cadastral and parcel data (LPIS), poverty maps"
+
+      - name: "Statistics and ML"
+        skills:
+          - name: "Model-based estimation"
+            text: "Small area estimation and mass valuation on large microdata"
+          - name: "Predictive ML"
+            text: "5+ yrs. Training, tuning and cross-validation with tidymodels"
+          - name: "Causal ML"
+            text: "5+ yrs. Heterogeneous treatment effects"
+
+      - name: "Econometrics"
+        skills:
+          - name: "Causal inference"
+            text: "8+ yrs. Difference-in-differences, IV, regression discontinuity, RCTs"
+          - name: "Microeconometrics"
+            text: "10+ yrs. Panel, spatial, efficiency and multilevel models"
+          - name: "Fiscal microsimulation"
+            text: "CEQ tax–benefit incidence, counterfactual reforms, macro–micro models"
+          - name: "Poverty and inequality"
+            text: "Welfare measurement and poverty mapping"
+          - name: "Equilibrium modelling"
+            text: "5+ yrs. Calibration, parameterisation and scenario projections"
+
+      - name: "Reproducibility"
+        skills:
+          - name: "Reproducible research"
+            text: "Version-controlled literate workflows to publication standard"
+          - name: "Standards"
+            text: "Introduced Quarto and Positron as World Bank tools"
+          - name: "Open source"
+            text: "Public R packages and open course materials"
 
   - type: expertise
-    label: "Software development"
+    label: "Professional skills"
     in: [full]
-    skills:
-      - name: "Git, GitHub and version control"
-        text: >-
-          10+ years. Collaborative development in multi-author projects; public
-          repositories and project documentation.
-      - name: "R package development"
-        text: >-
-          12+ years. Authored and maintain [devCEQ](https://worldbank.github.io/devCEQ/)
-          and [devPTIpack](https://worldbank.github.io/devPTIpack/); devPTIpack is used
-          in 30+ country analyses.
-      - name: "R Shiny applications and dashboards"
-        text: >-
-          Interactive data visualisation and client-facing tools for policy makers and
-          non-technical users.
-      - name: "Development environment"
-        text: "Positron IDE, Quarto, R Markdown."
+    groups:
+      - name: "Leading and enabling"
+        skills:
+          - name: "Leadership"
+            text: "Co-initiated GeoPov; led Bank-wide adoption of AI-assisted coding"
+          - name: "Fieldwork"
+            text: "Led a multi-country farm survey in Central Asia"
+          - name: "Mentorship"
+            text: "Guide economists in new methods and in scaling analyses across countries"
+          - name: "Enabling"
+            text: "Seminar series and hands-on training; space to experiment"
 
-  - type: expertise
-    label: "AI and large language models"
-    in: [full]
-    skills:
-      - name: "AI-assisted software development"
-        text: >-
-          GitHub Copilot and LLM coding tools in R and Stata. Designed and delivered
-          institution-wide training.
-      - name: "LLM integration"
-        text: "Integrating large language models into data and analysis workflows."
-      - name: "Retrieval-augmented generation (RAG)"
-        text: >-
-          Building RAG pipelines that connect LLMs to domain documents and data.
-      - name: "Knowledge systems"
-        text: "Developing knowledge bases and knowledge systems for LLM applications."
-      - name: "AI agents"
-        text: "Designing and building LLM-based agents."
+      - name: "Teaching and advice"
+        skills:
+          - name: "Teaching"
+            text: "Master's-level statistics and econometrics, 5 consecutive years"
+          - name: "Capacity building"
+            text: "Training for government counterparts and national statistical offices"
+          - name: "Policy advice"
+            text: "Technical assistance in Europe, Asia, Africa and Latin America"
 
-  - type: expertise
-    label: "Data engineering and databases"
-    in: [full]
-    skills:
-      - name: "Data pipelines (ETL)"
-        text: >-
-          8+ years. Design and maintenance of scalable, automated pipelines integrating
-          survey, administrative, trade and geospatial data, including on the
-          Databricks platform.
-      - name: "PostgreSQL / SQL"
-        text: "Since 2010. Relational database design and querying."
-      - name: "PostGIS"
-        text: "Spatial databases and spatial queries."
-      - name: "DuckDB"
-        text: "3+ years. Analytical queries on large datasets."
-      - name: "Data quality"
-        text: >-
-          Validation frameworks, QA/QC procedures and data harmonisation for official
-          statistics and large research datasets.
-      - name: "Data collection"
-        text: >-
-          Survey design, questionnaire development, pre-testing, enumerator training
-          and data quality monitoring.
-
-  - type: expertise
-    label: "GIS and remote sensing"
-    in: [full]
-    skills:
-      - name: "Raster and vector analysis"
-        text: >-
-          8+ years. Raster and vector processing, satellite-derived indicators
-          (climate, vegetation, land cover), integration of geospatial data with
-          microdata.
-      - name: "Tools"
-        text: "R, Python, QGIS, Google Earth Engine."
-      - name: "Geospatial data"
-        text: >-
-          Remote sensing products, cadastral and parcel data (LPIS), administrative
-          boundaries, poverty maps.
-
-  - type: expertise
-    label: "Statistical modelling and machine learning"
-    in: [full]
-    skills:
-      - name: "Statistical modelling and prediction"
-        text: >-
-          Model-based estimation on large microdata, including small area estimation
-          and mass valuation (automated valuation models).
-      - name: "Predictive machine learning"
-        text: >-
-          5+ years. Training, tuning, cross-validation and evaluation of predictive
-          models using the tidymodels framework and related R tools.
-      - name: "Causal machine learning"
-        text: >-
-          5+ years. Machine learning methods for causal inference and heterogeneous
-          treatment effect estimation.
-
-  - type: expertise
-    label: "Econometrics and causal inference"
-    in: [full]
-    skills:
-      - name: "Causal inference and impact evaluation"
-        text: >-
-          8+ years. Quasi-experimental designs (difference-in-differences, instrumental
-          variables, regression discontinuity, synthetic control) and randomised
-          controlled trials for policy impact evaluation.
-      - name: "Microeconometrics"
-        text: >-
-          10+ years. Panel data, spatial econometrics, efficiency analysis and
-          multilevel models on household, firm-level and administrative microdata.
-      - name: "Fiscal microsimulation and distributional analysis"
-        text: >-
-          Tax–benefit incidence analysis with the Commitment to Equity (CEQ) framework,
-          counterfactual simulation of tax and spending reforms, and macro–micro models
-          that link macroeconomic scenarios to household welfare.
-      - name: "Poverty and inequality measurement"
-        text: "Welfare measurement and poverty mapping."
-      - name: "Economic modelling"
-        text: >-
-          5+ years. Partial and general equilibrium (CGE) models for policy analysis,
-          covering calibration, parameterisation and scenario projections.
-      - name: "Teaching and capacity building"
-        text: >-
-          Master's-level courses in statistics and econometrics; training for
-          government counterparts and national statistical offices.
-
-  - type: expertise
-    label: "Reproducibility and open science"
-    in: [full]
-    skills:
-      - name: "Reproducible research"
-        text: >-
-          Version-controlled, literate programming workflows (Quarto, R Markdown) and
-          reproducibility packages that meet publication and institutional standards.
-          Introduced Quarto and Positron as World Bank standard tools.
-      - name: "Open science and open source"
-        text: "Public R packages and open course materials."
-      - name: "Code quality and testing"
-        text: >-
-          Test-driven development (TDD) with automated unit tests; modular package
-          design, validation routines, code review, documentation.
-
-  - type: expertise
-    label: "Leading and enabling others"
-    in: [full]
-    skills:
-      - name: "Leadership"
-        text: >-
-          Co-initiated the GeoPov work programme; led the Bank-wide adoption of
-          AI-assisted coding and reproducible workflows; led a multi-country farm
-          survey in Central Asia.
-      - name: "Mentorship"
-        text: >-
-          Guide economists in adopting new methods and tools and in scaling analyses
-          across countries; mentor colleagues in coding, econometrics and reproducible
-          research.
-      - name: "Enabling environment"
-        text: >-
-          Launched seminar series and hands-on training; create space for colleagues to
-          experiment, encourage curiosity and self-directed learning, and build teams'
-          capacity to keep innovating.
-      - name: "Policy advice"
-        text: >-
-          Technical assistance to government agencies and national statistical offices
-          in Europe, Asia, Africa and Latin America.
-
-  - type: expertise
-    label: "Communication and domain"
-    in: [full]
-    skills:
-      - name: "Writing"
-        text: >-
-          Peer-reviewed articles; policy briefs, reports and outlook chapters for FAO
-          and the World Bank.
       - name: "Communication"
-        text: "Presenting technical results to policy makers and non-technical audiences."
-      - name: "Working with others"
-        text: >-
-          Teamwork in multicultural, interdisciplinary teams (10+ years), initiative,
-          problem solving, adaptability and independent work.
-      - name: "Domain expertise"
-        text: >-
-          Land governance and markets, agricultural and trade policy, official
-          statistics.
+        skills:
+          - name: "Writing"
+            text: "Peer-reviewed articles; policy briefs, reports and outlook chapters"
+          - name: "Presenting"
+            text: "Technical results for policy makers and non-technical audiences"
+
+      - name: "Working style"
+        skills:
+          - name: "Teams"
+            text: "10+ yrs in multicultural, interdisciplinary teams"
+          - name: "Approach"
+            text: "Initiative, problem solving, adaptability, independent work"
+
+      - name: "Domain"
+        skills:
+          - name: "Fields"
+            text: "Land governance and markets, agricultural and trade policy"
+          - name: "Statistics"
+            text: "Official statistics, poverty measurement, distributional analysis"
 
   # ---- flat lists --------------------------------------------------------------
 

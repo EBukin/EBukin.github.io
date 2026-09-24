@@ -244,26 +244,38 @@ Four shapes of entry, told apart by `type:`:
 - **prose** — `profile`. Only `text:`, the `## About` / `## Profile` paragraph at the top of a
   CV, one entry per variant chosen with `in:`. The one shape that comes out identically in
   both formats, and `show=` does not apply to it either.
-- **skill group** — `expertise`, and the only shape that has no PDF form at all. A `label:`
-  naming the group and a `skills:` list of `name:` / `text:` pairs. `skills:` rather than
-  `items:` is what tells it apart from a flat list in `cv.lua`. `show=` does not apply.
+- **skill taxonomy** — `expertise`, and the only shape with no PDF form at all. Three levels:
+  a `label:` naming the section, a `groups:` list of subgroups each with a `name:`, and inside
+  each of those a `skills:` list of `name:` / `text:` bullets. `groups:` rather than `items:`
+  is what tells it apart from a flat list in `cv.lua`. `show=` does not apply.
 
-**The skills taxonomy is the website's alone.** `type: expertise` is ten groups and some
-forty skills, each a name over a line of detail, and `cv.lua` renders it for HTML and skips
-it for Typst — so `{{< cv type=expertise >}}` on `cv.qmd` is the only call anywhere and no
-CV carries it. The flat `type: skills` chip row the PDFs used to print is gone with it,
-from both records: every fact it held is in the taxonomy, and keeping both would have been
-two records of one thing drifting apart, which the teaching entries had already taught once.
-The PDFs got the space back — `Bukin-cv-JRC-tax-2026.pdf` fell to four pages on the change.
+**The skills taxonomy is the website's alone.** `type: expertise` is two sections —
+technical and professional — and `cv.lua` renders them for HTML and skips them for Typst, so
+`{{< cv type=expertise >}}` on `cv.qmd` is the only call anywhere and no CV carries it. The
+flat `type: skills` chip row the PDFs used to print is gone with it, from both records: every
+fact it held is in the taxonomy, and keeping both would have been two records of one thing
+drifting apart, which the teaching entries had already taught once. The PDFs got the space
+back — `Bukin-cv-JRC-tax-2026.pdf` fell to four pages on the change.
 
-It is also the one call that writes no `.section-split` around itself. Every other section
-of `cv.qmd` is a hand-written wrapper holding a `.label` and a content column, but ten
-groups cannot each be written by hand, so the shortcode emits the whole labelled section per
-group and the call sits at the top level of the page. Inside, a skill reuses the row the CV
-timeline already has — `.role` over `.sum`, the shape a `project` or `software` entry takes
-when it has no date and nothing to disclose — so the taxonomy introduced no CSS. Each row
-carries `data-in="full"`, which is what lets the Short view hide every group and take its
-label with it.
+It is also the one call that writes no `.section-split` around itself. Every other section of
+`cv.qmd` is a hand-written wrapper holding a `.label` and a content column; the taxonomy is
+emitted per section, label column included, and the call sits at the top level of the page.
+`data-in` goes on the wrapper and not on the forty-odd bullets, because the switcher reads
+`.cv-entry[data-in]` and hides a `.section-split` whose entries have all gone — one attribute
+per section drops the whole taxonomy from the Short view.
+
+**It is a reference list, and it is the one list on the site built to be scanned rather than
+read.** The first version gave each skill a timeline row — `.role` over `.sum`, the shape a
+`project` entry takes — and it ran to about ninety lines in a single column for forty-odd
+facts. It is now a real two-level bullet list: a `.skill-head` naming the subgroup, then
+`<li>` lines of `name — text` where the name carries the ink and the detail stays muted, so
+a reader runs down the left edge and stops at the one they came for. `styles.scss` packs it
+with CSS `columns: 2` — columns rather than a grid, because the groups are uneven and a grid
+would leave the short ones padding out a tall row — and `break-inside: avoid` on
+`.skill-group` is what stops a heading ending one column while its bullets start the next.
+This is the one component that deliberately drops the site's row rhythm: no hairline, no
+`$row-pad`, no `$measure` cap. Keep each `text:` a phrase rather than a sentence; a bullet
+that wraps three times has stopped being one.
 
 The Typst branch skips `expertise` **silently**, and that is deliberate rather than lazy: a
 shortcode cannot reliably ask whether the document it is in is really a PDF. Quarto runs the
