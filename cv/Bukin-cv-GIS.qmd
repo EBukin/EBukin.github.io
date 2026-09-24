@@ -1,0 +1,49 @@
+
+{{< cv-header private=true >}}
+
+## About
+
+{{< cv type=profile in=gis-generic >}}
+
+## Work experience
+
+{{< cv type=experience in=full show=full >}}
+
+## Education
+
+{{< cv type=education in=full show=full >}}
+
+## Teaching
+
+<!-- show=summary, unlike cv-full.qmd: this is not a teaching application, so the
+     courses are worth a line each and no more. The materials links survive the cut
+     because they live in `summary:` in ../_cv.yml, not in `description:`. -->
+
+{{< cv type=teaching in=full show=summary >}}
+
+## Publications
+
+### Peer-reviewed articles
+
+{{< pubs type=article show=none >}}
+
+### Working papers and work in progress
+
+{{< pubs type=working-paper,wip show=none >}}
+
+### Reports and policy work
+
+{{< pubs type=report show=none >}}
+
+### Theses
+
+{{< pubs type=thesis show=none >}}
+
+
+## Languages
+
+{{< cv type=languages in=full >}}
+
+## Scholarships
+
+{{< cv type=scholarships in=full >}}

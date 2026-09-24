@@ -266,6 +266,71 @@ cv:
       accessible to AI agents as to people.
 
   - type: profile
+    in: [gis-generic]
+    text: |
+      Applied economist and geospatial data scientist with a decade of
+      quantitative work at the World Bank, FAO and in academia, specialising in
+      combining Earth observation, cadastral and household survey data to
+      target, monitor and evaluate development policies. My doctoral research
+      is an impact evaluation of land privatiation on rangeland quality
+      southern Kazakhstan leverages satellite-derived vegetation, land cover
+      and climate data, with a staggered difference-in-differences design
+      that isolates the effect of land privatisation on pasture productivity
+      published in Land Use Policy. At the World Bank I developed the
+      methodology and the devPTIpack R package behind the Project Targeting Index,
+      which integrates geospatial and socio-economic data to improve the
+      spatial targeting of operations and has been applied in more than 30
+      countries, and co-initiated the GeoPov programme, which combines
+      remotely sensed data with household microdata to measure spatial
+      disparities in income and welfare. I use geospatial data in small area
+      estimation for poverty mapping, including in the EU poverty-mapping
+      project, and have supported the State Cadastre of Ukraine on
+      mass valuation of agricultural and urban land with the underlining data
+      being remotely sensed. My workflows run in R, Python and Google
+      Earth Engine, with QGIS and PostgreSQL/PostGIS, and are built as
+      version-controlled, reproducible pipelines and packages that
+      colleagues reuse; I have processed satellite time series, land cover
+      and terrain products and delivered the results as R Shiny dashboards
+      for non-technical users. Sector experience covers agriculture and land
+      governance, livestock and rangeland systems, agricultural statistics and
+      greenhouse gas emissions at FAO, and fiscal and poverty analysis,
+      with fieldwork in South Africa and Central Asia. I teach and build
+      capacity as part of the same work: master's courses in econometrics,
+      training for finance ministries and statistics offices, and
+      the World Bank's staff on AI-assisted coding in R and Stata, taken by more
+      than 600 economists.
+
+
+  - type: profile
+    in: [ra-generic]
+    text: |
+      Applied economist and data scientist with a decade of quantitative work
+      at the World Bank, FAO and in academia, moving policy questions through
+      data engineering and econometric analysis to results that decision-makers
+      use and colleagues can maintain. My experience spans both ends of the
+      data: on the macro side, I maintained the AGLINK-COSIMO partial equilibrium
+      model, built the databases behind FAOSTAT's greenhouse gas emissions
+      statistics, and worked as a CGE modeller in the BMBF-funded ROCHADE project;
+      on the micro side, I apply econometric and microsimulation methods to
+      household survey, administrative and cadastral microdata for fiscal
+      incidence analysis, poverty mapping and small area estimation, and I
+      engineer the pipelines that carry macroeconomic scenarios down to
+      household level in the World Bank's Micro-Modelling Lab. My research uses
+      quasi-experimental designs on panel, spatial and remotely sensed data to
+      evaluate land reforms in Ukraine and Kazakhstan, with articles in Land
+      Use Policy, Environmental and Resource Economics and Environmental
+      Research Letters, each backed by a public reproducibility package.
+      I work in R, Stata, Python and SQL and build version-controlled,
+      reproducible pipelines and open-source packages (devCEQ, devPTIpack)
+      that teams reuse across countries. I bring new tools into economists'
+      daily work: I introduced Git-based workflows and ETL-style data
+      pipelines to World Bank modelling teams, and in 2026 made Positron and
+      Quarto available Bank-wide and designed the ai4coding course on
+      AI-assisted programming in R and Stata, taken by more than 600 staff.
+      I have taught statistics and econometrics at master's level for five
+      years and trained finance ministries and national statistical offices.
+
+  - type: profile
     in: [JRC-tax-2026-short]
     text: |
       Economist specialising in fiscal microsimulation and applied economic modelling.
