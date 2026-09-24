@@ -198,6 +198,38 @@ cv:
       seminar series and workshops, and taught econometrics at master's level.
 
   - type: profile
+    in: [JRC-indicators-2026]
+    text: |
+      Applied economist and open-source data scientist with a decade of
+      quantitative policy analysis at the World Bank, FAO and in academia,
+      specialising in turning heterogeneous data into indicator frameworks,
+      visualisations and tools that policymakers can use and analysts can
+      maintain. R and R Shiny are the centre of my toolbox: for the World
+      Bank's poverty practice I built the devCEQ package and Shiny applications
+      that let non-technical users run counterfactual fiscal microsimulations,
+      and the methodology and devPTIpack package behind the Project Targeting
+      Index, a spatial composite index for geographic targeting; I contribute
+      to EU-wide poverty mapping and small area estimation, and to the GeoPov
+      programme combining remotely sensed data with household microdata to
+      measure territorial disparities. My research applies quasi-experimental
+      designs to cadastral, survey and satellite data, with eight peer-reviewed
+      articles, mostly in Land Use Policy, and a PhD evaluating land
+      privatisation in Kazakhstan; I have led survey data collection in South
+      Africa, Kazakhstan and neighbouring Central Asian countries. Innovation
+      and capacity building are, for me, one job. I brought version control
+      and reproducible pipelines to economists' workflows, made Positron and
+      Quarto standard tools at the World Bank, and in 2026 designed and taught
+      the Bank's internal course on AI-assisted coding in R and Stata, taken
+      by more than 600 staff, which created a demand for the tools and the
+      skills that colleagues now pursue on their own. I have trained master's
+      students, finance ministry analysts in Indonesia and Georgia, and
+      Statistics Poland's statisticians, each time leaving behind code they
+      maintain themselves. I am now extending this toolkit to
+      retrieval-augmented generation and Model Context Protocol interfaces,
+      so that indicators and their methodology can be queried by AI agents
+      as reliably as by people.
+
+  - type: profile
     in: [JRC-tax-2026-short]
     text: |
       Economist specialising in fiscal microsimulation and applied economic modelling.
