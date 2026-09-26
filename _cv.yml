@@ -311,6 +311,31 @@ cv:
 
 
   - type: profile
+    in: [gis-generic-v2]
+    text: |
+      Applied economist and geospatial data scientist with more than a decade
+      of quantitative work at the World Bank, FAO and in academia. I combine
+      Earth observation, cadastral records, administrative, and household
+      surveys microdata to develop evidence and decision-support tools for
+      sustainable development. At the World Bank, I developed the methodology
+      and R package behind the Project Targeting Index, used in more than 30
+      country analyses, co-initiated GeoPov, which links geospatial data with
+      household microdata to study welfare disparities and contributed to the
+      EU Poverty mapping project on using small-area estimates methodologies
+      to improve survey representativity of the small areas. My doctoral
+      research uses satellite and cadastral data to evaluate the effects of
+      land reform on pasture productivity in Kazakhstan using
+      quasi-experimental identification published in Land Use Policy. I
+      build reproducible geospatial workflows and tools for non-specialists,
+      and train colleagues and government counterparts to use and maintain
+      them. Finally, I strive to improve workflows speeding up technology
+      diffusion through sharing, capacity building and spreading curiosity,
+      as it was with introducing the ai4coding to Stata and R-using economists
+      at the World Bank: series of seminars that reached more than 600
+      economists in a week.
+
+
+  - type: profile
     in: [ra-generic]
     text: |
       Applied economist and data scientist with a decade of quantitative work
