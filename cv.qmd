@@ -103,6 +103,8 @@ print, so there is one place to bump when the record changes. -->
 ::: {}
 {{< cv type=languages >}}
 
+{{< cv type=countries >}}
+
 <!-- {{< cv type=scholarships >}} -->
 :::
 :::

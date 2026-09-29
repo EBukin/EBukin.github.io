@@ -67,6 +67,12 @@
 
 {{< cv type=languages in=full >}}
 
+## Country experience
+
+{{< cv type=countries in=full >}}
+
 ## Scholarships
 
 {{< cv type=scholarships in=full >}}
+
+{{< cv-referees >}}

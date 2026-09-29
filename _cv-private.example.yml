@@ -23,3 +23,11 @@ cv-private:
       url: "tel:+000000000000"
     - text: "name@example.com"
       url: "mailto:name@example.com"
+
+  # Referees, printed by {{< cv-referees >}} as a `## References` section — which the
+  # application CVs call and the public ones must not. The names may also sit in the
+  # public `references:` lines of _cv.yml; the emails belong here and nowhere else.
+  referees:
+    - name: "Referee Name"
+      institution: "Institution"
+      email: "referee@example.org"

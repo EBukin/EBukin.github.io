@@ -3,7 +3,7 @@
 
 ## About
 
-{{< cv type=profile in=gis-generic-v2 >}}
+{{< cv type=profile in=impact-evaluation-v1 >}}
 
 ## Work experience
 

@@ -40,7 +40,7 @@
 -- Entries come out in file order. Unlike publications nothing is sorted: `period:`
 -- is a display string, and _cv.yml is already in the order the CV should read.
 --
--- This file also carries two shortcodes that take no entries at all:
+-- This file also carries three shortcodes that take no entries at all:
 --
 --   {{< cv-header >}}   the identity block at the top of a PDF — name, headline,
 --                       appointments, contact line — every field read from `cv-me:`
@@ -48,6 +48,9 @@
 --                       the person: there is nowhere in them left to state one.
 --                       Nothing on the web; cv.qmd has the site header and its own
 --                       hero above it already
+--   {{< cv-referees >}} a References section — names, institutions, emails — read
+--                       from the gitignored _cv-private.yml, for the application
+--                       CVs only. Nothing where that file is absent
 --   {{< cv-pdf >}}      the download link for one of the typeset CVs, on cv.qmd and
 --                       index.qmd alike. It exists as a shortcode only so the saved
 --                       file can be named after the reader's benefit rather than the
@@ -684,23 +687,29 @@ end
 -- there is no copy, so CI says nothing about it.
 local PRIVATE_FILE = '_cv-private.yml'
 
-local function private_contact(kwargs)
-  if option(kwargs, 'private') ~= 'true' then return {} end
+-- `cv-private:` from that file, or nil when there is no copy. `who` names the
+-- shortcode asking, for the warning.
+local function private_record(who)
   local root = quarto.project and quarto.project.directory
   local handle = root and io.open(pandoc.path.join({ root, PRIVATE_FILE }), 'r')
   if not handle then
     if not os.getenv('GITHUB_ACTIONS') then
-      log_warn('cv-header: private=true, but there is no ' .. PRIVATE_FILE ..
+      log_warn(who .. ': there is no ' .. PRIVATE_FILE ..
                ' at the project root; copy _cv-private.example.yml and fill it in.')
     end
-    return {}
+    return nil
   end
   local yaml = handle:read('a')
   handle:close()
   -- Read as a YAML front-matter block, so the fields arrive exactly as _cv.yml's do:
   -- Markdown parsed once, written out by Pandoc for the format.
   local meta = pandoc.read('---\n' .. yaml .. '\n---\n', 'markdown').meta
-  local private = meta['cv-private']
+  return meta['cv-private']
+end
+
+local function private_contact(kwargs)
+  if option(kwargs, 'private') ~= 'true' then return {} end
+  local private = private_record('cv-header')
   return private and private.contact or {}
 end
 
@@ -790,6 +799,43 @@ return {
       pandoc.RawBlock('typst', '#show: cv-body'),
       pandoc.Plain(typst_call(call)),
     }
+  end,
+
+  -- {{< cv-referees >}} — a `## References` section listing each referee's name,
+  -- institution and email, read from `cv-private.referees:` in _cv-private.yml. The
+  -- emails are the reason it is private: _cv.yml is public, so the per-entry
+  -- `references:` lines there carry names only, and a referee's address reaches a
+  -- CV only by this call, in a CV rendered on a machine that has the file.
+  --
+  -- It writes its own heading rather than sitting under one in the .qmd, so that
+  -- where there are no referees — CI, a fresh clone, the web — it leaves no empty
+  -- section behind. Only the application CVs call it; the two public ones must not.
+  ['cv-referees'] = function(args, kwargs, meta)
+    if quarto.doc.is_format('html') then return pandoc.Blocks{} end
+    local private  = private_record('cv-referees')
+    local referees = private and private.referees or {}
+    if #referees == 0 then return pandoc.Blocks{} end
+
+    local items = pandoc.List{}
+    for _, one in ipairs(referees) do
+      if one.name then
+        local line = pandoc.Inlines{ pandoc.Strong(inls(one.name)) }
+        if one.institution then
+          line:extend{ pandoc.Str(','), pandoc.Space() }
+          line:extend(inls(one.institution))
+        end
+        if one.email then
+          local email = stringify(one.email)
+          line:extend(MIDDOT)
+          line:insert(pandoc.Link(txt(email), 'mailto:' .. email))
+        end
+        items:insert(pandoc.Blocks{ pandoc.Plain(line) })
+      end
+    end
+
+    local blocks = pandoc.Blocks{ pandoc.Header(2, 'References') }
+    blocks:extend(cv_detail(pandoc.Blocks{ pandoc.BulletList(items) }))
+    return blocks
   end,
 
   -- {{< cv-pdf variant=short class=btn-flat label="CV [PDF]{.qty}" >}} — a download

@@ -59,9 +59,9 @@
 
 ## Teaching and training
 
-<!-- No `from=`: these are ../_cv.yml's own teaching entries, the same five cv-full.qmd
+<!-- No `from=`: these are ../_cv.yml's own teaching entries, the same ones cv-full.qmd
      prints. What this CV changes is where the section sits, not what it says. No `in=`
-     either, so the one entry flagged `in: [full]` comes through here as well. -->
+     either, so the entries flagged `in: [full]` come through here as well. -->
 
 {{< cv type=teaching show=full >}}
 
@@ -98,3 +98,9 @@
 ## Languages
 
 {{< cv type=languages in=full >}}
+
+## Country experience
+
+{{< cv type=countries in=full >}}
+
+{{< cv-referees >}}

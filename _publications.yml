@@ -160,19 +160,23 @@ publications:
     year: 2024
     title: "Reforming land valuation and taxation in Ukraine — reproducibility package"
     authors: ["Deininger, K.", "Ali, D. A.", "Bukin, E.", "Martyn, A."]
-    where: "World Bank"
+    where: "World Bank Reproducible Research Repository"
     doi: "10.60572/ke2n-6z71"
+    url: "https://reproducibility.worldbank.org/catalog/223"
 
   - type: working-paper
     year: 2022
     title: "Structural change likely increases inequality in India more than climate policy"
     authors: ["Leimbach, M.", "Hübler, M.", "Mahlkow, H.", "Montrone, L.", "Bukin, E.", "Felbermayr, G.", "Kalkuhl, M.", "et al."]
+    where: "PIK Working Paper"
+    url: "https://rochade-project.org/en/news-and-events/recent-publications/working-paper/structural-change-likely-increases-inequality-in-india-more-than-climate-policy"
 
   - type: working-paper
     year: 2020
     title: "The effects of international trade on structural change and CO~2~ emissions"
     authors: ["Hübler, M.", "Bukin, E.", "Xi, Y."]
     where: "Kiel Working Paper 2174"
+    url: "https://www.kielinstitut.de/publications/the-effects-of-international-trade-on-structural-change-and-co2-emissions-7057/"
 
   # ---- reports ---------------------------------------------------------------
 
@@ -194,6 +198,7 @@ publications:
     year: 2017
     title: "OECD-FAO Agricultural Outlook 2017–2026 — meat chapter"
     authors: ["FAO Trade and Markets Division"]
+    url: "https://www.oecd.org/en/publications/2017/07/oecd-fao-agricultural-outlook-2017-2026_g1g7a2da.html"
 
   # ---- conference presentations ----------------------------------------------
 

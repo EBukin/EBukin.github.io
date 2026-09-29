@@ -187,6 +187,39 @@ cv:
       administrative and geospatial data (R, Stata, Python, Google Earth Engine).
 
   - type: profile
+    in: [impact-evaluation-v1]
+    text: |
+      Applied economist with a decade of causal research on land, agricultural
+      and development policy, at the World Bank, FAO and in academia. I
+      evaluate natural experiments and policy reforms with modern econometric
+      methods and spatial econometrics techniques. I build the pipelines that
+      fuse survey, administrative, cadastral and satellite microdata into
+      credible evidence. I have published peer-reviewed articles and built
+      capacity among government counterparts, clients, statistical offices
+      and students, whom I had the pleasure of teaching causal inference.
+      I work in R, Stata and Python, and leverage modern tools of open-source
+      software development and version control.
+
+  - type: profile
+    in: [data-science-v1]
+    text: |
+      Applied economist and data scientist with a decade of quantitative work
+      at the World Bank, FAO and in academia. I build sustainable, transferable
+      data pipelines and indicator frameworks that turn heterogeneous survey,
+      administrative and geospatial data into tools decision-makers use and
+      analysts can maintain. I produce indicators to official-statistics
+      standards, with documented methodology, automated QA/QC and
+      SDMX-structured metadata. I have also written open-source R packages
+      and dashboards that support fiscal microsimulation, poverty mapping
+      and project targeting across dozens of countries. My research applies
+      quasi-experimental methods to cadastral, survey and satellite data,
+      with a PhD and peer-reviewed publications in Land Use Policy. I led the
+      World Bank's adoption of AI-assisted coding, with a course taken by 600+
+      staff, and I now build LLM knowledge bases, retrieval pipelines and MCP
+      servers so that data and methodology can be queried reliably by AI
+      agents as well as by people.
+
+  - type: profile
     in: [JRC-tax-2026]
     text: |
       Economist and data scientist specialising in fiscal microsimulation and applied
@@ -444,7 +477,8 @@ cv:
         Identification System (LPIS) and on mass valuation of agricultural land, and
         piloting the [mass appraisal of urban land](https://doi.org/10.1016/j.landusepol.2026.107976).
       - *Microdata analysis, small area estimation and poverty mapping.* Contributed
-        to EU-wide poverty mapping and to missions to Poland, and trained the Polish
+        to EU-wide poverty mapping and to missions to Poland, working with EU-SILC
+        data for Poland and microcensus data for Germany, and trained the Polish
         national statistical office to produce its own small area estimates.
       - *AI-assisted coding.* Launched a seminar series and internal training,
         including the [ai4coding](https://worldbank.github.io/ai4coding/) course,
@@ -454,15 +488,19 @@ cv:
         sensed geospatial data with microdata to measure the extent and
         determinants of spatial income and welfare disparities. Led the development
         of the [Project Targeting Index](https://github.com/wbPTI) and its application
-        across countries.
+        across countries. Harmonized and geocoded Ecuador's household budget surveys
+        (2007–2024) and censuses (2000–2022), alongside the pre-harmonized surveys of
+        the Global Monitoring Database.
       - *Micro-Modelling Lab (MML).* Engineered the data pipelines behind macro–micro
         simulations and
         [guided economists in scaling and replicating these methods across countries](https://worldbank.github.io/mml/).
         Built the infrastructure for the fiscal incidence dashboards in R Shiny
         ([devCEQ](https://worldbank.github.io/devCEQ/)) and supported countries in
-        implementing the analysis.
+        implementing the analysis, harmonizing household budget surveys for Türkiye,
+        El Salvador, Romania, Georgia, Benin, The Gambia, Cameroon, Côte d'Ivoire
+        and Indonesia.
 
-    references: "Klaus W. Deininger; Carolina Diaz-Bonilla; Nobuo Yoshida"
+    references: "Klaus W. Deininger; Moritz Meyer; Carolina Diaz-Bonilla; Nobuo Yoshida"
 
   - type: experience
     period: "Jan 2020 — Dec 2024"
@@ -491,7 +529,8 @@ cv:
         and other journals. On [ROCHADE](https://rochade-project.org/en/front-page) — a
         project funded by the German Federal Ministry of Education and Research (BMBF,
         01LA1828A/B/C/D) — I worked as a macroeconomist, trade data analyst, CGE
-        modeller and GAMS programmer, publishing in
+        modeller and GAMS programmer, and analysed Indian census and German
+        microcensus microdata, publishing in
         [Environmental and Resource Economics](https://link.springer.com/article/10.1007/s10640-022-00698-7)
         and [Environmental Research Letters](https://iopscience.iop.org/article/10.1088/1748-9326/ad34e9).
 
@@ -578,8 +617,10 @@ cv:
         and price depressions, and organized a workshop on WTO dispute settlement
         in Kyiv.
       - *Trade data tools.* Analysed UN Comtrade data for reporting and for trade
-        and nutrition research; built an R package, a teaching website and R Shiny
-        apps for managing and exploring trade data.
+        and nutrition research; built an
+        [R package](https://github.com/EBukin/tradeAnalysis-pack/), a
+        [teaching website](https://ebukin.github.io/dataManipulationPractice/data-sources-compilation.html)
+        and R Shiny apps for managing and exploring trade data.
 
     references: "Francesco N. Tubiello; Holger Matthey; Ekaterina Krivonos"
 
@@ -621,8 +662,9 @@ cv:
       Martin Petrick.
     description: >-
       The thesis evaluates the impact of land privatization on pasture quality
-      with quasi-experimental methods, combining cadastral records with remotely
-      sensed measures of climate, vegetation and land cover. Part of it is
+      with quasi-experimental methods, combining cadastral records for parcels
+      covering some 100 million hectares with remotely sensed measures of climate,
+      vegetation and land cover. Part of it is
       published as
       [The effects of land privatization on pasture productivity in south-eastern Kazakhstan](https://doi.org/10.1016/j.landusepol.2025.107741)
       in *Land Use Policy* (2025).
@@ -901,6 +943,22 @@ cv:
             with R; and, for every topic, the reading, cheat sheets and tutorials that
             go with it.
 
+  # The one course with no `materials:` block: nothing from it was published, so it
+  # prints no materials line and, on teaching.qmd, no block. Do not invent a set.
+
+  - type: teaching
+    period: "2017 — 2019"
+    title: "Interviewer training for the IAMO Farm Survey"
+    place: "IAMO · Kazakhstan and Central Asia"
+    in: [full]
+    summary: >-
+      Trained the interviewers for the second wave of the IAMO Farm Survey of farms in
+      Kazakhstan and Central Asia before they went into the field.
+    description: >-
+      The training was one step of a survey I ran from end to end: I designed and
+      pre-tested the questionnaire the interviewers were taught, prepared the
+      fieldwork, and carried out the QA/QC of the 600 interviews they completed.
+
   # ---- projects and software -----------------------------------------------------
   #
   # Neither type is printed in a PDF — no {{< cv >}} call in cv/ asks for one — but
@@ -943,7 +1001,10 @@ cv:
     place: "R Shiny application"
     summary: "Poverty and equity analysis, packaged so that a counterpart can run it without an analyst in the room."
     description: |
-      The country workflows are wrapped in an R Shiny application.
+      The country workflows are wrapped in an R Shiny application, deployed on the
+      Bank's Posit Connect server.
+      [datanalytics.worldbank.org/pea](https://datanalytics.worldbank.org/pea) ·
+      [worldbank.github.io/peaApp](https://worldbank.github.io/peaApp/)
 
   - type: software
     title: "devCEQ"
@@ -960,7 +1021,8 @@ cv:
     place: "R package"
     summary: "Project Targeting Index tooling: spatial and micro data combined to improve how development projects choose where to work."
     description: |
-      Used in more than 30 country-specific analyses across Africa and Asia.
+      Written with K. Ito, and used in more than 30 country-specific analyses across
+      Africa and Asia.
       [worldbank.github.io/devPTIpack](https://worldbank.github.io/devPTIpack/) ·
       [github.com/wbPTI](https://github.com/wbPTI)
 
@@ -970,6 +1032,15 @@ cv:
     summary: "Lassoing welfare dynamics — synthetic panel construction with machine learning, packaged for reuse."
     description: |
       Written for the Poverty & Equity Global Practice.
+
+  - type: software
+    title: "tradeAnalysis"
+    place: "R package · FAO"
+    summary: "Managing and exploring UN Comtrade trade data, with R Shiny apps and a teaching website."
+    description: |
+      Built at FAO for trade reporting and for trade and nutrition research.
+      [github.com/EBukin/tradeAnalysis-pack](https://github.com/EBukin/tradeAnalysis-pack/) ·
+      [teaching website](https://ebukin.github.io/dataManipulationPractice/data-sources-compilation.html)
 
   # ---- expertise ---------------------------------------------------------------
   #
@@ -1151,6 +1222,30 @@ cv:
       - "Russian C2"
       - "Italian A2"
       - "French A2"
+
+  # Where the work took place — missions, fieldwork and country analyses — which is
+  # what consultancy templates ask for. Alphabetical, because no order is implied.
+  - type: countries
+    label: "Country experience"
+    in: [full]
+    items:
+      - "Armenia"
+      - "Benin"
+      - "Côte d'Ivoire"
+      - "El Salvador"
+      - "Georgia"
+      - "Germany"
+      - "Indonesia"
+      - "Italy"
+      - "Kazakhstan"
+      - "Poland"
+      - "Romania"
+      - "Senegal"
+      - "South Africa"
+      - "Switzerland"
+      - "Türkiye"
+      - "Ukraine"
+      - "United States"
 
   - type: scholarships
     label: "Scholarships"

@@ -244,7 +244,8 @@ Four shapes of entry, told apart by `type:`:
   research stream or a package and an invented range would be worse than no line at all. A
   row without one simply opens on its title, and the section label above it carries the
   accent instead.
-- **flat** — `languages`, `scholarships`. Only `items:`, a list of strings. Rendered
+- **flat** — `languages`, `scholarships`, `countries` (country experience, printed by
+  `cv-full.qmd` and every application CV). Only `items:`, a list of strings. Rendered
   as `.chip-out` chips on the web and as one ` · `-joined paragraph in the PDFs; `show=` does
   not apply to them.
 - **prose** — `profile`. Only `text:`, the `## About` / `## Profile` paragraph at the top of a
@@ -290,7 +291,14 @@ module-level flag — and on at least one of those passes a plain HTML page answ
 `is_format('typst')` as well as to `is_format('html')`. A guard written either way made
 every render of `cv.qmd` print ten warnings about PDFs it was not making.
 
-`_templates/cv.lua` also provides two shortcodes that take no entries at all:
+`_templates/cv.lua` also provides three shortcodes that take no entries at all:
+
+- `{{< cv-referees >}}` — the `## References` section closing each application CV: name,
+  institution and email per referee, read from `cv-private.referees:` in the gitignored
+  `_cv-private.yml`. It writes its own heading and prints nothing at all where that file is
+  absent (CI, the web), so no empty section is left behind. The public `references:` lines
+  on `_cv.yml` entries carry names only; an email reaches a CV by this call alone, and the
+  two public CVs must not make it.
 
 - `{{< cv-header >}}` — the identity block at the top of each PDF: name, headline, current
   appointments, contact line, all of it read from `cv-me:` in `_cv.yml`, plus the
@@ -349,15 +357,16 @@ by restating its summary. A clean render of `cv.qmd` prints no such line; treat 
 defect. An entry with no `description:` at all is fine, and comes out as a plain row with
 no `+`, because there would be nothing behind it.
 
-**Teaching is a section of courses, not of university courses.** The five `type: teaching`
+**Teaching is a section of courses, not of university courses.** The `type: teaching`
 entries in `_cv.yml` mix master's courses at JLU with the week-long counterpart programmes —
 small area estimation with Statistics Poland at Poznań, and fiscal incidence microsimulation
-for ministries of finance and social policy in Indonesia and Georgia. The counterpart ones
+for ministries of finance and social policy in Indonesia and Georgia — the Bank's internal
+AI-assisted coding course, and the interviewer training for the IAMO Farm Survey. The counterpart ones
 are entries in their own right, and not merely a clause inside the employer that paid for
 them, because each is a course with a cohort, a syllabus running from the theory to the code,
 and a handover it is judged on; the employer entries above them only have room to name them.
 `teaching.qmd`, `cv.qmd` and `cv-full.qmd` therefore all print both kinds in one list, and
-`Bukin-cv-R-training-NSO.qmd` prints the same five, from the same place, in a section of its
+`Bukin-cv-R-training-NSO.qmd` prints the same entries, from the same place, in a section of its
 own above Experience — position is all it changes. The
 tooling each one teaches is linked from the entry: [wbEUPM/eupm-pl](https://github.com/wbEUPM/eupm-pl)
 for poverty mapping, [wbEPL](https://github.com/wbEPL) for fiscal incidence, and
@@ -365,7 +374,8 @@ for poverty mapping, [wbEPL](https://github.com/wbEPL) for fiscal incidence, and
 site second, since the organisation is what a reader can browse.
 
 **Teaching materials are data, and the unit is a cohort, not a course.** Every teaching
-entry carries a `materials:` block: a `lead:` (the words before the dash — "Materials, one
+entry with published materials carries a `materials:` block (the IAMO interviewer training
+has none, so it prints no materials line and no block — do not invent a set for it): a `lead:` (the words before the dash — "Materials, one
 set per cohort") and `sets:`, one per cohort, each with a `url:` (the website), an optional
 `source:` (its repository), an optional `name:` (the cohort, "2023–24"; without one the
 address stands in), a Markdown `text:` saying what the set holds and how it is organised,
