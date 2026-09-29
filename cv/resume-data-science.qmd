@@ -1,0 +1,35 @@
+
+{{< cv-header >}}
+
+## Profile
+
+{{< cv type=profile in=data-science-v1 >}}
+
+## Experience
+
+{{< cv type=experience in=short show=summary titles=short >}}
+
+## Education
+
+{{< cv type=education in=short show=summary titles=short >}}
+
+## Publications
+
+<!-- The same three groups as cv-full.qmd, in the same order, and no conferences —
+     only the titles are trimmed here. -->
+
+### Peer-reviewed articles
+
+{{< pubs type=article titles=short show=none >}}
+
+### Working papers and work in progress
+
+{{< pubs type=working-paper,wip titles=short show=none >}}
+
+### Reports and policy work
+
+{{< pubs type=report titles=short show=none >}}
+
+## Languages
+
+{{< cv type=languages in=short >}}
